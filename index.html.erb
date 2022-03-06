@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="description" content="Simple ski reports. Learn if it is snowing and how much.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/picnic/7.1.0/picnic.min.css"
+    integrity="sha512-HZgZOfcUw1rxWuEBlzDis5U4HlbzR0wcWmb3FrLSKV6uhZiZpT9JSTzPJplHDmJZJFNfAReW+iDELJ1kADYHtA=="
+    crossorigin="anonymous" />
+  <title>
+    Simple ski reports
+  </title>
+  <style>
+    .content {
+      padding: 10px;
+      max-width: 960px;
+      width: 100%;
+      margin: 100px auto 500px;
+    }
+
+    @media print {
+      nav {
+        display: none;
+      }
+
+      .content {
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="demo">
+    <a href="/" class="brand">
+        <span>Simple Ski Reports</span>
+    </a>
+</nav>
+  <main class="content">
+    <p>Last Updated: <%= Time.now.to_s %></p>
+    <% by_state.each do |state, predictions| %>
+      <h1><%= state %></h1>
+      <ul>
+      <% predictions.each do |prediction| %>
+        <li><strong><%= prediction.location.name %></strong>: <%= prediction.text_report %>
+      <% end %>
+      </ul>
+    <% end %>
+  </main>
+</body>
+
+</html>
