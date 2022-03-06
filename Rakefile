@@ -18,4 +18,8 @@ task :build do
   builder.build!
 end
 
-task default: [:build]
+task :fmt do
+  sh('rubocop -A')
+end
+
+task default: %i[build]

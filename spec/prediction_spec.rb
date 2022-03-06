@@ -139,4 +139,35 @@ RSpec.describe 'Prediction' do
       expect(prediction.text_report).to eq 'no snow expected today and no snow expected tonight'
     end
   end
+
+  context 'when the points returns a 500' do
+    it 'returns a prediction of cannot fiqure it out' do
+      resort = Resort.new(lat: 1.001, lng: 2.002)
+      prediction = Prediction.new(resort: resort)
+
+      stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
+        .to_return(status: 500)
+
+      expect(prediction.text_report).to eq 'no current weather reports can be found'
+    end
+  end
+
+  context 'when the forecast returns a 500' do
+    it 'returns a prediction of cannot fiqure it out' do
+      resort = Resort.new(lat: 1.001, lng: 2.002)
+      prediction = Prediction.new(resort: resort)
+
+      stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
+        .to_return(status: 200, body: {
+          properties: {
+            forecast: 'https://api.weather.gov/gridpoints/TEST/1,2/forecast'
+          }
+        }.to_json)
+
+      stub_request(:get, 'https://api.weather.gov/gridpoints/TEST/1,2/forecast')
+        .to_return(status: 500)
+
+      expect(prediction.text_report).to eq 'no current weather reports can be found'
+    end
+  end
 end

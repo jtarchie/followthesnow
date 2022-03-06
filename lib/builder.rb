@@ -21,8 +21,14 @@ Builder = Struct.new(:resorts, :build_dir, :source_dir, keyword_init: true) do
   end
 
   def predictions
+    warn 'loading predictions: '
     @predictions ||= resorts.sort_by { |r| [r.state, r.name] }.map do |resort|
-      Prediction.new(resort: resort)
+      warn "* #{resort.name}"
+      prediction = Prediction.new(resort: resort)
+      report = prediction.text_report
+      warn "  report = #{report}"
+      sleep(rand(5..10))
+      prediction
     end
   end
 end

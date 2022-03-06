@@ -8,6 +8,8 @@ require 'webmock/rspec'
 RSpec.describe 'Builder' do
   before do
     WebMock.disable_net_connect!
+    allow_any_instance_of(Object).to receive(:sleep)
+    allow_any_instance_of(Object).to receive(:warn)
   end
 
   it 'renders resorts in alphabetical order and by state' do

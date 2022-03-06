@@ -9,9 +9,11 @@ Prediction = Struct.new(:resort, keyword_init: true) do
     @text_report ||= begin
       points_response = json_response("https://api.weather.gov/points/#{resort.coords.join(',')}")
       forecast_url = points_response.dig('properties', 'forecast')
+      warn "  forecast_url = #{forecast_url}"
 
       forecast_response = json_response(forecast_url)
       periods = forecast_response.dig('properties', 'periods')
+      warn "  periods = #{periods[0..1]}"
 
       snow_predictions = periods[0..1].map do |period|
         snow_prediction = 'no snow'
@@ -27,6 +29,8 @@ Prediction = Struct.new(:resort, keyword_init: true) do
         snow_prediction
       end
       %(#{snow_predictions[0]} expected today and #{snow_predictions[1]} expected tonight)
+    rescue OpenURI::HTTPError
+      'no current weather reports can be found'
     end
   end
 
