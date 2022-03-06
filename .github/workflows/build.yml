@@ -1,0 +1,32 @@
+name: Build Site
+
+on:
+  schedule:
+    - cron: '0 22,23,0,1 * * *' # every morning from 4-8am MST
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+    # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
+    # change this to (see https://github.com/ruby/setup-ruby#versioning):
+    # uses: ruby/setup-ruby@v1
+      uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+      with:
+        ruby-version: 3.0
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: Build docs
+      run: bundle exec rake build
+    - name: setup git config
+      run: |
+        # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+        git config user.name "GitHub Actions Bot"
+        git config user.email "<>"
+    - name: commit
+      run: |
+        # Stage the file, commit and push
+        git add -A
+        git commit -m "generated docs from github action"
+        git push origin main
