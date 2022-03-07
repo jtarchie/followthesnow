@@ -1,36 +1,133 @@
 name,lat,lng,city,state
-Arapahoe Basin,39.641667,-105.871667,White River National Forest,Colorado
-Aspen Highlands,39.181111,-106.856389,Aspen,Colorado
-Aspen Mountain,39.186389,-106.818611,Aspen,Colorado
-Beaver Creek Resort,39.631389,-106.521667,Avon,Colorado
-Breckenridge Ski Resort,39.48,-106.067,Breckenridge,Colorado
-Buttermilk,39.205,-106.860556,Aspen,Colorado
-Copper Mountain,39.501667,-106.156389,White River National Forest,Colorado
-Crested Butte Mountain Resort,38.899722,-106.965,Crested Butte,Colorado
-Echo Mountain Resort,39.685,-105.519444,Evergreen,Colorado
-Eldora Mountain Resort,39.9375,-105.583611,Nederland,Colorado
-Hesperus Ski Area,37.297778,-108.055,Hesperus,Colorado
-Howelsen Hill Ski Area,40.459,-106.803,Steamboat Springs,Colorado
-Kendall Mountain Ski Area,37.8111854,-107.6568195,Silverton,Colorado
-Keystone Resort,39.605,-105.954167,	White River National Forest,Colorado
-Loveland Ski Area,39.68,-105.897,Arapahoe National Forest,Colorado
-Monarch Ski Area,38.5125,-106.3325,Salida,Colorado
-Powderhorn Resort,39.063056,-108.155556,Grand Junction,Colorado
-Purgatory Resort,37.629722,-107.814444,Durango,Colorado
-Silverton Mountain,37.8847,-107.66529,Silverton,Colorado
-Ski Cooper,39.36,-106.302,Leadville,Colorado
-Snowmass,39.1956,-106.9513,Snowmass Village,Colorado
-Steamboat Ski Resort,40.459,-106.803,Steamboat Springs,Colorado
-Sunlight Ski Area,39.399806,-107.339278,Glenwood Springs,Colorado
-Telluride Ski Resort,37.936389,-107.820278,Telluride,Colorado
-Vail Ski Resort,39.639,-106.374,Vail,Colorado
-Winter Park Ski Resort,39.8869,-105.7625,Winter Park,Colorado
-Wolf Creek ski area,37.472222,-106.793333,Pagosa Springs,Colorado
-Beartooth Basin Summer Ski Area,44.975462,-109.435347,Beartooth National Forest,Wyoming
-Grand Targhee Resort,43.789,-110.957,Alta,Wyoming
-Hogadon Ski Area,42.744961,-106.339428,Casper,Wyoming
-Jackson Hole Mountain Resort,43.59,-110.89,Teton Village,Wyoming
-Pine Creek Ski Area,42.103108,-110.828789,Cokeville,Wyoming
+Alpine Meadows (ski resort),39.164,-120.239,Alpine Meadows,California
+Angora Lakes,38.86417,-120.06667,Angora Lakes Resort,California
+Badger Pass Ski Area,37.66194,-119.6636,Badger Pass Ski Lodge,California
+Bear Mountain (ski area),34.2267,-116.8602,Big Bear Lake,California
+Bear Valley (resort),38.492,-120.044,Bear Valley Day Lodge,California
+"Big Pines, California",34.37889,-117.69,Big Pines,California
+Boreal Mountain Resort,39.3317,-120.3511,,California
+Buckhorn Ski Club,34.34457,-117.91437,,California
+China Peak,37.2297,-119.1583,,California
+Coppervale Ski Area,40.345,-120.904,Westwood,California
+Dodge Ridge Ski Area,38.1896,-119.9564,Creekside Lodge,California
+Donner Ski Ranch,39.3183139,-120.3300194,,California
+Granlibakken,39.1556,-120.1551,Granlibakken Tahoe,California
+Heavenly Mountain Resort,38.9353,-119.94,California Lodge,California
+Homewood Mountain Resort,39.0827,-120.1755,,California
+June Mountain ski area,37.7683,-119.0906,,California
+Kirkwood Mountain Resort,38.684,-120.068,,California
+Mammoth Mountain Ski Area,37.63056,-119.0325,,California
+Mount Baldy Ski Lifts,34.27,-117.62,,California
+Mount Shasta Ski Park,41.32083,-122.20389,Upper Lodge,California
+Mount Waterman,34.349722,-117.928611,Mount Waterman,California
+Mountain High,34.37472,-117.69323,Big Pines,California
+Northstar California,39.264,-120.125,,California
+Palisades Tahoe,39.196,-120.235,Olympic Valley,California
+Rim Nordic Ski Area,34.2256,-117.0409,,California
+Royal Gorge Cross Country Ski Resort,39.3133778,-120.3891722,Royal Gorge Cross Country Ski Resort,California
+Sierra-at-Tahoe,38.8002,-120.0806,Base Lodge,California
+Snow Summit,34.2286,-116.8911,,California
+Snow Valley Mountain Resort,34.223375,-117.037423,,California
+Sugar Bowl Ski Resort,39.30444,-120.33583,,California
+Tahoe Donner Downhill,39.3549,-120.259,Tahoe Donner Day Lodge,California
+"Wrightwood, California",34.36083,-117.63333,,California
+Arapahoe Basin,39.64167,-105.87167,The Goat,Colorado
+Aspen Highlands,39.18111,-106.85639,Aspen Highlands (Aspen Snowmass),Colorado
+Aspen Mountain (ski area),39.18639,-106.81861,Rooftop Pool,Colorado
+"Aspen, Colorado",39.194951,-106.837002,,Colorado
+Beaver Creek Resort,39.63139,-106.52167,,Colorado
+Birds of Prey (ski course),39.583,-106.523,,Colorado
+Blue Sky Basin,39.59639,-106.33083,,Colorado
+Breckenridge Ski Resort,39.48,-106.067,One Ski Hill Place,Colorado
+Buttermilk (ski area),39.205,-106.86056,,Colorado
+Copper Mountain (Colorado),39.50167,-106.15639,,Colorado
+Crested Butte Mountain Resort,38.89972,-106.965,Mount Crested Butte,Colorado
+Echo Mountain Resort,39.685,-105.51944,,Colorado
+Eldora Mountain Resort,39.9375,-105.58361,Eldora Mountain Resort,Colorado
+Front Range Ski Club,39.685,-105.51944,,Colorado
+Haugen Hill,39.61333,-106.06583,,Colorado
+Hesperus Ski Area,37.29778,-108.055,Ski Hesperus,Colorado
+Howelsen Hill Ski Area,40.483,-106.839,Howelsen Hill Ski Area,Colorado
+Kendall Mountain Ski Area,37.81135,-107.65652,Kendall Mountain Recreation Area,Colorado
+Keystone Resort,39.605,-105.95417,Keystone Resort,Colorado
+Loveland Ski Area,39.68,-105.897,Ski Patrol,Colorado
+Monarch Ski Area,38.5125,-106.3325,,Colorado
+Powderhorn Resort,39.06306,-108.15556,,Colorado
+Purgatory Resort,37.62972,-107.81444,,Colorado
+Ruby Hill Terrain Park,39.68448,-105.00528,Denver,Colorado
+Silverton Mountain,37.8847,-107.66529,Silverton Mountain,Colorado
+Ski Cooper,39.36,-106.302,Ski Cooper,Colorado
+Snowmass (ski area),39.1956,-106.9513,Snowmass Village,Colorado
+Spring Gulch,39.35472,-107.29944,,Colorado
+Steamboat Ski Resort,40.459,-106.803,,Colorado
+Sunlight Ski Area,39.399806,-107.339278,Ski Sunlight Mountain Resort,Colorado
+Telluride Ski Resort,37.93639,-107.82028,,Colorado
+Vail Ski Resort,39.639,-106.374,,Colorado
+Winter Park Resort,39.88694,-105.7625,Admin Building,Colorado
+Wolf Creek ski area,37.47222,-106.79333,Wolf Creek Ski Area,Colorado
+Bald Mountain (Idaho),43.655,-114.40917,,Idaho
+Bald Mountain Ski Area,46.57,-115.87,,Idaho
+Blizzard Mountain Ski Area,43.508,-113.56,,Idaho
+Bogus Basin,43.764,-116.104,,Idaho
+Brundage Mountain,45.005,-116.155,,Idaho
+Cottonwood Butte,46.0755,-116.4528,Cottonwood Butte Ski Area,Idaho
+Dollar Mountain,43.68306,-114.34694,Sun Valley,Idaho
+Kelly Canyon,43.64583,-111.63,Kelly Canyon Ski Lodge,Idaho
+Ketchum Sun Valley Historical Society Heritage & Ski Museum,43.6775,-114.365,,Idaho
+Little Ski Hill,44.93,-116.16306,,Idaho
+Lookout Pass Ski and Recreation Area,47.453,-115.707,,Montana
+Lost Trail Powder Mountain,45.692,-113.952,Lost Trail Powder Mountain,Montana
+Magic Mountain Resort,42.188306,-114.286111,Magic Mountain Resort,Idaho
+North–South Ski Bowl,47.066,-116.66,,Idaho
+"Pebble Creek, Idaho",42.778,-112.16,,Idaho
+Pomerelle,42.318,-113.608,,Idaho
+Rotarun Ski Area,43.4975,-114.366,Rotarun Ski Area,Idaho
+Schweitzer Mountain,48.367,-116.623,,Idaho
+Silver Mountain (Idaho),47.495,-116.135,Wardner,Idaho
+Snowhaven,45.869,-116.09,Snowhaven Ski Patrol,Idaho
+Soldier Mountain,43.485,-114.83,Soldier Mountain Ski Area,Idaho
+"Sun Valley, Idaho",43.68056,-114.34278,Sun Valley,Idaho
+Tamarack Resort,44.671,-116.123,,Idaho
+"Tamarack Ski Area (Troy, Idaho)",46.8029,-116.8295,,Idaho
+Bear Paw Ski Bowl,48.1644,-109.6702194,,Montana
+Beartooth Basin Summer Ski Area,44.9754616,-109.4353466,,Montana
+Big Sky Resort,45.25,-111.41667,,Montana
+Blacktail Mountain Ski Area,48.01306,-114.24694,,Montana
+Bridger Bowl Ski Area,45.818,-110.897,,Montana
+Discovery Ski Area,46.25639,-113.24194,,Montana
+Great Divide Montana,46.7497,-112.3043,,Montana
+Lookout Pass Ski and Recreation Area,47.453,-115.707,,Montana
+Lost Trail Powder Mountain,45.692,-113.952,Lost Trail Powder Mountain,Montana
+Maverick Mountain Ski Area,45.435,-113.12944,Maverick Mountain Lodge,Montana
+Montana Snowbowl,47.02,-114.0,,Montana
+Moonlight Basin,45.31417,-111.45083,The Reserve at Moonlight Basin,Montana
+Red Lodge Mountain,45.191,-109.335,,Montana
+Showdown Ski Area,46.83861,-110.70889,,Montana
+Teton Pass Ski Area,47.92806,-112.81528,,Montana
+Turner Mountain Ski Resort,48.605,-115.63,,Montana
+Whitefish Mountain Resort,48.5,-114.34,,Montana
+Yellowstone Club,45.2313833,-111.4512556,,Montana
+Alta Ski Area,40.58083,-111.63722,,Utah
+Beaver Mountain,41.968,-111.541,Beaver Mountain Lodge,Utah
+Brian Head Ski Resort,37.683,-112.833,,Utah
+Brighton Ski Resort,40.6,-111.58333,Brighton,Utah
+Cherry Peak Resort,41.92639,-111.75667,Richmond,Utah
+Deer Valley,40.62278,-111.48944,Goldener Hirsch Inn,Utah
+"Elk Mountain, Utah",38.32056,-112.39167,,Utah
+Park City Mountain Resort,40.65083,-111.5075,Marriott's MountainSide,Utah
+Powder Mountain,41.38,-111.78028,,Utah
+Snowbasin,41.216,-111.857,Earl's Lodge,Utah
+"Snowbird, Utah",40.58111,-111.65639,,Utah
+Soldier Hollow,40.47917,-111.49722,,Utah
+Solitude Mountain Resort,40.615139,-111.588917,Solitude,Utah
+Sundance Resort,40.392,-111.579,,Utah
+Wolf Mountain,41.32833,-111.82417,Eden,Utah
+Beartooth Basin Summer Ski Area,44.9754616,-109.4353466,,Montana
+Corbet's Couloir,43.596088,-110.867774,Teton Village,Wyoming
+Grand Targhee Resort,43.789,-110.957,Grand Targhee Resort,Wyoming
+Hogadon Ski Area,42.7449611,-106.3394278,,Wyoming
+Jackson Hole Mountain Resort,43.59,-110.89,,Wyoming
+Pine Creek Ski Area,42.1031083,-110.8287889,Pine Creek Ski Resort,Wyoming
 Snow King Mountain,43.472,-110.761,Jackson,Wyoming
-Snowy Range Ski Area,41.341231,-106.183441,Snowy Range,Wyoming
-White Pine Ski Resort,42.977839,-109.758172,Wind River Range,Wyoming
+Snowy Range Ski Area,41.341231,-106.183441,,Wyoming
+White Pine Ski Resort,42.9778389,-109.7581722,,Wyoming
