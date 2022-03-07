@@ -10,7 +10,7 @@
     integrity="sha512-HZgZOfcUw1rxWuEBlzDis5U4HlbzR0wcWmb3FrLSKV6uhZiZpT9JSTzPJplHDmJZJFNfAReW+iDELJ1kADYHtA=="
     crossorigin="anonymous" />
   <title>
-    Simple ski reports
+    Follow the Snow, today
   </title>
   <style>
     .content {
@@ -37,7 +37,17 @@
     <a href="/" class="brand">
         <span>Follow the Snow, Today</span>
     </a>
-</nav>
+
+    <!-- responsive-->
+    <input id="bmenub" type="checkbox" class="show">
+    <label for="bmenub" class="burger pseudo button">&#8801;</label>
+
+    <div class="menu">
+      <% by_state.keys.each do |state| %>
+      <a href="#<%= state.downcase%>" class="pseudo button"><%= state %></a>
+      <% end %>
+    </div>
+  </nav>
   <main class="content">
     <p>Last Updated: <%= Time.now.to_s %></p>
     <% by_state.each do |state, predictions| %>
