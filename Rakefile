@@ -11,7 +11,10 @@ task :build do
     build_dir: File.join(__dir__, 'docs'),
     fetcher: HTTPCache.new(
       filename: 'http_responses.db',
-      rules: []
+      rules: {
+        'api.weather.gov/points' => 12 * 60, # 12 hours in minutes
+        'forecast' => 5 * 60 # 5 hour in minutes
+      }
     ),
     resorts: resorts,
     source_dir: __dir__
