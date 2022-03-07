@@ -2,12 +2,9 @@
 
 require_relative './lib/builder'
 require_relative './lib/resort'
-require 'csv'
 
 task :build do
-  resorts = CSV.read('resorts.csv', headers: true).map do |resort|
-    Resort.new(resort.to_h)
-  end
+  resorts = Resort.from_csv(File.join(__dir__, 'resorts.csv'))
 
   builder = Builder.new(
     resorts: resorts,
