@@ -31,7 +31,9 @@ HTTPCache = Struct.new(:filename, :rules, keyword_init: true) do
       return results[0][0] if results.length.positive?
     end
 
-    response = URI.open(url).read
+    response = URI.open(url,{
+      'User-Agent' => '(followthesnow.today, jtachie+followthesnow@gmail.com)'
+    }).read
     db.execute('INSERT INTO responses (url, response) VALUES (:url, :response);', url: url, response: response)
     response
   end
