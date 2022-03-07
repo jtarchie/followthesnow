@@ -1,19 +1,15 @@
 # frozen_string_literal: true
 
 require_relative 'resort'
-require 'open-uri'
-require 'json'
 
-Prediction = Struct.new(:resort, keyword_init: true) do
+Prediction = Struct.new(:resort, :fetcher, keyword_init: true) do
   def text_report
     @text_report ||= begin
       points_response = json_response("https://api.weather.gov/points/#{resort.coords.join(',')}")
       forecast_url = points_response.dig('properties', 'forecast')
-      warn "  forecast_url = #{forecast_url}"
 
       forecast_response = json_response(forecast_url)
       periods = forecast_response.dig('properties', 'periods')
-      warn "  periods = #{periods[0..1]}"
 
       snow_predictions = periods[0..1].map do |period|
         snow_prediction = 'no snow'
@@ -37,8 +33,6 @@ Prediction = Struct.new(:resort, keyword_init: true) do
   private
 
   def json_response(url)
-    JSON.parse(
-      URI.open(url).read
-    )
+    fetcher.json_response(url)
   end
 end

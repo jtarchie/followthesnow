@@ -2,10 +2,13 @@
 
 require 'json'
 require 'spec_helper'
+require 'tempfile'
 require 'webmock/rspec'
 require_relative '../lib/prediction'
 
 RSpec.describe 'Prediction' do
+  let(:fetcher) { TestFetcher.new }
+
   before do
     WebMock.disable_net_connect!
   end
@@ -13,7 +16,7 @@ RSpec.describe 'Prediction' do
   context 'when the resort has snow' do
     it 'gives a helpful report' do
       resort = Resort.new(lat: 1.001, lng: 2.002)
-      prediction = Prediction.new(resort: resort)
+      prediction = Prediction.new(resort: resort, fetcher: fetcher)
 
       stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
         .to_return(status: 200, body: {
@@ -39,7 +42,7 @@ RSpec.describe 'Prediction' do
   context 'when the resort will have light snow' do
     it 'gives a helpful report' do
       resort = Resort.new(lat: 1.001, lng: 2.002)
-      prediction = Prediction.new(resort: resort)
+      prediction = Prediction.new(resort: resort, fetcher: fetcher)
 
       stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
         .to_return(status: 200, body: {
@@ -65,7 +68,7 @@ RSpec.describe 'Prediction' do
   context 'when the resort has snow today, but none tomorrow' do
     it 'gives a helpful report' do
       resort = Resort.new(lat: 1.001, lng: 2.002)
-      prediction = Prediction.new(resort: resort)
+      prediction = Prediction.new(resort: resort, fetcher: fetcher)
 
       stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
         .to_return(status: 200, body: {
@@ -91,7 +94,7 @@ RSpec.describe 'Prediction' do
   context 'when there is no snow today, but snow tomorrow' do
     it 'gives a helpful report' do
       resort = Resort.new(lat: 1.001, lng: 2.002)
-      prediction = Prediction.new(resort: resort)
+      prediction = Prediction.new(resort: resort, fetcher: fetcher)
 
       stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
         .to_return(status: 200, body: {
@@ -117,7 +120,7 @@ RSpec.describe 'Prediction' do
   context 'when there no snow on either days' do
     it 'gives a helpful report' do
       resort = Resort.new(lat: 1.001, lng: 2.002)
-      prediction = Prediction.new(resort: resort)
+      prediction = Prediction.new(resort: resort, fetcher: fetcher)
 
       stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
         .to_return(status: 200, body: {
@@ -143,7 +146,7 @@ RSpec.describe 'Prediction' do
   context 'when the points returns a 500' do
     it 'returns a prediction of cannot fiqure it out' do
       resort = Resort.new(lat: 1.001, lng: 2.002)
-      prediction = Prediction.new(resort: resort)
+      prediction = Prediction.new(resort: resort, fetcher: fetcher)
 
       stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
         .to_return(status: 500)
@@ -155,7 +158,7 @@ RSpec.describe 'Prediction' do
   context 'when the forecast returns a 500' do
     it 'returns a prediction of cannot fiqure it out' do
       resort = Resort.new(lat: 1.001, lng: 2.002)
-      prediction = Prediction.new(resort: resort)
+      prediction = Prediction.new(resort: resort, fetcher: fetcher)
 
       stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
         .to_return(status: 200, body: {

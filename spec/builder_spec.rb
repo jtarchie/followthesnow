@@ -22,6 +22,7 @@ RSpec.describe 'Builder' do
     build_dir = Dir.mktmpdir
     builder = Builder.new(
       build_dir: build_dir,
+      fetcher: TestFetcher.new,
       source_dir: File.expand_path(File.join(__dir__, '..')),
       resorts: resorts
     )

@@ -2,14 +2,19 @@
 
 require_relative './lib/builder'
 require_relative './lib/resort'
+require_relative './lib/http_cache'
 
 task :build do
   resorts = Resort.from_csv(File.join(__dir__, 'resorts.csv'))
 
   builder = Builder.new(
+    build_dir: File.join(__dir__, 'docs'),
+    fetcher: HTTPCache.new(
+      filename: 'http_responses.db',
+      rules: []
+    ),
     resorts: resorts,
-    source_dir: __dir__,
-    build_dir: File.join(__dir__, 'docs')
+    source_dir: __dir__
   )
 
   builder.build!

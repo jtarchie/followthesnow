@@ -4,7 +4,7 @@ require 'erb'
 require 'fileutils'
 require_relative 'prediction'
 
-Builder = Struct.new(:resorts, :build_dir, :source_dir, keyword_init: true) do
+Builder = Struct.new(:resorts, :build_dir, :source_dir, :fetcher, keyword_init: true) do
   def build!
     FileUtils.mkdir_p(build_dir)
 
@@ -21,14 +21,11 @@ Builder = Struct.new(:resorts, :build_dir, :source_dir, keyword_init: true) do
   end
 
   def predictions
-    warn 'loading predictions: '
     @predictions ||= resorts.sort_by { |r| [r.state, r.name] }.map do |resort|
-      warn "* #{resort.name}"
-      prediction = Prediction.new(resort: resort)
-      report = prediction.text_report
-      warn "  report = #{report}"
-      sleep(rand(5..10))
-      prediction
+      Prediction.new(
+        fetcher: fetcher,
+        resort: resort
+      )
     end
   end
 end
