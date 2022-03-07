@@ -44,7 +44,7 @@ if __FILE__ == $PROGRAM_NAME
     'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Colorado',
     'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Idaho',
     'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Montana',
-    'https://en.wikipedia.org/wiki/List_of_New_Mexico_ski_resorts',
+    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_New_Mexico',
     'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Utah',
     'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Wyoming'
   ]
