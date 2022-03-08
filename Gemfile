@@ -2,6 +2,7 @@
 
 source 'https://rubygems.org'
 
+gem 'activesupport'
 gem 'geo_coord', require: 'geo/coord'
 gem 'nokogiri'
 gem 'rake'

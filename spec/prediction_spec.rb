@@ -13,29 +13,33 @@ RSpec.describe 'Prediction' do
     WebMock.disable_net_connect!
   end
 
+  def forecast(periods)
+    stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
+      .to_return(status: 200, body: {
+        properties: {
+          forecast: 'https://api.weather.gov/gridpoints/TEST/1,2/forecast'
+        }
+      }.to_json)
+
+    stub_request(:get, 'https://api.weather.gov/gridpoints/TEST/1,2/forecast')
+      .to_return(status: 200, body: {
+        properties: {
+          periods: periods
+        }
+      }.to_json)
+  end
+
   context 'when the resort has snow' do
     it 'gives a helpful report' do
       resort = Resort.new(lat: 1.001, lng: 2.002)
       prediction = Prediction.new(resort: resort, fetcher: fetcher)
 
-      stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
-        .to_return(status: 200, body: {
-          properties: {
-            forecast: 'https://api.weather.gov/gridpoints/TEST/1,2/forecast'
-          }
-        }.to_json)
+      forecast([
+                 { shortForecast: 'Snow', name: 'Today', detailedForecast: 'We are expecting 2 to 4 inches of snow.' },
+                 { shortForecast: 'Snow', name: 'Tonight', detailedForecast: 'We are expecting 4 to 9 inches of snow.' }
+               ])
 
-      stub_request(:get, 'https://api.weather.gov/gridpoints/TEST/1,2/forecast')
-        .to_return(status: 200, body: {
-          properties: {
-            periods: [
-              { shortForecast: 'Snow', detailedForecast: 'We are expecting 2 to 4 inches of snow.' },
-              { shortForecast: 'Snow', detailedForecast: 'We are expecting 4 to 9 inches of snow.' }
-            ]
-          }
-        }.to_json)
-
-      expect(prediction.text_report).to eq '2-4" of snow expected today and 4-9" of snow expected tonight'
+      expect(prediction.text_report).to eq '2-4" of snow today and 4-9" of snow tonight'
     end
   end
 
@@ -44,24 +48,13 @@ RSpec.describe 'Prediction' do
       resort = Resort.new(lat: 1.001, lng: 2.002)
       prediction = Prediction.new(resort: resort, fetcher: fetcher)
 
-      stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
-        .to_return(status: 200, body: {
-          properties: {
-            forecast: 'https://api.weather.gov/gridpoints/TEST/1,2/forecast'
-          }
-        }.to_json)
+      forecast([
+                 { shortForecast: 'Snow', name: 'Today', detailedForecast: 'We are expecting 2 to 4 inches of snow.' },
+                 { shortForecast: 'Light Snow', name: 'Tonight',
+                   detailedForecast: 'We are expecting 1 to 2 inches of snow.' }
+               ])
 
-      stub_request(:get, 'https://api.weather.gov/gridpoints/TEST/1,2/forecast')
-        .to_return(status: 200, body: {
-          properties: {
-            periods: [
-              { shortForecast: 'Snow', detailedForecast: 'We are expecting 2 to 4 inches of snow.' },
-              { shortForecast: 'Light Snow', detailedForecast: 'We are expecting 1 to 2 inches of snow.' }
-            ]
-          }
-        }.to_json)
-
-      expect(prediction.text_report).to eq '2-4" of snow expected today and 1-2" of snow expected tonight'
+      expect(prediction.text_report).to eq '2-4" of snow today and 1-2" of snow tonight'
     end
   end
 
@@ -70,24 +63,12 @@ RSpec.describe 'Prediction' do
       resort = Resort.new(lat: 1.001, lng: 2.002)
       prediction = Prediction.new(resort: resort, fetcher: fetcher)
 
-      stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
-        .to_return(status: 200, body: {
-          properties: {
-            forecast: 'https://api.weather.gov/gridpoints/TEST/1,2/forecast'
-          }
-        }.to_json)
+      forecast([
+                 { shortForecast: 'Snow', name: 'Today', detailedForecast: 'We are expecting 2 to 4 inches of snow.' },
+                 { shortForecast: 'Sunny', name: 'Tonight', detailedForecast: 'It is way too sunny to ski.' }
+               ])
 
-      stub_request(:get, 'https://api.weather.gov/gridpoints/TEST/1,2/forecast')
-        .to_return(status: 200, body: {
-          properties: {
-            periods: [
-              { shortForecast: 'Snow', detailedForecast: 'We are expecting 2 to 4 inches of snow.' },
-              { shortForecast: 'Sunny', detailedForecast: 'It is way too sunny to ski.' }
-            ]
-          }
-        }.to_json)
-
-      expect(prediction.text_report).to eq '2-4" of snow expected today and no snow expected tonight'
+      expect(prediction.text_report).to eq '2-4" of snow today and no snow tonight'
     end
   end
 
@@ -96,24 +77,12 @@ RSpec.describe 'Prediction' do
       resort = Resort.new(lat: 1.001, lng: 2.002)
       prediction = Prediction.new(resort: resort, fetcher: fetcher)
 
-      stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
-        .to_return(status: 200, body: {
-          properties: {
-            forecast: 'https://api.weather.gov/gridpoints/TEST/1,2/forecast'
-          }
-        }.to_json)
+      forecast([
+                 { shortForecast: 'Sunny', name: 'Today', detailedForecast: 'It is way too sunny to ski.' },
+                 { shortForecast: 'Snow', name: 'Tonight', detailedForecast: 'We are expecting 2 to 4 inches of snow.' }
+               ])
 
-      stub_request(:get, 'https://api.weather.gov/gridpoints/TEST/1,2/forecast')
-        .to_return(status: 200, body: {
-          properties: {
-            periods: [
-              { shortForecast: 'Sunny', detailedForecast: 'It is way too sunny to ski.' },
-              { shortForecast: 'Snow', detailedForecast: 'We are expecting 2 to 4 inches of snow.' }
-            ]
-          }
-        }.to_json)
-
-      expect(prediction.text_report).to eq 'no snow expected today and 2-4" of snow expected tonight'
+      expect(prediction.text_report).to eq 'no snow today and 2-4" of snow tonight'
     end
   end
 
@@ -122,24 +91,12 @@ RSpec.describe 'Prediction' do
       resort = Resort.new(lat: 1.001, lng: 2.002)
       prediction = Prediction.new(resort: resort, fetcher: fetcher)
 
-      stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
-        .to_return(status: 200, body: {
-          properties: {
-            forecast: 'https://api.weather.gov/gridpoints/TEST/1,2/forecast'
-          }
-        }.to_json)
+      forecast([
+                 { shortForecast: 'Sunny', name: 'Today', detailedForecast: 'It is way too sunny to ski.' },
+                 { shortForecast: 'Sunny', name: 'Tonight', detailedForecast: 'It is way too sunny to ski.' }
+               ])
 
-      stub_request(:get, 'https://api.weather.gov/gridpoints/TEST/1,2/forecast')
-        .to_return(status: 200, body: {
-          properties: {
-            periods: [
-              { shortForecast: 'Sunny', detailedForecast: 'It is way too sunny to ski.' },
-              { shortForecast: 'Sunny', detailedForecast: 'It is way too sunny to ski.' }
-            ]
-          }
-        }.to_json)
-
-      expect(prediction.text_report).to eq 'no snow expected today and no snow expected tonight'
+      expect(prediction.text_report).to eq 'no snow today and no snow tonight'
     end
   end
 
