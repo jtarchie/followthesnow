@@ -20,6 +20,10 @@
       margin: 100px auto 500px;
     }
 
+    table {
+      width: 100%;
+    }
+
     @media print {
       nav {
         display: none;
@@ -56,11 +60,22 @@
     <p><strong>Last Updated:</strong> <%= Time.now.to_s %></p>
     <% by_state.each do |state, predictions| %>
       <h1 id="<%= state.downcase%>"><%= state %></h1>
-      <ul>
-      <% predictions.each do |prediction| %>
-        <li><strong><%= prediction.resort.name %></strong>: <%= prediction.text_report %>
-      <% end %>
-      </ul>
+      <table class="primary">
+        <thead>
+          <tr>
+            <th>Location</th>
+            <th>Weather Report</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% predictions.each do |prediction| %>
+          <tr>
+            <td><%= prediction.resort.name %></td>
+            <td><%= prediction.text_report %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
     <% end %>
   </main>
 </body>

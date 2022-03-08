@@ -13,7 +13,7 @@ task :build do
       filename: 'http_responses.db',
       rules: {
         'api.weather.gov/points' => 12 * 60, # 12 hours in minutes
-        'forecast' => 5 * 60 # 5 hour in minutes
+        'forecast' => 12 * 60 # 5 hour in minutes
       }
     ),
     resorts: resorts,
