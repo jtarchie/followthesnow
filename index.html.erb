@@ -59,7 +59,7 @@
     </p>
     <p><strong>Last Updated:</strong> <%= Time.now.to_s %></p>
     <% by_state.each do |state, predictions| %>
-      <h1 id="<%= state.downcase%>"><%= state %></h1>
+      <h1 id="<%= state.downcase%>"><%= h state %></h1>
       <table class="primary">
         <thead>
           <tr>
@@ -70,8 +70,8 @@
         <tbody>
         <% predictions.each do |prediction| %>
           <tr>
-            <td><%= prediction.resort.name %></td>
-            <td><%= prediction.text_report %></td>
+            <td><%= h prediction.resort.name %></td>
+            <td><%= h prediction.text_report %></td>
           </tr>
         <% end %>
         </tbody>
