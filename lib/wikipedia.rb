@@ -22,10 +22,12 @@ WikipediaScraper = Struct.new(:url, keyword_init: true) do
       title   = link_doc.css('h1').text
       geo     = Geo::Coord.parse(location.text)
       address = address(lat: geo.lat, lng: geo.lng)
+      url     = link_doc.css('.infobox-data .url a').first
+      href    = url ? url['href'] : nil
 
       city = address.city || address.village || address.leisure || address.tourism || address.building
 
-      puts [title, geo.lat.to_f, geo.lng.to_f, city, address.state].to_csv
+      puts [title, geo.lat.to_f, geo.lng.to_f, city, address.state, href].to_csv
       sleep(1) # rate limit
     end
   end
@@ -50,7 +52,7 @@ if __FILE__ == $PROGRAM_NAME
     'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Wyoming'
   ]
 
-  puts 'name,lat,lng,city,state'
+  puts 'name,lat,lng,city,state,url'
   urls.each do |url|
     scraper = WikipediaScraper.new(url: url)
     scraper.resorts

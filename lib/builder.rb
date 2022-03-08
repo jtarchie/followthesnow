@@ -6,7 +6,7 @@ require_relative 'prediction'
 
 Builder = Struct.new(:resorts, :build_dir, :source_dir, :fetcher, keyword_init: true) do
   include ERB::Util
-  
+
   def build!
     FileUtils.mkdir_p(build_dir)
 

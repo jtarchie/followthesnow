@@ -70,7 +70,15 @@
         <tbody>
         <% predictions.each do |prediction| %>
           <tr>
-            <td><%= h prediction.resort.name %></td>
+            <td>
+              <% unless prediction.resort.url.nil? %>
+                <a href="<%= prediction.resort.url %>" target="_blank">
+                  <%= h prediction.resort.name %>
+                </a>
+              <% else %>
+                <%= h prediction.resort.name %>
+              <% end %>
+            </td>
             <td><%= h prediction.text_report %></td>
           </tr>
         <% end %>

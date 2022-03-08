@@ -2,7 +2,7 @@
 
 require 'csv'
 
-Resort = Struct.new(:name, :lat, :lng, :city, :state, keyword_init: true) do
+Resort = Struct.new(:name, :lat, :lng, :city, :state, :url, keyword_init: true) do
   def coords
     [lat, lng]
   end
@@ -10,6 +10,6 @@ Resort = Struct.new(:name, :lat, :lng, :city, :state, keyword_init: true) do
   def self.from_csv(filename)
     CSV.read(filename, headers: true).map do |resort|
       Resort.new(resort.to_h)
-    end
+    end.uniq(&:name)
   end
 end
