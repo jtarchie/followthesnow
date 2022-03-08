@@ -13,20 +13,25 @@ Prediction = Struct.new(:resort, :fetcher, keyword_init: true) do
       forecast_response = json_response(forecast_url)
       periods = forecast_response.dig('properties', 'periods')
 
-      snow_predictions = periods.map do |period|
+      snow_predictions = periods.map.with_index do |period, index|
         time_period = period['name'].downcase
-        snow_prediction = "no snow #{time_period}"
+        snow_prediction = ("no snow #{time_period}" if index < 2)
 
         short_forecast = period['shortForecast']
-        if short_forecast.include?('Snow')
+        if short_forecast =~ /snow/i
           detailed_forecast = period['detailedForecast']
 
-          matches = /(\d+)\s+to\s+(\d+)\s+inches/.match(detailed_forecast)
-          snow_prediction = %(#{matches[1]}-#{matches[2]}" of snow #{time_period}) if matches
+          snow_prediction = if matches = /(\d+)\s+to\s+(\d+)\s+inches/.match(detailed_forecast)
+                              %(#{matches[1]}-#{matches[2]}" of snow #{time_period})
+                            elsif detailed_forecast =~ /less than half an inch/
+                              %(<0.5" of snow #{time_period})
+                            elsif detailed_forecast =~ /around one inch/
+                              %(<1" of snow #{time_period})
+                            end
         end
 
         snow_prediction
-      end.compact.to_sentence
+      end[0..2].compact.to_sentence
     rescue OpenURI::HTTPError
       'no current weather reports can be found'
     end

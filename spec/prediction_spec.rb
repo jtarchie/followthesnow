@@ -100,6 +100,39 @@ RSpec.describe 'Prediction' do
     end
   end
 
+  context 'when there is snow a later in the week' do
+    it 'gives a helpful report' do
+      resort = Resort.new(lat: 1.001, lng: 2.002)
+      prediction = Prediction.new(resort: resort, fetcher: fetcher)
+
+      forecast([
+                 { shortForecast: 'Sunny', name: 'Today', detailedForecast: 'It is way too sunny to ski.' },
+                 { shortForecast: 'Sunny', name: 'Tonight', detailedForecast: 'It is way too sunny to ski.' },
+                 { shortForecast: 'Snow', name: 'Thursday Night',
+                   detailedForecast: 'We are expecting 2 to 4 inches of snow.' }
+               ])
+
+      expect(prediction.text_report).to eq 'no snow today, no snow tonight, and 2-4" of snow thursday night'
+    end
+  end
+
+  context 'when the snow report is less than an inch' do
+    it 'gives a helpful report' do
+      resort = Resort.new(lat: 1.001, lng: 2.002)
+      prediction = Prediction.new(resort: resort, fetcher: fetcher)
+
+      forecast([
+                 { shortForecast: 'Snow', name: 'Today',
+                   detailedForecast: 'New snow accumulation of around one inch possible' },
+                 { shortForecast: 'Snow', name: 'Tonight',
+                   detailedForecast: 'New snow accumulation of less than half an inch possible' },
+                 { shortForecast: 'Sunny', name: 'Thursday Night', detailedForecast: 'It is way too sunny to ski.' }
+               ])
+
+      expect(prediction.text_report).to eq '<1" of snow today and <0.5" of snow tonight'
+    end
+  end
+
   context 'when the points returns a 500' do
     it 'returns a prediction of cannot fiqure it out' do
       resort = Resort.new(lat: 1.001, lng: 2.002)
