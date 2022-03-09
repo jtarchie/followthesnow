@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="description" content="Follow the Snow, today. Learn if it is snowing and how much.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/picnic/7.1.0/picnic.min.css"
+    integrity="sha512-HZgZOfcUw1rxWuEBlzDis5U4HlbzR0wcWmb3FrLSKV6uhZiZpT9JSTzPJplHDmJZJFNfAReW+iDELJ1kADYHtA=="
+    crossorigin="anonymous" />
+  <title>
+    Follow the Snow, today
+  </title>
+  <style>
+    h2 {
+      scroll-margin-top: 2em;
+    }
+
+    .content {
+      width: 100%;
+      margin: 60px auto 500px;
+    }
+
+    #locations + ul {
+      list-style: none;
+      padding: 0;
+    }
+    #locations + ul li {
+      display: inline-block;
+      margin-right: 1em;
+    }
+
+    table {
+      width: 100%;
+    }
+    table tr td:nth-child(1) {
+      width: 25%;
+    }
+
+
+    nav {
+      position: fixed;
+    }
+
+    @media print {
+      nav {
+        display: none;
+      }
+
+      .content {
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="demo">
+    <a href="/" class="brand">
+        <span>Follow the Snow, Today</span>
+    </a>
+
+    <!-- responsive-->
+    <input id="bmenub" type="checkbox" class="show">
+    <label for="bmenub" class="burger pseudo button">&#8801;</label>
+
+    <div class="menu">
+      <a href="mailto:hello@followthesnow.today" class="pseudo button">Contact</a>
+      <a href="#locations" class="button">Locations</a>
+    </div>
+  </nav>
+  <main class="content">
+    <p>
+      This is an aggregate list of ski resorts and the expected snow totals for the day.
+      Follow the snow started after discussion of "Where we can find the best snow today?"
+    </p>
+    <h2 id="locations">Locations</h2>
+    <ul >
+      <% by_state.keys.each do |state| %>
+      <li><a href="#<%= state.downcase%>"><%= state %></a></li>
+      <% end %>
+    </ul>
+    <p><strong>Last Updated:</strong> <%= current_timestamp %></p>
+    <% by_state.each do |state, predictions| %>
+      <h2 id="<%= state.downcase%>"><%= h state %></h2>
+      <table class="primary">
+        <thead>
+          <tr>
+            <th>Location</th>
+            <% predictions.first.emoji_reports.each do |tod, emoji| %>
+              <th><%= h tod %></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+        <% predictions.each do |prediction| %>
+          <tr>
+            <td>
+              <% unless prediction.resort.url.nil? %>
+                <a href="<%= prediction.resort.url %>" target="_blank">
+                  <%= h prediction.resort.name %>
+                </a>
+              <% else %>
+                <%= h prediction.resort.name %>
+              <% end %>
+            </td>
+            <% prediction.emoji_reports.each do |tod, emoji| %>
+              <td><%= h emoji %></td>
+            <% end %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </main>
+  <script defer data-domain="followthesnow.today" src="https://plausible.io/js/plausible.js"></script>
+</body>
+</html>

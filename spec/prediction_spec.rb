@@ -11,6 +11,7 @@ RSpec.describe 'Prediction' do
 
   before do
     WebMock.disable_net_connect!
+    allow_any_instance_of(Prediction).to receive(:warn)
   end
 
   def forecast(periods)

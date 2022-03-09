@@ -17,7 +17,7 @@ task :build do
       }
     ),
     resorts: resorts,
-    source_dir: __dir__
+    source_dir: File.join(__dir__, 'pages')
   )
 
   builder.build!

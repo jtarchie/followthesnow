@@ -23,7 +23,7 @@ RSpec.describe 'Builder' do
     builder = Builder.new(
       build_dir: build_dir,
       fetcher: TestFetcher.new,
-      source_dir: File.expand_path(File.join(__dir__, '..')),
+      source_dir: File.expand_path(File.join(__dir__, '..', 'pages')),
       resorts: resorts
     )
 

@@ -12,8 +12,11 @@ Builder = Struct.new(:resorts, :build_dir, :source_dir, :fetcher, keyword_init: 
   def build!
     FileUtils.mkdir_p(build_dir)
 
-    file = ERB.new(File.read(File.join(source_dir, 'index.html.erb')))
-    File.write(File.join(build_dir, 'index.html'), file.result(binding))
+    Dir[File.join(source_dir, '*.html.erb')].each do |source_filename|
+      build_filename = File.basename(source_filename, '.erb')
+      file = ERB.new(File.read(source_filename))
+      File.write(File.join(build_dir, build_filename), file.result(binding))
+    end
   end
 
   private
