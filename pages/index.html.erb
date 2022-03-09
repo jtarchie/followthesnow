@@ -33,16 +33,28 @@
 
     table {
       width: 100%;
+      position: relative;
+    }
+    table th {
+      position: sticky;
+      top: 0;
+      z-index: 2; 
+    }
+    table th:nth-child(1) {
+      left: 0;
+      z-index: 3;
+    }
+    table tr td {
+      min-width: 6rem;
     }
     table tr td:nth-child(1) {
-      width: 25%;
-    }
-    table tr td:nth-child(2) {
-      width: 75%;
+      position: sticky;
+      left: 0;
+      z-index: 1;
     }
 
     nav {
-      position: fixed;
+      position: absolute;
     }
 
     @media print {
@@ -84,13 +96,16 @@
       <% end %>
     </ul>
     <p><strong>Last Updated:</strong> <%= current_timestamp %></p>
-    <% by_state([Forecast::Text]).each do |state, predictions| %>
+    <% by_state([Forecast::Aggregate, Forecast::Emoji]).each do |state, predictions| %>
       <h2 id="<%= state.downcase%>"><%= h state %></h2>
       <table class="primary">
         <thead>
           <tr>
             <th>Location</th>
-            <th>Weather Report</th>
+            <% number_of_forecasts = predictions.first.forecast.forecasts.length %>
+            <% predictions.first.forecast.forecasts.each do |tod, _| %>
+              <th><%= h tod %></th>
+            <% end %>
           </tr>
         </thead>
         <tbody>
@@ -105,7 +120,9 @@
                 <%= h prediction.resort.name %>
               <% end %>
             </td>
-            <td><%= h prediction.forecast.forecasts %></td>
+            <% prediction.forecast.forecasts[0...number_of_forecasts].each do |_, range| %>
+              <td><%= h range %></td>
+            <% end %>
           </tr>
         <% end %>
         </tbody>

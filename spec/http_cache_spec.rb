@@ -54,6 +54,24 @@ RSpec.describe 'HTTPCache' do
   end
 
   context 'when rules are given' do
+    it 'will retry if the condition is not meant' do
+      client = HTTPCache.new(
+        filename: filename,
+        rules: {
+          'example.com' => 1
+        }
+      )
+
+      stub_request(:get, 'http://example.com/index.json')
+        .to_return(status: 200, body: ['abc', 123].to_json).then
+        .to_return(status: 200, body: { 123 => 'abc' }.to_json).then
+
+      response = client.json_response('http://example.com/index.json') do |resp|
+        resp.is_a?(Hash)
+      end
+      expect(response).to eq({ '123' => 'abc' })
+    end
+
     it 'will use the cached response' do
       client = HTTPCache.new(
         filename: filename,

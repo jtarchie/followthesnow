@@ -5,7 +5,7 @@ require 'active_support/core_ext/array/conversions'
 
 Forecast::Text = Struct.new(:forecasts, keyword_init: true) do
   def forecasts
-    sentence = self['forecasts'].map.with_index do |forecast, index|
+    self['forecasts'].map.with_index do |forecast, index|
       case forecast.range.end
       when 0
         "no snow #{forecast.time_of_day}" if index < 2

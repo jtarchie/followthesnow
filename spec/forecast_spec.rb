@@ -48,9 +48,7 @@ RSpec.describe 'Forecast' do
                         detailedForecast: 'We are expecting 4 to 9 inches of snow.' }
                     ])
 
-      forecast =
-
-        expect(text_forecast.forecasts).to eq '4-13" of snow 03/01'
+      expect(text_forecast.forecasts).to eq '4-13" of snow 03/01'
     end
   end
 
@@ -62,8 +60,6 @@ RSpec.describe 'Forecast' do
                       { shortForecast: 'Light Snow', name: 'Tonight', startTime: '2022-03-01T18:00:00-08:00',
                         detailedForecast: 'We are expecting 1 to 2 inches of snow.' }
                     ])
-
-      forecast = Forecast.from(resort: resort, aggregates: [Forecast::Text], fetcher: fetcher)
 
       expect(text_forecast.forecasts).to eq '2-6" of snow 03/01'
     end

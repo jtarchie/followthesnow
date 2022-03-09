@@ -5,14 +5,20 @@ require 'open-uri'
 require 'sqlite3'
 
 HTTPCache = Struct.new(:filename, :rules, keyword_init: true) do
+  NotMatchingBlock = RuntimeError
+  MAX_RETRIES = 2
+
   def initialize(**)
     super
     db
   end
 
-  def json_response(url, retries = 2)
-    JSON.parse(get_response(url))
-  rescue OpenURI::HTTPError => e
+  def json_response(url, retries = MAX_RETRIES)
+    response = JSON.parse(get_response(url, retries != MAX_RETRIES))
+    return response if !block_given? || yield(response)
+
+    raise NotMatchingBlock, "request to #{url} did not meet condition"
+  rescue OpenURI::HTTPError, NotMatchingBlock => e
     if retries.positive?
       retries -= 1
       sleep(rand(5..15))
@@ -23,9 +29,9 @@ HTTPCache = Struct.new(:filename, :rules, keyword_init: true) do
 
   private
 
-  def get_response(url)
+  def get_response(url, force)
     expires = find_rule_expiry(url)
-    if expires
+    if expires && !force
       results = db.execute(%(
         SELECT response FROM responses
         WHERE

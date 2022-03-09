@@ -26,3 +26,6 @@ Metrics/CyclomaticComplexity:
 
 Security/Open:
   Enabled: false
+
+Lint/ConstantDefinitionInBlock:
+  Enabled: false

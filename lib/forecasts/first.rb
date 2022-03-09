@@ -6,10 +6,14 @@ Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
       points_response = fetcher.json_response("https://api.weather.gov/points/#{resort.coords.join(',')}")
       forecast_url = points_response.dig('properties', 'forecast')
 
-      forecast_response = fetcher.json_response(forecast_url)
+      forecast_response = fetcher.json_response(forecast_url) do |response|
+        updated_at = Time.parse(response.dig('properties', 'updated'))
+        (Time.now - updated_at) / 3600 <= 24
+      end
+
       periods = forecast_response.dig('properties', 'periods')
 
-      forecasts = periods.map do |period|
+      periods.map do |period|
         snow = 0..0
 
         short_forecast = period['shortForecast']
