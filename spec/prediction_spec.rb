@@ -128,15 +128,12 @@ RSpec.describe 'Prediction' do
                    detailedForecast: 'New snow accumulation of less than half an inch possible' },
                  { shortForecast: 'Snow', name: 'Wednesday',
                    detailedForecast: 'New snow accumulation of less than one inch possible.' },
-                { shortForecast: 'Snow', name: 'Thursday',
-                    detailedForecast: 'Little or no snow accumulation expected.' },
+                 { shortForecast: 'Snow', name: 'Thursday',
+                   detailedForecast: 'Little or no snow accumulation expected.' },
                  { shortForecast: 'Sunny', name: 'Friday Night', detailedForecast: 'It is way too sunny to ski.' }
                ])
 
-      expect(prediction.text_report).to eq(
-        '<1" of snow Today, <1" of snow Tonight, ' \
-        '<1" of snow Wednesday, no snow Thursday, and no snow Friday Night'
-      )
+      expect(prediction.text_report).to eq('<1" of snow Today, <1" of snow Tonight, and <1" of snow Wednesday')
     end
   end
 

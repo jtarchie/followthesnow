@@ -9,10 +9,10 @@ Period = Struct.new(:time_of_day, :range, keyword_init: true)
 Prediction = Struct.new(:resort, :fetcher, keyword_init: true) do
   def text_report
     @text_report ||= begin
-      reports.map do |report|
+      reports.map.with_index do |report, index|
         case report.range
         when 0
-          "no snow #{report.time_of_day}"
+          "no snow #{report.time_of_day}" if index < 2
         when 0..1
           "<#{report.range}\" of snow #{report.time_of_day}"
         else
@@ -45,9 +45,9 @@ Prediction = Struct.new(:resort, :fetcher, keyword_init: true) do
                  elsif detailed_forecast =~ /less than|around/
                    1
                  else
-                  warn "detected snow, but no depth"
-                  warn "  shortForecast=#{short_forecast.inspect}"
-                  warn "  detailedForecast=#{detailed_forecast.inspect}"
+                   warn 'detected snow, but no depth'
+                   warn "  shortForecast=#{short_forecast.inspect}"
+                   warn "  detailedForecast=#{detailed_forecast.inspect}"
                    0
                  end
         end
