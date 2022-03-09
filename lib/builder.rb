@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'active_support'
+require 'active_support/time'
 require 'erb'
 require 'fileutils'
 require_relative 'prediction'
@@ -29,5 +31,10 @@ Builder = Struct.new(:resorts, :build_dir, :source_dir, :fetcher, keyword_init: 
         resort: resort
       )
     end
+  end
+
+  def current_timestamp
+    Time.zone = 'Eastern Time (US & Canada)'  
+    Time.zone.now.strftime(" %a %b %e, %Y %l:%M%p %Z")
   end
 end

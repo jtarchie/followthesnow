@@ -20,8 +20,27 @@
       margin: 100px auto 500px;
     }
 
+    ul#states {
+      list-style: none;
+      padding: 0;
+    }
+    ul#states li {
+      display: inline-block;
+      margin-right: 1em;
+    }
+
     table {
       width: 100%;
+    }
+    table tr td:nth-child(1) {
+      width: 25%;
+    }
+    table tr td:nth-child(2) {
+      width: 75%;
+    }
+
+    nav {
+      position: absolute;
     }
 
     @media print {
@@ -47,35 +66,41 @@
     <label for="bmenub" class="burger pseudo button">&#8801;</label>
 
     <div class="menu">
-      
-      <a href="#california" class="pseudo button">California</a>
-      
-      <a href="#colorado" class="pseudo button">Colorado</a>
-      
-      <a href="#idaho" class="pseudo button">Idaho</a>
-      
-      <a href="#montana" class="pseudo button">Montana</a>
-      
-      <a href="#new mexico" class="pseudo button">New Mexico</a>
-      
-      <a href="#oregon" class="pseudo button">Oregon</a>
-      
-      <a href="#utah" class="pseudo button">Utah</a>
-      
-      <a href="#washington" class="pseudo button">Washington</a>
-      
-      <a href="#wyoming" class="pseudo button">Wyoming</a>
-      
+      <a href="mailto:hello@followthesnow.today" class="pseudo button">Contact</a>
+      <a href="#states" class="button">Locations</a>
     </div>
   </nav>
   <main class="content">
+    <h2>Introduction</h2>
     <p>
       Follow the snow started after discussion of "Where we can find the best snow today?"
       This is an aggregate list of ski resorts and the expected snow totals for the day.
     </p>
-    <p><strong>Last Updated:</strong> 2022-03-08 16:36:52 -0700</p>
+    <h2>Locations</h2>
+    <ul id="states">
+      
+      <li><a href="#california">California</a></li>
+      
+      <li><a href="#colorado">Colorado</a></li>
+      
+      <li><a href="#idaho">Idaho</a></li>
+      
+      <li><a href="#montana">Montana</a></li>
+      
+      <li><a href="#new mexico">New Mexico</a></li>
+      
+      <li><a href="#oregon">Oregon</a></li>
+      
+      <li><a href="#utah">Utah</a></li>
+      
+      <li><a href="#washington">Washington</a></li>
+      
+      <li><a href="#wyoming">Wyoming</a></li>
+      
+    </ul>
+    <p><strong>Last Updated:</strong>  Tue Mar  8, 2022  8:06PM EST</p>
     
-      <h1 id="california">California</h1>
+      <h2 id="california">California</h2>
       <table class="primary">
         <thead>
           <tr>
@@ -428,7 +453,7 @@
         </tbody>
       </table>
     
-      <h1 id="colorado">Colorado</h1>
+      <h2 id="colorado">Colorado</h2>
       <table class="primary">
         <thead>
           <tr>
@@ -799,7 +824,7 @@
         </tbody>
       </table>
     
-      <h1 id="idaho">Idaho</h1>
+      <h2 id="idaho">Idaho</h2>
       <table class="primary">
         <thead>
           <tr>
@@ -1046,7 +1071,7 @@
         </tbody>
       </table>
     
-      <h1 id="montana">Montana</h1>
+      <h2 id="montana">Montana</h2>
       <table class="primary">
         <thead>
           <tr>
@@ -1255,7 +1280,7 @@
         </tbody>
       </table>
     
-      <h1 id="new mexico">New Mexico</h1>
+      <h2 id="new mexico">New Mexico</h2>
       <table class="primary">
         <thead>
           <tr>
@@ -1363,7 +1388,7 @@
         </tbody>
       </table>
     
-      <h1 id="oregon">Oregon</h1>
+      <h2 id="oregon">Oregon</h2>
       <table class="primary">
         <thead>
           <tr>
@@ -1537,7 +1562,7 @@
         </tbody>
       </table>
     
-      <h1 id="utah">Utah</h1>
+      <h2 id="utah">Utah</h2>
       <table class="primary">
         <thead>
           <tr>
@@ -1711,7 +1736,7 @@
         </tbody>
       </table>
     
-      <h1 id="washington">Washington</h1>
+      <h2 id="washington">Washington</h2>
       <table class="primary">
         <thead>
           <tr>
@@ -1813,7 +1838,7 @@
                 </a>
               
             </td>
-            <td>no current weather reports can be found</td>
+            <td>no snow this afternoon and no snow tonight</td>
           </tr>
         
           <tr>
@@ -1936,7 +1961,7 @@
         </tbody>
       </table>
     
-      <h1 id="wyoming">Wyoming</h1>
+      <h2 id="wyoming">Wyoming</h2>
       <table class="primary">
         <thead>
           <tr>
