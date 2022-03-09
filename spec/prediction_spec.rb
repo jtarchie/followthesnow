@@ -39,7 +39,7 @@ RSpec.describe 'Prediction' do
                  { shortForecast: 'Snow', name: 'Tonight', detailedForecast: 'We are expecting 4 to 9 inches of snow.' }
                ])
 
-      expect(prediction.text_report).to eq '2-4" of snow today and 4-9" of snow tonight'
+      expect(prediction.text_report).to eq '2-4" of snow Today and 4-9" of snow Tonight'
     end
   end
 
@@ -54,11 +54,11 @@ RSpec.describe 'Prediction' do
                    detailedForecast: 'We are expecting 1 to 2 inches of snow.' }
                ])
 
-      expect(prediction.text_report).to eq '2-4" of snow today and 1-2" of snow tonight'
+      expect(prediction.text_report).to eq '2-4" of snow Today and 1-2" of snow Tonight'
     end
   end
 
-  context 'when the resort has snow today, but none tomorrow' do
+  context 'when the resort has snow Today, but none tomorrow' do
     it 'gives a helpful report' do
       resort = Resort.new(lat: 1.001, lng: 2.002)
       prediction = Prediction.new(resort: resort, fetcher: fetcher)
@@ -68,11 +68,11 @@ RSpec.describe 'Prediction' do
                  { shortForecast: 'Sunny', name: 'Tonight', detailedForecast: 'It is way too sunny to ski.' }
                ])
 
-      expect(prediction.text_report).to eq '2-4" of snow today and no snow tonight'
+      expect(prediction.text_report).to eq '2-4" of snow Today and no snow Tonight'
     end
   end
 
-  context 'when there is no snow today, but snow tomorrow' do
+  context 'when there is no snow Today, but snow tomorrow' do
     it 'gives a helpful report' do
       resort = Resort.new(lat: 1.001, lng: 2.002)
       prediction = Prediction.new(resort: resort, fetcher: fetcher)
@@ -82,7 +82,7 @@ RSpec.describe 'Prediction' do
                  { shortForecast: 'Snow', name: 'Tonight', detailedForecast: 'We are expecting 2 to 4 inches of snow.' }
                ])
 
-      expect(prediction.text_report).to eq 'no snow today and 2-4" of snow tonight'
+      expect(prediction.text_report).to eq 'no snow Today and 2-4" of snow Tonight'
     end
   end
 
@@ -96,7 +96,7 @@ RSpec.describe 'Prediction' do
                  { shortForecast: 'Sunny', name: 'Tonight', detailedForecast: 'It is way too sunny to ski.' }
                ])
 
-      expect(prediction.text_report).to eq 'no snow today and no snow tonight'
+      expect(prediction.text_report).to eq 'no snow Today and no snow Tonight'
     end
   end
 
@@ -112,7 +112,7 @@ RSpec.describe 'Prediction' do
                    detailedForecast: 'We are expecting 2 to 4 inches of snow.' }
                ])
 
-      expect(prediction.text_report).to eq 'no snow today, no snow tonight, and 2-4" of snow thursday night'
+      expect(prediction.text_report).to eq 'no snow Today, no snow Tonight, and 2-4" of snow Thursday Night'
     end
   end
 
@@ -126,10 +126,17 @@ RSpec.describe 'Prediction' do
                    detailedForecast: 'New snow accumulation of around one inch possible' },
                  { shortForecast: 'Snow', name: 'Tonight',
                    detailedForecast: 'New snow accumulation of less than half an inch possible' },
-                 { shortForecast: 'Sunny', name: 'Thursday Night', detailedForecast: 'It is way too sunny to ski.' }
+                 { shortForecast: 'Snow', name: 'Wednesday',
+                   detailedForecast: 'New snow accumulation of less than one inch possible.' },
+                { shortForecast: 'Snow', name: 'Thursday',
+                    detailedForecast: 'Little or no snow accumulation expected.' },
+                 { shortForecast: 'Sunny', name: 'Friday Night', detailedForecast: 'It is way too sunny to ski.' }
                ])
 
-      expect(prediction.text_report).to eq '<1" of snow today and <0.5" of snow tonight'
+      expect(prediction.text_report).to eq(
+        '<1" of snow Today, <1" of snow Tonight, ' \
+        '<1" of snow Wednesday, no snow Thursday, and no snow Friday Night'
+      )
     end
   end
 

@@ -34,7 +34,7 @@ Builder = Struct.new(:resorts, :build_dir, :source_dir, :fetcher, keyword_init: 
   end
 
   def current_timestamp
-    Time.zone = 'Eastern Time (US & Canada)'  
-    Time.zone.now.strftime(" %a %b %e, %Y %l:%M%p %Z")
+    Time.zone = 'Eastern Time (US & Canada)'
+    Time.zone.now.strftime(' %a %b %e, %Y %l:%M%p %Z')
   end
 end

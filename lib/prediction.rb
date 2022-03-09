@@ -4,36 +4,59 @@ require_relative 'resort'
 require 'active_support'
 require 'active_support/core_ext/array/conversions'
 
+Period = Struct.new(:time_of_day, :range, keyword_init: true)
+
 Prediction = Struct.new(:resort, :fetcher, keyword_init: true) do
   def text_report
     @text_report ||= begin
+      reports.map do |report|
+        case report.range
+        when 0
+          "no snow #{report.time_of_day}"
+        when 0..1
+          "<#{report.range}\" of snow #{report.time_of_day}"
+        else
+          "#{report.range.begin}-#{report.range.end}\" of snow #{report.time_of_day}"
+        end
+      end.compact.to_sentence
+    rescue OpenURI::HTTPError
+      'no current weather reports can be found'
+    end
+  end
+
+  def reports
+    @reports ||= begin
       points_response = json_response("https://api.weather.gov/points/#{resort.coords.join(',')}")
       forecast_url = points_response.dig('properties', 'forecast')
 
       forecast_response = json_response(forecast_url)
       periods = forecast_response.dig('properties', 'periods')
 
-      snow_predictions = periods.map.with_index do |period, index|
-        time_period = period['name'].downcase
-        snow_prediction = ("no snow #{time_period}" if index < 2)
+      periods.map do |period|
+        snow = 0
 
         short_forecast = period['shortForecast']
         if short_forecast =~ /snow/i
           detailed_forecast = period['detailedForecast']
 
-          snow_prediction = if matches = /(\d+)\s+to\s+(\d+)\s+inches/.match(detailed_forecast)
-                              %(#{matches[1]}-#{matches[2]}" of snow #{time_period})
-                            elsif detailed_forecast =~ /less than half an inch/
-                              %(<0.5" of snow #{time_period})
-                            elsif detailed_forecast =~ /around one inch/
-                              %(<1" of snow #{time_period})
-                            end
+          matches = /(\d+)\s+to\s+(\d+)\s+inches/.match(detailed_forecast)
+          snow = if matches
+                   matches[1]..matches[2]
+                 elsif detailed_forecast =~ /less than|around/
+                   1
+                 else
+                  warn "detected snow, but no depth"
+                  warn "  shortForecast=#{short_forecast.inspect}"
+                  warn "  detailedForecast=#{detailed_forecast.inspect}"
+                   0
+                 end
         end
 
-        snow_prediction
-      end.compact.to_sentence
-    rescue OpenURI::HTTPError
-      'no current weather reports can be found'
+        Period.new(
+          time_of_day: period['name'],
+          range: snow
+        )
+      end
     end
   end
 

@@ -24,10 +24,16 @@ HTTPCache = Struct.new(:filename, :rules, keyword_init: true) do
   private
 
   def get_response(url)
-    if expires = find_rule_expiry(url)
-      results = db.execute(
-        "SELECT response FROM responses WHERE url = :url AND datetime('now', '-#{expires} minutes') <= created_at ORDER BY created_at LIMIT 1", url: url
-      )
+    expires = find_rule_expiry(url)
+    if expires
+      results = db.execute(%(
+        SELECT response FROM responses
+        WHERE
+          url = :url AND
+          datetime('now', '-#{expires} minutes') <= created_at
+        ORDER BY
+          created_at
+        LIMIT 1), url: url)
       return results[0][0] if results.length.positive?
     end
 
@@ -46,7 +52,7 @@ HTTPCache = Struct.new(:filename, :rules, keyword_init: true) do
   end
 
   def db
-    db ||= begin
+    @db ||= begin
       db = SQLite3::Database.new(filename)
       db.execute <<-SQL
         CREATE TABLE IF NOT EXISTS responses (
