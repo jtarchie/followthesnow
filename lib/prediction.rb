@@ -31,7 +31,7 @@ Prediction = Struct.new(:resort, :fetcher, keyword_init: true) do
         end
 
         snow_prediction
-      end[0..2].compact.to_sentence
+      end.compact.to_sentence
     rescue OpenURI::HTTPError
       'no current weather reports can be found'
     end

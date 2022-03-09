@@ -13,18 +13,20 @@
     Follow the Snow, today
   </title>
   <style>
-    .content {
-      padding: 10px;
-      max-width: 960px;
-      width: 100%;
-      margin: 100px auto 500px;
+    h2 {
+      scroll-margin-top: 2em;
     }
 
-    ul#states {
+    .content {
+      width: 100%;
+      margin: 60px auto 500px;
+    }
+
+    #locations + ul {
       list-style: none;
       padding: 0;
     }
-    ul#states li {
+    #locations + ul li {
       display: inline-block;
       margin-right: 1em;
     }
@@ -40,7 +42,7 @@
     }
 
     nav {
-      position: absolute;
+      position: fixed;
     }
 
     @media print {
@@ -67,17 +69,16 @@
 
     <div class="menu">
       <a href="mailto:hello@followthesnow.today" class="pseudo button">Contact</a>
-      <a href="#states" class="button">Locations</a>
+      <a href="#locations" class="button">Locations</a>
     </div>
   </nav>
   <main class="content">
-    <h2>Introduction</h2>
     <p>
-      Follow the snow started after discussion of "Where we can find the best snow today?"
       This is an aggregate list of ski resorts and the expected snow totals for the day.
+      Follow the snow started after discussion of "Where we can find the best snow today?"
     </p>
-    <h2>Locations</h2>
-    <ul id="states">
+    <h2 id="locations">Locations</h2>
+    <ul >
       <% by_state.keys.each do |state| %>
       <li><a href="#<%= state.downcase%>"><%= state %></a></li>
       <% end %>
