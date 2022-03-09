@@ -64,7 +64,7 @@ Prediction = Struct.new(:resort, :fetcher, keyword_init: true) do
     new_tod = tod
               .gsub(/Tonight/i, '🌓')
               .gsub(/Night/i, '🌓')
-              .gsub(/(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday)/i) { |w| w[0..2] }
+              .gsub(/Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday/i) { |w| w[0..2] }
               .strip
     new_tod = 'Now' if new_tod.length > 3
     new_tod
