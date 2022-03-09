@@ -38,10 +38,19 @@
     table th {
       position: sticky;
       top: 0;
-      z-index: 1; 
+      z-index: 2; 
+    }
+    table th:nth-child(1) {
+      left: 0;
+      z-index: 3;
+    }
+    table tr td {
+      min-width: 6rem;
     }
     table tr td:nth-child(1) {
-      width: 25%;
+      position: sticky;
+      left: 0;
+      z-index: 1;
     }
 
     nav {
