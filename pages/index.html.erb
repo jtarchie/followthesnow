@@ -84,7 +84,7 @@
       <% end %>
     </ul>
     <p><strong>Last Updated:</strong> <%= current_timestamp %></p>
-    <% by_state.each do |state, predictions| %>
+    <% by_state([Forecast::Text]).each do |state, predictions| %>
       <h2 id="<%= state.downcase%>"><%= h state %></h2>
       <table class="primary">
         <thead>
@@ -105,7 +105,7 @@
                 <%= h prediction.resort.name %>
               <% end %>
             </td>
-            <td><%= h prediction.text_report %></td>
+            <td><%= h prediction.forecast.forecasts %></td>
           </tr>
         <% end %>
         </tbody>

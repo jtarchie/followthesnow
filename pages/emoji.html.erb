@@ -96,13 +96,13 @@
       <% end %>
     </ul>
     <p><strong>Last Updated:</strong> <%= current_timestamp %></p>
-    <% by_state.each do |state, predictions| %>
+    <% by_state([Forecast::Aggregate, Forecast::Emoji]).each do |state, predictions| %>
       <h2 id="<%= state.downcase%>"><%= h state %></h2>
       <table class="primary">
         <thead>
           <tr>
             <th>Location</th>
-            <% predictions.first.emoji_reports.each do |tod, emoji| %>
+            <% predictions.first.forecast.forecasts.each do |tod, _| %>
               <th><%= h tod %></th>
             <% end %>
           </tr>
@@ -119,7 +119,7 @@
                 <%= h prediction.resort.name %>
               <% end %>
             </td>
-            <% prediction.emoji_reports.each do |tod, emoji| %>
+            <% prediction.forecast.forecasts.each do |_, emoji| %>
               <td><%= h emoji %></td>
             <% end %>
           </tr>

@@ -4,7 +4,9 @@ require 'active_support'
 require 'active_support/time'
 require 'erb'
 require 'fileutils'
-require_relative 'prediction'
+require_relative 'forecast'
+
+Prediction = Struct.new(:resort, :forecast, keyword_init: true)
 
 Builder = Struct.new(:resorts, :build_dir, :source_dir, :fetcher, keyword_init: true) do
   include ERB::Util
@@ -21,17 +23,23 @@ Builder = Struct.new(:resorts, :build_dir, :source_dir, :fetcher, keyword_init: 
 
   private
 
-  def by_state
-    @by_state ||= predictions.group_by do |prediction|
+  def by_state(forecasters = [Forecast::Text])
+    predictions(forecasters).group_by do |prediction|
       prediction.resort.state
     end
   end
 
-  def predictions
-    @predictions ||= resorts.sort_by { |r| [r.state, r.name] }.map do |resort|
+  def predictions(forecasters)
+    resorts
+      .sort_by { |r| [r.state, r.name] }
+      .map do |resort|
       Prediction.new(
-        fetcher: fetcher,
-        resort: resort
+        resort: resort,
+        forecast: Forecast.from(
+          fetcher: fetcher,
+          resort: resort,
+          aggregates: forecasters
+        )
       )
     end
   end

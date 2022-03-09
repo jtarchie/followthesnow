@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require_relative '../lib/prediction'
 
 RSpec.describe('Resort') do
   it 'returns coordinates' do
