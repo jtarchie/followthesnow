@@ -33,6 +33,12 @@
 
     table {
       width: 100%;
+      position: relative;
+    }
+    table th {
+      position: sticky;
+      top: 0;
+      z-index: 1; 
     }
     table tr td:nth-child(1) {
       width: 25%;
@@ -40,7 +46,7 @@
 
 
     nav {
-      position: fixed;
+      position: absolute;
     }
 
     @media print {
@@ -97,7 +103,7 @@
       <li><a href="#wyoming">Wyoming</a></li>
       
     </ul>
-    <p><strong>Last Updated:</strong>  Tue Mar  8, 2022 10:21PM EST</p>
+    <p><strong>Last Updated:</strong>  Tue Mar  8, 2022 10:35PM EST</p>
     
       <h2 id="california">California</h2>
       <table class="primary">

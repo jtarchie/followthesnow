@@ -33,14 +33,19 @@
 
     table {
       width: 100%;
+      position: relative;
+    }
+    table th {
+      position: sticky;
+      top: 0;
+      z-index: 1; 
     }
     table tr td:nth-child(1) {
       width: 25%;
     }
 
-
     nav {
-      position: fixed;
+      position: absolute;
     }
 
     @media print {
