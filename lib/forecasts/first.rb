@@ -10,7 +10,15 @@ Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
 
       forecast_response = fetcher.json_response(forecast_url) do |response|
         updated_at = Time.parse(response.dig('properties', 'updated'))
-        (Time.now - updated_at) / 3600 <= 24
+        current_time = Time.now
+        if (Time.now - updated_at) / 3600 <= 24
+          return true
+        else
+          warn "forecast payload:"
+          warn "  current_time: #{current_time}"
+          warn "  updated_at:   #{updated_at}"
+          return false
+        end
       end
 
       periods = forecast_response.dig('properties', 'periods')
