@@ -19,7 +19,11 @@ WikipediaScraper = Struct.new(:url, keyword_init: true) do
       location = link_doc.css('.geo').first
       next unless location
 
-      title   = link_doc.css('h1').text
+      title   = link_doc.css('h1')
+        .text
+        .gsub(/\s*\(.*\)\s*/,'')
+        .gsub(/\s*,.*$/, '')
+        .strip
       geo     = Geo::Coord.parse(location.text)
       address = address(lat: geo.lat, lng: geo.lng)
       url     = link_doc.css('.infobox-data .url a').first
@@ -42,15 +46,15 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   urls = [
-    # 'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_California',
-    # 'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Colorado',
-    # 'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Idaho',
-    # 'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Montana',
-    # 'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_New_Mexico',
-    # 'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Oregon',
-    # 'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Utah',
-    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Washington_(state)'
-    # 'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Wyoming'
+    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_California',
+    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Colorado',
+    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Idaho',
+    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Montana',
+    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_New_Mexico',
+    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Oregon',
+    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Utah',
+    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Washington_(state)',
+    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Wyoming'
   ]
 
   puts 'name,lat,lng,city,state,url'
