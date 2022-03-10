@@ -21,6 +21,7 @@ RSpec.describe 'Forecast' do
   before do
     WebMock.disable_net_connect!
     allow_any_instance_of(Object).to receive(:warn)
+    allow_any_instance_of(Object).to receive(:sleep)
   end
 
   def json_forecast(periods)

@@ -6,7 +6,7 @@ require 'sqlite3'
 
 HTTPCache = Struct.new(:filename, :rules, keyword_init: true) do
   NotMatchingBlock = RuntimeError
-  MAX_RETRIES = 2
+  MAX_RETRIES = 10
 
   def initialize(**)
     super
@@ -21,7 +21,6 @@ HTTPCache = Struct.new(:filename, :rules, keyword_init: true) do
   rescue OpenURI::HTTPError, NotMatchingBlock => e
     if retries.positive?
       retries -= 1
-      sleep(rand(5..15))
       retry
     end
     raise e
@@ -46,6 +45,7 @@ HTTPCache = Struct.new(:filename, :rules, keyword_init: true) do
     response = URI.open(url, {
                           'User-Agent' => '(followthesnow.today, jtachie+followthesnow@gmail.com)'
                         }).read
+    sleep(rand(5..15))
     db.execute('INSERT INTO responses (url, response) VALUES (:url, :response);', url: url, response: response)
     response
   end

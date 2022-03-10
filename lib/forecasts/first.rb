@@ -6,6 +6,8 @@ Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
       points_response = fetcher.json_response("https://api.weather.gov/points/#{resort.coords.join(',')}")
       forecast_url = points_response.dig('properties', 'forecast')
 
+      sleep(rand(5..15))
+
       forecast_response = fetcher.json_response(forecast_url) do |response|
         updated_at = Time.parse(response.dig('properties', 'updated'))
         (Time.now - updated_at) / 3600 <= 24
