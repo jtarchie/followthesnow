@@ -48,7 +48,7 @@ Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
           range: snow
         )
       end
-    rescue OpenURI::HTTPError
+    rescue OpenURI::HTTPError, HTTPCache::NotMatchingBlock
       [
         Forecast.new(
           time_of_day: 'Today',
