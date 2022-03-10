@@ -20,10 +20,10 @@ WikipediaScraper = Struct.new(:url, keyword_init: true) do
       next unless location
 
       title   = link_doc.css('h1')
-        .text
-        .gsub(/\s*\(.*\)\s*/,'')
-        .gsub(/\s*,.*$/, '')
-        .strip
+                        .text
+                        .gsub(/\s*\(.*\)\s*/, '')
+                        .gsub(/\s*,.*$/, '')
+                        .strip
       geo     = Geo::Coord.parse(location.text)
       address = address(lat: geo.lat, lng: geo.lng)
       url     = link_doc.css('.infobox-data .url a').first

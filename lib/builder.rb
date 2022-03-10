@@ -4,6 +4,7 @@ require 'active_support'
 require 'active_support/time'
 require 'erb'
 require 'fileutils'
+require 'kramdown'
 require_relative 'forecast'
 
 Prediction = Struct.new(:resort, :forecast, keyword_init: true)
@@ -14,19 +15,41 @@ Builder = Struct.new(:resorts, :build_dir, :source_dir, :fetcher, keyword_init: 
   def build!
     FileUtils.mkdir_p(build_dir)
 
-    Dir[File.join(source_dir, '*.html.erb')].each do |source_filename|
-      build_filename = File.basename(source_filename, '.erb')
-      file = ERB.new(File.read(source_filename))
-      File.write(File.join(build_dir, build_filename), file.result(binding))
+    layout = ERB.new(File.read(File.join(source_dir, '_layout.html.erb')), nil, '-')
+
+    Dir[File.join(source_dir, '*.md.erb')].each do |source_filename|
+      build_filename = File.basename(source_filename, '.md.erb')
+      file = ERB.new(File.read(source_filename), nil, '-')
+
+      markdown = file.result(erb_binding)
+      File.write(File.join(build_dir, "#{build_filename}.md"), markdown)
+
+      File.write(
+        File.join(build_dir, "#{build_filename}.html"),
+        layout.result(erb_binding { markdown_render(markdown) })
+      )
     end
   end
 
   private
 
+  def erb_binding
+    binding
+  end
+
   def by_state(forecasters = [Forecast::Text])
     predictions(forecasters).group_by do |prediction|
       prediction.resort.state
     end
+  end
+
+  def markdown_render(text)
+    Kramdown::Document.new(
+      text,
+      input: 'GFM',
+      gfm_emojis: true,
+      hard_wrap: false
+    ).to_html
   end
 
   def predictions(forecasters)

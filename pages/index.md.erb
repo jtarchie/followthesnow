@@ -1,0 +1,22 @@
+This is an aggregate list of ski resorts and the expected snow totals for the day.
+Follow the snow started after discussion of "Where we can find the best snow today?"
+
+## Locations
+      
+<%- by_state.keys.each do |state| -%>
+* [<%= state %>](#<%= state.downcase %>)
+<%- end -%>
+
+*Last Updated:* <%= current_timestamp %>
+
+<%- by_state([Forecast::Aggregate, Forecast::Emoji]).each do |state, predictions| -%>
+## <%= state %>
+<%- number_of_forecasts = predictions.first.forecast.forecasts.length -%>
+
+| Location | <%= predictions.first.forecast.forecasts.map{|tod, _| tod }.join(' | ') %> |
+| <%= (['-'] * (number_of_forecasts + 1)).join(' | ') %> |            
+<%- predictions.each do |prediction| -%>
+| [<%= prediction.resort.name %>](<%= prediction.resort.url%>) | <%= prediction.forecast.forecasts[0...number_of_forecasts].map{|_, range| range }.join(' | ') %> |
+<%- end -%>
+
+<%- end -%>
