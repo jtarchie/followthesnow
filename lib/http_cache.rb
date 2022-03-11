@@ -61,7 +61,7 @@ class HTTPCache
                .follow
                .headers({
                           'User-Agent' => "(followthesnow.today, jtachie+followthesnow#{Time.now.to_i}@gmail.com)",
-                          'Cache-Control' => 'max-age=0',
+                          'Cache-Control' => 'max-age=0'
                         })
                .get(url)
 

@@ -5,6 +5,7 @@ require 'active_support/time'
 require 'erb'
 require 'fileutils'
 require 'kramdown'
+require 'terminal-table'
 require_relative 'forecast'
 
 Prediction = Struct.new(:resort, :forecast, keyword_init: true) do
@@ -90,5 +91,31 @@ Builder = Struct.new(:resorts, :build_dir, :source_dir, :fetcher, keyword_init: 
   def current_timestamp
     Time.zone = 'Eastern Time (US & Canada)'
     Time.zone.now.strftime('%Y-%m-%d %l:%M%p %Z')
+  end
+
+  def table(predictions:)
+    max_days = predictions.map(&:days).max_by(&:length)
+    headers = ['Location'] + max_days
+
+    rows = predictions.map do |p|
+      row = if p.url
+              ["[#{p.name}](#{p.url})"]
+            else
+              [p.name]
+            end
+      row += if p.ranges.length == max_days.length
+               p.ranges
+             else
+               p.ranges + ([''] * (max_days.length - p.ranges.length))
+             end
+      row
+    end
+
+    table = Terminal::Table.new(
+      headings: headers,
+      rows: rows
+    )
+    table.style = { border: :markdown }
+    table.to_s
   end
 end

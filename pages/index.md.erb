@@ -11,12 +11,7 @@ Follow the snow started after discussion of "Where we can find the best snow tod
 
 <%- by_state([Forecast::Aggregate, Forecast::Emoji]).each do |state, predictions| -%>
 ## <%= state %>
-<%- number_of_days = predictions.first.days.length -%>
 
-| Location | <%= predictions.first.days.join(' | ') %> |
-| <%= (['-'] * (number_of_days + 1)).join(' | ') %> |            
-<%- predictions.each do |prediction| -%>
-| [<%= prediction.name %>](<%= prediction.url%>) | <%= prediction.ranges[0...number_of_days].join(' | ') %> |
-<%- end -%>
+<%= table(predictions: predictions) %>
 
 <%- end -%>
