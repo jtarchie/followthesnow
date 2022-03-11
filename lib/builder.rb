@@ -7,28 +7,7 @@ require 'fileutils'
 require 'kramdown'
 require 'terminal-table'
 require_relative 'forecast'
-
-Prediction = Struct.new(:resort, :forecast, keyword_init: true) do
-  def days
-    forecast.forecasts.map do |tod, _|
-      tod
-    end
-  end
-
-  def name
-    resort.name
-  end
-
-  def url
-    resort.url
-  end
-
-  def ranges
-    forecast.forecasts.map do |_, range|
-      range
-    end
-  end
-end
+require_relative 'prediction'
 
 Builder = Struct.new(:resorts, :build_dir, :source_dir, :fetcher, keyword_init: true) do
   include ERB::Util

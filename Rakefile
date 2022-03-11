@@ -27,4 +27,8 @@ task :fmt do
   sh('rubocop -A')
 end
 
-task default: %i[build]
+tash :test do
+  sh('bundle exec test')
+end
+
+task default: %i[fmt test build]
