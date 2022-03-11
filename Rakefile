@@ -12,8 +12,8 @@ task :build do
     fetcher: HTTPCache.new(
       filename: 'http_responses.db',
       rules: {
-        'api.weather.gov/points' => 12 * 60, # 12 hours in minutes
-        'forecast' => 12 * 60 # 5 hour in minutes
+        'api.weather.gov/points' => 6 * 60, # 12 hours in minutes
+        'forecast' => 60 # 5 hour in minutes
       }
     ),
     resorts: resorts,
