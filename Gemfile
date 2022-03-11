@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 gem 'activesupport'
 gem 'geo_coord', require: 'geo/coord'
+gem 'http'
 gem 'kramdown'
 gem 'kramdown-parser-gfm'
 gem 'nokogiri'

@@ -4,17 +4,17 @@ require 'csv'
 require 'geo/coord'
 require 'json'
 require 'nokogiri'
-require 'open-uri'
+require 'http'
 require 'ostruct'
 
 WikipediaScraper = Struct.new(:url, keyword_init: true) do
   def resorts
-    doc = Nokogiri::HTML(URI.open(url))
+    doc = Nokogiri::HTML(HTTP.follow.get(url))
     doc.css('.mw-category-group ul li a').each do |link|
       href = link['href']
       next if href =~ /Template|Category|Comparison/i
 
-      link_doc = Nokogiri::HTML(URI.open(%(https://en.wikipedia.org#{href})))
+      link_doc = Nokogiri::HTML(HTTP.follow.get(%(https://en.wikipedia.org#{href})))
 
       location = link_doc.css('.geo').first
       next unless location
@@ -39,7 +39,7 @@ WikipediaScraper = Struct.new(:url, keyword_init: true) do
   private
 
   def address(lat:, lng:)
-    response = JSON.parse(URI.open(%(https://nominatim.openstreetmap.org/reverse?lat=#{lat.to_f}&lon=#{lng.to_f}&format=jsonv2)).read)
+    response = JSON.parse(HTTP.follow.get(%(https://nominatim.openstreetmap.org/reverse?lat=#{lat.to_f}&lon=#{lng.to_f}&format=jsonv2)).read)
     OpenStruct.new(response['address'])
   end
 end

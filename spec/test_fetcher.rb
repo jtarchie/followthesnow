@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
-require 'open-uri'
+require 'http'
 
 class TestFetcher
   def json_response(url)
-    JSON.parse(URI.open(url).read)
+    response = HTTP.follow.get(url)
+    raise HTTPCache::HTTPError unless response.status.success?
+
+    JSON.parse(response.to_s)
   end
 end

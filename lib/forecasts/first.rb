@@ -3,21 +3,20 @@
 Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
   def forecasts
     @forecasts ||= begin
+      warn "loading forecasts for #{resort.name}"
       points_response = fetcher.json_response("https://api.weather.gov/points/#{resort.coords.join(',')}")
       forecast_url = points_response.dig('properties', 'forecast')
-
-      sleep(rand(5..15))
 
       forecast_response = fetcher.json_response(forecast_url) do |response|
         updated_at = Time.parse(response.dig('properties', 'updated'))
         current_time = Time.now
         if (Time.now - updated_at) / 3600 <= 24
-          return true
+          true
         else
-          warn "forecast payload:"
+          warn 'forecast payload:'
           warn "  current_time: #{current_time}"
           warn "  updated_at:   #{updated_at}"
-          return false
+          false
         end
       end
 
@@ -48,7 +47,7 @@ Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
           range: snow
         )
       end
-    rescue OpenURI::HTTPError, HTTPCache::NotMatchingBlock
+    rescue HTTPCache::HTTPError, HTTPCache::NotMatchingBlock
       [
         Forecast.new(
           time_of_day: 'Today',
