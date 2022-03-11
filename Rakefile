@@ -27,7 +27,7 @@ task :fmt do
   sh('rubocop -A')
 end
 
-tash :test do
+task :test do
   sh('bundle exec test')
 end
 
