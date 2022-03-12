@@ -45,5 +45,13 @@ RSpec.describe 'Builder' do
     contents = File.read(File.join(build_dir, 'index.html'))
     expect(contents).to match(/Colorado.*Wyoming/m)
     expect(contents).to match(/A Resort.*B Resort/m)
+
+    contents = File.read(File.join(build_dir, 'states', 'colorado.html'))
+    expect(contents).to match(/Colorado/m)
+    expect(contents).to match(/C Resort/m)
+
+    contents = File.read(File.join(build_dir, 'states', 'wyoming.html'))
+    expect(contents).to match(/Wyoming/m)
+    expect(contents).to match(/A Resort.*B Resort/m)
   end
 end
