@@ -20,7 +20,7 @@ RSpec.describe 'Builder' do
     ]
 
     build_dir = Dir.mktmpdir
-    builder = Builder.new(
+    builder = Builder::Start.new(
       build_dir: build_dir,
       fetcher: TestFetcher.new,
       source_dir: File.expand_path(File.join(__dir__, '..', 'pages')),
