@@ -14,8 +14,8 @@ RSpec.describe 'Builder' do
 
   it 'renders resorts in alphabetical order and by state' do
     resorts = [
-      Resort.new(name: 'B Resort', state: 'Wyoming'),
-      Resort.new(name: 'A Resort', state: 'Wyoming'),
+      Resort.new(name: 'B Resort', state: 'New Mexico'),
+      Resort.new(name: 'A Resort', state: 'New Mexico'),
       Resort.new(name: 'C Resort', state: 'Colorado')
     ]
 
@@ -43,15 +43,15 @@ RSpec.describe 'Builder' do
 
     builder.build!
     contents = File.read(File.join(build_dir, 'index.html'))
-    expect(contents).to match(/Colorado.*Wyoming/m)
+    expect(contents).to match(/Colorado.*New Mexico/m)
     expect(contents).to match(/A Resort.*B Resort/m)
 
     contents = File.read(File.join(build_dir, 'states', 'colorado.html'))
     expect(contents).to match(/Colorado/m)
     expect(contents).to match(/C Resort/m)
 
-    contents = File.read(File.join(build_dir, 'states', 'wyoming.html'))
-    expect(contents).to match(/Wyoming/m)
+    contents = File.read(File.join(build_dir, 'states', 'new-mexico.html'))
+    expect(contents).to match(/New Mexico/m)
     expect(contents).to match(/A Resort.*B Resort/m)
   end
 end

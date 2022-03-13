@@ -15,7 +15,7 @@ module Builder
           fetcher: fetcher,
           resorts: resorts_for_state(state),
           source_dir: source_dir
-        ).build!(output_filename: "#{state.downcase}.html")
+        ).build!(output_filename: "#{state.downcase.gsub(/\W+/, '-')}.html")
       end
     end
 
