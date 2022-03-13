@@ -11,10 +11,11 @@ task :build do
     build_dir: File.join(__dir__, 'docs'),
     fetcher: HTTPCache.new(
       filename: 'http_responses.db',
-      rules: {
-        'api.weather.gov/points' => 6 * 60, # 12 hours in minutes
-        'forecast' => 12 * 60 # 5 hour in minutes
-      }
+      modifiers: [
+        HTTPCache::Modifier.new('api.weather.gov', lambda { |url|
+          url.gsub('api.weather.gov', 'd3d94ugajl22vj.cloudfront.net')
+        })
+      ]
     ),
     resorts: resorts,
     source_dir: File.join(__dir__, 'pages')

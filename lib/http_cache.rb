@@ -9,16 +9,23 @@ class HTTPCache
   MAX_RETRIES = 2
   NotMatchingBlock = RuntimeError
   HTTPError = RuntimeError
+  Modifier = Struct.new(:matcher, :block) do
+    def match?(url)
+      Regexp.new(matcher).match?(url)
+    end
 
-  def initialize(filename:, rules: [])
+    def call(url)
+      block.call(url)
+    end
+  end
+
+  def initialize(filename:, modifiers: [])
     @filename = filename
-    @rules = rules
-
-    db
+    @modifiers = modifiers
   end
 
   def json_response(url, retries = MAX_RETRIES)
-    response = JSON.parse(get_response(url, retries != MAX_RETRIES))
+    response = JSON.parse(get_response(url))
 
     raise NotMatchingBlock, "request to #{url} did not meet condition" if block_given? && !yield(response)
 
@@ -37,31 +44,18 @@ class HTTPCache
 
   private
 
-  def get_response(url, force)
-    expires = find_rule_expiry(url)
-    if expires && !force
-      warn "attempting loading #{url} from cache"
-      results = db.execute(%(
-        SELECT response FROM responses
-        WHERE
-          url = :url AND
-          datetime('now', '-#{expires} minutes') <= created_at
-        ORDER BY
-          created_at
-        LIMIT 1), url: url)
-      if results.length.positive?
-        warn '  loaded from cache'
-        return results[0][0]
-      end
-    end
-
+  def get_response(url)
     warn "attempting loading #{url} from HTTP GET"
+    modifier = find_modifier(url)
+    if modifier
+      url = modifier.call(url)
+      warn "  modified-url=#{url}"
+    end
 
     response = HTTP
                .follow
                .headers({
-                          'User-Agent' => "(followthesnow.today, jtachie+followthesnow#{Time.now.to_i}@gmail.com)",
-                          'Cache-Control' => 'max-age=0'
+                          'User-Agent' => "(followthesnow.today, jtachie+followthesnow#{Time.now.to_i}@gmail.com)"
                         })
                .get(url)
 
@@ -69,29 +63,12 @@ class HTTPCache
 
     raise HTTPError, "request to #{url} was not successful: #{response.status}" unless response.status.success?
 
-    db.execute('INSERT INTO responses (url, response) VALUES (:url, :response);', url: url, response: response.to_s)
     response.to_s
   end
 
-  def find_rule_expiry(url)
-    return if @rules.empty?
+  def find_modifier(url)
+    return if @modifiers.empty?
 
-    rule = @rules.find { |match, _| url.include?(match) }
-    rule[1] if rule
-  end
-
-  def db
-    @db ||= begin
-      db = SQLite3::Database.new(@filename)
-      db.execute <<-SQL
-        CREATE TABLE IF NOT EXISTS responses (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          url text,
-          response text,
-          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-        );
-      SQL
-      db
-    end
+    @modifiers.find { |m| m.match?(url) }
   end
 end
