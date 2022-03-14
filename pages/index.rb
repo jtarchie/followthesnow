@@ -2,6 +2,7 @@
 
 require 'active_support'
 require 'active_support/time'
+require 'parallel'
 
 module Builder
   # builds the front page
@@ -26,24 +27,27 @@ module Builder
 
     private
 
-    def by_state(forecasters = [Forecast::Text])
-      predictions(forecasters).group_by do |prediction|
+    def by_state
+      predictions.group_by do |prediction|
         prediction.resort.state
       end
     end
 
-    def predictions(forecasters)
-      resorts
-        .sort_by { |r| [r.state, r.name] }
-        .map do |resort|
-        Prediction.new(
-          resort: resort,
-          forecast: Forecast.from(
-            fetcher: fetcher,
+    def predictions
+      @predictions ||= begin
+        sorted_resorts = resorts
+                         .sort_by { |r| [r.state, r.name] }
+
+        Parallel.map(sorted_resorts, in_threads: 5) do |resort|
+          Prediction.new(
             resort: resort,
-            aggregates: forecasters
+            forecast: Forecast.from(
+              fetcher: fetcher,
+              resort: resort,
+              aggregates: [Forecast::Aggregate, Forecast::Emoji]
+            )
           )
-        )
+        end
       end
     end
 
