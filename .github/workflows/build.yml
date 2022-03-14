@@ -18,6 +18,10 @@ jobs:
       with:
         ruby-version: 3.0
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: Cache multiple paths
+      uses: actions/cache@v2
+      with:
+        path: .cache
     - name: Build docs
       run: bundle exec rake build
     - name: setup git config
