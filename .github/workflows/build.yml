@@ -22,6 +22,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: .cache
+        key: cache-for-http-responses
     - name: Build docs
       run: bundle exec rake build
     - name: setup git config
