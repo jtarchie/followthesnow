@@ -14,15 +14,15 @@ module Builder
   # starts building all the pages
   class Start < Page
     def build!
-      warn 'building pages'
+      puts 'building pages'
 
       FileUtils.mkdir_p(build_dir)
       Dir[File.join(source_dir, '*.rb')].each do |source_filename|
-        warn "  loading #{source_filename}"
+        puts "  loading #{source_filename}"
         require_relative source_filename
 
         klass_name = "builder/#{File.basename(source_filename, '.rb')}".camelize
-        warn "  found #{klass_name}"
+        puts "  found #{klass_name}"
 
         klass = klass_name.constantize
         klass.new(

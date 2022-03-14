@@ -3,7 +3,7 @@
 Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
   def forecasts
     @forecasts ||= begin
-      warn "loading forecasts for #{resort.name}"
+      puts "loading forecasts for #{resort.name}"
       points_response = fetcher.json_response("https://api.weather.gov/points/#{resort.coords.join(',')}")
       forecast_url = points_response.dig('properties', 'forecast')
 
@@ -13,9 +13,9 @@ Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
         if (Time.now - updated_at) / 3600 <= 24
           true
         else
-          warn 'forecast payload:'
-          warn "  current_time: #{current_time}"
-          warn "  updated_at:   #{updated_at}"
+          puts 'forecast payload:'
+          puts "  current_time: #{current_time}"
+          puts "  updated_at:   #{updated_at}"
           false
         end
       end
@@ -35,9 +35,9 @@ Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
                  elsif detailed_forecast =~ /less than|around/
                    0..1
                  else
-                   warn 'detected snow, but no depth'
-                   warn "  shortForecast=#{short_forecast.inspect}"
-                   warn "  detailedForecast=#{detailed_forecast.inspect}"
+                   puts 'detected snow, but no depth'
+                   puts "  shortForecast=#{short_forecast.inspect}"
+                   puts "  detailedForecast=#{detailed_forecast.inspect}"
                    0..0
                  end
         end
@@ -47,7 +47,7 @@ Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
           range: snow
         )
       end
-    rescue HTTPCache::HTTPError, HTTPCache::NotMatchingBlock
+    rescue JSON::ParserError
       [
         Forecast.new(
           time_of_day: 'Today',

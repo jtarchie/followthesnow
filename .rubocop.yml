@@ -29,3 +29,6 @@ Security/Open:
 
 Lint/ConstantDefinitionInBlock:
   Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false

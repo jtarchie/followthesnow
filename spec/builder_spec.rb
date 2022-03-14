@@ -6,6 +6,12 @@ require 'json'
 require 'webmock/rspec'
 
 RSpec.describe 'Builder' do
+  let(:fetcher) do
+    HTTPCache.new(
+      filename: ':memory'
+    )
+  end
+
   before do
     WebMock.disable_net_connect!
     allow_any_instance_of(Object).to receive(:sleep)
@@ -22,7 +28,7 @@ RSpec.describe 'Builder' do
     build_dir = Dir.mktmpdir
     builder = Builder::Start.new(
       build_dir: build_dir,
-      fetcher: TestFetcher.new,
+      fetcher: fetcher,
       source_dir: File.expand_path(File.join(__dir__, '..', 'pages')),
       resorts: resorts
     )

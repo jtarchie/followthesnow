@@ -8,7 +8,11 @@ require_relative '../lib/forecast'
 require_relative '../lib/resort'
 
 RSpec.describe 'Forecast' do
-  let(:fetcher) { TestFetcher.new }
+  let(:fetcher) do
+    HTTPCache.new(
+      filename: ':memory'
+    )
+  end
   let(:resort) { Resort.new(lat: 1.001, lng: 2.002) }
   let(:text_forecast) do
     Forecast.from(

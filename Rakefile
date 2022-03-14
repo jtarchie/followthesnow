@@ -10,11 +10,7 @@ task :build do
   builder = Builder::Start.new(
     build_dir: File.join(__dir__, 'docs'),
     fetcher: HTTPCache.new(
-      filename: 'http_responses.db',
-      rules: {
-        'api.weather.gov/points' => 6 * 60, # 12 hours in minutes
-        'forecast' => 12 * 60 # 5 hour in minutes
-      }
+      filename: 'http_responses.db'
     ),
     resorts: resorts,
     source_dir: File.join(__dir__, 'pages')
@@ -28,7 +24,7 @@ task :fmt do
 end
 
 task :test do
-  sh('bundle exec test')
+  sh('bundle exec rspec')
 end
 
 task default: %i[fmt test build]
