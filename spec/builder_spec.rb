@@ -7,9 +7,7 @@ require 'webmock/rspec'
 
 RSpec.describe 'Builder' do
   let(:fetcher) do
-    HTTPCache.new(
-      filename: ':memory'
-    )
+    HTTPCache.new
   end
 
   before do

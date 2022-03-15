@@ -13,7 +13,7 @@ require 'json'
 
 # Handles the caching of assets for the HTTP Client
 class HTTPCache
-  NotMatchingBlock = RuntimeError
+  NotMatchingBlock = Class.new(RuntimeError) {}
 
   def initialize
     @client = Faraday.new do |builder|

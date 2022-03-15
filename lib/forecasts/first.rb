@@ -7,9 +7,9 @@ Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
       forecast_url = points_response.dig('properties', 'forecast')
 
       forecast_response = fetcher.json_response(forecast_url) do |response|
-        updated_at = Time.parse(response.dig('properties', 'updated'))
+        updated_at = response.dig('properties', 'updated')
 
-        (Time.now - updated_at) / 3600 <= 24
+        !updated_at.nil? && (Time.now - Time.parse(updated_at)) / 3600 <= 24
       end
 
       periods = forecast_response.dig('properties', 'periods')
@@ -36,7 +36,7 @@ Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
           range: snow
         )
       end
-    rescue Faraday::ServerError
+    rescue Faraday::ServerError, HTTPCache::NotMatchingBlock
       [
         Forecast.new(
           time_of_day: 'Today',

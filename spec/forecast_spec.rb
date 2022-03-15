@@ -144,7 +144,7 @@ RSpec.describe 'Forecast' do
   end
 
   context 'when the points returns a 500' do
-    it 'returns a prediction of cannot fiqure it out' do
+    it 'returns a prediction of cannot figure it out' do
       stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
         .to_return(status: 500)
 
@@ -152,8 +152,24 @@ RSpec.describe 'Forecast' do
     end
   end
 
+  context 'when the points does not have updated at' do
+    it 'returns a prediction of cannot figure it out' do
+      stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
+        .to_return(status: 200, body: {
+          properties: {
+            forecast: 'https://api.weather.gov/gridpoints/TEST/1,2/forecast'
+          }
+        }.to_json)
+
+      stub_request(:get, 'https://api.weather.gov/gridpoints/TEST/1,2/forecast')
+        .to_return(status: 200, body: {}.to_json)
+
+      expect(text_forecast.forecasts).to eq 'no snow Today'
+    end
+  end
+
   context 'when the forecast returns a 500' do
-    it 'returns a prediction of cannot fiqure it out' do
+    it 'returns a prediction of cannot figure it out' do
       stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
         .to_return(status: 200, body: {
           properties: {
