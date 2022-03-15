@@ -213,7 +213,11 @@ RSpec.describe 'Forecast' do
         fetcher: fetcher
       )
 
-      expect(emoji_forecast.forecasts).to eq [
+      emojis = emoji_forecast.forecasts.map do |forecast|
+        [forecast.time_of_day, forecast.snow.to_s]
+      end
+
+      expect(emojis).to eq [
         ['03/01', '2-4"'],
         ['03/01', '2-4"'],
         ['03/01', '2-4"'],

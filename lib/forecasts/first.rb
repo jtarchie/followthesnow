@@ -33,14 +33,14 @@ Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
 
         Forecast.new(
           time_of_day: Time.parse(period['startTime']).strftime('%m/%d'),
-          range: snow
+          snow: snow
         )
       end
     rescue Faraday::ServerError, HTTPCache::NotMatchingBlock
       [
         Forecast.new(
           time_of_day: 'Today',
-          range: 0..0
+          snow: 0..0
         )
       ]
     end

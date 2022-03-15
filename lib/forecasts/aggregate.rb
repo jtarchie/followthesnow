@@ -10,7 +10,7 @@ Forecast::Aggregate = Struct.new(:forecasts, keyword_init: true) do
 
         combined = Forecast.new(
           time_of_day: first.time_of_day,
-          range: [first.range.begin, second.range.begin].max..(first.range.end + second.range.end)
+          snow: [first.snow.begin, second.snow.begin].max..(first.snow.end + second.snow.end)
         )
         final_forecasts.insert(final_forecasts.index(first), combined)
         final_forecasts.delete_at(final_forecasts.index(first))

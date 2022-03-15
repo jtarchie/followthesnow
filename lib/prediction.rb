@@ -2,9 +2,7 @@
 
 Prediction = Struct.new(:resort, :forecast, keyword_init: true) do
   def days
-    forecast.forecasts.map do |tod, _|
-      tod
-    end
+    forecast.forecasts.map(&:time_of_day)
   end
 
   def name
@@ -15,9 +13,9 @@ Prediction = Struct.new(:resort, :forecast, keyword_init: true) do
     resort.url
   end
 
-  def ranges
-    forecast.forecasts.map do |_, range|
-      range
+  def snows
+    forecast.forecasts.map do |f|
+      f.snow.to_s
     end
   end
 end

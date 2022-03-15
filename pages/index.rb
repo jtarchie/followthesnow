@@ -66,10 +66,10 @@ module Builder
               else
                 [p.name]
               end
-        row += if p.ranges.length == max_days.length
-                 p.ranges
+        row += if p.snows.length == max_days.length
+                 p.snows
                else
-                 p.ranges + ([''] * (max_days.length - p.ranges.length))
+                 p.snows + ([''] * (max_days.length - p.snows.length))
                end
         row
       end
