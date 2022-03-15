@@ -3,21 +3,13 @@
 Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
   def forecasts
     @forecasts ||= begin
-      puts "loading forecasts for #{resort.name}"
       points_response = fetcher.json_response("https://api.weather.gov/points/#{resort.coords.join(',')}")
       forecast_url = points_response.dig('properties', 'forecast')
 
       forecast_response = fetcher.json_response(forecast_url) do |response|
         updated_at = Time.parse(response.dig('properties', 'updated'))
-        current_time = Time.now
-        if (Time.now - updated_at) / 3600 <= 24
-          true
-        else
-          puts 'forecast payload:'
-          puts "  current_time: #{current_time}"
-          puts "  updated_at:   #{updated_at}"
-          false
-        end
+
+        (Time.now - updated_at) / 3600 <= 24
       end
 
       periods = forecast_response.dig('properties', 'periods')
@@ -35,9 +27,6 @@ Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
                  elsif detailed_forecast =~ /less than|around/
                    0..1
                  else
-                   puts 'detected snow, but no depth'
-                   puts "  shortForecast=#{short_forecast.inspect}"
-                   puts "  detailedForecast=#{detailed_forecast.inspect}"
                    0..0
                  end
         end
@@ -47,7 +36,7 @@ Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
           range: snow
         )
       end
-    rescue JSON::ParserError
+    rescue Faraday::ServerError
       [
         Forecast.new(
           time_of_day: 'Today',

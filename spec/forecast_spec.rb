@@ -5,13 +5,12 @@ require 'spec_helper'
 require 'tempfile'
 require 'webmock/rspec'
 require_relative '../lib/forecast'
+require_relative '../lib/http_cache'
 require_relative '../lib/resort'
 
 RSpec.describe 'Forecast' do
   let(:fetcher) do
-    HTTPCache.new(
-      filename: ':memory'
-    )
+    HTTPCache.new
   end
   let(:resort) { Resort.new(lat: 1.001, lng: 2.002) }
   let(:text_forecast) do
@@ -39,6 +38,7 @@ RSpec.describe 'Forecast' do
     stub_request(:get, 'https://api.weather.gov/gridpoints/TEST/1,2/forecast')
       .to_return(status: 200, body: {
         properties: {
+          updated: Time.now.to_s,
           periods: periods
         }
       }.to_json)

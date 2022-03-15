@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'active_support'
 require 'active_support/cache'
 require 'active_support/cache/file_store'
 require 'faraday-http-cache'
@@ -13,34 +14,45 @@ require 'json'
 # Handles the caching of assets for the HTTP Client
 class HTTPCache
   NotMatchingBlock = RuntimeError
-  HTTPError = RuntimeError
 
-  def initialize(filename:)
-    @filename = filename
-    @client   = Faraday.new do |builder|
+  def initialize
+    @client = Faraday.new do |builder|
       builder.request :retry, {
         max: 4,
         interval: 5,
         interval_randomness: 10,
-        retry_statuses: (400...600).to_a
+        exceptions: [
+          Errno::ETIMEDOUT,
+          'Timeout::Error',
+          Faraday::TimeoutError,
+          Faraday::RetriableResponse,
+          Faraday::ServerError
+        ]
       }
+      builder.response :raise_error
       builder.use :http_cache,
                   store: ActiveSupport::Cache::FileStore.new(File.join(__dir__, '..', '.cache')),
                   shared_cache: true,
                   logger: Logger.new($stdout)
       builder.response :detailed_logger
+      builder.response :json, content_type: //
       builder.use Faraday::FollowRedirects::Middleware
       builder.adapter :net_http_persistent, pool_size: 5
     end
   end
 
-  def json_response(url)
-    JSON.parse(
-      @client.get(
-        url,
-        nil,
-        { 'User-Agent' => '(followthesnow.com, hello@followthesnow.com)' }
-      ).body
-    )
+  def json_response(url, retries = 3, &block)
+    block = ->(_response) { true } unless block_given?
+    response = @client.get(
+      url,
+      nil,
+      { 'User-Agent' => '(followthesnow.com, hello@followthesnow.com)' }
+    ).body
+    raise NotMatchingBlock unless block.call(response)
+
+    response
+  rescue NotMatchingBlock => e
+    retry if (retries -= 1).positive?
+    raise e
   end
 end
