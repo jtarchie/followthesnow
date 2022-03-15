@@ -9,9 +9,7 @@ task :build do
 
   builder = Builder::Start.new(
     build_dir: File.join(__dir__, 'docs'),
-    fetcher: HTTPCache.new(
-      filename: 'http_responses.db'
-    ),
+    fetcher: HTTPCache.new,
     resorts: resorts,
     source_dir: File.join(__dir__, 'pages')
   )
