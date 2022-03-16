@@ -1,18 +1,25 @@
 # frozen_string_literal: true
 
+require 'time'
+
 Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
   def forecasts
     @forecasts ||= begin
       points_response = fetcher.json_response("https://api.weather.gov/points/#{resort.coords.join(',')}")
       forecast_url = points_response.dig('properties', 'forecast')
 
-      forecast_response = fetcher.json_response(forecast_url) do |response|
+      forecast_response = fetcher.json_response(
+        forecast_url,
+        {
+          'Feature-Flags' => 'forecast_temperature_qv, forecast_wind_speed_qv'
+        }
+      ) do |response|
         updated_at = response.dig('properties', 'updated')
 
         !updated_at.nil? && (Time.now - Time.parse(updated_at)) / 3600 <= 24
       end
 
-      periods = forecast_response.dig('properties', 'periods')
+      periods = forecast_response.dig('properties', 'periods') || []
 
       periods.map do |period|
         snow_range = 0..0
@@ -49,10 +56,21 @@ Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
                              0..0
                            end
 
+        temp = period['temperature'] || {}
+        temp_range = if temp['value']
+                       0..(c_to_f(temp['value']))
+                     elsif temp['minValue']
+                       (c_to_f(temp['minValue'])..c_to_f(temp['maxValue']))
+                     else
+                       0..0
+                     end
+
         Forecast.new(
-          time_of_day: Time.parse(period['startTime']).strftime('%m/%d'),
-          snow: snow_range,
           short: period['shortForecast'],
+          snow: snow_range,
+          temp: temp_range,
+          time_of_day: Time.parse(period['startTime']),
+          wind_direction: period['windDirection'],
           wind_gust: wind_gust_range,
           wind_speed: wind_speed_range
         )
@@ -60,8 +78,13 @@ Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
     rescue Faraday::ServerError, HTTPCache::NotMatchingBlock
       [
         Forecast.new(
-          time_of_day: 'Today',
-          snow: 0..0
+          short: 'Unknown',
+          snow: 0..0,
+          temp: 0..0,
+          time_of_day: Time.now,
+          wind_direction: '',
+          wind_gust: 0..0,
+          wind_speed: 0..0
         )
       ]
     end
@@ -71,5 +94,9 @@ Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
 
   def kph_to_mph(value)
     (value / 1.609344).round(3)
+  end
+
+  def c_to_f(value)
+    (value * 9 / 5).round(3) + 32
   end
 end

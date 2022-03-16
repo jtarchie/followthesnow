@@ -31,5 +31,34 @@ module Builder
     def slug(name)
       name.downcase.gsub(/\W+/, '-')
     end
+
+    def long_term_table(resort)
+      headers = ['Date', 'Snowfall', 'Icon', 'Short', 'Temp', 'Wind Speed', 'Wind Gusts']
+
+      forecast = Forecast.from(
+        fetcher: fetcher,
+        resort: resort,
+        aggregates: [Forecast::Emoji]
+      )
+
+      rows = forecast.forecasts.map do |f|
+        [
+          f.time_of_day,
+          f.snow,
+          f.short_icon,
+          f.short,
+          f.temp,
+          f.wind_speed,
+          f.wind_gust
+        ]
+      end
+
+      table = Terminal::Table.new(
+        headings: headers,
+        rows: rows
+      )
+      table.style = { border: :markdown }
+      table.to_s
+    end
   end
 end

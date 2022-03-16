@@ -41,12 +41,12 @@ class HTTPCache
     end
   end
 
-  def json_response(url, retries = 3, &block)
+  def json_response(url, headers = {}, retries = 3, &block)
     block = ->(_response) { true } unless block_given?
     response = @client.get(
       url,
       nil,
-      { 'User-Agent' => '(followthesnow.com, hello@followthesnow.com)' }
+      { 'User-Agent' => '(followthesnow.com, hello@followthesnow.com)' }.merge(headers)
     ).body
     raise NotMatchingBlock unless block.call(response)
 

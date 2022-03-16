@@ -1,25 +1,48 @@
 # frozen_string_literal: true
 
 Forecast::Emoji = Struct.new(:forecasts, keyword_init: true) do
-  class Snow < SimpleDelegator
-    def to_s
-      case self.begin
+  class ForecastDelegate < SimpleDelegator
+    def time_of_day
+      __getobj__.time_of_day.strftime('%m/%d')
+    end
+
+    def snow
+      case __getobj__.snow.begin
       when 0
-        case self.end
+        case __getobj__.snow.end
         when 0
           '🚫'
         else
-          "<#{self.end}\""
+          "<#{__getobj__.snow.end}\""
         end
       else
-        "#{self.begin}-#{self.end}\""
+        "#{__getobj__.snow.begin}-#{__getobj__.snow.end}\""
       end
     end
-  end
 
-  class ForecastDelegate < SimpleDelegator
-    def snow
-      Snow.new(__getobj__.snow)
+    def short_icon
+      case short
+      when /Snow/i
+        '❄️'
+      when /Sunny/i
+        '☀️'
+      when /Cloud/i
+        '☁️'
+      else
+        '⛅️'
+      end
+    end
+
+    def temp
+      "#{__getobj__.temp.end}°F"
+    end
+
+    def wind_gust
+      "#{__getobj__.wind_gust.end} mph"
+    end
+
+    def wind_speed
+      "#{__getobj__.wind_direction} #{__getobj__.wind_speed.end} mph"
     end
   end
 

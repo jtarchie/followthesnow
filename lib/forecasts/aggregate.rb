@@ -4,7 +4,9 @@ Forecast::Aggregate = Struct.new(:forecasts, keyword_init: true) do
   def forecasts
     @forecasts ||= begin
       final_forecasts = self['forecasts'].dup
-      self['forecasts'].group_by(&:time_of_day).each do |_time_of_day, grouped_forecasts|
+      self['forecasts']
+        .group_by { |f| f.time_of_day.strftime('%m/%d') }
+        .each do |_time_of_day, grouped_forecasts|
         first, second = grouped_forecasts
         next unless first && second
 

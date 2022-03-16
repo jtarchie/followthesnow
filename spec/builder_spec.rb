@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
-require_relative '../lib/builder'
-require 'tmpdir'
 require 'json'
+require 'tmpdir'
 require 'webmock/rspec'
+require_relative '../lib/builder'
+require_relative '../lib/http_cache'
+require_relative '../lib/resort'
 
 RSpec.describe 'Builder' do
   let(:fetcher) do

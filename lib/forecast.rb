@@ -3,7 +3,9 @@
 Forecast = Struct.new(
   :short,
   :snow,
+  :temp,
   :time_of_day,
+  :wind_direction,
   :wind_gust,
   :wind_speed,
   keyword_init: true

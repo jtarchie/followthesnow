@@ -85,3 +85,4 @@ build-iPhoneSimulator/
 *.db
 docs/*.md
 .cache
+.DS_Store
