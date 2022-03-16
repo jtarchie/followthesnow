@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
-Forecast = Struct.new(:time_of_day, :snow, keyword_init: true) do
+Forecast = Struct.new(
+  :short,
+  :snow,
+  :time_of_day,
+  :wind_gust,
+  :wind_speed,
+  keyword_init: true
+) do
   def self.from(resort:, fetcher:, aggregates: [])
     first = Forecast::First.new(
       resort: resort,

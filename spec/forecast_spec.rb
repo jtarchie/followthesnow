@@ -227,4 +227,33 @@ RSpec.describe 'Forecast' do
       ]
     end
   end
+
+  context 'when loading up full forecast' do
+    let(:forecast) { YAML.load_file(File.join(__dir__, 'forecast.yml')) }
+
+    it 'has all the information' do
+      stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
+        .to_return(status: 200, body: {
+          properties: {
+            forecast: 'https://api.weather.gov/gridpoints/TEST/1,2/forecast'
+          }
+        }.to_json)
+
+      stub_request(:get, 'https://api.weather.gov/gridpoints/TEST/1,2/forecast')
+        .to_return(status: 200, body: forecast.to_json)
+
+      forecast = Forecast.from(
+        resort: resort,
+        fetcher: fetcher
+      )
+
+      expect(forecast.forecasts.length).to eq 14
+
+      first = forecast.forecasts.first
+      expect(first.short).to eq 'Sunny'
+      expect(first.wind_gust).to eq(0..24.166)
+      expect(first.wind_speed).to eq(0..14.960)
+      expect(first.snow).to eq(0..0)
+    end
+  end
 end

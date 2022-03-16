@@ -3,6 +3,7 @@
 require 'active_support'
 require 'active_support/time'
 require 'parallel'
+require 'terminal-table'
 
 module Builder
   # builds the front page
