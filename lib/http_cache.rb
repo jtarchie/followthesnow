@@ -22,11 +22,12 @@ class HTTPCache
         interval: 5,
         interval_randomness: 10,
         exceptions: [
-          Errno::ETIMEDOUT,
           'Timeout::Error',
-          Faraday::TimeoutError,
+          Errno::ETIMEDOUT,
+          Faraday::ParsingError,
           Faraday::RetriableResponse,
-          Faraday::ServerError
+          Faraday::ServerError,
+          Faraday::TimeoutError
         ]
       }
       builder.response :raise_error
