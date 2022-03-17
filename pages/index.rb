@@ -10,6 +10,7 @@ module Builder
   # builds the front page
   class Index < Page
     include Builder::Renderer
+    include Builder::Slug
     include ERB::Util
 
     def build!(output_filename: 'index.html')
@@ -63,11 +64,7 @@ module Builder
       headers = ['Location'] + max_days
 
       rows = predictions.map do |p|
-        row = if p.url
-                ["[#{p.name}](#{p.url})"]
-              else
-                [p.name]
-              end
+        row = ["[#{p.name}](/resorts/#{slug(p.name)})"]
         row += if p.snows.length == max_days.length
                  p.snows
                else

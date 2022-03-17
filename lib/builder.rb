@@ -30,3 +30,4 @@ module Builder
 end
 
 require_relative 'builder/renderer'
+require_relative 'builder/slug'

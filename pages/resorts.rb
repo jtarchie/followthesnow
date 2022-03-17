@@ -6,6 +6,7 @@ module Builder
   # builds each state page
   class Resorts < Page
     include Builder::Renderer
+    include Builder::Slug
     include ERB::Util
 
     def build!
@@ -30,10 +31,6 @@ module Builder
     private
 
     attr_reader :resort
-
-    def slug(name)
-      name.downcase.gsub(/\W+/, '-')
-    end
 
     def long_term_table(resort)
       headers = ['Date', 'Snowfall', 'Icon', 'Short', 'Temp', 'Wind Speed', 'Wind Gusts']

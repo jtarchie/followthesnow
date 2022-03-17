@@ -75,7 +75,7 @@ Forecast::JSON = Struct.new(:resort, :fetcher, keyword_init: true) do
           wind_speed: wind_speed_range
         )
       end
-    rescue Faraday::ServerError, HTTPCache::NotMatchingBlock => e
+    rescue Faraday::ServerError, HTTPCache::NotMatchingBlock
       [
         Forecast.new(
           short: 'Unknown',
