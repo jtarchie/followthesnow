@@ -2,6 +2,7 @@
 
 require 'active_support'
 require 'active_support/time'
+require 'erb'
 require 'parallel'
 require 'terminal-table'
 

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'erb'
 require 'json'
 require 'spec_helper'
 require 'tempfile'
@@ -229,7 +230,15 @@ RSpec.describe 'Forecast' do
   end
 
   context 'when loading up full forecast' do
-    let(:forecast) { YAML.load_file(File.join(__dir__, 'forecast.yml')) }
+    let(:forecast) do
+      YAML.safe_load(
+        ERB.new(
+          File.read(
+            File.join(__dir__, 'forecast.yml.erb')
+          )
+        ).result
+      )
+    end
 
     it 'has all the information' do
       stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')

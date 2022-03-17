@@ -2,7 +2,6 @@
 
 require 'active_support'
 require 'active_support/inflector'
-require 'erb'
 require 'fileutils'
 require_relative 'forecast'
 require_relative 'prediction'

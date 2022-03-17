@@ -2,7 +2,7 @@
 
 require 'time'
 
-Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
+Forecast::JSON = Struct.new(:resort, :fetcher, keyword_init: true) do
   def forecasts
     @forecasts ||= begin
       points_response = fetcher.json_response("https://api.weather.gov/points/#{resort.coords.join(',')}")
@@ -75,7 +75,7 @@ Forecast::First = Struct.new(:resort, :fetcher, keyword_init: true) do
           wind_speed: wind_speed_range
         )
       end
-    rescue Faraday::ServerError, HTTPCache::NotMatchingBlock
+    rescue Faraday::ServerError, HTTPCache::NotMatchingBlock => e
       [
         Forecast.new(
           short: 'Unknown',

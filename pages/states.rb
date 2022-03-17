@@ -4,7 +4,6 @@ module Builder
   # builds each state page
   class States < Page
     include Builder::Renderer
-    include ERB::Util
 
     def build!
       states_dir = File.join(build_dir, 'states')

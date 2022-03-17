@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
+require 'erb'
+
 module Builder
   # builds each state page
   class Resorts < Page
     include Builder::Renderer
+    include ERB::Util
 
     def build!
       resort_path = File.join(build_dir, 'resorts')

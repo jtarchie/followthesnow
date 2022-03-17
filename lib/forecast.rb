@@ -11,7 +11,7 @@ Forecast = Struct.new(
   keyword_init: true
 ) do
   def self.from(resort:, fetcher:, aggregates: [])
-    first = Forecast::First.new(
+    first = Forecast::JSON.new(
       resort: resort,
       fetcher: fetcher
     )
@@ -26,5 +26,5 @@ end
 
 require_relative './forecasts/aggregate'
 require_relative './forecasts/emoji'
-require_relative './forecasts/first'
+require_relative './forecasts/json'
 require_relative './forecasts/text'

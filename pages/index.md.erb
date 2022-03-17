@@ -4,13 +4,13 @@ Follow the snow started after discussion of "Where we can find the best snow tod
 ## Locations
       
 <%- by_state.keys.each do |state| -%>
-* [<%= state %>](#<%= state.downcase.gsub(/\s+/,'-') %>)
+* [<%= h state %>](#<%= state.downcase.gsub(/\s+/,'-') %>)
 <%- end -%>
 
-*Last Updated:* <%= current_timestamp %>
+*Last Updated:* <%= h current_timestamp %>
 
 <%- by_state.each do |state, predictions| -%>
-## <%= state %>
+## <%= h state %>
 
 <%= table(predictions: predictions) %>
 
