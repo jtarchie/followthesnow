@@ -2,23 +2,14 @@
 
 Forecast::Aggregate = Struct.new(:forecasts, keyword_init: true) do
   def forecasts
-    @forecasts ||= begin
-      final_forecasts = self['forecasts'].dup
-      self['forecasts']
-        .group_by { |f| f.time_of_day.strftime('%m/%d') }
-        .each do |_time_of_day, grouped_forecasts|
-        first, second = grouped_forecasts
-        next unless first && second
-
-        combined = Forecast.new(
-          time_of_day: first.time_of_day,
-          snow: [first.snow.begin, second.snow.begin].max..(first.snow.end + second.snow.end)
-        )
-        final_forecasts.insert(final_forecasts.index(first), combined)
-        final_forecasts.delete_at(final_forecasts.index(first))
-        final_forecasts.delete_at(final_forecasts.index(second))
-      end
-      final_forecasts
+    @forecasts ||= self['forecasts']
+                   .sort_by(&:time_of_day)
+                   .group_by { |f| f.time_of_day.strftime('%m/%d') }
+                   .map do |_, grouped_forecasts|
+      Forecast.new(
+        time_of_day: grouped_forecasts.first.time_of_day,
+        snow: grouped_forecasts.map { |f| f.snow.min }.max..(grouped_forecasts.sum { |f| f.snow.max })
+      )
     end
   end
 end
