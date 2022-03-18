@@ -11,7 +11,7 @@ Forecast::Emoji = Struct.new(:forecasts, keyword_init: true) do
       when 0
         case __getobj__.snow.end
         when 0
-          '🚫'
+          '0"'
         else
           "<#{__getobj__.snow.end}\""
         end
