@@ -219,9 +219,9 @@ RSpec.describe 'Forecast' do
       end
 
       expect(emojis).to eq [
-        ['03/01', '2-16"'],
-        ['03/02', '2-8"'],
-        ['03/05', '2-8"']
+        ['Tue', '2-16"'],
+        ['Wed', '2-8"'],
+        ['Sat', '2-8"']
       ]
     end
   end
