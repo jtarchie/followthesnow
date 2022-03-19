@@ -20,9 +20,21 @@ RSpec.describe 'Builder' do
 
   it 'renders resorts in alphabetical order and by state' do
     resorts = [
-      Resort.new(name: 'B Resort', state: 'New Mexico'),
-      Resort.new(name: 'A Resort', state: 'New Mexico'),
-      Resort.new(name: 'C Resort', state: 'Colorado')
+      Resort.new(
+        name: 'B Resort',
+        state: 'New Mexico',
+        forecast_url: 'https://api.weather.gov/gridpoints/TEST/1,2/forecast'
+      ),
+      Resort.new(
+        name: 'A Resort',
+        state: 'New Mexico',
+        forecast_url: 'https://api.weather.gov/gridpoints/TEST/1,2/forecast'
+      ),
+      Resort.new(
+        name: 'C Resort',
+        state: 'Colorado',
+        forecast_url: 'https://api.weather.gov/gridpoints/TEST/1,2/forecast'
+      )
     ]
 
     build_dir = Dir.mktmpdir

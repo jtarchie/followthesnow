@@ -13,7 +13,13 @@ RSpec.describe 'Forecast' do
   let(:fetcher) do
     HTTPCache.new
   end
-  let(:resort) { Resort.new(lat: 1.001, lng: 2.002) }
+  let(:resort) do
+    Resort.new(
+      forecast_url: 'https://api.weather.gov/gridpoints/TEST/1,2/forecast',
+      lat: 1.001,
+      lng: 2.002
+    )
+  end
   let(:text_forecast) do
     Forecast.from(
       resort: resort,
@@ -29,13 +35,6 @@ RSpec.describe 'Forecast' do
   end
 
   def json_forecast(periods)
-    stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
-      .to_return(status: 200, body: {
-        properties: {
-          forecast: 'https://api.weather.gov/gridpoints/TEST/1,2/forecast'
-        }
-      }.to_json)
-
     stub_request(:get, 'https://api.weather.gov/gridpoints/TEST/1,2/forecast')
       .to_return(status: 200, body: {
         properties: {
@@ -144,24 +143,8 @@ RSpec.describe 'Forecast' do
     end
   end
 
-  context 'when the points returns a 500' do
-    it 'returns a prediction of cannot figure it out' do
-      stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
-        .to_return(status: 500)
-
-      expect(text_forecast.forecasts).to eq 'no snow Today'
-    end
-  end
-
   context 'when the points does not have updated at' do
     it 'returns a prediction of cannot figure it out' do
-      stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
-        .to_return(status: 200, body: {
-          properties: {
-            forecast: 'https://api.weather.gov/gridpoints/TEST/1,2/forecast'
-          }
-        }.to_json)
-
       stub_request(:get, 'https://api.weather.gov/gridpoints/TEST/1,2/forecast')
         .to_return(status: 200, body: {}.to_json)
 
@@ -171,13 +154,6 @@ RSpec.describe 'Forecast' do
 
   context 'when the forecast returns a 500' do
     it 'returns a prediction of cannot figure it out' do
-      stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
-        .to_return(status: 200, body: {
-          properties: {
-            forecast: 'https://api.weather.gov/gridpoints/TEST/1,2/forecast'
-          }
-        }.to_json)
-
       stub_request(:get, 'https://api.weather.gov/gridpoints/TEST/1,2/forecast')
         .to_return(status: 500)
 
@@ -238,13 +214,6 @@ RSpec.describe 'Forecast' do
     end
 
     it 'has all the information' do
-      stub_request(:get, 'https://api.weather.gov/points/1.001,2.002')
-        .to_return(status: 200, body: {
-          properties: {
-            forecast: 'https://api.weather.gov/gridpoints/TEST/1,2/forecast'
-          }
-        }.to_json)
-
       stub_request(:get, 'https://api.weather.gov/gridpoints/TEST/1,2/forecast')
         .to_return(status: 200, body: forecast.to_json)
 

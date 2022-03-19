@@ -56,7 +56,7 @@ module Builder
 
     def current_timestamp
       Time.zone = 'Eastern Time (US & Canada)'
-      Time.zone.now.strftime('%Y-%m-%d %l:%M%p %Z')
+      Time.zone.now.strftime('%Y-%m-%d %l:%M%p%Z')
     end
 
     def table(predictions:)

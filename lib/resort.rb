@@ -2,7 +2,16 @@
 
 require 'csv'
 
-Resort = Struct.new(:name, :lat, :lng, :city, :state, :url, keyword_init: true) do
+Resort = Struct.new(
+  :city,
+  :forecast_url,
+  :lat,
+  :lng,
+  :name,
+  :state,
+  :url,
+  keyword_init: true
+) do
   def coords
     [lat, lng]
   end

@@ -5,11 +5,8 @@ require 'time'
 Forecast::JSON = Struct.new(:resort, :fetcher, keyword_init: true) do
   def forecasts
     @forecasts ||= begin
-      points_response = fetcher.json_response("https://api.weather.gov/points/#{resort.coords.join(',')}")
-      forecast_url = points_response.dig('properties', 'forecast')
-
       forecast_response = fetcher.json_response(
-        forecast_url,
+        resort.forecast_url,
         {
           'Feature-Flags' => 'forecast_temperature_qv, forecast_wind_speed_qv'
         }

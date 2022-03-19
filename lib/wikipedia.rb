@@ -9,37 +9,52 @@ require 'ostruct'
 
 WikipediaScraper = Struct.new(:url, keyword_init: true) do
   def resorts
-    doc = Nokogiri::HTML(HTTP.follow.get(url))
+    $stdout.sync = true
+
+    doc = Nokogiri::HTML(HTTP.follow.get(url).to_s)
     doc.css('.mw-category-group ul li a').each do |link|
       href = link['href']
       next if href =~ /Template|Category|Comparison/i
 
-      link_doc = Nokogiri::HTML(HTTP.follow.get(%(https://en.wikipedia.org#{href})))
+      link_doc = Nokogiri::HTML(HTTP.follow.get(%(https://en.wikipedia.org#{href})).to_s)
 
       location = link_doc.css('.geo').first
       next unless location
 
-      title   = link_doc.css('h1')
-                        .text
-                        .gsub(/\s*\(.*\)\s*/, '')
-                        .gsub(/\s*,.*$/, '')
-                        .strip
+      title = link_doc.css('h1')
+                      .text
+                      .gsub(/\s*\(.*\)\s*/, '')
+                      .gsub(/\s*,.*$/, '')
+                      .strip
       geo     = Geo::Coord.parse(location.text)
       address = address(lat: geo.lat, lng: geo.lng)
       url     = link_doc.css('.infobox-data .url a').first
       href    = url ? url['href'] : nil
-
       city = address.city || address.village || address.leisure || address.tourism || address.building
 
-      puts [title, geo.lat.to_f, geo.lng.to_f, city, address.state, href].to_csv
+      puts [
+        title,
+        geo.lat.to_f,
+        geo.lng.to_f,
+        city,
+        address.state,
+        href,
+        forecast_url(lat: geo.lat.to_f, lng: geo.lng.to_f)
+      ].to_csv
       sleep(1) # rate limit
     end
   end
 
   private
 
+  def forecast_url(lat:, lng:)
+    JSON.parse(
+      HTTP.follow.get(%(https://api.weather.gov/points/#{lat},#{lng})).to_s
+    ).dig('properties', 'forecast')
+  end
+
   def address(lat:, lng:)
-    response = JSON.parse(HTTP.follow.get(%(https://nominatim.openstreetmap.org/reverse?lat=#{lat.to_f}&lon=#{lng.to_f}&format=jsonv2)).read)
+    response = JSON.parse(HTTP.follow.get(%(https://nominatim.openstreetmap.org/reverse?lat=#{lat.to_f}&lon=#{lng.to_f}&format=jsonv2)).to_s)
     OpenStruct.new(response['address'])
   end
 end
@@ -57,7 +72,7 @@ if __FILE__ == $PROGRAM_NAME
     'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Wyoming'
   ]
 
-  puts 'name,lat,lng,city,state,url'
+  puts 'name,lat,lng,city,state,url,forecast_url'
   urls.each do |url|
     scraper = WikipediaScraper.new(url: url)
     scraper.resorts
