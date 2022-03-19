@@ -18,7 +18,7 @@ class HTTPCache
   def initialize
     @client = Faraday.new do |builder|
       builder.request :retry, {
-        max: 4,
+        max: 2,
         interval: 5,
         interval_randomness: 10,
         exceptions: [
@@ -42,7 +42,7 @@ class HTTPCache
     end
   end
 
-  def json_response(url, headers = {}, retries = 3, &block)
+  def json_response(url, headers = {}, retries = 2, &block)
     block = ->(_response) { true } unless block_given?
     response = @client.get(
       url,
