@@ -7,11 +7,11 @@ h2 {
   margin: 60px auto 500px;
 }
 
-#locations + ul {
+ul {
   list-style: none;
   padding: 0;
 }
-#locations + ul li {
+ul li {
   display: inline-block;
   margin-right: 1em;
 }
