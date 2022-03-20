@@ -90,7 +90,7 @@ Forecast::JSON = Struct.new(:resort, :fetcher, keyword_init: true) do
   private
 
   def kph_to_mph(value)
-    (value / 1.609344).round(3)
+    (value / 1.609344).round
   end
 
   def c_to_f(value)

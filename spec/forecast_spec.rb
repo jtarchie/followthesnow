@@ -226,8 +226,8 @@ RSpec.describe 'Forecast' do
 
       first = forecast.forecasts.first
       expect(first.short).to eq 'Sunny'
-      expect(first.wind_gust).to eq(0..24.166)
-      expect(first.wind_speed).to eq(0..14.960)
+      expect(first.wind_gust).to eq(0..24)
+      expect(first.wind_speed).to eq(0..15)
       expect(first.snow).to eq(0..0)
       expect(first.temp).to eq(0..43.0)
       expect(first.wind_direction).to eq 'W'
