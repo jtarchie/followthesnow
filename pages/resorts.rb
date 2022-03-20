@@ -38,7 +38,7 @@ module Builder
       forecast = Forecast.from(
         fetcher: fetcher,
         resort: resort,
-        aggregates: [Forecast::Emoji]
+        aggregates: [Forecast::Short]
       )
 
       rows = forecast.forecasts.map do |f|

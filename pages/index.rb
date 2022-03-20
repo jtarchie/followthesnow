@@ -47,7 +47,7 @@ module Builder
             forecast: Forecast.from(
               fetcher: fetcher,
               resort: resort,
-              aggregates: [Forecast::Aggregate, Forecast::Emoji]
+              aggregates: [Forecast::Aggregate, Forecast::Short]
             )
           )
         end

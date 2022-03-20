@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Forecast::Emoji = Struct.new(:forecasts, keyword_init: true) do
+Forecast::Short = Struct.new(:forecasts, keyword_init: true) do
   class ForecastDelegate < SimpleDelegator
     def time_of_day
       current_date = __getobj__.time_of_day.strftime('%m/%d')

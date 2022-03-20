@@ -186,7 +186,7 @@ RSpec.describe 'Forecast' do
 
       emoji_forecast = Forecast.from(
         resort: resort,
-        aggregates: [Forecast::Aggregate, Forecast::Emoji],
+        aggregates: [Forecast::Aggregate, Forecast::Short],
         fetcher: fetcher
       )
 

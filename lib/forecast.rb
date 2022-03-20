@@ -25,6 +25,6 @@ Forecast = Struct.new(
 end
 
 require_relative './forecasts/aggregate'
-require_relative './forecasts/emoji'
 require_relative './forecasts/json'
+require_relative './forecasts/short'
 require_relative './forecasts/text'
