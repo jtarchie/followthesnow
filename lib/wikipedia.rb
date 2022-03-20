@@ -28,8 +28,7 @@ WikipediaScraper = Struct.new(:url, keyword_init: true) do
                       .strip
       geo     = Geo::Coord.parse(location.text)
       address = address(lat: geo.lat, lng: geo.lng)
-      url     = link_doc.css('.infobox-data .url a').first
-      href    = url ? url['href'] : nil
+      url     = validate(url: link_doc.css('.infobox-data .url a').first)
       city = address.city || address.village || address.leisure || address.tourism || address.building
 
       puts [
@@ -38,7 +37,7 @@ WikipediaScraper = Struct.new(:url, keyword_init: true) do
         geo.lng.to_f,
         city,
         address.state,
-        href,
+        url,
         forecast_url(lat: geo.lat.to_f, lng: geo.lng.to_f)
       ].to_csv
       sleep(1) # rate limit
@@ -46,6 +45,21 @@ WikipediaScraper = Struct.new(:url, keyword_init: true) do
   end
 
   private
+
+  def validate(url:)
+    return unless url
+
+    href = url['href']
+
+    response = begin
+      HTTP.follow.head(href)
+    rescue StandardError
+      return nil
+    end
+    return unless response.status.success?
+
+    href
+  end
 
   def forecast_url(lat:, lng:)
     JSON.parse(
