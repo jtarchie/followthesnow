@@ -175,3 +175,7 @@ Pine Creek Ski Area,42.1031083,-110.8287889,Pine Creek Ski Resort,Wyoming,http:/
 Snow King Mountain,43.472,-110.761,Jackson,Wyoming,https://snowkingmountain.com/,"https://api.weather.gov/gridpoints/RIW/41,137/forecast"
 Snowy Range Ski Area,41.341231,-106.183441,,Wyoming,http://www.snowyrangeski.com/,"https://api.weather.gov/gridpoints/CYS/63,25/forecast"
 White Pine Ski Resort,42.9778389,-109.7581722,,Wyoming,,"https://api.weather.gov/gridpoints/RIW/72,111/forecast"
+Diamond Peak,39.254,-119.924,,Nevada,,"https://api.weather.gov/gridpoints/REV/38,94/forecast"
+Heavenly Mountain Resort,38.9353,-119.94,California Lodge,California,http://www.skiheavenly.com,"https://api.weather.gov/gridpoints/REV/35,80/forecast"
+Lee Canyon,36.301638,-115.680759,Las Vegas Ski and Snowboard Resort,Nevada,,"https://api.weather.gov/gridpoints/VEF/103,106/forecast"
+Mount Rose Ski Tahoe,39.32917,-119.88583,Employee Lockers,Nevada,http://www.skirose.com/,"https://api.weather.gov/gridpoints/REV/40,97/forecast"
