@@ -1,5 +1,9 @@
 # <%= h resort.name %>
 
+<%- unless resort.url.nil? -%>
+* [Homepage](<%= resort.url %>)
+<%- end -%>
+
 ## Long term forecast
 
 <%= long_term_table(resort) %>
