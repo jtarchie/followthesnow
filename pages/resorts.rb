@@ -32,6 +32,11 @@ module Builder
 
     attr_reader :resort
 
+    def current_timestamp
+      Time.zone = 'Eastern Time (US & Canada)'
+      Time.zone.now.strftime('%Y-%m-%d %l:%M%p %Z')
+    end
+
     def long_term_table(resort)
       headers = ['Date', 'Snowfall', 'Icon', 'Short', 'Temp', 'Wind Speed', 'Wind Gusts']
 
