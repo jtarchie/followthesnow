@@ -16,6 +16,9 @@ class HTTPCache
   NotMatchingBlock = Class.new(RuntimeError) {}
 
   def initialize
+    logger = Logger.new($stderr)
+    logger.level = Logger::INFO
+
     @client = Faraday.new do |builder|
       builder.request :retry, {
         max: 2,
@@ -34,8 +37,8 @@ class HTTPCache
       builder.use :http_cache,
                   store: ActiveSupport::Cache::FileStore.new(File.join(__dir__, '..', '.cache')),
                   shared_cache: true,
-                  logger: Logger.new($stdout)
-      builder.response :detailed_logger
+                  logger: logger
+      builder.response :detailed_logger, logger
       builder.response :json, content_type: //
       builder.use Faraday::FollowRedirects::Middleware
       builder.adapter :net_http_persistent, pool_size: 5
