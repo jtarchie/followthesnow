@@ -47,7 +47,7 @@ class HTTPCache
     response = @client.get(
       url,
       nil,
-      { 'User-Agent' => '(followthesnow.com, hello@followthesnow.com)' }.merge(headers)
+      { 'User-Agent' => '(followthesnow.today, hello@followthesnow.today)' }.merge(headers)
     ).body
     raise NotMatchingBlock unless block.call(response)
 
