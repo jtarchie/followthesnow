@@ -21,15 +21,15 @@ WikipediaScraper = Struct.new(:url, keyword_init: true) do
       location = link_doc.css('.geo').first
       next unless location
 
-      title = link_doc.css('h1')
-                      .text
-                      .gsub(/\s*\(.*\)\s*/, '')
-                      .gsub(/\s*,.*$/, '')
-                      .strip
+      title   = link_doc.css('h1')
+                        .text
+                        .gsub(/\s*\(.*\)\s*/, '')
+                        .gsub(/\s*,.*$/, '')
+                        .strip
       geo     = Geo::Coord.parse(location.text)
       address = address(lat: geo.lat, lng: geo.lng)
       url     = validate(url: link_doc.css('.infobox-data .url a').first)
-      city = address.city || address.village || address.leisure || address.tourism || address.building
+      city    = address.city || address.village || address.leisure || address.tourism || address.building
 
       puts [
         title,

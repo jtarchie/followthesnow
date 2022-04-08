@@ -16,7 +16,7 @@ module Builder
     def build!(output_filename: 'index.html')
       FileUtils.mkdir_p(build_dir)
 
-      layout_path = File.join(source_dir, '_layout.html.erb')
+      layout_path     = File.join(source_dir, '_layout.html.erb')
       source_filename = File.join(source_dir, 'index.md.erb')
 
       File.write(
@@ -61,10 +61,10 @@ module Builder
 
     def table(predictions:)
       max_days = predictions.map(&:days).max_by(&:length)
-      headers = ['Location'] + max_days
+      headers  = ['Location'] + max_days
 
       rows = predictions.map do |p|
-        row = ["[#{p.name}](/resorts/#{slug(p.name)})"]
+        row  = ["[#{p.name}](/resorts/#{slug(p.name)})"]
         row += if p.snows.length == max_days.length
                  p.snows
                else
@@ -73,7 +73,7 @@ module Builder
         row
       end
 
-      table = Terminal::Table.new(
+      table       = Terminal::Table.new(
         headings: headers,
         rows: rows
       )

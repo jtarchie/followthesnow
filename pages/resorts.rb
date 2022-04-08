@@ -48,7 +48,7 @@ module Builder
 
       rows = forecast.forecasts.map do |f|
         [
-          f.time_of_day,
+          f.name,
           f.snow,
           f.short_icon,
           f.short,
@@ -58,7 +58,7 @@ module Builder
         ]
       end
 
-      table = Terminal::Table.new(
+      table       = Terminal::Table.new(
         headings: headers,
         rows: rows
       )

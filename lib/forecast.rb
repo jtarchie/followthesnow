@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Forecast = Struct.new(
+  :name,
   :short,
   :snow,
   :temp,

@@ -35,3 +35,6 @@ Style/ClassAndModuleChildren:
 
 Style/Documentation:
   Enabled: false
+
+Style/ExtraSpacing:
+  ForceEqualSignAlignment: true

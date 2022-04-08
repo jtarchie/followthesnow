@@ -186,18 +186,24 @@ RSpec.describe 'Forecast' do
 
       emoji_forecast = Forecast.from(
         resort: resort,
-        aggregates: [Forecast::Aggregate, Forecast::Short],
+        aggregates: [Forecast::Short],
         fetcher: fetcher
       )
 
       emojis = emoji_forecast.forecasts.map do |forecast|
-        [forecast.time_of_day, forecast.snow.to_s]
+        [forecast.name, forecast.snow.to_s]
       end
 
       expect(emojis).to eq [
-        ['Tue', '2-16"'],
-        ['Wed', '2-8"'],
-        ['Sat', '2-8"']
+        ['Today', '0"'],
+        ['This Afternoon', '2-4"'],
+        ['Tonight', '2-4"'],
+        ['Overnight', '2-4"'],
+        ['This Morning', '2-4"'],
+        ['Wednesday', '2-4"'],
+        ['Wednesday Night', '2-4"'],
+        ['Saturday', '2-4"'],
+        ['Saturday Night', '2-4"']
       ]
     end
   end

@@ -25,7 +25,7 @@ Forecast::JSON = Struct.new(:resort, :fetcher, keyword_init: true) do
         if short_forecast =~ /snow/i
           detailed_forecast = period['detailedForecast']
 
-          matches = /(\d+)\s+to\s+(\d+)\s+inches/.match(detailed_forecast)
+          matches    = /(\d+)\s+to\s+(\d+)\s+inches/.match(detailed_forecast)
           snow_range = if matches
                          matches[1].to_i..matches[2].to_i
                        elsif detailed_forecast =~ /less than|around/
@@ -35,16 +35,16 @@ Forecast::JSON = Struct.new(:resort, :fetcher, keyword_init: true) do
                        end
         end
 
-        wind_gust = period['windGust'] || {}
-        wind_gust_range = if wind_gust['value']
-                            0..(kph_to_mph(wind_gust['value']))
-                          elsif wind_gust['minValue']
-                            (kph_to_mph(wind_gust['minValue'])..kph_to_mph(wind_gust['maxValue']))
-                          else
-                            0..0
-                          end
+        wind_gust        = period['windGust'] || {}
+        wind_gust_range  = if wind_gust['value']
+                             0..(kph_to_mph(wind_gust['value']))
+                           elsif wind_gust['minValue']
+                             (kph_to_mph(wind_gust['minValue'])..kph_to_mph(wind_gust['maxValue']))
+                           else
+                             0..0
+                           end
 
-        wind_speed = period['windSpeed'] || {}
+        wind_speed       = period['windSpeed'] || {}
         wind_speed_range = if wind_speed['value']
                              0..(kph_to_mph(wind_speed['value']))
                            elsif wind_speed['minValue']
@@ -53,16 +53,17 @@ Forecast::JSON = Struct.new(:resort, :fetcher, keyword_init: true) do
                              0..0
                            end
 
-        temp = period['temperature'] || {}
-        temp_range = if temp['value']
-                       0..(c_to_f(temp['value']))
-                     elsif temp['minValue']
-                       (c_to_f(temp['minValue'])..c_to_f(temp['maxValue']))
-                     else
-                       0..0
-                     end
+        temp             = period['temperature'] || {}
+        temp_range       = if temp['value']
+                             0..(c_to_f(temp['value']))
+                           elsif temp['minValue']
+                             (c_to_f(temp['minValue'])..c_to_f(temp['maxValue']))
+                           else
+                             0..0
+                           end
 
         Forecast.new(
+          name: period['name'],
           short: period['shortForecast'],
           snow: snow_range,
           temp: temp_range,

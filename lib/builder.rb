@@ -17,7 +17,7 @@ module Builder
         require_relative source_filename
 
         klass_name = "builder/#{File.basename(source_filename, '.rb')}".camelize
-        klass = klass_name.constantize
+        klass      = klass_name.constantize
         klass.new(
           build_dir: build_dir,
           fetcher: fetcher,

@@ -18,10 +18,10 @@ module Builder
     end
 
     def render(layout:, page:)
-      @layouts ||= {}
+      @layouts         ||= {}
       @layouts[layout] ||= ERB.new(File.read(layout), trim_mode: '-')
 
-      @pages ||= {}
+      @pages       ||= {}
       @pages[page] ||= ERB.new(File.read(page), trim_mode: '-')
 
       @layouts[layout]

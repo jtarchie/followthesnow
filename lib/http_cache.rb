@@ -16,7 +16,7 @@ class HTTPCache
   NotMatchingBlock = Class.new(RuntimeError) {}
 
   def initialize
-    logger = Logger.new($stderr)
+    logger       = Logger.new($stderr)
     logger.level = Logger::INFO
 
     @client = Faraday.new do |builder|
@@ -46,7 +46,7 @@ class HTTPCache
   end
 
   def json_response(url, headers = {}, retries = 2, &block)
-    block = ->(_response) { true } unless block_given?
+    block    = ->(_response) { true } unless block_given?
     response = @client.get(
       url,
       nil,
