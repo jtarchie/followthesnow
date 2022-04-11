@@ -10,7 +10,10 @@
     crossorigin="anonymous" />
   <link rel="stylesheet" href="/main.css" />
   <title>
-    Follow the Snow, today
+    followthesnow.today
+    <% if title = yield(:title) %>
+    &raquo; <%= title %>
+    <% end %>
   </title>
 </head>
 <body>

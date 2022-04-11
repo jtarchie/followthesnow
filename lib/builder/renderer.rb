@@ -17,7 +17,7 @@ module Builder
       ).to_html
     end
 
-    def render(layout:, page:)
+    def render(layout:, page:, title: nil)
       @layouts         ||= {}
       @layouts[layout] ||= ERB.new(File.read(layout), trim_mode: '-')
 
@@ -26,11 +26,16 @@ module Builder
 
       @layouts[layout]
         .result(
-          erb_binding do
-            markdown_render(
-              @pages[page]
-                .result(erb_binding)
-            )
+          erb_binding do |type|
+            case type
+            when :title
+              title
+            else
+              markdown_render(
+                @pages[page]
+                  .result(erb_binding)
+              )
+            end
           end
         )
     end

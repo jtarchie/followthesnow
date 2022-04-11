@@ -3,7 +3,7 @@
 require 'erb'
 
 module Builder
-  # builds each state page
+  # builds each single resort page
   class Resorts < Page
     include Builder::Renderer
     include Builder::Slug
@@ -22,7 +22,8 @@ module Builder
           File.join(resort_path, "#{slug(resort.name)}.html"),
           render(
             layout: layout_path,
-            page: resort_file
+            page: resort_file,
+            title: "#{resort.state} &raquo; #{resort.name}"
           )
         )
       end

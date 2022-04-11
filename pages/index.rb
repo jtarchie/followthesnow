@@ -19,11 +19,14 @@ module Builder
       layout_path     = File.join(source_dir, '_layout.html.erb')
       source_filename = File.join(source_dir, 'index.md.erb')
 
+      title = 'United States'
+      title = by_state.keys.first if by_state.keys.size == 1
       File.write(
         File.join(build_dir, output_filename),
         render(
           layout: layout_path,
-          page: source_filename
+          page: source_filename,
+          title: title
         )
       )
     end
