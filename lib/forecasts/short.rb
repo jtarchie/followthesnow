@@ -3,15 +3,7 @@
 Forecast::Short = Struct.new(:forecasts, keyword_init: true) do
   class ForecastDelegate < SimpleDelegator
     def time_of_day
-      current_date = __getobj__.time_of_day.strftime('%m/%d')
-
-      if current_date == Time.now.strftime('%m/%d')
-        'Today'
-      elsif current_date == (Time.now + 86_400).strftime('%m/%d')
-        'Tomorrow'
-      else
-        __getobj__.time_of_day.strftime('%a')
-      end
+      __getobj__.time_of_day.strftime('%a')
     end
 
     def snow
