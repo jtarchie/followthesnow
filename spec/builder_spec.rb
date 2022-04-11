@@ -84,5 +84,9 @@ RSpec.describe 'Builder' do
     expect(title).to match(/New Mexico/)
     expect(title).to match(/A Resort/)
     expect(contents).to match(/A Resort/m)
+
+    expect(File).to exist(File.join(build_dir, 'CNAME'))
+    expect(File).to exist(File.join(build_dir, '404.html'))
+    expect(File).to exist(File.join(build_dir, 'main.css'))
   end
 end

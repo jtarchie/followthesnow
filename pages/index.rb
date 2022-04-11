@@ -15,6 +15,7 @@ module Builder
 
     def build!(output_filename: 'index.html')
       FileUtils.mkdir_p(build_dir)
+      FileUtils.cp_r(File.join(source_dir, 'public', '.'), build_dir)
 
       layout_path     = File.join(source_dir, '_layout.html.erb')
       source_filename = File.join(source_dir, 'index.md.erb')
