@@ -23,8 +23,14 @@ jobs:
       with:
         path: .cache
         key: cache-for-http-responses
+    - name: Install minify
+      uses: jaxxstorm/action-install-gh-release@release/v1-alpha
+      with: # Grab the latest version
+        repo: tdewolff/minify
     - name: Build docs
       run: bundle exec rake build
+    - name: minify docs
+      run: minify docs/ --all --recursive -o .
     - name: setup git config
       run: |
         # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
