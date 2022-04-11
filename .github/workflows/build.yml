@@ -27,6 +27,9 @@ jobs:
       uses: jaxxstorm/action-install-gh-release@release/v1-alpha
       with: # Grab the latest version
         repo: tdewolff/minify
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     - name: Build docs
       run: bundle exec rake build
     - name: minify docs
