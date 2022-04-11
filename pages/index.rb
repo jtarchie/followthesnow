@@ -26,7 +26,8 @@ module Builder
         render(
           layout: layout_path,
           page: source_filename,
-          title: title
+          title: title,
+          description: "Find the snow in resorts across #{title}"
         )
       )
     end

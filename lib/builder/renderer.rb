@@ -17,7 +17,7 @@ module Builder
       ).to_html
     end
 
-    def render(layout:, page:, title: nil)
+    def render(layout:, page:, title:, description:)
       @layouts         ||= {}
       @layouts[layout] ||= ERB.new(File.read(layout), trim_mode: '-')
 
@@ -30,11 +30,15 @@ module Builder
             case type
             when :title
               title
-            else
+            when :description
+              description
+            when :content
               markdown_render(
                 @pages[page]
                   .result(erb_binding)
               )
+            else
+              raise "Unsupported yield type #{type} from #{layout}"
             end
           end
         )

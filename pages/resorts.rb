@@ -23,7 +23,8 @@ module Builder
           render(
             layout: layout_path,
             page: resort_file,
-            title: "#{resort.state} &raquo; #{resort.name}"
+            title: "#{resort.state} &raquo; #{resort.name}",
+            description: "Weekly forecast of snow for #{resort.name}"
           )
         )
       end
