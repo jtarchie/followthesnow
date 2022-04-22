@@ -3,6 +3,9 @@
 <%- unless resort.url.nil? -%>
 * [Homepage](<%= resort.url %>)
 <%- end -%>
+<%- if resort.closed -%>
+* Closed for season
+<%- end -%>
 
 *Last Updated:* <%= h current_timestamp %>
 
