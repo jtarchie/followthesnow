@@ -4,6 +4,7 @@ require 'csv'
 
 Resort = Struct.new(
   :city,
+  :closed,
   :forecast_url,
   :lat,
   :lng,

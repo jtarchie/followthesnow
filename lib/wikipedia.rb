@@ -21,18 +21,19 @@ WikipediaScraper = Struct.new(:url, keyword_init: true) do
       location = link_doc.css('.geo').first
       next unless location
 
-      title   = link_doc.css('h1')
-                        .text
-                        .gsub(/\s*\(.*\)\s*/, '')
-                        .gsub(/\s*,.*$/, '')
-                        .strip
-      geo     = Geo::Coord.parse(location.text)
-      address = address(lat: geo.lat, lng: geo.lng)
-      url     = validate(url: link_doc.css('.infobox-data .url a').first)
-      city    = address.city || address.village || address.leisure || address.tourism || address.building
+      title       = link_doc.css('h1')
+                            .text
+                            .gsub(/\s*\(.*\)\s*/, '')
+                            .gsub(/\s*,.*$/, '')
+                            .strip
+      geo         = Geo::Coord.parse(location.text)
+      address     = address(lat: geo.lat, lng: geo.lng)
+      city        = address.city || address.village || address.leisure || address.tourism || address.building
+      url, closed = validate(url: link_doc.css('.infobox-data .url a').first, matcher: /close/i)
 
       puts [
         title,
+        closed,
         geo.lat.to_f,
         geo.lng.to_f,
         city,
@@ -46,19 +47,21 @@ WikipediaScraper = Struct.new(:url, keyword_init: true) do
 
   private
 
-  def validate(url:)
-    return unless url
+  def validate(url:, matcher:)
+    return nil, false unless url
 
     href = url['href']
 
     response = begin
-      HTTP.follow.head(href)
+      HTTP.follow.get(href)
     rescue StandardError
-      return nil
+      return nil, false
     end
-    return unless response.status.success?
+    return nil, false unless response.status.success?
 
-    href
+    body = Nokogiri::HTML(response.to_s)
+
+    [href, matcher.match?(body.text)]
   end
 
   def forecast_url(lat:, lng:)
@@ -88,7 +91,7 @@ if __FILE__ == $PROGRAM_NAME
     'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Wyoming'
   ]
 
-  puts 'name,lat,lng,city,state,url,forecast_url'
+  puts 'name,closed,lat,lng,city,state,url,forecast_url'
   urls.each do |url|
     scraper = WikipediaScraper.new(url: url)
     scraper.resorts
