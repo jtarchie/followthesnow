@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 require 'csv'
+require 'ferrum'
 require 'geo/coord'
+require 'http'
 require 'json'
 require 'nokogiri'
-require 'http'
 require 'ostruct'
 
 WikipediaScraper = Struct.new(:url, keyword_init: true) do
@@ -29,7 +30,7 @@ WikipediaScraper = Struct.new(:url, keyword_init: true) do
       geo         = Geo::Coord.parse(location.text)
       address     = address(lat: geo.lat, lng: geo.lng)
       city        = address.city || address.village || address.leisure || address.tourism || address.building
-      url, closed = validate(url: link_doc.css('.infobox-data .url a').first, matcher: /close/i)
+      url, closed = validate(url: link_doc.css('.infobox-data .url a').first, matcher: /closed/i)
 
       puts [
         title,
@@ -41,27 +42,25 @@ WikipediaScraper = Struct.new(:url, keyword_init: true) do
         url,
         forecast_url(lat: geo.lat.to_f, lng: geo.lng.to_f)
       ].to_csv
-      sleep(1) # rate limit
+      sleep(0.25)
     end
   end
 
   private
 
+  def browser
+    @browser ||= Ferrum::Browser.new
+  end
+
   def validate(url:, matcher:)
-    return nil, false unless url
+    href     = url['href']
+    browser.go_to(href)
+    return nil, false unless browser.network.status == 200
 
-    href = url['href']
-
-    response = begin
-      HTTP.follow.get(href)
-    rescue StandardError
-      return nil, false
-    end
-    return nil, false unless response.status.success?
-
-    body = Nokogiri::HTML(response.to_s)
-
+    body = Nokogiri::HTML(browser.body)
     [href, matcher.match?(body.text)]
+  rescue StandardError
+    [nil, false]
   end
 
   def forecast_url(lat:, lng:)
