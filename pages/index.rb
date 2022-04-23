@@ -69,7 +69,7 @@ module Builder
       headers  = ['Location'] + max_days
 
       rows = predictions.map do |p|
-        row  = ["[#{p.name}](/resorts/#{slug(p.name)})#{p.closed ? '&ast;' : ''}"]
+        row  = ["[#{p.name}](/resorts/#{slug(p.name)})#{p.closed ? '*' : ''}"]
         row += if p.snows.length == max_days.length
                  p.snows
                else

@@ -15,6 +15,7 @@ task :build do
   )
 
   builder.build!
+  sh('minify docs/ --all --recursive -o .')
 end
 
 task :fmt do

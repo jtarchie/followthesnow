@@ -10,7 +10,7 @@ Prediction = Struct.new(:resort, :forecast, keyword_init: true) do
   end
 
   def closed
-    resort.closed == true
+    resort.closed == 'true'
   end
 
   def url
