@@ -3,7 +3,7 @@
 <%- unless resort.url.nil? -%>
 * [Homepage](<%= resort.url %>)
 <%- end -%>
-<%- if resort.closed -%>
+<%- if resort.closed? -%>
 * Closed for season*
 <%- end -%>
 
@@ -13,4 +13,6 @@
 
 <%= long_term_table(resort) %>
 
+<%- if resort.closed? -%>
 (*) The resort may be closed for the season.
+<%- end -%>

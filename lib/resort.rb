@@ -22,4 +22,8 @@ Resort = Struct.new(
       Resort.new(resort.to_h)
     end.uniq(&:name)
   end
+
+  def closed?
+    self['closed'] == 'true'
+  end
 end
