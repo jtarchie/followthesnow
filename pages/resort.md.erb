@@ -4,7 +4,7 @@
 * [Homepage](<%= resort.url %>)
 <%- end -%>
 <%- if resort.closed -%>
-* Closed for season
+* Closed for season*
 <%- end -%>
 
 *Last Updated:* <%= h current_timestamp %>
@@ -12,3 +12,5 @@
 ## Long term forecast
 
 <%= long_term_table(resort) %>
+
+(*) The resort may be closed for the season.
