@@ -2,7 +2,7 @@
 
 require 'time'
 
-Forecast::JSON = Struct.new(:resort, :fetcher, keyword_init: true) do
+Forecast::NOAA = Struct.new(:resort, :fetcher, keyword_init: true) do
   def forecasts
     @forecasts ||= begin
       forecast_response = fetcher.json_response(
