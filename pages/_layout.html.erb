@@ -11,28 +11,21 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://followthesnow.today/" />
   <meta property="og:image" content="https://followthesnow.today/assets/logo.jpg" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/picnic/7.1.0/picnic.min.css"
-    integrity="sha512-HZgZOfcUw1rxWuEBlzDis5U4HlbzR0wcWmb3FrLSKV6uhZiZpT9JSTzPJplHDmJZJFNfAReW+iDELJ1kADYHtA=="
-    crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.fluid.classless.min.css">
   <link rel="stylesheet" href="/main.css" />
   <title>
     followthesnow.today &raquo; <%= yield :title %>
   </title>
 </head>
 <body>
-  <nav class="demo">
-    <a href="/" class="brand">
-        <span>Follow the Snow, Today</span>
-    </a>
-
-    <!-- responsive-->
-    <input id="bmenub" type="checkbox" class="show">
-    <label for="bmenub" class="burger pseudo button">&#8801;</label>
-
-    <div class="menu">
-      <a href="mailto:hello@followthesnow.today" class="pseudo button">Contact</a>
-      <a href="/#locations" class="button">Locations</a>
-    </div>
+  <nav>
+    <ul>
+        <li><strong>Follow the Snow, Today</strong></li>
+    </ul>
+    <ul>
+      <li><a href="mailto:hello@followthesnow.today">Contact</a></li>
+      <li><a href="/#locations" role="button">Locations</a></li>
+    </ul>
   </nav>
   <main class="content">
     <%= yield :content %>

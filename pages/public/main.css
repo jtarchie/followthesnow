@@ -1,18 +1,9 @@
-h2 {
-  scroll-margin-top: 2em;
-}
-
-.content {
-  width: 100%;
-  margin: 60px auto 50px;
-}
-
-ul {
+h2#locations + ul {
   list-style: none;
   padding: 0;
 }
 
-ul li {
+h2#locations + ul li {
   display: inline-block;
   margin-right: 1em;
 }
@@ -26,6 +17,7 @@ table th {
   position: sticky;
   top: 0;
   z-index: 2;
+  background-color: inherit;
 }
 
 table th:nth-child(1) {
@@ -41,10 +33,7 @@ table tr td:nth-child(1) {
   position: sticky;
   left: 0;
   z-index: 1;
-}
-
-nav {
-  position: absolute;
+  background-color: inherit;
 }
 
 @media print {

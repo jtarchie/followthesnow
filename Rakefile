@@ -4,9 +4,7 @@ require_relative './lib/builder'
 require_relative './lib/resort'
 require_relative './lib/http_cache'
 
-task :build do
-  resorts = Resort.from_csv(File.join(__dir__, 'resorts.csv'))
-
+def build!(resorts)
   builder = Builder::Start.new(
     build_dir: File.join(__dir__, 'docs'),
     fetcher: HTTPCache.new,
@@ -16,6 +14,20 @@ task :build do
 
   builder.build!
   sh('minify docs/ --all --recursive -o .')
+end
+
+task :build do
+  resorts = Resort.from_csv(File.join(__dir__, 'resorts.csv'))
+  build!(resorts)
+end
+
+task :fast do
+  resorts = Resort
+            .from_csv(File.join(__dir__, 'resorts.csv'))
+            .group_by(&:state).map do |_state, list|
+    list.first
+  end
+  build!(resorts)
 end
 
 task :fmt do
