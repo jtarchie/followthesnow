@@ -11,8 +11,13 @@ Forecast = Struct.new(
   :wind_speed,
   keyword_init: true
 ) do
-  def self.from(resort:, fetcher:, aggregates: [])
-    first = Forecast::NOAA.new(
+  def self.from(
+    resort:,
+    fetcher:,
+    aggregates: [Forecast::NOAA]
+  )
+    first_klass = aggregates.shift
+    first       = first_klass.new(
       resort: resort,
       fetcher: fetcher
     )
@@ -27,5 +32,6 @@ end
 
 require_relative './forecasts/aggregate'
 require_relative './forecasts/noaa'
+require_relative './forecasts/open_weather_map'
 require_relative './forecasts/short'
 require_relative './forecasts/text'

@@ -50,18 +50,9 @@ RSpec.describe 'Builder' do
       resorts: resorts
     )
 
-    stub_request(:get, /points/)
+    stub_request(:get, /api.openweathermap.org/)
       .to_return(status: 200, body: {
-        properties: {
-          forecast: 'https://api.weather.gov/gridpoints/TEST/1,2/forecast'
-        }
-      }.to_json)
-
-    stub_request(:get, /forecast/)
-      .to_return(status: 200, body: {
-        properties: {
-          periods: []
-        }
+        daily: []
       }.to_json)
 
     builder.build!

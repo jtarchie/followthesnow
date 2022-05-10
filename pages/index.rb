@@ -52,7 +52,11 @@ module Builder
             forecast: Forecast.from(
               fetcher: fetcher,
               resort: resort,
-              aggregates: [Forecast::Aggregate, Forecast::Short]
+              aggregates: [
+                Forecast::OpenWeatherMap,
+                Forecast::Aggregate,
+                Forecast::Short
+              ]
             )
           )
         end

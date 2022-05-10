@@ -45,7 +45,10 @@ module Builder
       forecast = Forecast.from(
         fetcher: fetcher,
         resort: resort,
-        aggregates: [Forecast::Short]
+        aggregates: [
+          Forecast::OpenWeatherMap,
+          Forecast::Short
+        ]
       )
 
       rows = forecast.forecasts.map do |f|

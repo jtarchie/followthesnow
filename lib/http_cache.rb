@@ -27,10 +27,11 @@ class HTTPCache
         exceptions: [
           'Timeout::Error',
           Errno::ETIMEDOUT,
+          Faraday::ConnectionFailed,
           Faraday::ParsingError,
           Faraday::RetriableResponse,
           Faraday::ServerError,
-          Faraday::TimeoutError
+          Faraday::TimeoutError,
         ]
       }
       builder.response :raise_error

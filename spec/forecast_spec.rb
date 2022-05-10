@@ -23,7 +23,11 @@ RSpec.describe 'Forecast' do
   let(:text_forecast) do
     Forecast.from(
       resort: resort,
-      aggregates: [Forecast::Aggregate, Forecast::Text],
+      aggregates: [
+        Forecast::NOAA,
+        Forecast::Aggregate,
+        Forecast::Text
+      ],
       fetcher: fetcher
     )
   end
@@ -186,7 +190,10 @@ RSpec.describe 'Forecast' do
 
       emoji_forecast = Forecast.from(
         resort: resort,
-        aggregates: [Forecast::Short],
+        aggregates: [
+          Forecast::NOAA,
+          Forecast::Short
+        ],
         fetcher: fetcher
       )
 
