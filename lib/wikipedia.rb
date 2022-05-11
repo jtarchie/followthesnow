@@ -15,7 +15,7 @@ WikipediaScraper = Struct.new(:url, keyword_init: true) do
     doc = Nokogiri::HTML(HTTP.follow.get(url).to_s)
     doc.css('#mw-content-text ul > li > a:first-child').each do |link|
       href = link['href']
-      next if href =~ /Template|Category|Comparison/i
+      next if href =~ /Template|Category|Comparison|List/i
 
       begin
         link_doc = Nokogiri::HTML(HTTP.follow.get(%(https://en.wikipedia.org#{href})).to_s)
