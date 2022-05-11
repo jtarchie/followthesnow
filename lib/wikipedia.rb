@@ -13,11 +13,15 @@ WikipediaScraper = Struct.new(:url, keyword_init: true) do
     $stdout.sync = true
 
     doc = Nokogiri::HTML(HTTP.follow.get(url).to_s)
-    doc.css('.mw-category-group ul li a').each do |link|
+    doc.css('#mw-content-text ul > li > a:first-child').each do |link|
       href = link['href']
       next if href =~ /Template|Category|Comparison/i
 
-      link_doc = Nokogiri::HTML(HTTP.follow.get(%(https://en.wikipedia.org#{href})).to_s)
+      begin
+        link_doc = Nokogiri::HTML(HTTP.follow.get(%(https://en.wikipedia.org#{href})).to_s)
+      rescue HTTP::ConnectionError
+        return
+      end
 
       location = link_doc.css('.geo').first
       next unless location
@@ -42,7 +46,6 @@ WikipediaScraper = Struct.new(:url, keyword_init: true) do
         url,
         forecast_url(lat: geo.lat.to_f, lng: geo.lng.to_f)
       ].to_csv
-      sleep(0.25)
     end
   end
 
@@ -64,9 +67,10 @@ WikipediaScraper = Struct.new(:url, keyword_init: true) do
   end
 
   def forecast_url(lat:, lng:)
-    JSON.parse(
-      HTTP.follow.get(%(https://api.weather.gov/points/#{lat},#{lng})).to_s
-    ).dig('properties', 'forecast')
+    # JSON.parse(
+    #   HTTP.follow.get(%(https://api.weather.gov/points/#{lat},#{lng})).to_s
+    # ).dig('properties', 'forecast')
+    ""
   end
 
   def address(lat:, lng:)
@@ -77,17 +81,7 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   urls = [
-    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_California',
-    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Colorado',
-    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Idaho',
-    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Montana',
-    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Nevada',
-    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_New_Mexico',
-    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Oregon',
-    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Utah',
-    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Vermont',
-    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Washington_(state)',
-    'https://en.wikipedia.org/wiki/Category:Ski_areas_and_resorts_in_Wyoming'
+    'https://en.wikipedia.org/wiki/List_of_ski_areas_and_resorts_in_the_United_States'
   ]
 
   puts 'name,closed,lat,lng,city,state,url,forecast_url'
