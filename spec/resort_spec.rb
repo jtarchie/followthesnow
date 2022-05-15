@@ -9,7 +9,7 @@ RSpec.describe('Resort') do
   end
 
   it 'can load a CSV file' do
-    resorts = Resort.from_csv(File.join(__dir__, '..', 'resorts.csv'))
+    resorts = Resort.from_csv(File.join(__dir__, '..', 'resorts', 'wikipedia.csv'))
     expect(resorts.length).to be > 0
   end
 end

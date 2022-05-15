@@ -18,13 +18,13 @@ def build!(resorts)
 end
 
 task :build do
-  resorts = Resort.from_csv(File.join(__dir__, 'resorts.csv'))
+  resorts = Resort.from_csv(File.join(__dir__, 'resorts', 'wikipedia.csv'))
   build!(resorts)
 end
 
 task :fast do
   resorts = Resort
-            .from_csv(File.join(__dir__, 'resorts.csv'))
+            .from_csv(File.join(__dir__, 'resorts', 'wikipedia.csv'))
             .group_by(&:state).map do |_state, list|
     list.first
   end.take(5)
@@ -37,6 +37,10 @@ end
 
 task :test do
   sh('bundle exec rspec')
+end
+
+task :wikipedia do
+  sh('ruby lib/wikipedia.rb > resorts/wikipedia.csv')
 end
 
 task default: %i[fmt test build]
