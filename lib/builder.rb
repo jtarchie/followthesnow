@@ -6,7 +6,14 @@ require 'fileutils'
 require_relative 'forecast'
 require_relative 'prediction'
 
-Page = Struct.new(:build_dir, :fetcher, :source_dir, :resorts, keyword_init: true)
+Page = Struct.new(
+  :build_dir,
+  :fetcher,
+  :initial_aggregate,
+  :resorts,
+  :source_dir,
+  keyword_init: true
+)
 
 module Builder
   # starts building all the pages
@@ -21,6 +28,7 @@ module Builder
         klass.new(
           build_dir: build_dir,
           fetcher: fetcher,
+          initial_aggregate: initial_aggregate,
           resorts: resorts,
           source_dir: source_dir
         ).build!

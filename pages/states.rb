@@ -12,6 +12,7 @@ module Builder
         Builder::Index.new(
           build_dir: states_dir,
           fetcher: fetcher,
+          initial_aggregate: initial_aggregate,
           resorts: resorts_for_state(state),
           source_dir: source_dir
         ).build!(output_filename: "#{state.downcase.gsub(/\W+/, '-')}.html")

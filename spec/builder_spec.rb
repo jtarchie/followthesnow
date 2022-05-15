@@ -46,6 +46,7 @@ RSpec.describe 'Builder' do
     builder   = Builder::Start.new(
       build_dir: build_dir,
       fetcher: fetcher,
+      initial_aggregate: Forecast::OpenWeatherMap,
       source_dir: File.expand_path(File.join(__dir__, '..', 'pages')),
       resorts: resorts
     )

@@ -46,7 +46,7 @@ module Builder
         fetcher: fetcher,
         resort: resort,
         aggregates: [
-          Forecast::OpenWeatherMap,
+          initial_aggregate,
           Forecast::Short
         ]
       )

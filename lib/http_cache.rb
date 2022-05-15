@@ -31,7 +31,7 @@ class HTTPCache
           Faraday::ParsingError,
           Faraday::RetriableResponse,
           Faraday::ServerError,
-          Faraday::TimeoutError,
+          Faraday::TimeoutError
         ]
       }
       builder.response :raise_error

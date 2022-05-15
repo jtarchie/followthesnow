@@ -84,7 +84,7 @@ Forecast::NOAA = Struct.new(:resort, :fetcher, keyword_init: true) do
           wind_gust: 0..0,
           wind_speed: 0..0
         )
-      ]
+      ] * 7
     end
   end
 

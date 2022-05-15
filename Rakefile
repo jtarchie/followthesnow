@@ -8,6 +8,7 @@ def build!(resorts)
   builder = Builder::Start.new(
     build_dir: File.join(__dir__, 'docs'),
     fetcher: HTTPCache.new,
+    initial_aggregate: Forecast::NOAA,
     resorts: resorts,
     source_dir: File.join(__dir__, 'pages')
   )
@@ -26,7 +27,7 @@ task :fast do
             .from_csv(File.join(__dir__, 'resorts.csv'))
             .group_by(&:state).map do |_state, list|
     list.first
-  end
+  end.take(5)
   build!(resorts)
 end
 

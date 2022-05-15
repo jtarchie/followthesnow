@@ -20,7 +20,7 @@ WikipediaScraper = Struct.new(:url, keyword_init: true) do
       begin
         link_doc = Nokogiri::HTML(HTTP.follow.get(%(https://en.wikipedia.org#{href})).to_s)
       rescue HTTP::ConnectionError
-        return
+        next
       end
 
       location = link_doc.css('.geo').first
@@ -67,10 +67,9 @@ WikipediaScraper = Struct.new(:url, keyword_init: true) do
   end
 
   def forecast_url(lat:, lng:)
-    # JSON.parse(
-    #   HTTP.follow.get(%(https://api.weather.gov/points/#{lat},#{lng})).to_s
-    # ).dig('properties', 'forecast')
-    ""
+    JSON.parse(
+      HTTP.follow.get(%(https://api.weather.gov/points/#{lat},#{lng})).to_s
+    ).dig('properties', 'forecast')
   end
 
   def address(lat:, lng:)
