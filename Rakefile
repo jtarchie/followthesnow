@@ -25,9 +25,7 @@ end
 task :fast do
   resorts = Resort
             .from_csv(File.join(__dir__, 'resorts', 'wikipedia.csv'))
-            .group_by(&:state).map do |_state, list|
-    list.first
-  end.take(5)
+            .group_by(&:state)['Alaska']
   build!(resorts)
 end
 

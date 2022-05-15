@@ -152,7 +152,7 @@ RSpec.describe 'Forecast' do
       stub_request(:get, 'https://api.weather.gov/gridpoints/TEST/1,2/forecast')
         .to_return(status: 200, body: {}.to_json)
 
-      expect(text_forecast.forecasts).to eq 'no snow Today'
+      expect(text_forecast.forecasts).to include 'no snow Today'
     end
   end
 
@@ -161,7 +161,7 @@ RSpec.describe 'Forecast' do
       stub_request(:get, 'https://api.weather.gov/gridpoints/TEST/1,2/forecast')
         .to_return(status: 500)
 
-      expect(text_forecast.forecasts).to eq 'no snow Today'
+      expect(text_forecast.forecasts).to include 'no snow Today'
     end
   end
 

@@ -74,17 +74,17 @@ Forecast::NOAA = Struct.new(:resort, :fetcher, keyword_init: true) do
         )
       end
     rescue Faraday::ServerError, HTTPCache::NotMatchingBlock
-      [
+      (0..6).map do |day|
         Forecast.new(
           short: 'Unknown',
           snow: 0..0,
           temp: 0..0,
-          time_of_day: Time.now,
+          time_of_day: Time.now + 3600 * 24 * day,
           wind_direction: '',
           wind_gust: 0..0,
           wind_speed: 0..0
         )
-      ] * 7
+      end
     end
   end
 
