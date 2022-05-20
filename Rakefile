@@ -5,10 +5,14 @@ require_relative './lib/resort'
 require_relative './lib/http_cache'
 
 def build!(resorts)
+  aggregator = Forecast::Switcher.new(rules: [
+                                        ->(r) { return Forecast::OpenWeatherMap if r.state == 'Colorado' }
+                                      ])
+
   builder = Builder::Start.new(
     build_dir: File.join(__dir__, 'docs'),
     fetcher: HTTPCache.new,
-    initial_aggregate: Forecast::NOAA,
+    initial_aggregate: aggregator,
     resorts: resorts,
     source_dir: File.join(__dir__, 'pages')
   )
@@ -25,7 +29,8 @@ end
 task :fast do
   resorts = Resort
             .from_csv(File.join(__dir__, 'resorts', 'wikipedia.csv'))
-            .group_by(&:state)['Alaska']
+            .group_by(&:state)['Colorado']
+            .take(5)
   build!(resorts)
 end
 
