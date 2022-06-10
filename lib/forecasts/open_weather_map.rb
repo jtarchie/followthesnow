@@ -4,7 +4,7 @@ Forecast::OpenWeatherMap = Struct.new(:resort, :fetcher, keyword_init: true) do
   def forecasts
     @forecasts ||= begin
       forecast_response = fetcher.json_response(
-        "https://api.openweathermap.org/data/2.5/onecall?units=imperial&exclude=alerts,current,minutely,hourly&lat=#{resort.lat}&lon=#{resort.lng}&appid=921184c0ff4860d69ae8d4885af77679"
+        "https://api.openweathermap.org/data/2.5/onecall?units=imperial&exclude=alerts,current,minutely,hourly&lat=#{resort.lat}&lon=#{resort.lng}&appid=#{ENV['OPENWEATHER_API_KEY']}"
       )
 
       forecast_response.fetch('daily', []).map do |period|
