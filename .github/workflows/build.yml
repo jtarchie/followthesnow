@@ -32,6 +32,8 @@ jobs:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     - name: Build docs
       run: bundle exec rake build
+      env:
+        OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
     - name: setup git config
       run: |
         # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
