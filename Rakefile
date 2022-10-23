@@ -6,7 +6,7 @@ require_relative './lib/http_cache'
 
 def build!(resorts)
   aggregator = Forecast::Switcher.new(rules: [
-                                        ->(r) { return Forecast::OpenWeatherMap if r.state == 'Colorado' }
+                                        ->(_r) { Forecast::OpenWeatherMap }
                                       ])
 
   builder = Builder::Start.new(
