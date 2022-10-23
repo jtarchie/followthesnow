@@ -13,18 +13,17 @@ jobs:
     - name: Set up Ruby
     # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
     # change this to (see https://github.com/ruby/setup-ruby#versioning):
-    # uses: ruby/setup-ruby@v1
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.1
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Cache multiple paths
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: .cache
         key: cache-for-http-responses
     - name: Install minify
-      uses: jaxxstorm/action-install-gh-release@release/v1-alpha
+      uses: jaxxstorm/action-install-gh-release@v1.7,1
       with: # Grab the latest version
         repo: tdewolff/minify
       env:
