@@ -23,7 +23,7 @@ jobs:
         path: .cache
         key: cache-for-http-responses
     - name: Install minify
-      uses: jaxxstorm/action-install-gh-release@v1.7,1
+      uses: jaxxstorm/action-install-gh-release@v1.7.1
       with: # Grab the latest version
         repo: tdewolff/minify
       env:
