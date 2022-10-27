@@ -33,5 +33,5 @@ bundle exec rspec
 ## Sources
 
 Theses are the resources to populate the resorts.
-The meta information is captured in the `resorts.csv`.
+The meta information is captured in the `resorts/wikipedia.csv`.
 This can most likely be automated to scrape, however, it is just copy and paste for now. Please see `./lib/wikipedia.rb`.
