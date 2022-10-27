@@ -6,7 +6,7 @@ It goes through a list of ski resorts and locations to get the snow report (inch
 ## Usage
 
 Building the site will take awhile.
-The NOAA API is used to get information about current and upcoming snow conditions.
+The OpenWeather API is used to get information about current and upcoming snow conditions.
 They rate limit pretty heavily, so a `sleep` is put in between every API call.
 
 This will manually build the site.
@@ -18,7 +18,7 @@ rake build
 
 Then commit the changed pages, which will be deployed as a static site via Github Pages and Cloudflare.
 
-The page is build every morning from 4-8am MST, so that latest snow totals for the day are available.
+The page is build every morning from 6am MST, so that latest snow totals for the day are available.
 This is using [Github Actions](https://github.com/jtarchie/followthesnow/blob/main/.github/workflows/build.yml) to do so.
 
 ### Test
