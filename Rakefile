@@ -5,14 +5,10 @@ require_relative './lib/resort'
 require_relative './lib/http_cache'
 
 def build!(resorts)
-  aggregator = Forecast::Switcher.new(rules: [
-                                        ->(_r) { Forecast::OpenWeatherMap }
-                                      ])
-
   builder = Builder::Start.new(
     build_dir: File.join(__dir__, 'docs'),
     fetcher: HTTPCache.new,
-    initial_aggregate: aggregator,
+    initial_aggregate: Forecast::OpenWeatherMap,
     resorts: resorts,
     source_dir: File.join(__dir__, 'pages')
   )
