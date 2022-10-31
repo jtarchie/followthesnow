@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'erb'
+require 'tilt/erb'
 require 'kramdown'
 
 module Builder
@@ -19,33 +19,19 @@ module Builder
 
     def render(layout:, page:, title:, description:)
       @layouts         ||= {}
-      @layouts[layout] ||= ERB.new(File.read(layout), trim_mode: '-')
+      @layouts[layout] ||= Tilt::ERBTemplate.new(layout, trim: true)
 
       @pages       ||= {}
-      @pages[page] ||= ERB.new(File.read(page), trim_mode: '-')
+      @pages[page] ||= Tilt::ERBTemplate.new(page, trim: true)
 
-      @layouts[layout]
-        .result(
-          erb_binding do |type|
-            case type
-            when :title
-              title
-            when :description
-              description
-            when :content
-              markdown_render(
-                @pages[page]
-                  .result(erb_binding)
-              )
-            else
-              raise "Unsupported yield type #{type} from #{layout}"
-            end
-          end
+      @layouts[layout].render(
+        self,
+        title: title,
+        description: description,
+        content: markdown_render(
+          @pages[page].render(self)
         )
-    end
-
-    def erb_binding
-      binding
+      )
     end
   end
 end

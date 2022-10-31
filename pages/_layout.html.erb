@@ -3,18 +3,18 @@
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta name="description" content="<%= yield :description %>">
+  <meta name="description" content="<%= description %>">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Opengraph -->
-  <meta property="og:title" content="<%= yield :title %>" />
-  <meta property="og:description" content="<%= yield :description %>" />
+  <meta property="og:title" content="<%= title %>" />
+  <meta property="og:description" content="<%= description %>" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://followthesnow.today/" />
   <meta property="og:image" content="https://followthesnow.today/assets/logo.jpg" />
   <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.5.6/css/pico.fluid.classless.min.css">
   <link rel="stylesheet" href="/main.css" />
   <title>
-    followthesnow.today &raquo; <%= yield :title %>
+    followthesnow.today &raquo; <%= title %>
   </title>
 </head>
 <body>
@@ -28,7 +28,7 @@
     </ul>
   </nav>
   <main class="content">
-    <%= yield :content %>
+    <%= content %>
   </main>
   <footer>
     Made with ♥ in Colorado<br/>

@@ -1,17 +1,17 @@
-<%- if by_state.length > 1 -%>
+<% if by_state.length > 1 %>
 ## Locations
       
-<%- by_state.keys.each do |state| -%>
+<% by_state.keys.each do |state| %>
 * [<%= h state %>](#<%= slug(state) %>)
-<%- end -%>
-<%- end -%>
+<% end %>
+<% end %>
 
-<%- by_state.each do |state, predictions| -%>
+<% by_state.each do |state, predictions| %>
 ## <%= h state %> {#<%= slug(state) %>}
 
 <%= table(predictions: predictions) %>
 
-<%- end -%>
+<% end %>
 
 (*) The resort may be closed for the season.
 Please check the ski resort site for more information.
