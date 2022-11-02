@@ -10,6 +10,7 @@ Resort = Struct.new(
   :lng,
   :name,
   :state,
+  :country,
   :url,
   keyword_init: true
 ) do
@@ -25,5 +26,20 @@ Resort = Struct.new(
 
   def closed?
     self['closed'] == 'true'
+  end
+
+  def forecasts(aggregates: [
+    Forecast::Aggregate,
+    Forecast::Short
+  ])
+    @forecast ||= Forecast::OpenWeatherMap.new(
+      resort: self
+    )
+
+    aggregates.reduce(@forecast) do |forecaster, aggregate|
+      aggregate.new(
+        forecasts: forecaster.forecasts
+      )
+    end.forecasts
   end
 end

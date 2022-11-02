@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
-Forecast::OpenWeatherMap = Struct.new(:resort, :fetcher, keyword_init: true) do
+require 'http'
+require 'json'
+
+Forecast::OpenWeatherMap = Struct.new(:resort, keyword_init: true) do
   def forecasts
     @forecasts ||= begin
-      forecast_response = fetcher.json_response(
-        "https://api.openweathermap.org/data/2.5/onecall?units=imperial&exclude=alerts,current,minutely,hourly&lat=#{resort.lat}&lon=#{resort.lng}&appid=#{ENV['OPENWEATHER_API_KEY']}"
+      forecast_response = JSON.parse(
+        HTTP.get("https://api.openweathermap.org/data/2.5/onecall?units=imperial&exclude=alerts,current,minutely,hourly&lat=#{resort.lat}&lon=#{resort.lng}&appid=#{ENV.fetch('OPENWEATHER_API_KEY')}")
       )
 
       forecast_response.fetch('daily', []).map do |period|
@@ -28,7 +31,7 @@ Forecast::OpenWeatherMap = Struct.new(:resort, :fetcher, keyword_init: true) do
         )
       end
     end
-  rescue Faraday::ServerError, HTTPCache::NotMatchingBlock
+  rescue HTTP::Error
     [
       Forecast.new(
         short: 'Unknown',

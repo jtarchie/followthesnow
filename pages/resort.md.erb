@@ -1,4 +1,4 @@
-# [<%= h resort.state%>](/#<%= slug(resort.state) %>) &raquo; <%= h resort.name %>
+# [<%= h resort.state %>](/<%= resort.state.parameterize %>) &raquo; <%= h resort.name %>
 
 <% unless resort.url.nil? %>
 * [Homepage](<%= resort.url %>)
@@ -9,7 +9,7 @@
 
 ## Long term forecast
 
-<%= long_term_table(resort) %>
+<%= table_for_longterm(resort) %>
 
 <% if resort.closed? %>
 (*) The resort may be closed for the season.

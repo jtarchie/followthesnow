@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative './lib/builder'
+require_relative './pages/build'
 require_relative './lib/resort'
-require_relative './lib/http_cache'
+require 'fileutils'
 
 def build!(resorts)
-  builder = Builder::Start.new(
-    build_dir: File.join(__dir__, 'docs'),
-    fetcher: HTTPCache.new,
-    initial_aggregate: Forecast::OpenWeatherMap,
+  build_dir = File.join(__dir__, 'docs')
+  FileUtils.rm_rf(build_dir)
+  builder   = Builder::Site.new(
+    build_dir: build_dir,
     resorts: resorts,
     source_dir: File.join(__dir__, 'pages')
   )
@@ -18,15 +18,17 @@ def build!(resorts)
 end
 
 task :build do
-  resorts = Resort.from_csv(File.join(__dir__, 'resorts', 'wikipedia.csv'))
+  resorts = Dir[File.join(__dir__, 'resorts', '*.csv')].flat_map do |filename|
+    Resort.from_csv(filename)
+  end
   build!(resorts)
 end
 
 task :fast do
-  resorts = Resort
-            .from_csv(File.join(__dir__, 'resorts', 'wikipedia.csv'))
-            .group_by(&:state)['Colorado']
-            .take(5)
+  resorts = Dir[File.join(__dir__, 'resorts', '*.csv')].flat_map do |filename|
+    Resort.from_csv(filename)
+  end.shuffle.take(5)
+
   build!(resorts)
 end
 
@@ -39,7 +41,7 @@ task :test do
 end
 
 task :wikipedia do
-  sh('ruby lib/wikipedia.rb > resorts/wikipedia.csv')
+  sh('ruby lib/wikipedia.rb ')
 end
 
 task default: %i[fmt test build]

@@ -12,6 +12,12 @@
 Metrics/BlockLength:
   Enabled: false
 
+Layout/LineLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
 Metrics/MethodLength:
   Enabled: false
 

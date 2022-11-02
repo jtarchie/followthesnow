@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require_relative '../lib/resort'
 
 RSpec.describe('Resort') do
   it 'returns coordinates' do
@@ -9,7 +10,12 @@ RSpec.describe('Resort') do
   end
 
   it 'can load a CSV file' do
-    resorts = Resort.from_csv(File.join(__dir__, '..', 'resorts', 'wikipedia.csv'))
-    expect(resorts.length).to be > 0
+    csv_files = Dir[File.join(__dir__, '..', 'resorts', '*.csv')]
+    expect(csv_files.length).to be > 0
+
+    csv_files.each do |csv_file|
+      resorts = Resort.from_csv(csv_file)
+      expect(resorts.length).to be > 0
+    end
   end
 end

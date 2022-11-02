@@ -3,11 +3,6 @@
 source 'https://rubygems.org'
 
 gem 'activesupport'
-gem 'faraday-detailed_logger'
-gem 'faraday-follow_redirects'
-gem 'faraday-http-cache'
-gem 'faraday-net_http_persistent'
-gem 'faraday-retry'
 gem 'ferrum'
 gem 'geo_coord', require: 'geo/coord'
 gem 'http'
