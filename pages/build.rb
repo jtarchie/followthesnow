@@ -73,9 +73,12 @@ module Builder
           layout_html.render(
             self,
             {
-              content: from_markdown(resort_md.render(self, {
-                                                        resort: resort
-                                                      })),
+              content: from_markdown(resort_md.render(
+                                       self,
+                                       {
+                                         resort: resort
+                                       }
+                                     )),
               description: "Weekly forecast of snow for #{resort.name}",
               title: "#{resort.state} &raquo; #{resort.name}"
             }

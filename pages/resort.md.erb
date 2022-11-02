@@ -12,7 +12,9 @@
 <%= table_for_longterm(resort) %>
 
 <% if resort.closed? %>
+
 (*) The resort may be closed for the season.
+
 <% end %>
 
 *Last Updated:* <%= h current_timestamp %>
