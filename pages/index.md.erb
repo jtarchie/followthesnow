@@ -1,8 +1,10 @@
 <% countries.each do |country| %>
+
 ## <%= h country %>
 <% states(country: country).each do |state| %>
 * [<%= h state %>](/states/<%= state.parameterize %>)
 <% end %>
+
 <% end %>
 
 *Last Updated:* <%= h current_timestamp %>
