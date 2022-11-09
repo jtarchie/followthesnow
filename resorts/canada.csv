@@ -31,7 +31,7 @@ Kicking Horse Resort,true,51.28917,-117.05861,Area A (Kicking Horse/Kinbasket La
 Kimberley Alpine Resort,true,49.685,-116.014,Kimberley,British Columbia,Canada,http://www.skikimberley.com
 Little Mac Ski Hill,false,55.33944,-123.07639,Little Mac X-Country Ski Trail,British Columbia,Canada,
 E. C. Manning Provincial Park,true,49.06667,-120.78333,Area H (Manning Park/Tulameen/Siwash),British Columbia,Canada,https://bcparks.ca/explore/parkpgs/ecmanning/
-Mount Baldy Ski Area,true,49.15389,-119.23944,Area E (Beaverdell/West Boundary),British Columbia,Canada,https://baldyresort.com/
+Mount Baldy Ski Area,false,49.15389,-119.23944,Area E (Beaverdell/West Boundary),British Columbia,Canada,https://baldyresort.com/
 Mount Cain,false,50.228611,-126.326111,Area D (Nimpkish Valley/Cormorant Island),British Columbia,Canada,
 Mount Seymour,false,49.39333,-122.94444,Mount Seymour Trail,British Columbia,Canada,
 Mount Timothy Ski Area,false,51.91556,-121.25361,Area G (Lac La Hache/108 Mile Ranch),British Columbia,Canada,
@@ -39,7 +39,7 @@ Mount Washington Alpine Resort,true,49.73833,-125.29861,Area C (Puntledge/Black 
 Murray Ridge Ski Area,false,54.51806,-124.21167,Area C (Stuart Lake/Omineca Valley),British Columbia,Canada,
 Panorama Mountain Resort,true,50.46028,-116.23833,Area F (Columbia Lake/Windermere Lake),British Columbia,Canada,http://www.panoramaresort.com/
 Phoenix Mountain Ski Resort,false,49.10889,-118.58611,Area D (Granby Valley),British Columbia,Canada,http://www.skiphoenix.com
-Powder King Mountain Resort,true,55.36306,-122.62472,Area G (Crooked River/Parsnip),British Columbia,Canada,http://powderking.com
+Powder King Mountain Resort,false,55.36306,-122.62472,Area G (Crooked River/Parsnip),British Columbia,Canada,
 Purden Ski Village,false,53.90083,-121.88611,Area F (Willow River/Upper Fraser),British Columbia,Canada,
 Red Mountain Resort,false,49.10278,-117.82028,The Josie Hotel,British Columbia,Canada,http://www.redresort.com
 Revelstoke Mountain Resort,false,50.95417,-118.15417,Revelstoke,British Columbia,Canada,http://www.revelstokemountainresort.com
@@ -53,11 +53,11 @@ Tabor Mountain Ski Resort,false,53.94444,-122.45389,Area F (Willow River/Upper F
 Troll Ski Resort,false,53.06667,-121.95,Area C (Bowron Lake/Barlow Creek/Barkerville),British Columbia,Canada,
 Whistler Blackcomb,false,50.10833,-122.9425,Whistler Village,British Columbia,Canada,http://www.whistlerblackcomb.com/
 Whitewater Ski Resort,false,49.44,-117.15,Area E (Balfour/Cottonwood Lake),British Columbia,Canada,http://www.skiwhitewater.com/
-Asessippi Ski Area,false,50.951,-101.3391,Rural Municipality of Riding Mountain West,Manitoba,Canada,http://www.asessippi.com/
+Asessippi Ski Area,false,50.951,-101.3391,Rural Municipality of Riding Mountain West,Manitoba,Canada,
 Mount Agassiz Ski Resort,false,50.761,-99.675,Unorganized Division No. 17,Manitoba,Canada,
 Mystery Mountain Winter Park,false,55.8716,-97.7789,Mystery Mountain Winter Park,Manitoba,Canada,https://www.mysterymountain.ca/
 Stony Mountain Ski Area,false,50.09417,-97.20667,Stony Mountain,Manitoba,Canada,
-Thunderhill Ski Area,false,52.0157,-101.6084,Rural Municipality of Swan Valley West,Manitoba,Canada,
+Thunderhill Ski Area,true,52.0157,-101.6084,Rural Municipality of Swan Valley West,Manitoba,Canada,http://www.skithunderhill.ca/
 Crabbe Mountain,false,46.12028,-67.10861,Central Hainesville,New Brunswick / Nouveau-Brunswick,Canada,http://www.crabbemountain.com
 Poley Mountain,false,45.67333,-65.37667,Poley Mountain Ski Area,New Brunswick / Nouveau-Brunswick,Canada,http://www.poleymountain.com/
 Sugarloaf Mountain,false,47.98972,-66.68556,Campbellton,New Brunswick / Nouveau-Brunswick,Canada,
@@ -72,17 +72,17 @@ Mount Antoine,false,46.36111,-78.74222,Mattawan,Ontario,Canada,
 Batawa Ski Hill,true,44.16667,-77.59667,Quinte West,Ontario,Canada,http://batawaskihill.com/
 Beaver Valley Ski Club,false,44.35,-80.53333,Grey Highlands,Ontario,Canada,http://www.beavervalley.ca/
 Blue Mountain,false,44.5,-80.31667,Memory Lane Hiking Trail,Ontario,Canada,http://www.bluemountain.ca/
-Boler Mountain,false,42.94,-81.34,London,Ontario,Canada,
+Boler Mountain,false,42.94,-81.34,London,Ontario,Canada,https://www.bolermountain.com
 Calabogie Peaks,true,45.275,-76.78194,Greater Madawaska,Ontario,Canada,http://www.calabogie.com/
-Caledon Ski Club,true,43.8039,-80.0109,Lower Chalet Road,Ontario,Canada,http://caledonskiclub.on.ca
+Caledon Ski Club,false,43.8039,-80.0109,Lower Chalet Road,Ontario,Canada,
 Centennial Park,false,43.65278,-79.58889,Toronto,Ontario,Canada,
-Chicopee Ski Club,true,43.43318,-80.420684,Kitchener,Ontario,Canada,http://www.discoverchicopee.com/
+Chicopee Ski Club,false,43.43318,-80.420684,Kitchener,Ontario,Canada,http://www.discoverchicopee.com/
 Craigleith Ski Club,false,44.51667,-80.33333,Craigleith Road,Ontario,Canada,http://www.craigleith.com/
 Georgian Peaks Club,false,44.535,-80.3767,Wensley Drive,Ontario,Canada,http://www.georgianpeaks.com/
 Kelso Conservation Area,false,43.51111,-79.94583,Kelso,Ontario,Canada,http://www.gleneden.on.ca/
 Hardwood Ski and Bike,false,44.517639,-79.591833,Oro-Medonte,Ontario,Canada,
 Hockley Valley Resort,false,43.9779,-80.0471,Mono,Ontario,Canada,http://www.hockley.com
-Horseshoe Resort,true,44.55194,-79.67194,Oro-Medonte,Ontario,Canada,http://www.horseshoeresort.com/
+Horseshoe Resort,false,44.55194,-79.67194,Oro-Medonte,Ontario,Canada,
 Kamiskotia Snow Resort,false,48.53583,-81.54111,Timmins,Ontario,Canada,
 Kawartha Nordic Ski Club,false,44.6201,-78.1319,North Kawartha,Ontario,Canada,
 Mansfield Ski Club,false,44.19752,-80.05378,Mulmur,Ontario,Canada,
@@ -122,7 +122,7 @@ Ski Chantecler,false,45.96111,-74.17278,Ski Chantecler,Québec,Canada,http://www
 Mont Orford,true,45.33333,-72.21667,Orford,Québec,Canada,http://www.sepaq.com/pq/mor/index.dot?language_id=1
 Ski Mont Rigaud,false,45.46667,-74.33611,Yakima (18),Québec,Canada,
 Ski Mont Saint-Bruno,false,45.55694,-73.33333,L'Hermine - raquette,Québec,Canada,
-Ski Montcalm,false,46.041,-73.831,Le Mur,Québec,Canada,
+Ski Montcalm,false,46.041,-73.831,Le Mur,Québec,Canada,http://www.skimontcalm.com
 Ski Morin Heights,true,45.89944,-74.26833,Morin-Heights,Québec,Canada,https://www.sommets.com/en/ski-mountains/sommet-morin-heights/
 Stoneham Mountain Resort,true,47.03,-71.38833,Stoneham-et-Tewkesbury,Québec,Canada,http://www.ski-stoneham.com
 La Tuque,false,47.433,-72.783,Rue Saint-Louis,Québec,Canada,http://www.ville.latuque.qc.ca/
