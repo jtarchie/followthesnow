@@ -1,6 +1,6 @@
 <% countries.each do |country| %>
 
-## <%= h country %>
+## <%= h country %> {#<%= country.parameterize %>}
 <% states(country: country).each do |state| %>
 * [<%= h state %>](/states/<%= state.parameterize %>)
 <% end %>
