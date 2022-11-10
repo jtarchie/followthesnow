@@ -40,6 +40,7 @@ module Builder
 
       states.each do |state|
         state_filename = File.join(state_dir, "#{state.parameterize}.html")
+        puts "Building state: #{state}"
         File.write(
           state_filename,
           layout_html.render(
@@ -67,7 +68,7 @@ module Builder
 
       @resorts.each do |resort|
         resort_filename = File.join(resort_dir, "#{resort.name.parameterize}.html")
-        puts resort.state
+        puts "Building resort: #{resort.name}"
         File.write(
           resort_filename,
           layout_html.render(
