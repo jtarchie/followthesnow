@@ -50,7 +50,7 @@ module Builder
                 state_md.render(
                   self,
                   {
-                    state: state,
+                    state:,
                     resorts: resorts_by_state(state)
                   }
                 )
@@ -77,7 +77,7 @@ module Builder
               content: from_markdown(resort_md.render(
                                        self,
                                        {
-                                         resort: resort
+                                         resort:
                                        }
                                      )),
               description: "Weekly forecast of snow for #{resort.name}",
@@ -145,7 +145,7 @@ module Builder
 
       table       = Terminal::Table.new(
         headings: headers,
-        rows: rows
+        rows:
       )
       table.style = { border: :markdown }
       table.to_s
@@ -172,7 +172,7 @@ module Builder
 
       table       = Terminal::Table.new(
         headings: headers,
-        rows: rows
+        rows:
       )
       table.style = { border: :markdown }
       table.to_s

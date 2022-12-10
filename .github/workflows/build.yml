@@ -15,7 +15,7 @@ jobs:
     # change this to (see https://github.com/ruby/setup-ruby#versioning):
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.1
+        ruby-version: 3.2.0-rc1
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Cache multiple paths
       uses: actions/cache@v3

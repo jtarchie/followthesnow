@@ -8,8 +8,8 @@ def build!(resorts)
   build_dir = File.join(__dir__, 'docs')
   FileUtils.rm_rf(build_dir)
   builder   = Builder::Site.new(
-    build_dir: build_dir,
-    resorts: resorts,
+    build_dir:,
+    resorts:,
     source_dir: File.join(__dir__, 'pages')
   )
 

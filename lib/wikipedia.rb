@@ -82,8 +82,8 @@ if __FILE__ == $PROGRAM_NAME
     file      = File.open(filename, 'w')
     file.sync = true
     file.puts 'name,closed,lat,lng,city,state,country,url'
-    scraper   = WikipediaScraper.new(url: url)
-    scraper.resorts_to_csv(file: file)
+    scraper   = WikipediaScraper.new(url:)
+    scraper.resorts_to_csv(file:)
     file.close
   end
 end
