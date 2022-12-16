@@ -3,7 +3,7 @@ name: Build Site
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 6 * * *' # every six hours
+    - cron: '0 10 * * *' # 5AM EST
 
 jobs:
   build:
