@@ -31,18 +31,9 @@ Forecast::OpenWeatherMap = Struct.new(:resort, keyword_init: true) do
         )
       end
     end
-  rescue HTTP::Error
-    [
-      Forecast.new(
-        short: 'Unknown',
-        snow: 0..0,
-        temp: 0..0,
-        time_of_day: Time.now,
-        wind_direction: '',
-        wind_gust: 0..0,
-        wind_speed: 0..0
-      )
-    ]
+  rescue OpenSSL::SSL::SSLError, HTTP::Error
+    sleep(1)
+    retry
   end
 
   private
