@@ -104,7 +104,7 @@ module Builder
     end
 
     def states(country: nil)
-      return resorts_by_countries.values.flatten.map(&:state) if country.nil?
+      return resorts_by_countries.values.flatten.map(&:state).uniq if country.nil?
 
       resorts_by_countries.fetch(country).group_by(&:state).keys
     end
