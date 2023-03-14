@@ -13,7 +13,8 @@ This will manually build the site.
 
 ```bash
 bundle install
-rake build
+rake build # or rake fast
+ruby -run -ehttpd docs/ -p8000
 ```
 
 Then commit the changed pages, which will be deployed as a static site via
