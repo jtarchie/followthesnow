@@ -23,6 +23,7 @@ module Builder
 
     def build!
       FileUtils.mkdir_p(@build_dir)
+      FileUtils.copy_entry(File.join(@source_dir, 'public'), @build_dir)
 
       layout_html = erb('_layout.html.erb')
 
