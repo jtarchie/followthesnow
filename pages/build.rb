@@ -14,25 +14,49 @@ module Builder
   class Site
     include ERB::Util
 
-    def initialize(build_dir:, resorts:, source_dir:)
+    def initialize(build_dir:, resorts:, source_dir:, to_build: %i[index pages resorts])
       @build_dir  = build_dir
       @resorts    = resorts.sort_by { |r| [r.country, r.state, r.name] }
       @source_dir = source_dir
+      @to_build   = to_build
     end
 
     def build!
       FileUtils.mkdir_p(@build_dir)
 
       layout_html = erb('_layout.html.erb')
-      main_md     = erb('index.md.erb')
-      File.write(
-        File.join(@build_dir, 'index.html'),
-        layout_html.render(self, {
-                             content: from_markdown(main_md.render(self)),
-                             description: '',
-                             title: ''
-                           })
-      )
+
+      if @to_build.include?(:index)
+        main_md     = erb('index.md.erb')
+        File.write(
+          File.join(@build_dir, 'index.html'),
+          layout_html.render(self, {
+                               content: from_markdown(main_md.render(self)),
+                               description: 'List of all states and provinces that have ski resorts.',
+                               title: 'States and Provinces'
+                             })
+        )
+      end
+
+      if @to_build.include?(:pages)
+        Dir[File.join(@source_dir, '*.md')].each do |markdown_file|
+          render_filename = markdown_file.gsub(@source_dir, @build_dir).gsub('.md', '.html')
+          puts "m: #{markdown_file}, r: #{render_filename}"
+          title           = markdown_file.gsub(@source_dir, '').titleize
+          File.write(
+            render_filename,
+            layout_html.render(
+              self, {
+                content: from_markdown(File.read(markdown_file)),
+                description: title,
+                title:
+              }
+            )
+          )
+        end
+      end
+
+      return unless @to_build.include?(:resorts)
 
       state_md  = erb('state.md.erb')
       state_dir = File.join(@build_dir, 'states')

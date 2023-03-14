@@ -34,6 +34,7 @@ end
 
 task :fmt do
   sh('rubocop -A')
+  sh('deno fmt pages/*.md')
 end
 
 task :test do
