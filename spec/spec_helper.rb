@@ -1,13 +1,6 @@
 # frozen_string_literal: true
 
-require 'vcr'
-
-VCR.configure do |c|
-  c.cassette_library_dir = 'spec/cassettes'
-  c.hook_into :webmock
-  c.configure_rspec_metadata!
-  c.filter_sensitive_data('OPENWEATHER_API_KEY') { ENV['OPENWEATHER_API_KEY'] }
-end
+require 'webmock/rspec'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -89,4 +82,80 @@ RSpec.configure do |config|
   #   # test failures related to randomization by passing the same `--seed` value
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
+end
+
+def stub_country_page
+  stub_request(:get, 'https://wikipedia.com/page')
+    .to_return(
+      status: 200,
+      body: <<~HTML
+        <div id="mw-content-text">
+          <ul>
+            <li><a href="/resort-page"></a></li>
+          </ul>
+        </div>
+      HTML
+    )
+end
+
+def stub_resort_page
+  stub_request(:get, 'https://en.wikipedia.org/resort-page')
+    .to_return(
+      status: 200,
+      body: <<~HTML
+        <h1>Some Resort</h1>
+        <div class="geo">
+          3°32′01″N 113°28′31″W
+        </div>
+        <div class="infobox-data">
+          <div class="url">
+            <a href="https://some-resort.com">Link</a>
+          </div>
+        </div>
+      HTML
+    )
+end
+
+def stub_geo_lookup(lat:, lng:)
+  stub_request(:get, "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=#{lat}&lon=#{lng}")
+    .to_return(
+      status: 200,
+      body: {
+        address: {
+          city: 'Denver',
+          state: 'Colorado',
+          country: 'US'
+        }
+      }.to_json
+    )
+end
+
+def stub_openai_prompt
+  stub_request(:post, 'https://api.openai.com/v1/chat/completions')
+    .to_return(
+      status: 200,
+      body: {
+        choices: [
+          {
+            message: {
+              content: '{"closed": true}'
+            }
+          }
+        ]
+      }.to_json,
+      headers: {
+        'Content-Type' => 'application/json'
+      }
+    )
+end
+
+def stub_browser(url:)
+  browser = double('browser')
+  expect(browser).to receive(:go_to).with(url)
+  expect(browser).to receive(:network).and_return(OpenStruct.new(status: 200))
+
+  body = double(:bodt)
+  expect(browser).to receive(:at_css).and_return(body)
+  expect(body).to receive(:inner_text).and_return 'some text'
+  allow(Ferrum::Browser).to receive(:new) { browser }
 end

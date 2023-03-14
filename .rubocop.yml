@@ -47,3 +47,18 @@ Style/Documentation:
 
 Style/ExtraSpacing:
   ForceEqualSignAlignment: true
+
+Layout/MultilineHashKeyLineBreaks:
+  Enabled: true
+
+Layout/MultilineArrayLineBreaks:
+  Enabled: true
+
+Layout/MultilineHashBraceLayout:
+  Enabled: true
+
+Style/ExponentialNotation:
+  Enabled: false
+
+Style/MultilineBlockChain:
+  Enabled: false

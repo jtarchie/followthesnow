@@ -86,3 +86,5 @@ build-iPhoneSimulator/
 docs/*.md
 .cache
 .DS_Store
+Brewfile.lock.json
+.envrc

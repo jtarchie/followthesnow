@@ -40,8 +40,8 @@ task :test do
   sh('bundle exec rspec')
 end
 
-task :wikipedia do
-  sh('ruby lib/wikipedia.rb ')
+task :scrape do
+  sh('ruby lib/csv_builder.rb ')
 end
 
 task default: %i[fmt test build]
