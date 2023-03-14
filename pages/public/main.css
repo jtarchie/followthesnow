@@ -49,3 +49,8 @@ table tr td:nth-child(1) {
 footer {
   text-align: center;
 }
+
+nav {
+  padding-left: var(--spacing);
+  padding-right: var(--spacing);
+}
