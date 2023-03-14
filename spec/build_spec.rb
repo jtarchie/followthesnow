@@ -10,6 +10,10 @@ RSpec.describe('Building') do
   let(:pages_dir) { File.expand_path(File.join(__dir__, '..', 'pages')) }
   let(:resorts_dir) { File.expand_path(File.join(__dir__, '..', 'resorts')) }
 
+  before do
+    ENV['OPENWEATHER_API_KEY'] = 'fake-key-for-tests'
+  end
+
   it 'builds HTML files', :vcr do
     resorts = Dir[File.join(resorts_dir, '*.csv')].flat_map do |filename|
       Resort.from_csv(filename)
