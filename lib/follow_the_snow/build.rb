@@ -7,102 +7,62 @@ require 'fileutils'
 require 'kramdown'
 require 'terminal-table'
 require 'tilt/erb'
+require 'front_matter_parser'
+require_relative './build/context'
 
 module FollowTheSnow
   module Builder
     # builds the entire site
     class Site
-      include ERB::Util
-
       def initialize(build_dir:, resorts:, source_dir:)
-        @build_dir  = build_dir
-        @resorts    = resorts.sort_by { |r| [r.country, r.state, r.name] }
-        @source_dir = source_dir
+        @build_dir    = build_dir
+        @resorts      = resorts
+        @context      = Context.new(resorts:)
+        @source_dir   = source_dir
+        @logger       = Logger.new($stderr)
+        @logger.level = Logger::DEBUG
       end
 
       def build!
         FileUtils.mkdir_p(@build_dir)
         FileUtils.copy_entry(File.join(@source_dir, 'public'), @build_dir)
 
-        layout_html = erb('_layout.html.erb')
+        layout_html = erb('_layout.erb.html')
 
-        main_md     = erb('index.md.erb')
-        File.write(
-          File.join(@build_dir, 'index.html'),
-          layout_html.render(self, {
-                               content: from_markdown(main_md.render(self)),
-                               description: 'List of all states and provinces that have ski resorts.',
-                               title: 'States and Provinces'
-                             })
-        )
+        Dir[File.join(@source_dir, '**', '*.erb.md')].each do |filename|
+          next if File.basename(filename) =~ /^_/
 
-        Dir[File.join(@source_dir, '*.md')].each do |markdown_file|
-          render_filename = markdown_file.gsub(@source_dir, @build_dir).gsub('.md', '.html')
-          puts "m: #{markdown_file}, r: #{render_filename}"
-          title           = markdown_file.gsub(@source_dir, '').titleize
-          File.write(
-            render_filename,
-            layout_html.render(
-              self, {
-                content: from_markdown(File.read(markdown_file)),
-                description: title,
-                title:
-              }
-            )
-          )
-        end
+          parsed_file    = FrontMatterParser::Parser.parse_file(filename)
+          metadata       = parsed_file.front_matter
+          contents       = parsed_file.content
+          template       = Tilt::ERBTemplate.new { contents }
+          build_filename = filename.gsub(@source_dir, @build_dir).gsub('.erb.md', '.html')
 
-        state_md  = erb('state.md.erb')
-        state_dir = File.join(@build_dir, 'states')
-        FileUtils.mkdir_p(state_dir)
+          FileUtils.mkdir_p(File.dirname(build_filename))
 
-        states.each do |state|
-          state_filename = File.join(state_dir, "#{state.parameterize}.html")
-          puts "Building state: #{state}"
-          File.write(
-            state_filename,
-            layout_html.render(
-              self,
-              {
-                content: from_markdown(
-                  state_md.render(
-                    self,
-                    {
-                      state:,
-                      resorts: resorts_by_state(state)
-                    }
-                  )
-                ),
-                description: "Weekly forecast of snow for #{state}",
-                title: "Weekly forecast of snow for #{state}"
-              }
-            )
-          )
-        end
-
-        resort_md  = erb('resort.md.erb')
-        resort_dir = File.join(@build_dir, 'resorts')
-        FileUtils.mkdir_p(resort_dir)
-
-        @resorts.each do |resort|
-          resort_filename = File.join(resort_dir, "#{resort.name.parameterize}.html")
-          puts "Building resort: #{resort.name}"
-          File.write(
-            resort_filename,
-            layout_html.render(
-              self,
-              {
-                content: from_markdown(resort_md.render(
-                                         self,
-                                         {
-                                           resort:
-                                         }
-                                       )),
-                description: "Weekly forecast of snow for #{resort.name}",
-                title: "#{resort.state} &raquo; #{resort.name}"
-              }
-            )
-          )
+          case filename
+          when /\[state\]/
+            states.each do |state|
+              state_filename = build_filename.gsub('[state]', state.parameterize)
+              write_file(layout_html, state_filename, template, {
+                           title: metadata['title'].gsub('[state]', state),
+                           description: metadata['description'].gsub('[state]', state),
+                           resorts: resorts_by_state(state),
+                           state:
+                         })
+            end
+          when /\[resort\]/
+            @resorts.each do |resort|
+              resort_filename = build_filename.gsub('[resort]', resort.name.parameterize)
+              write_file(layout_html, resort_filename, template, {
+                           title: metadata['title'].gsub('[state]', resort.state).gsub('[name]', resort.name),
+                           description: metadata['description'].gsub('[state]', resort.state).gsub('[name]', resort.name),
+                           resort:
+                         })
+            end
+          else
+            write_file(layout_html, build_filename, template, metadata)
+          end
         end
       end
 
@@ -113,18 +73,19 @@ module FollowTheSnow
         @resorts_by_state.fetch(state)
       end
 
-      def resorts_by_countries
-        @resorts_by_countries ||= @resorts.group_by(&:country)
+      def states
+        @states ||= @resorts.map(&:state).uniq.sort
       end
 
-      def countries
-        resorts_by_countries.keys.sort
-      end
-
-      def states(country: nil)
-        return resorts_by_countries.values.flatten.map(&:state).uniq if country.nil?
-
-        resorts_by_countries.fetch(country).group_by(&:state).keys
+      def write_file(layout, filename, template, metadata)
+        @logger.info "file: #{filename}, metadata: #{metadata}"
+        FileUtils.mkdir_p(File.dirname(filename))
+        File.write(
+          filename,
+          layout.render(@context, metadata.merge(
+                                    content: from_markdown(template.render(@context, metadata))
+                                  ))
+        )
       end
 
       def erb(filename)
@@ -138,67 +99,6 @@ module FollowTheSnow
           gfm_emojis: true,
           hard_wrap: false
         ).to_html
-      end
-
-      def table_for_resorts(resorts)
-        max_days = resorts.map do |resort|
-          resort.forecasts.map(&:time_of_day)
-        end.max_by(&:length)
-
-        headers  = ['Location'] + max_days
-
-        rows = resorts.map do |resort|
-          snow_days = resort.forecasts.map do |f|
-            f.snow.to_s
-          end
-
-          row  = ["[#{resort.name}](/resorts/#{resort.name.parameterize})#{resort.closed? ? '*' : ''}"]
-          row += if snow_days.length == max_days.length
-                   snow_days
-                 else
-                   snow_days + ([''] * (max_days.length - snow_days.length))
-                 end
-          row
-        end
-
-        table       = Terminal::Table.new(
-          headings: headers,
-          rows:
-        )
-        table.style = { border: :markdown }
-        table.to_s
-      end
-
-      def table_for_longterm(resort)
-        headers = ['Date', 'Snowfall', 'Icon', 'Short', 'Temp', 'Wind Speed', 'Wind Gusts']
-
-        forecasts = resort.forecasts(
-          aggregates: [FollowTheSnow::Forecast::Short]
-        )
-
-        rows = forecasts.map do |f|
-          [
-            f.name,
-            f.snow,
-            f.short_icon,
-            f.short,
-            f.temp,
-            f.wind_speed,
-            f.wind_gust
-          ]
-        end
-
-        table       = Terminal::Table.new(
-          headings: headers,
-          rows:
-        )
-        table.style = { border: :markdown }
-        table.to_s
-      end
-
-      def current_timestamp
-        Time.zone = 'Eastern Time (US & Canada)'
-        Time.zone.now.strftime('%Y-%m-%d %l:%M%p %Z')
       end
     end
   end

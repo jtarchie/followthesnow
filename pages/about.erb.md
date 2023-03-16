@@ -1,3 +1,7 @@
+---
+title: About Us
+description: Learn why we started Follow the Snow
+---
 # About
 
 Follow the Snow's story began with a memorable ski day when a friend and I

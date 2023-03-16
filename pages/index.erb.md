@@ -1,3 +1,7 @@
+---
+title: List of geographical locations
+description: List of all states and provinces that have ski resorts
+---
 
 Our mission is to provide you with accurate and timely snowfall forecasts, so
 you can make the most of your skiing adventures.

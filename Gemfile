@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 gem 'activesupport'
 gem 'ferrum'
+gem 'front_matter_parser'
 gem 'geo_coord', require: 'geo/coord'
 gem 'http'
 gem 'kramdown'

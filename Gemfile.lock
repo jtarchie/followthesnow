@@ -24,6 +24,7 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
+    front_matter_parser (1.0.1)
     geo_coord (0.2.0)
     hashdiff (1.0.1)
     http (5.1.1)
@@ -117,6 +118,7 @@ PLATFORMS
 DEPENDENCIES
   activesupport
   ferrum
+  front_matter_parser
   geo_coord
   http
   kramdown
