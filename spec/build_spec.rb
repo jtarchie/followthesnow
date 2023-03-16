@@ -3,7 +3,6 @@
 require 'spec_helper'
 require 'tmpdir'
 require_relative '../pages/build'
-require_relative '../lib/resort'
 
 RSpec.describe('Building') do
   let(:build_dir) { Dir.mktmpdir }
@@ -68,7 +67,7 @@ RSpec.describe('Building') do
 
   it 'builds HTML files', :vcr do
     resorts = Dir[File.join(resorts_dir, '*.csv')].flat_map do |filename|
-      Resort.from_csv(filename)
+      FollowTheSnow::Resort.from_csv(filename)
     end.take(5)
 
     builder   = Builder::Site.new(

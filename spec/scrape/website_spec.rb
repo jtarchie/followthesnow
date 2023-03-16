@@ -2,7 +2,6 @@
 
 require 'spec_helper'
 require 'ostruct'
-require_relative '../../lib/scrape/website'
 
 RSpec.describe 'Website Metadata' do
   context 'when getting a resort frontpage' do
@@ -17,7 +16,7 @@ RSpec.describe 'Website Metadata' do
       stub_browser(url:)
       logger = Logger.new($stderr)
 
-      client   = Scrape::Website.new(logger:)
+      client   = FollowTheSnow::Scrape::Website.new(logger:)
       metadata = client.metadata(url:)
       expect(metadata.closed).to eq(true)
     end

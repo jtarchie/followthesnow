@@ -3,7 +3,7 @@
 require 'active_support'
 require 'active_support/inflector'
 require 'active_support/time'
-require_relative '../lib/forecast'
+require_relative '../lib/follow_the_snow'
 require 'fileutils'
 require 'kramdown'
 require 'terminal-table'
@@ -180,7 +180,7 @@ module Builder
       headers = ['Date', 'Snowfall', 'Icon', 'Short', 'Temp', 'Wind Speed', 'Wind Gusts']
 
       forecasts = resort.forecasts(
-        aggregates: [Forecast::Short]
+        aggregates: [FollowTheSnow::Forecast::Short]
       )
 
       rows = forecasts.map do |f|

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require_relative '../../lib/scrape/wikipedia'
 
 RSpec.describe 'Getting resorts from wikipedia' do
   it 'returns a list of resorts' do
@@ -9,7 +8,7 @@ RSpec.describe 'Getting resorts from wikipedia' do
     stub_resort_page
     logger = Logger.new($stderr)
 
-    client  = Scrape::Wikipedia.new(
+    client  = FollowTheSnow::Scrape::Wikipedia.new(
       url: 'https://wikipedia.com/page',
       logger:
     )

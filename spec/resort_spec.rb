@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require_relative '../lib/resort'
 
 RSpec.describe('Resort') do
   it 'returns coordinates' do
-    resort = Resort.new(lat: 1.001, lng: 2.002)
+    resort = FollowTheSnow::Resort.new(lat: 1.001, lng: 2.002)
     expect(resort.coords).to eq [1.001, 2.002]
   end
 
@@ -14,7 +13,7 @@ RSpec.describe('Resort') do
     expect(csv_files.length).to be > 0
 
     csv_files.each do |csv_file|
-      resorts = Resort.from_csv(csv_file)
+      resorts = FollowTheSnow::Resort.from_csv(csv_file)
       expect(resorts.length).to be > 0
     end
   end

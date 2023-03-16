@@ -3,7 +3,6 @@
 require 'spec_helper'
 require 'csv'
 require 'tmpdir'
-require_relative '../lib/csv_builder'
 
 RSpec.describe 'CSVBuilder' do
   let(:build_dir) { Dir.mktmpdir }
@@ -19,7 +18,7 @@ RSpec.describe 'CSVBuilder' do
     stub_openai_prompt
     # stub_browser(url: 'https://some-resort.com')
 
-    builder = CSVBuilder.new(
+    builder = FollowTheSnow::CSVBuilder.new(
       build_dir:,
       country: 'usa',
       url: 'https://wikipedia.com/page'

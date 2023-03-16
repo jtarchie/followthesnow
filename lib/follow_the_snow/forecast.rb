@@ -1,16 +1,18 @@
 # frozen_string_literal: true
 
-Forecast = Struct.new(
-  :name,
-  :short,
-  :snow,
-  :temp,
-  :time_of_day,
-  :wind_direction,
-  :wind_gust,
-  :wind_speed,
-  keyword_init: true
-)
+module FollowTheSnow
+  Forecast = Struct.new(
+    :name,
+    :short,
+    :snow,
+    :temp,
+    :time_of_day,
+    :wind_direction,
+    :wind_gust,
+    :wind_speed,
+    keyword_init: true
+  )
+end
 
 require_relative './forecasts/aggregate'
 require_relative './forecasts/open_weather_map'
