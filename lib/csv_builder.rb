@@ -4,25 +4,25 @@ require_relative './scrape/wikipedia'
 require_relative './scrape/website'
 require_relative './scrape/geo'
 require 'csv'
+require 'logger'
 
 CSVBuilder = Struct.new(:build_dir, :country, :url, keyword_init: true) do
   def build!
-    resorts = Scrape::Wikipedia.new(url:).resorts
-    geo     = Scrape::Geo.new
-    website = Scrape::Website.new
+    logger       = Logger.new($stderr)
+    logger.level = Logger::DEBUG
+
+    wikipedia = Scrape::Wikipedia.new(url:, logger:)
+    geo       = Scrape::Geo.new(logger:)
+    # website   = Scrape::Website.new(logger:)
 
     filename  = File.expand_path(File.join(build_dir, "#{country}.csv"))
     file      = File.open(filename, 'w')
     file.sync = true
     file.puts 'name,closed,lat,lng,city,state,country,url'
 
-    resorts.map do |resort|
+    wikipedia.map do |resort|
       address  = geo.to_address(lat: resort.lat, lng: resort.lng)
-      metadata = if address.state == 'Colorado'
-                   website.metadata(url: resort.url)
-                 else
-                   OpenStruct.new(closed: false)
-                 end
+      metadata = OpenStruct.new(closed: false)
 
       file.puts([
         resort.name,
@@ -42,7 +42,7 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   urls = {
-    canada: 'https://en.wikipedia.org/wiki/List_of_ski_areas_and_resorts_in_Canada',
+    # canada: 'https://en.wikipedia.org/wiki/List_of_ski_areas_and_resorts_in_Canada',
     united_states: 'https://en.wikipedia.org/wiki/List_of_ski_areas_and_resorts_in_the_United_States'
   }
 

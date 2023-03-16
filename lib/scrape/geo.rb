@@ -5,22 +5,18 @@ require 'http'
 require 'json'
 
 module Scrape
-  class Geo
+  Geo = Struct.new(:logger, keyword_init: true) do
     def to_address(lat:, lng:)
-      response = JSON.parse(http.follow.get(%(/reverse?lat=#{lat.to_f}&lon=#{lng.to_f}&format=jsonv2)).to_s)
+      response = JSON.parse(HTTP.follow.get(%(https://nominatim.openstreetmap.org/reverse?lat=#{lat.to_f}&lon=#{lng.to_f}&format=jsonv2)).to_s)
       address  = OpenStruct.new(response['address'])
+
+      logger.info "address: #{address}"
 
       OpenStruct.new({
                        city: address.city || address.village || address.leisure || address.tourism || address.building || address.road || address.county,
                        state: address.state,
                        country: address.country
                      })
-    end
-
-    private
-
-    def http
-      @http ||= HTTP.persistent('https://nominatim.openstreetmap.org')
     end
   end
 end

@@ -6,7 +6,13 @@ require 'ostruct'
 require 'geo/coord'
 
 module Scrape
-  Wikipedia = Struct.new(:url, keyword_init: true) do
+  Wikipedia = Struct.new(:url, :logger, keyword_init: true) do
+    include Enumerable
+
+    def each(&block)
+      resorts(&block)
+    end
+
     def resorts
       doc = Nokogiri::HTML(HTTP.follow.get(url).to_s)
       doc.css('#mw-content-text ul > li > a:first-child').map do |link|
@@ -14,6 +20,7 @@ module Scrape
         next if href =~ /Template|Category|Comparison|List|Former/i
 
         begin
+          logger.info "wiki: #{href}"
           link_doc = Nokogiri::HTML(HTTP.follow.get("https://en.wikipedia.org#{href}").to_s)
         rescue HTTP::ConnectionError
           next
@@ -31,14 +38,16 @@ module Scrape
         url   = if (link = link_doc.css('.infobox-data .url a').first)
                   link['href']
                 end
-        puts "  resort: #{title}"
+        logger.info "resort: #{title}"
 
-        OpenStruct.new({
-                         name: title,
-                         lat: geo.lat,
-                         lng: geo.lng,
-                         url:
-                       })
+        resort = OpenStruct.new({
+                                  name: title,
+                                  lat: geo.lat,
+                                  lng: geo.lng,
+                                  url:
+                                })
+        yield(resort) if block_given?
+        resort
       end.compact
     end
   end

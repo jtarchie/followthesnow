@@ -7,8 +7,12 @@ RSpec.describe 'Getting resorts from wikipedia' do
   it 'returns a list of resorts' do
     stub_country_page
     stub_resort_page
+    logger = Logger.new($stderr)
 
-    client  = Scrape::Wikipedia.new(url: 'https://wikipedia.com/page')
+    client  = Scrape::Wikipedia.new(
+      url: 'https://wikipedia.com/page',
+      logger:
+    )
     resorts = client.resorts
     expect(resorts).to eq [OpenStruct.new(
       name: 'Some Resort',

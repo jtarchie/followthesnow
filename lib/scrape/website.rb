@@ -7,51 +7,71 @@ require 'ostruct'
 require 'openai'
 
 module Scrape
-  class Website
+  Website = Struct.new(:logger) do
     def metadata(url:)
       return OpenStruct.new unless url
 
-      browser.go_to(url)
-      return OpenStruct.new unless browser.network.status == 200
+      begin
+        logger.info "browser: #{url}"
 
-      body          = browser.at_css('body').inner_text
-      scrubbed_text = body
-                      .split("\n")
-                      .map do |line|
-                        line
-                          .chomp
-                          .strip
-                          .squeeze(' ')
-                          .downcase
-                      end
-                      .reject { |line| line.split(' ').length <= 5 }
-                      .uniq
-                      .join(' ')
-      prompt        = <<~PROMPT
-        This is raw text from a ski resort website. Return JSON payload of the resort that includes if it is closed for the season. For example, `{"closed": true}`.
+        browser.go_to(url)
+        return OpenStruct.new unless browser.network.status == 200
 
-        #{scrubbed_text}
-      PROMPT
+        body          = browser.at_css('body').inner_text
+        scrubbed_text = body
+                        .split("\n")
+                        .map do |line|
+                          line
+                            .chomp
+                            .strip
+                            .squeeze(' ')
+                            .downcase
+                        end
+                        .reject { |line| line.split(' ').length <= 5 }
+                        .uniq
+                        .join(' ')
+        prompt        = <<~PROMPT
+          This is raw text from a ski resort website. Return JSON payload of the resort that includes if it is closed for the season. For example, `{"closed": true}`.
 
-      response      = client.chat(
-        parameters: {
-          model: 'gpt-3.5-turbo',
-          messages: [{
-            role: 'user',
-            content: prompt
-          }],
-          temperature: 0.7
-        }
-      )
+          #{scrubbed_text}
+        PROMPT
 
-      payload = response.dig('choices', 0, 'message', 'content') || '{"closed": false}'
-      OpenStruct.new(JSON.parse(payload))
+        response      = client.chat(
+          parameters: {
+            model: 'gpt-3.5-turbo',
+            messages: [{
+              role: 'user',
+              content: prompt
+            }],
+            temperature: 0.7
+          }
+        )
+
+        payload = response.dig('choices', 0, 'message', 'content') || '{"closed": false}'
+        logger.info "payload: #{payload}"
+
+        OpenStruct.new(JSON.parse(payload))
+      rescue StandardError => e
+        logger.error "error: #{e}, retry"
+        sleep(5)
+        retry
+      end
     end
 
     private
 
     def browser
+      @retries ||= 1
+      if (@retries % 10).zero?
+        @browser.reset
+        @browser.quit
+        @browser = nil
+      end
+
       @browser ||= Ferrum::Browser.new
+      @retries  += 1
+
+      @browser
     end
 
     def client

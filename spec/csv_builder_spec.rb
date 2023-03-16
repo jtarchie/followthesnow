@@ -17,7 +17,7 @@ RSpec.describe 'CSVBuilder' do
     stub_resort_page
     stub_geo_lookup(lat: 3.533611111, lng: -113.4752778)
     stub_openai_prompt
-    stub_browser(url: 'https://some-resort.com')
+    # stub_browser(url: 'https://some-resort.com')
 
     builder = CSVBuilder.new(
       build_dir:,
@@ -36,7 +36,7 @@ RSpec.describe 'CSVBuilder' do
     expect(rows.length).to eq 1
     expect(rows.first.to_h).to eq({
                                     'city' => 'Denver',
-                                    'closed' => 'true',
+                                    'closed' => 'false',
                                     'country' => 'US',
                                     'lat' => '0.3533611111e1',
                                     'lng' => '-0.1134752778e3',
