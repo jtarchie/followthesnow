@@ -8,7 +8,7 @@ require 'kramdown'
 require 'terminal-table'
 require 'tilt/erb'
 require 'front_matter_parser'
-require_relative './build/context'
+require_relative './builder/context'
 
 module FollowTheSnow
   module Builder
