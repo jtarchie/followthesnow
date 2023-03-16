@@ -2,7 +2,6 @@
 
 require 'spec_helper'
 require 'tmpdir'
-require_relative '../pages/build'
 
 RSpec.describe('Building') do
   let(:build_dir) { Dir.mktmpdir }
@@ -70,7 +69,7 @@ RSpec.describe('Building') do
       FollowTheSnow::Resort.from_csv(filename)
     end.take(5)
 
-    builder   = Builder::Site.new(
+    builder   = FollowTheSnow::Builder::Site.new(
       build_dir:,
       resorts:,
       source_dir: pages_dir

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative './pages/build'
 require_relative './lib/follow_the_snow'
 require 'fileutils'
 
