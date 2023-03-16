@@ -14,14 +14,14 @@ module Scrape
     end
 
     def resorts
-      doc = Nokogiri::HTML(HTTP.follow.get(url).to_s)
+      doc = Nokogiri::HTML(HTTP.follow.timeout(10).get(url).to_s)
       doc.css('#mw-content-text ul > li > a:first-child').map do |link|
         href = link['href']
         next if href =~ /Template|Category|Comparison|List|Former/i
 
         begin
           logger.info "wiki: #{href}"
-          link_doc = Nokogiri::HTML(HTTP.follow.get("https://en.wikipedia.org#{href}").to_s)
+          link_doc = Nokogiri::HTML(HTTP.follow.timeout(10).get("https://en.wikipedia.org#{href}").to_s)
         rescue HTTP::ConnectionError
           next
         end

@@ -32,7 +32,7 @@ Resort = Struct.new(
     Forecast::Aggregate,
     Forecast::Short
   ])
-    @forecast ||= Forecast::OpenMeteo.new(
+    @forecast ||= Forecast::OpenWeatherMap.new(
       resort: self
     )
 

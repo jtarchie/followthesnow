@@ -7,7 +7,7 @@ require 'json'
 module Scrape
   Geo = Struct.new(:logger, keyword_init: true) do
     def to_address(lat:, lng:)
-      response = JSON.parse(HTTP.follow.get(%(https://nominatim.openstreetmap.org/reverse?lat=#{lat.to_f}&lon=#{lng.to_f}&format=jsonv2)).to_s)
+      response = JSON.parse(HTTP.follow.timeout(10).get(%(https://nominatim.openstreetmap.org/reverse?lat=#{lat.to_f}&lon=#{lng.to_f}&format=jsonv2)).to_s)
       address  = OpenStruct.new(response['address'])
 
       logger.info "address: #{address}"
