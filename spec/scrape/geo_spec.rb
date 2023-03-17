@@ -6,10 +6,10 @@ RSpec.describe 'Geo location' do
   context 'when given lat and lng' do
     it 'returns an address' do
       stub_geo_lookup(lat: 1.1, lng: 2.2)
-      logger = Logger.new($stderr)
+      logger = Ougai::Logger.new($stderr)
 
-      client  = FollowTheSnow::Scrape::Geo.new(logger:)
-      address = client.to_address(lat: '1.1', lng: '2.2')
+      client  = FollowTheSnow::Scrape::Geo.new
+      address = client.to_address(lat: '1.1', lng: '2.2', logger:)
       expect(address.city).to eq 'Denver'
       expect(address.state).to eq 'Colorado'
       expect(address.country).to eq 'US'

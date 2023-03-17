@@ -6,7 +6,7 @@ require 'fileutils'
 def build!(resorts)
   build_dir = File.join(__dir__, 'docs')
   FileUtils.rm_rf(build_dir)
-  builder   = Builder::Site.new(
+  builder   = FollowTheSnow::Builder::Site.new(
     build_dir:,
     resorts:,
     source_dir: File.join(__dir__, 'pages')
@@ -18,7 +18,7 @@ end
 
 task :build do
   resorts = Dir[File.join(__dir__, 'resorts', '*.csv')].flat_map do |filename|
-    Resort.from_csv(filename)
+    FollowTheSnow::Resort.from_csv(filename)
   end
   build!(resorts)
 end

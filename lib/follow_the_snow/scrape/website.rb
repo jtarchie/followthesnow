@@ -12,8 +12,10 @@ module FollowTheSnow
       def metadata(url:)
         return OpenStruct.new unless url
 
+        child_logger = logger.child({ browser: url })
+
         begin
-          logger.info "browser: #{url}"
+          child_logger.info('load in browser')
 
           browser.go_to(url)
           return OpenStruct.new unless browser.network.status == 200
@@ -49,11 +51,11 @@ module FollowTheSnow
           )
 
           payload = response.dig('choices', 0, 'message', 'content') || '{"closed": false}'
-          logger.info "payload: #{payload}"
+          child_logger.info({ payload: })
 
           OpenStruct.new(JSON.parse(payload))
         rescue StandardError => e
-          logger.error "error: #{e}, retry"
+          child_logger.info('error', { error: e })
           sleep(5)
           retry
         end

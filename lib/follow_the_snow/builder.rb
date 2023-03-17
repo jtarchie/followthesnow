@@ -2,13 +2,12 @@
 
 require 'active_support'
 require 'active_support/inflector'
-require 'active_support/time'
 require 'fileutils'
 require 'kramdown'
-require 'terminal-table'
 require 'tilt/erb'
 require 'front_matter_parser'
 require_relative './builder/context'
+require 'ougai'
 
 module FollowTheSnow
   module Builder
@@ -19,8 +18,8 @@ module FollowTheSnow
         @resorts      = resorts
         @context      = Context.new(resorts:)
         @source_dir   = source_dir
-        @logger       = Logger.new($stderr)
-        @logger.level = Logger::DEBUG
+        @logger       = Ougai::Logger.new($stderr)
+        @logger.level = Ougai::Logger::DEBUG
       end
 
       def build!
@@ -78,7 +77,7 @@ module FollowTheSnow
       end
 
       def write_file(layout, filename, template, metadata)
-        @logger.info "file: #{filename}, metadata: #{metadata}"
+        @logger.info('writing file', { file: filename, metadata: })
         FileUtils.mkdir_p(File.dirname(filename))
         File.write(
           filename,

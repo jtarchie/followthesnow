@@ -14,7 +14,7 @@ RSpec.describe 'Website Metadata' do
     it 'determines if it open or not' do
       stub_openai_prompt
       stub_browser(url:)
-      logger = Logger.new($stderr)
+      logger = Ougai::Logger.new($stderr)
 
       client   = FollowTheSnow::Scrape::Website.new(logger:)
       metadata = client.metadata(url:)

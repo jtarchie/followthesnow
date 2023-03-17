@@ -20,8 +20,10 @@ module FollowTheSnow
           href = link['href']
           next if href =~ /Template|Category|Comparison|List|Former/i
 
+          child_logger = logger.child(wiki: href)
+
           begin
-            logger.info "wiki: #{href}"
+            child_logger.info('loading page')
             link_doc = Nokogiri::HTML(HTTP.follow.timeout(10).get("https://en.wikipedia.org#{href}").to_s)
           rescue HTTP::ConnectionError
             next
@@ -39,7 +41,7 @@ module FollowTheSnow
           url   = if (link = link_doc.css('.infobox-data .url a').first)
                     link['href']
                   end
-          logger.info "resort: #{title}"
+          child_logger.info('found resort', { resort: title })
 
           resort = OpenStruct.new({
                                     name: title,

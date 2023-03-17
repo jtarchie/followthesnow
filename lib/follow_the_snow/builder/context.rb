@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require 'active_support'
+require 'active_support/time'
+require 'terminal-table'
+
 module FollowTheSnow
   module Builder
     class Context

@@ -6,7 +6,7 @@ RSpec.describe 'Getting resorts from wikipedia' do
   it 'returns a list of resorts' do
     stub_country_page
     stub_resort_page
-    logger = Logger.new($stderr)
+    logger = Ougai::Logger.new($stderr)
 
     client  = FollowTheSnow::Scrape::Wikipedia.new(
       url: 'https://wikipedia.com/page',

@@ -4,16 +4,16 @@ require_relative './scrape/wikipedia'
 require_relative './scrape/website'
 require_relative './scrape/geo'
 require 'csv'
-require 'logger'
+require 'ougai'
 
 module FollowTheSnow
   CSVBuilder = Struct.new(:build_dir, :country, :url, keyword_init: true) do
     def build!
-      logger       = Logger.new($stderr)
-      logger.level = Logger::DEBUG
+      @logger       = Ougai::Logger.new($stderr)
+      @logger.level = Ougai::Logger::DEBUG
 
-      wikipedia = Scrape::Wikipedia.new(url:, logger:)
-      geo       = Scrape::Geo.new(logger:)
+      wikipedia = Scrape::Wikipedia.new(url:, logger: @logger)
+      geo       = Scrape::Geo.new
       # website   = Scrape::Website.new(logger:)
 
       filename  = File.expand_path(File.join(build_dir, "#{country}.csv"))
@@ -22,7 +22,8 @@ module FollowTheSnow
       file.puts 'name,closed,lat,lng,city,state,country,url'
 
       wikipedia.map do |resort|
-        address  = geo.to_address(lat: resort.lat, lng: resort.lng)
+        logger   = @logger.child(resort: resort.name)
+        address  = geo.to_address(lat: resort.lat, lng: resort.lng, logger:)
         metadata = OpenStruct.new(closed: false)
 
         file.puts([
