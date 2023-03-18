@@ -15,11 +15,11 @@ module FollowTheSnow
     class Site
       def initialize(build_dir:, resorts:, source_dir:)
         @build_dir    = build_dir
-        @resorts      = resorts
         @context      = Context.new(resorts:)
-        @source_dir   = source_dir
         @logger       = Ougai::Logger.new($stderr)
         @logger.level = Ougai::Logger::DEBUG
+        @resorts      = resorts
+        @source_dir   = source_dir
       end
 
       def build!
@@ -31,36 +31,37 @@ module FollowTheSnow
         Dir[File.join(@source_dir, '**', '*.erb.md')].each do |filename|
           next if File.basename(filename) =~ /^_/
 
-          parsed_file    = FrontMatterParser::Parser.parse_file(filename)
-          metadata       = parsed_file.front_matter
-          contents       = parsed_file.content
-          template       = Tilt::ERBTemplate.new { contents }
           build_filename = filename.gsub(@source_dir, @build_dir).gsub('.erb.md', '.html')
-
           FileUtils.mkdir_p(File.dirname(build_filename))
 
           case filename
           when /\[state\]/
             states.each do |state|
               state_filename = build_filename.gsub('[state]', state.parameterize)
-              write_file(layout_html, state_filename, template, {
-                           title: metadata['title'].gsub('[state]', state),
-                           description: metadata['description'].gsub('[state]', state),
-                           resorts: resorts_by_state(state),
-                           state:
-                         })
+              write_file(
+                layout_html,
+                filename,
+                state_filename,
+                {
+                  resorts: resorts_by_state(state),
+                  state:
+                }
+              )
             end
           when /\[resort\]/
             @resorts.each do |resort|
               resort_filename = build_filename.gsub('[resort]', resort.name.parameterize)
-              write_file(layout_html, resort_filename, template, {
-                           title: metadata['title'].gsub('[state]', resort.state).gsub('[name]', resort.name),
-                           description: metadata['description'].gsub('[state]', resort.state).gsub('[name]', resort.name),
-                           resort:
-                         })
+              write_file(
+                layout_html,
+                filename,
+                resort_filename,
+                {
+                  resort:
+                }
+              )
             end
           else
-            write_file(layout_html, build_filename, template, metadata)
+            write_file(layout_html, filename, build_filename)
           end
         end
       end
@@ -76,14 +77,22 @@ module FollowTheSnow
         @states ||= @resorts.map(&:state).uniq.sort
       end
 
-      def write_file(layout, filename, template, metadata)
-        @logger.info('writing file', { file: filename, metadata: })
-        FileUtils.mkdir_p(File.dirname(filename))
+      def write_file(layout, source_filename, build_filename, metadata = {})
+        template     = Tilt::ERBTemplate.new { File.read(source_filename) }
+        parsed_file  = FrontMatterParser::Parser.new(:md).call(template.render(@context, metadata))
+        front_matter = parsed_file.front_matter
+        contents     = parsed_file.content
+        variables    = front_matter
+                       .merge(metadata)
+                       .merge({
+                                content: from_markdown(contents)
+                              })
+
+        @logger.info('writing file', { source: source_filename, build_filename:, metadata: })
+        FileUtils.mkdir_p(File.dirname(build_filename))
         File.write(
-          filename,
-          layout.render(@context, metadata.merge(
-                                    content: from_markdown(template.render(@context, metadata))
-                                  ))
+          build_filename,
+          layout.render(@context, variables)
         )
       end
 

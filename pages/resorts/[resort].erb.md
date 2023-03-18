@@ -1,6 +1,6 @@
 ---
-title: 'Weekly forecast of snow for [name]'
-description: '[state] &raquo; [name]'
+title: 'Weekly forecast of snow for <%= h resort.name %>'
+description: '<%= h resort.state %> &raquo; <%= h resort.name %>'
 ---
 
 ## [<%= h resort.country %>](/#<%= resort.country.parameterize %>) &raquo; [<%= h resort.state %>](/states/<%= resort.state.parameterize %>) &raquo; <%= h resort.name %>
