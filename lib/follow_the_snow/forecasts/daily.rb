@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module FollowTheSnow
-  Forecast::Short = Struct.new(:forecasts, keyword_init: true) do
+  Forecast::Daily = Struct.new(:forecasts, keyword_init: true) do
     class ForecastDelegate < SimpleDelegator
       def time_of_day
         __getobj__.time_of_day.strftime('%a')

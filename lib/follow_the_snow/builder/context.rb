@@ -60,7 +60,7 @@ module FollowTheSnow
         headers = ['Date', 'Snowfall', 'Icon', 'Short', 'Temp', 'Wind Speed', 'Wind Gusts']
 
         forecasts = resort.forecasts(
-          aggregates: [FollowTheSnow::Forecast::Short]
+          aggregates: [FollowTheSnow::Forecast::Daily]
         )
 
         rows = forecasts.map do |f|
