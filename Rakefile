@@ -25,7 +25,7 @@ end
 
 task :fast do
   resorts = Dir[File.join(__dir__, 'resorts', '*.csv')].flat_map do |filename|
-    Resort.from_csv(filename)
+    FollowTheSnow::Resort.from_csv(filename)
   end.shuffle.take(5)
 
   build!(resorts)
