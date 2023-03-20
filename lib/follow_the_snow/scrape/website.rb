@@ -51,7 +51,7 @@ module FollowTheSnow
           )
 
           payload = response.dig('choices', 0, 'message', 'content') || '{"closed": false}'
-          child_logger.info({ payload: })
+          child_logger.info({ payload: payload })
 
           OpenStruct.new(JSON.parse(payload))
         rescue StandardError => e

@@ -10,7 +10,7 @@ RSpec.describe 'Getting resorts from wikipedia' do
 
     client  = FollowTheSnow::Scrape::Wikipedia.new(
       url: 'https://wikipedia.com/page',
-      logger:
+      logger: logger
     )
     resorts = client.resorts
     expect(resorts).to eq [OpenStruct.new(

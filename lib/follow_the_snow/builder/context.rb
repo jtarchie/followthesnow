@@ -50,7 +50,7 @@ module FollowTheSnow
 
         table       = Terminal::Table.new(
           headings: headers,
-          rows:
+          rows: rows
         )
         table.style = { border: :markdown }
         table.to_s
@@ -77,7 +77,7 @@ module FollowTheSnow
 
         table       = Terminal::Table.new(
           headings: headers,
-          rows:
+          rows: rows
         )
         table.style = { border: :markdown }
         table.to_s

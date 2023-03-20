@@ -7,8 +7,8 @@ def build!(resorts)
   build_dir = File.join(__dir__, 'docs')
   FileUtils.rm_rf(build_dir)
   builder   = FollowTheSnow::Builder::Site.new(
-    build_dir:,
-    resorts:,
+    build_dir: build_dir,
+    resorts: resorts,
     source_dir: File.join(__dir__, 'pages')
   )
 

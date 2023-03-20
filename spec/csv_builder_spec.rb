@@ -19,7 +19,7 @@ RSpec.describe 'CSVBuilder' do
     # stub_browser(url: 'https://some-resort.com')
 
     builder = FollowTheSnow::CSVBuilder.new(
-      build_dir:,
+      build_dir: build_dir,
       country: 'usa',
       url: 'https://wikipedia.com/page'
     )

@@ -13,11 +13,11 @@ RSpec.describe 'Website Metadata' do
 
     it 'determines if it open or not' do
       stub_openai_prompt
-      stub_browser(url:)
+      stub_browser(url: url)
       logger = Ougai::Logger.new($stderr)
 
-      client   = FollowTheSnow::Scrape::Website.new(logger:)
-      metadata = client.metadata(url:)
+      client   = FollowTheSnow::Scrape::Website.new(logger: logger)
+      metadata = client.metadata(url: url)
       expect(metadata.closed).to eq(true)
     end
   end

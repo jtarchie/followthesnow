@@ -9,7 +9,7 @@ RSpec.describe 'Geo location' do
       logger = Ougai::Logger.new($stderr)
 
       client  = FollowTheSnow::Scrape::Geo.new
-      address = client.to_address(lat: '1.1', lng: '2.2', logger:)
+      address = client.to_address(lat: '1.1', lng: '2.2', logger: logger)
       expect(address.city).to eq 'Denver'
       expect(address.state).to eq 'Colorado'
       expect(address.country).to eq 'US'

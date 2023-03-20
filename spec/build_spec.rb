@@ -70,8 +70,8 @@ RSpec.describe('Building') do
     end.take(5)
 
     builder   = FollowTheSnow::Builder::Site.new(
-      build_dir:,
-      resorts:,
+      build_dir: build_dir,
+      resorts: resorts,
       source_dir: pages_dir
     )
 

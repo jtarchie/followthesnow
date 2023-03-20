@@ -12,7 +12,7 @@ module FollowTheSnow
       @logger       = Ougai::Logger.new($stderr)
       @logger.level = Ougai::Logger::DEBUG
 
-      wikipedia = Scrape::Wikipedia.new(url:, logger: @logger)
+      wikipedia = Scrape::Wikipedia.new(url: url, logger: @logger)
       geo       = Scrape::Geo.new
       # website   = Scrape::Website.new(logger:)
 
@@ -23,7 +23,7 @@ module FollowTheSnow
 
       wikipedia.map do |resort|
         logger   = @logger.child(resort: resort.name)
-        address  = geo.to_address(lat: resort.lat, lng: resort.lng, logger:)
+        address  = geo.to_address(lat: resort.lat, lng: resort.lng, logger: logger)
         metadata = OpenStruct.new(closed: false)
 
         file.puts([
@@ -54,9 +54,9 @@ if __FILE__ == $PROGRAM_NAME
   urls.each do |country, url|
     puts "Loading for country: #{country}"
     CSVBuilder.new(
-      build_dir:,
-      country:,
-      url:
+      build_dir: build_dir,
+      country: country,
+      url: url
     ).build!
   end
 end

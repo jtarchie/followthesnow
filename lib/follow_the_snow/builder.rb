@@ -15,7 +15,7 @@ module FollowTheSnow
     class Site
       def initialize(build_dir:, resorts:, source_dir:)
         @build_dir    = build_dir
-        @context      = Context.new(resorts:)
+        @context      = Context.new(resorts: resorts)
         @logger       = Ougai::Logger.new($stderr)
         @logger.level = Ougai::Logger::DEBUG
         @resorts      = resorts
@@ -44,7 +44,7 @@ module FollowTheSnow
                 state_filename,
                 {
                   resorts: resorts_by_state(state),
-                  state:
+                  state: state
                 }
               )
             end
@@ -56,7 +56,7 @@ module FollowTheSnow
                 filename,
                 resort_filename,
                 {
-                  resort:
+                  resort: resort
                 }
               )
             end
@@ -88,7 +88,7 @@ module FollowTheSnow
                                 content: from_markdown(contents)
                               })
 
-        @logger.info('writing file', { source: source_filename, build_filename:, metadata: })
+        @logger.info('writing file', { source: source_filename, build_filename: build_filename, metadata: metadata })
         FileUtils.mkdir_p(File.dirname(build_filename))
         File.write(
           build_filename,

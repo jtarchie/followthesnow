@@ -47,7 +47,7 @@ module FollowTheSnow
                                     name: title,
                                     lat: geo.lat,
                                     lng: geo.lng,
-                                    url:
+                                    url: url
                                   })
           yield(resort) if block_given?
           resort
