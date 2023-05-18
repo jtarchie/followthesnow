@@ -32,7 +32,7 @@ module FollowTheSnow
           )
         end
       end
-    rescue OpenSSL::SSL::SSLError, HTTP::Error
+    rescue OpenSSL::SSL::SSLError, HTTP::Error, JSON::ParserError
       sleep(1)
       retry
     end
