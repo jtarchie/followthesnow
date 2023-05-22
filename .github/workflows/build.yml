@@ -36,12 +36,12 @@ jobs:
       run: bundle exec rake build
       env:
         OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
-    - name: commit files
-      run: |
-        # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
-        git config user.name "GitHub Actions Bot"
-        git config user.email "Github Actions Bot <jtarchie+githubbot@gmail.com>"
-        # Stage the file, commit and push
-        git add -A
-        git commit -m "generated docs from github action"
-        git push origin main
+    - name: Publish to Cloudflare Pages
+      uses: cloudflare/pages-action@v1
+      with:
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        accountId: 945954ae6af55e6e4af004fb7772fdc5
+        projectName: followthesnow
+        directory: docs
+        # Optional: Enable this if you want to have GitHub Deployments triggered
+        gitHubToken: ${{ secrets.GITHUB_TOKEN }}
