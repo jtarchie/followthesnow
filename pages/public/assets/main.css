@@ -41,7 +41,7 @@ table tr td:nth-child(1) {
     display: none;
   }
 
-  .content {
+  .container {
     margin: 0;
   }
 }
