@@ -40,7 +40,7 @@ task :test do
 end
 
 task :scrape do
-  sh('ruby lib/csv_builder.rb')
+  sh('ruby lib/follow_the_snow/csv_builder.rb')
 end
 
 task default: %i[fmt test build]

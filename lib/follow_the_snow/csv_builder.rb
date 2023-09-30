@@ -45,15 +45,16 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   urls = {
-    # canada: 'https://en.wikipedia.org/wiki/List_of_ski_areas_and_resorts_in_Canada',
-    united_states: 'https://en.wikipedia.org/wiki/List_of_ski_areas_and_resorts_in_the_United_States'
+    canada: 'https://en.wikipedia.org/wiki/List_of_ski_areas_and_resorts_in_Canada',
+    japan: 'https://en.wikipedia.org/wiki/List_of_ski_areas_and_resorts_in_Japan',
+    united_states: 'https://en.wikipedia.org/wiki/List_of_ski_areas_and_resorts_in_the_United_States',
   }
 
-  build_dir = File.join(__dir__, '..', 'resorts')
+  build_dir = File.join(__dir__, '..', '..', 'resorts')
 
   urls.each do |country, url|
     puts "Loading for country: #{country}"
-    CSVBuilder.new(
+    FollowTheSnow::CSVBuilder.new(
       build_dir: build_dir,
       country: country,
       url: url
