@@ -34,5 +34,12 @@
     Made with &#10084; in Colorado<br/>
     &copy; <%= Time.now.strftime("%Y") %> <a href="https://github.com/jtarchie/followthesnow">Follow the Snow</a>
   </footer>
+  <script>
+    document.querySelectorAll("td:not(:first-child)").forEach(function(element) {
+      if(element.innerText != "0”") {
+        element.classList.add("dump");
+      }
+    })
+  </script>
 </body>
 </html>

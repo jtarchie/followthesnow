@@ -54,3 +54,7 @@ nav {
   padding-left: var(--spacing);
   padding-right: var(--spacing);
 }
+
+td.dump {
+  font-weight: bold;
+}
