@@ -32,7 +32,7 @@ module FollowTheSnow
     def forecasts(aggregates: [
       Forecast::Daily
     ])
-      @forecast ||= Forecast::OpenWeatherMap.new(
+      @forecast ||= Forecast::OpenMeteo.new(
         resort: self
       )
 
