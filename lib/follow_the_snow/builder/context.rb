@@ -9,8 +9,15 @@ module FollowTheSnow
     class Context
       include ERB::Util
 
+      attr_reader :resorts
+
       def initialize(resorts:)
-        @resorts = resorts.sort_by { |r| [r.country, r.state, r.name] }
+        @resorts = resorts.select do |r|
+          # filter resorts that do not have all values
+          [r.country, r.state, r.city, r.name].compact.length == 4
+        end.sort_by do |r|
+          [r.country, r.state, r.city, r.name]
+        end
       end
 
       def resorts_by_countries

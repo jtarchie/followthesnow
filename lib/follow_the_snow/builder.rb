@@ -18,8 +18,11 @@ module FollowTheSnow
         @context      = Context.new(resorts: resorts)
         @logger       = Ougai::Logger.new($stderr)
         @logger.level = Ougai::Logger::DEBUG
-        @resorts      = resorts
         @source_dir   = source_dir
+      end
+
+      def resorts
+        @context.resorts
       end
 
       def build!
@@ -49,7 +52,7 @@ module FollowTheSnow
               )
             end
           when /\[resort\]/
-            @resorts.each do |resort|
+            resorts.each do |resort|
               resort_filename = build_filename.gsub('[resort]', resort.name.parameterize)
               write_file(
                 layout_html,
@@ -69,12 +72,12 @@ module FollowTheSnow
       private
 
       def resorts_by_state(state)
-        @resorts_by_state ||= @resorts.group_by(&:state)
+        @resorts_by_state ||= resorts.group_by(&:state)
         @resorts_by_state.fetch(state)
       end
 
       def states
-        @states ||= @resorts.map(&:state).uniq.sort
+        @states ||= resorts.map(&:state).uniq.sort
       end
 
       def write_file(layout, source_filename, build_filename, metadata = {})

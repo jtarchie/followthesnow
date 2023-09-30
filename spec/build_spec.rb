@@ -64,7 +64,7 @@ RSpec.describe('Building') do
       )
   end
 
-  it 'builds HTML files', :vcr do
+  it 'builds HTML files', :focus do
     resorts = Dir[File.join(resorts_dir, '*.csv')].flat_map do |filename|
       FollowTheSnow::Resort.from_csv(filename)
     end.take(5)
