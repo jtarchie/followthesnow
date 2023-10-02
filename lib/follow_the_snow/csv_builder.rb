@@ -21,10 +21,12 @@ module FollowTheSnow
       file.sync = true
       file.puts 'name,closed,lat,lng,city,state,country,url'
 
-      wikipedia.map do |resort|
+      Parallel.each(wikipedia.resorts, in_threads: 3) do |resort|
         logger   = @logger.child(resort: resort.name)
         address  = geo.to_address(lat: resort.lat, lng: resort.lng, logger: logger)
         metadata = OpenStruct.new(closed: false)
+
+        sleep(rand(0.0..1.0))
 
         file.puts([
           resort.name,

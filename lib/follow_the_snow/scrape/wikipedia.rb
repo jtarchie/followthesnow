@@ -1,22 +1,18 @@
 # frozen_string_literal: true
 
+require 'geo/coord'
 require 'http'
 require 'nokogiri'
 require 'ostruct'
-require 'geo/coord'
+require 'parallel'
 
 module FollowTheSnow
   module Scrape
     Wikipedia = Struct.new(:url, :logger, keyword_init: true) do
-      include Enumerable
-
-      def each(&block)
-        resorts(&block)
-      end
-
       def resorts
         doc = Nokogiri::HTML(HTTP.follow.timeout(10).get(url).to_s)
-        doc.css('#mw-content-text ul > li > a:first-child').map do |link|
+        links = doc.css('#mw-content-text ul > li > a:first-child')
+        Parallel.map(links, in_threads: 4) do |link|
           href = link['href']
           next if href =~ /Template|Category|Comparison|List|Former/i
 
@@ -49,7 +45,7 @@ module FollowTheSnow
                                     lng: geo.lng,
                                     url: url
                                   })
-          yield(resort) if block_given?
+          sleep(rand(0.0..1.0))
           resort
         end.compact
       end
