@@ -1,180 +1,275 @@
 name,closed,lat,lng,city,state,country,url
-Mohawk Mountain Ski Area,false,0.4183675e2,-0.7331342e2,Great Hollow Road,Connecticut,United States,http://www.mohawkmtn.com/
 Mount Southington,false,0.4158235e2,-0.7292587e2,Mount Southington,Connecticut,United States,http://www.mountsouthington.com
+Mohawk Mountain Ski Area,false,0.4183675e2,-0.7331342e2,Great Hollow Road,Connecticut,United States,http://www.mohawkmtn.com/
 Powder Ridge Ski Area,false,0.41502006e2,-0.72737172e2,Powder Hill Road,Connecticut,United States,http://powderridgepark.com/
 Ski Sundown,false,0.4188407e2,-0.7294523e2,Ski Sundown,Connecticut,United States,http://www.skisundown.com/
 Baker Mountain,false,0.4508472e2,-0.6990556e2,Baker Mountain Ski Area,Maine,United States,
 Big Rock,false,0.4652222e2,-0.6782778e2,Bigrock Mountain,Maine,United States,http://www.bigrockmaine.com/
-Big Squaw Mountain Resort,false,0.4550417e2,-0.6970556e2,Big Squaw Mountain Ski Resort,Maine,United States,
 Black Mountain of Maine,false,0.4458e2,-0.706175e2,Black Mountain,Maine,United States,http://www.skiblackmountain.org
-Camden Snow Bowl,false,0.44217216e2,-0.69134667e2,Sidecoundtry Sports,Maine,United States,http://www.camdensnowbowl.com/
+Big Squaw Mountain Resort,false,0.4550417e2,-0.6970556e2,Big Moose Township,Maine,United States,
 Eaton Mountain,false,0.4476806e2,-0.6961944e2,Eaton Mountain,Maine,United States,
+Camden Snow Bowl,false,0.44217216e2,-0.69134667e2,Sidecoundtry Sports,Maine,United States,http://www.camdensnowbowl.com/
+Hermon,false,0.4481e2,-0.6891333e2,Route 2,Maine,United States,https://www.hermonmaine.gov
 Lonesome Pine Trails,false,0.4723278e2,-0.6859306e2,Fort Kent Mills,Maine,United States,
 Lost Valley Ski Area,false,0.44136e2,-0.70281e2,Auburn,Maine,United States,http://www.lostvalleyski.com/index.html
 Ski Mount Abram,false,0.4437917e2,-0.7070694e2,Mt. Abram,Maine,United States,http://www.mtabram.com
+Lee,false,0.4536e2,-0.6828639e2,Arab Road,Maine,United States,
 Pleasant Mountain Ski Area,false,0.4405833e2,-0.7081528e2,Base Lodge,Maine,United States,http://www.pleasantmountain.com
 Powderhouse Hill,false,0.4323694e2,-0.7080222e2,Agamenticus Road,Maine,United States,http://www.powderhousehill.com/
-Saddleback Maine,false,0.4493667e2,-0.7050306e2,Madrid Township,Maine,United States,http://www.saddlebackmaine.com
+Presque Isle,false,0.4667944e2,-0.6800222e2,Presque Isle,Maine,United States,
+Saddleback Maine,false,0.4493667e2,-0.7050306e2,Sandy River Plantation,Maine,United States,http://www.saddlebackmaine.com
 Sugarloaf,false,0.4503139e2,-0.7031306e2,Carrabassett Valley,Maine,United States,http://www.sugarloaf.com/
 Sunday River,false,0.444734e2,-0.708569e2,South Ridge Base Lodge,Maine,United States,http://www.sundayriver.com/
 Titcomb Mountain,false,0.4465e2,-0.7017083e2,Titcomb Mountain Ski Area,Maine,United States,http://www.titcombmountain.com/
-Berkshire East Ski Resort,false,0.4262083e2,-0.7287694e2,Berkshire East Ski Area,Massachusetts,United States,http://www.berkshireeast.com/
+Berkshire East Ski Resort,false,0.4262083e2,-0.7287694e2,Charlemont,Massachusetts,United States,http://www.berkshireeast.com/
 Blue Hills Ski Area,false,0.4221528e2,-0.7111917e2,Accord Path,Massachusetts,United States,https://www.bluehillsboston.com/
 Bousquet Mountain,false,0.424171e2,-0.732788e2,Pittsfield,Massachusetts,United States,https://bousquetmountain.com/
+Easton Ski Area,false,0.425387e2,-0.725938e2,Deerfield,Massachusetts,United States,http://www.eaglebrook.org/
 Ski Butternut,false,0.4217806e2,-0.7331694e2,Ski Butternut,Massachusetts,United States,http://www.skibutternut.com
-Easton Ski Area,false,0.425387e2,-0.725938e2,Pine Nook Road,Massachusetts,United States,http://www.eaglebrook.org/
-Jiminy Peak,false,0.4255083e2,-0.7329083e2,Trail D,Massachusetts,United States,http://jiminypeak.com/
+Jiminy Peak,false,0.4255083e2,-0.7329083e2,Hancock,Massachusetts,United States,http://jiminypeak.com/
+Williamstown,false,0.4271194e2,-0.7320417e2,Morgan Hall,Massachusetts,United States,http://williamstownma.gov/
 Nashoba Valley Ski Area,false,0.42541975e2,-0.714441028e2,Nashoba Ski Area Road,Massachusetts,United States,http://www.skinashoba.com/
-Otis Ridge,false,0.421964e2,-0.730988e2,Monterey Road,Massachusetts,United States,https://otisridge.com/
+Otis Ridge,false,0.421964e2,-0.730988e2,Otis,Massachusetts,United States,https://otisridge.com/
 Ski Bradford,false,0.4274361e2,-0.7105889e2,Haverhill,Massachusetts,United States,http://skibradford.com/
 Ski Ward,false,0.4230556e2,-0.71675e2,West Main Street,Massachusetts,United States,http://www.skiward.com/
 Wachusett Mountain,false,0.4249944e2,-0.7188639e2,Balance Rock Road,Massachusetts,United States,http://www.wachusett.com
 Arrowhead Recreation Area,false,0.4336278e2,-0.7233333e2,Claremont,New Hampshire,United States,http://www.arrowheadnh.com
-Attitash Mountain Resort,false,0.4408222e2,-0.7122972e2,Attitash Pedestrian Tunnel,New Hampshire,United States,http://www.attitash.com
-Black Mountain Ski Area,false,0.4416833e2,-0.7116444e2,Black Mountain Road,New Hampshire,United States,http://www.blackmt.com/
-Bretton Woods Mountain Resort,false,0.4425972e2,-0.7146222e2,Crawford Ridge Road,New Hampshire,United States,http://brettonwoods.com
-Cannon Mountain Ski Area,false,0.4415778e2,-0.7169889e2,Short Trail,New Hampshire,United States,http://www.cannonmt.com
+Attitash Mountain Resort,false,0.4408222e2,-0.7122972e2,Bartlett,New Hampshire,United States,http://www.attitash.com
+Black Mountain Ski Area,false,0.4416833e2,-0.7116444e2,Jackson,New Hampshire,United States,http://www.blackmt.com/
+Bretton Woods Mountain Resort,false,0.4425972e2,-0.7146222e2,Carroll,New Hampshire,United States,http://brettonwoods.com
+Cannon Mountain Ski Area,false,0.4415778e2,-0.7169889e2,Franconia,New Hampshire,United States,http://www.cannonmt.com
 Cranmore Mountain Resort,false,0.4405639e2,-0.7111e2,Fairbank Lodge,New Hampshire,United States,http://www.cranmore.com/
-Crotched Mountain,false,0.4299829411e2,-0.718737123e2,Peak Trail,New Hampshire,United States,
-Dartmouth Skiway,false,0.4378694e2,-0.7210083e2,Grafton Turnpike,New Hampshire,United States,http://skiway.dartmouth.edu
-Granite Gorge Ski Area,false,0.4297083e2,-0.7221222e2,Main Lodge,New Hampshire,United States,http://granitegorge.com
-Gunstock Mountain Resort,false,0.4354139e2,-0.713675e2,Panorama Drive,New Hampshire,United States,http://www.gunstock.com
-King Pine,false,0.4387139e2,-0.7108944e2,Hoyt Lane,New Hampshire,United States,http://www.kingpine.com/
-Loon Mountain,false,0.4403597e2,-0.7162144e2,Brookway,New Hampshire,United States,
+Crotched Mountain,false,0.4299829411e2,-0.718737123e2,Francestown,New Hampshire,United States,
+Dartmouth Skiway,false,0.4378694e2,-0.7210083e2,Lyme,New Hampshire,United States,http://skiway.dartmouth.edu
+Granite Gorge Ski Area,false,0.4297083e2,-0.7221222e2,Roxbury,New Hampshire,United States,http://granitegorge.com
+Gunstock Mountain Resort,false,0.4354139e2,-0.713675e2,Gilford,New Hampshire,United States,http://www.gunstock.com
+King Pine,false,0.4387139e2,-0.7108944e2,Eaton,New Hampshire,United States,http://www.kingpine.com/
+Loon Mountain,false,0.4403597e2,-0.7162144e2,Lincoln,New Hampshire,United States,
 McIntyre Ski Area,false,0.43005e2,-0.7144e2,Manchester,New Hampshire,United States,http://www.mcintyreskiarea.com
-Mount Sunapee Resort,false,0.4333056e2,-0.7208e2,Mount Sunapee,New Hampshire,United States,http://www.mountsunapee.com
-Pats Peak,false,0.4316333e2,-0.7179583e2,Flanders Road,New Hampshire,United States,http://www.patspeak.com
-Ragged Mountain Resort,false,0.4348444e2,-0.7184222e2,Ragged Mountain Resort,New Hampshire,United States,http://www.raggedmountainresort.com/
+Mount Prospect Ski Tow,false,0.444572e2,-0.715769e2,Prospect Street,New Hampshire,United States,https://www.mountprospectskitow.com
+Mount Sunapee Resort,false,0.4333056e2,-0.7208e2,Newbury,New Hampshire,United States,http://www.mountsunapee.com
+Pats Peak,false,0.4316333e2,-0.7179583e2,Henniker,New Hampshire,United States,http://www.patspeak.com
+Ragged Mountain Resort,false,0.4348444e2,-0.7184222e2,Danbury,New Hampshire,United States,http://www.raggedmountainresort.com/
 Tenney Mountain Ski Resort,false,0.4373778e2,-0.7178361e2,wind farm,New Hampshire,United States,http://www.skitenney.com
 The Balsams Grand Resort Hotel,false,0.4487056e2,-0.7130778e2,Spur Road,New Hampshire,United States,
-Waterville Valley Resort,false,0.4396528e2,-0.7152778e2,Kids Kamp Drop-off Driveway,New Hampshire,United States,http://www.waterville.com
-Whaleback,false,0.4360139e2,-0.7218139e2,Whaleback Mountain,New Hampshire,United States,http://www.whaleback.com/
+Waterville Valley Resort,false,0.4396528e2,-0.7152778e2,Waterville Valley,New Hampshire,United States,http://www.waterville.com
+Whaleback,false,0.4360139e2,-0.7218139e2,Enfield,New Hampshire,United States,http://www.whaleback.com/
 Wildcat Mountain Ski Area,false,0.4426306e2,-0.7123833e2,Thompson Falls Trail,New Hampshire,United States,http://www.skiwildcat.com
 Yawgoo Valley,false,0.4151694e2,-0.7152944e2,Yawgoo Valley Road,Rhode Island,United States,http://www.yawgoo.com
-Brownsville,false,0.4346861e2,-0.7247083e2,Brownsville-Hartland Road,Vermont,United States,http://www.westwindsorvt.govoffice2.com
-Bellows Falls,false,0.4313333e2,-0.7244389e2,Westminster Street,Vermont,United States,https://www.rockinghamvt.org/
-Bolton Valley,false,0.4441583e2,-0.7286972e2,Jake,Vermont,United States,http://www.boltonvalley.com/
-Bromley Mountain,false,0.4322778e2,-0.7293861e2,Upper Twister,Vermont,United States,
-Burke Mountain,false,0.4457083e2,-0.7189317e2,Profile Trail,Vermont,United States,
+Brownsville,false,0.4346861e2,-0.7247083e2,West Windsor,Vermont,United States,http://www.westwindsorvt.govoffice2.com
+Bellows Falls,false,0.4313333e2,-0.7244389e2,Rockingham,Vermont,United States,https://www.rockinghamvt.org/
+Bolton Valley,false,0.4441583e2,-0.7286972e2,Bolton,Vermont,United States,http://www.boltonvalley.com/
+Bromley Mountain,false,0.4322778e2,-0.7293861e2,Peru,Vermont,United States,
 Skiing Cochrans,false,0.44396e2,-0.72982e2,Richmond,Vermont,United States,
-Strafford,false,0.4386583e2,-0.7237722e2,Justin Morrill Memorial Highway,Vermont,United States,
-St. Albans,false,0.4481028e2,-0.7315222e2,Maquam Shore Road,Vermont,United States,http://www.stalbanstown.com
-Haystack Mountain Ski Area,false,0.429226028e2,-0.728945694e2,The Hermitage Club Base Lodge & Clubhouse,Vermont,United States,http://www.hermitageclub.com/
-Jay Peak Resort,false,0.4492944e2,-0.7253222e2,Long Trail,Vermont,United States,http://www.jaypeakresort.com/
-Killington Ski Resort,false,0.43626e2,-0.72798e2,Killington Road,Vermont,United States,http://www.killington.com/
-Brattleboro,false,0.4285e2,-0.7258222e2,Williams Street,Vermont,United States,
+Burke Mountain,false,0.4457083e2,-0.7189317e2,Burke,Vermont,United States,
+Strafford,false,0.4386583e2,-0.7237722e2,Strafford,Vermont,United States,
+St. Albans,false,0.4481028e2,-0.7315222e2,Saint Albans,Vermont,United States,http://www.stalbanstown.com
+Jay Peak Resort,false,0.4492944e2,-0.7253222e2,Jay,Vermont,United States,http://www.jaypeakresort.com/
+Haystack Mountain Ski Area,false,0.429226028e2,-0.728945694e2,Wilmington,Vermont,United States,http://www.hermitageclub.com/
+Killington Ski Resort,false,0.43626e2,-0.72798e2,Killington,Vermont,United States,http://www.killington.com/
 Lyndon,false,0.4453583e2,-0.7200528e2,Lyndonville,Vermont,United States,http://www.lyndonvt.org
-Mad River Glen,false,0.4420083e2,-0.7292444e2,Easy Way,Vermont,United States,http://www.madriverglen.com
-Magic Mountain Ski Area,false,0.4319278e2,-0.7276e2,Magic Maintenance Trail,Vermont,United States,http://www.magicmtn.com
-Middlebury College Snow Bowl,false,0.4393917e2,-0.729575e2,Neil Starr Shelter,Vermont,United States,
-Mount Snow,false,0.42959e2,-0.72922e2,Summit Work Road,Vermont,United States,https://www.mountsnow.com
-Northeast Slopes,false,0.440725e2,-0.7225028e2,Vermont Route 25,Vermont,United States,https://northeastslopes.org
-Okemo Mountain,false,0.4340139e2,-0.7271667e2,The Mountain Lodge at Okemo,Vermont,United States,http://www.okemo.com/
-Pico Mountain,false,0.4366167e2,-0.728425e2,Alpine Drive,Vermont,United States,http://www.picomountain.com/
-Plymouth Notch,false,0.435299e2,-0.727388e2,Vermont Route 100A,Vermont,United States,
-Quechee Ski Area,false,0.436572e2,-0.724431e2,Quechee Main Street,Vermont,United States,
-Saskadena Six,false,0.4366389e2,-0.7254444e2,Saskadena Six Base Lodge,Vermont,United States,http://saskadenasix.com
-Smugglers' Notch Resort,false,0.4457278e2,-0.7277611e2,Vermont Route 108 South,Vermont,United States,http://www.smuggs.com
+Brattleboro,false,0.4285e2,-0.7258222e2,Williams Street,Vermont,United States,
+Mad River Glen,false,0.4420083e2,-0.7292444e2,Fayston,Vermont,United States,http://www.madriverglen.com
+Middlebury College Snow Bowl,false,0.4393917e2,-0.729575e2,Hancock,Vermont,United States,
+Magic Mountain Ski Area,false,0.4319278e2,-0.7276e2,Londonderry,Vermont,United States,http://www.magicmtn.com
+Mount Snow,false,0.42959e2,-0.72922e2,Dover,Vermont,United States,https://www.mountsnow.com
+Northeast Slopes,false,0.440725e2,-0.7225028e2,Corinth,Vermont,United States,https://northeastslopes.org
+Okemo Mountain,false,0.4340139e2,-0.7271667e2,Ludlow,Vermont,United States,http://www.okemo.com/
+Pico Mountain,false,0.4366167e2,-0.728425e2,Killington,Vermont,United States,http://www.picomountain.com/
+Plymouth Notch,false,0.435299e2,-0.727388e2,Plymouth,Vermont,United States,
+Quechee Ski Area,false,0.436572e2,-0.724431e2,Hartford,Vermont,United States,
+Saskadena Six,false,0.4366389e2,-0.7254444e2,Pomfret,Vermont,United States,http://saskadenasix.com
+Smugglers' Notch Resort,false,0.4457278e2,-0.7277611e2,Cambridge,Vermont,United States,http://www.smuggs.com
 Stowe Mountain Resort,false,0.4453194e2,-0.727875e2,Crossover,Vermont,United States,http://www.stowe.com
-Stratton Mountain Resort,false,0.4311417e2,-0.7290667e2,Founders Hill Road,Vermont,United States,https://www.stratton.com/
-Sugarbush Resort,false,0.4413722e2,-0.7290667e2,Castlerock Runout,Vermont,United States,http://www.sugarbush.com
+Stratton Mountain Resort,false,0.4311417e2,-0.7290667e2,Stratton,Vermont,United States,https://www.stratton.com/
+Sugarbush Resort,false,0.4413722e2,-0.7290667e2,Warren,Vermont,United States,http://www.sugarbush.com
 Wisp Ski Resort,false,0.3955806e2,-0.7936306e2,McHenry,Maryland,United States,
 Big Snow American Dream,false,0.4081111e2,-0.7407e2,East Rutherford,New Jersey,United States,http://bigsnowamericandream.com
 Campgaw Mountain,false,0.410542633e2,-0.741993123e2,Campgaw Mountain Reservation,New Jersey,United States,
 Hidden Valley,false,0.411856e2,-0.744806e2,Breakneck Road,New Jersey,United States,
 Mountain Creek,false,0.41181e2,-0.74513e2,Red Lodge Drive,New Jersey,United States,http://www.mountaincreek.com
+Plattsburgh,false,0.4469528e2,-0.7345833e2,City of Plattsburgh,New York,United States,
 Belleayre Mountain,false,0.421422139e2,-0.74510778e2,Town of Shandaken,New York,United States,https://www.belleayre.com
+Sodus,false,0.4323611e2,-0.7706806e2,Village of Sodus,New York,United States,
+Tupper Lake,false,0.441625e2,-0.7447528e2,Town of Tupper Lake,New York,United States,http://www.tupperlakeny.gov
 Bristol Mountain Ski Resort,false,0.42745e2,-0.77404444e2,North Star Village,New York,United States,http://www.bristolmountain.com/
 Catamount Ski Area,false,0.42171457e2,-0.73477764e2,Town of Hillsdale,New York,United States,http://www.catamountski.com/
-Gore Mountain,false,0.4367222e2,-0.7400694e2,Town of Johnsburg,New York,United States,http://www.goremountain.com/
+Colden,false,0.4264417e2,-0.7868472e2,Town of Colden,New York,United States,http://townofcolden.com
+Watertown,false,0.43975611e2,-0.75906389e2,City of Watertown,New York,United States,http://www.watertown-ny.gov
 Greek Peak Mountain Resort,false,0.42505e2,-0.7614722e2,Town of Virgil,New York,United States,https://www.greekpeak.net
+Gore Mountain,false,0.4367222e2,-0.7400694e2,Town of Johnsburg,New York,United States,http://www.goremountain.com/
+Warrensburg,false,0.4349667e2,-0.73775e2,Warrensburg,New York,United States,
 Holiday Valley,false,0.422625e2,-0.7866806e2,Holiday Valley Lodge,New York,United States,http://www.holidayvalley.com/
-Hunter Mountain,false,0.42200278e2,-0.74230278e2,Trail 6,New York,United States,https://www.huntermtn.com
+Monticello,false,0.4165e2,-0.74683e2,Spring Street,New York,United States,http://www.villageofmonticello.com/
+Ellicottville,false,0.4227472e2,-0.7867222e2,Village of Ellicottville,New York,United States,http://www.ellicottvillegov.com
+Hunter Mountain,false,0.42200278e2,-0.74230278e2,Fire Tower Trail,New York,United States,https://www.huntermtn.com
+Colden,false,0.4264417e2,-0.7868472e2,Town of Colden,New York,United States,http://townofcolden.com
+Truxton,false,0.4271194e2,-0.7602861e2,State Route 13,New York,United States,http://www.townoftruxton.com
+Warwick,false,0.4126111e2,-0.7435528e2,Colonial Avenue,New York,United States,
 McCauley Mountain,false,0.436925676e2,-0.749612837e2,McCauley Mountain Ski Area,New York,United States,
+Speculator,false,0.4352694e2,-0.7436306e2,Town of Indian Lake,New York,United States,https://www.villageofspeculator.com/
 Peek'n Peak,false,0.420625e2,-0.7973667e2,Town of Clymer,New York,United States,http://www.pknpk.com/
+Caroga,false,0.4314333e2,-0.7449e2,Vrooman Road,New York,United States,http://townofcaroga.com
 Plattekill Mountain,false,0.42290251e2,-0.74653678e2,Town of Roxbury,New York,United States,http://plattekill.com/
+Tully,false,0.427975e2,-0.7610639e2,Village of Tully,New York,United States,
+Grove,false,0.4243639e2,-0.7786806e2,Grove,New York,United States,http://www.townofgrove.com
+Turin,false,0.4362833e2,-0.7541139e2,North State Street,New York,United States,
 Thunder Ridge Ski Area,false,0.4150722e2,-0.7358111e2,Birch Hill Road,New York,United States,http://www.thunderridgeski.com/
 Titus Mountain,false,0.4476333e2,-0.7423528e2,Titus Mountain Family Ski Center,New York,United States,https://www.titusmountain.com/
+Fabius,false,0.4283472e2,-0.7598472e2,Main Street,New York,United States,
 West Mountain,false,0.4328556e2,-0.7372833e2,West Mountain Road,New York,United States,http://www.westmtn.net/
+Easton,false,0.4303028e2,-0.7353722e2,Town of Easton,New York,United States,
 Whiteface Mountain,false,0.4436583e2,-0.7390278e2,Wilmington Trail,New York,United States,http://www.whiteface.com
-Windham Mountain,false,0.4229167e2,-0.7425944e2,Town of Windham,New York,United States,http://www.windhammountain.com/
+Windham Mountain Club,false,0.4229167e2,-0.7425944e2,Town of Windham,New York,United States,http://www.windhammountain.com/
+Westernville,false,0.4330556e2,-0.7538306e2,Gifford Hill Road,New York,United States,
 Bear Creek Mountain Resort,false,0.4047611e2,-0.7562583e2,Longswamp Township,Pennsylvania,United States,http://www.bcmr.com/
 Blue Mountain Resort,false,0.4082222e2,-0.7551333e2,Lower Towamensing Township,Pennsylvania,United States,https://www.skibluemt.com/
+Claysburg,false,0.4029306e2,-0.7845194e2,Greenfield Township,Pennsylvania,United States,http://www.claysburgpa.com
 Boyce Park,false,0.4046556e2,-0.7974528e2,Yellow / Black Dot Trail,Pennsylvania,United States,
+Hazleton,false,0.4095889e2,-0.7597444e2,Hazleton,Pennsylvania,United States,http://www.hazletoncity.org/
 Camelback Mountain Resort,false,0.4105139e2,-0.7535528e2,Pocono Township,Pennsylvania,United States,
-Elk Mountain Ski Area,false,0.41721e2,-0.75559e2,Elk Mountain Road,Pennsylvania,United States,http://www.elkskier.com
 Hidden Valley Resort,false,0.40058042e2,-0.79258277e2,Jefferson Township,Pennsylvania,United States,http://www.hiddenvalleyresort.com
+Elk Mountain Ski Area,false,0.41721e2,-0.75559e2,Elk Mountain Road,Pennsylvania,United States,http://www.elkskier.com
 Jack Frost–Big Boulder Ski Resort,false,0.41111e2,-0.75652e2,Kidder Township,Pennsylvania,United States,https://www.jfbb.com
 Liberty Mountain Resort,false,0.397635e2,-0.77375e2,Carroll Valley,Pennsylvania,United States,http://www.libertymountainresort.com
 Montage Mountain Ski Resort,false,0.413533e2,-0.756592e2,Scranton,Pennsylvania,United States,
-Mount Pleasant of Edinboro,false,0.4185222e2,-0.8007389e2,Mount Pleasant of Edinboro,Pennsylvania,United States,
+Mount Pleasant of Edinboro,false,0.4185222e2,-0.8007389e2,Mount Pleasant Road,Pennsylvania,United States,
 Seven Springs Mountain Resort,false,0.4002306e2,-0.7929278e2,Seven Springs,Pennsylvania,United States,http://www.7springs.com
 Shawnee Mountain Ski Area,false,0.4104083e2,-0.7508333e2,Middle Smithfield Township,Pennsylvania,United States,http://www.shawneemt.com
 Ski Big Bear,false,0.4152333e2,-0.75025e2,Lackawaxen,Pennsylvania,United States,
 Roundtop Mountain Resort,false,0.40108e2,-0.76926e2,Warrington Township,Pennsylvania,United States,http://www.skiroundtop.com
+Coudersport,false,0.4177389e2,-0.7801861e2,Ludwig Lane,Pennsylvania,United States,
 Schwenksville,false,0.4025639e2,-0.75465e2,Schwenksville,Pennsylvania,United States,
+Morris,false,0.41595e2,-0.7729222e2,Morris Township,Pennsylvania,United States,
 Tussey Mountain,false,0.407682e2,-0.77752e2,Bear Meadows Road,Pennsylvania,United States,http://www.tusseymountain.com
 Whitetail Ski Resort,false,0.3974167e2,-0.7793278e2,Mercersburg,Pennsylvania,United States,http://www.skiwhitetail.com
+Mentone,false,0.3457222e2,-0.8558028e2,Mentone,Alabama,United States,
 Appalachian Ski Mountain,false,0.36174e2,-0.81662e2,Galax Circle,North Carolina,United States,http://www.appskimtn.com/
+Sapphire,false,0.3510694e2,-0.8300306e2,Upper Whitewater Road,North Carolina,United States,
 Cataloochee Ski Area,false,0.35563e2,-0.8309e2,Maggie Valley,North Carolina,United States,http://www.cataloochee.com
-Wolf Ridge Ski Resort,false,0.35955e2,-0.82509e2,Wolf Ridge Ski Resort,North Carolina,United States,http://www.skiwolfridgenc.com/
+Beech Mountain,false,0.3620639e2,-0.8188306e2,Hilltop Road,North Carolina,United States,http://www.townofbeechmountain.com/
+Wolf Ridge Ski Resort,false,0.35955e2,-0.82509e2,Wolf Ridge Ski Resort,North Carolina,United States,https://www.hatleypointe.com//
+Sugar Mountain,false,0.3612639e2,-0.8186472e2,Sugar Mountain,North Carolina,United States,
 Ober Gatlinburg,false,0.3570306e2,-0.8355778e2,Ober Gatlinburg Lodge,Tennessee,United States,https://obergatlinburg.com
 Bryce Resort,false,0.388175e2,-0.7876583e2,Basye,Virginia,United States,http://www.bryceresort.com/Home.aspx
+College Station,false,0.3060139e2,-0.9631444e2,College Station,Texas,United States,http://www.cstx.gov
 Massanutten Mountain,false,0.38643028e2,-0.78612028e2,US 211,Virginia,United States,
 The Omni Homestead Resort,false,0.379954722e2,-0.798296444e2,Hot Springs,Virginia,United States,
 Wintergreen Resort,false,0.3793e2,-0.7894167e2,Fairway Oaks Lane,Virginia,United States,http://www.wintergreenresort.com/
 Canaan Valley Resort State Park,false,0.3902361e2,-0.7946583e2,Canaan Valley Resort State Park,West Virginia,United States,https://wvstateparks.com/park/canaan-valley-resort-state-park/
+Wheeling,false,0.4007028e2,-0.8069861e2,Wheeling,West Virginia,United States,
 Snowshoe Mountain,false,0.3840889e2,-0.7999472e2,Snowshoe Drive,West Virginia,United States,http://www.snowshoemtn.com/
+Davis,false,0.3913111e2,-0.7946639e2,Blackwater Avenue,West Virginia,United States,
 Winterplace Ski Resort,false,0.3759e2,-0.81115e2,Tower Road,West Virginia,United States,http://www.winterplace.com
+Lisle,false,0.417925e2,-0.8808833e2,University Lane,Illinois,United States,http://www.villageoflisle.org/
+Algonquin,false,0.4216278e2,-0.883025e2,Huntington Drive,Illinois,United States,http://www.algonquin.org
 Ski Snowstar,false,0.41425e2,-0.907438e2,126th Street West,Illinois,United States,
-Paoli Peaks,false,0.3855778e2,-0.8651028e2,Paoli Peaks,Indiana,United States,http://www.paolipeaks.com
+Bartlett,false,0.4199528e2,-0.8818556e2,North Oak Avenue,Illinois,United States,http://village.bartlett.il.us
 Perfect North Slopes,false,0.39149208e2,-0.84886581e2,Perfect Place Lane,Indiana,United States,http://www.perfectnorth.com/
+Paoli Peaks,false,0.3855778e2,-0.8651028e2,Paoli Peaks,Indiana,United States,http://www.paolipeaks.com
+Crescent,false,0.4136361e2,-0.9585889e2,Crescent,Iowa,United States,
+Boone,false,0.4206111e2,-0.9388611e2,5th Street,Iowa,United States,
+Des Moines,false,0.4159083e2,-0.9362083e2,Des Moines,Iowa,United States,http://www.dmgov.org/
+White Lake Township,false,0.4264778e2,-0.8349639e2,Serra Drive,Michigan,United States,
+Dubuque,false,0.425e2,-0.9069e2,Dubuque,Iowa,United States,
 Big Powderhorn Mountain,false,0.4650417e2,-0.9009611e2,Musket Court,Michigan,United States,https://bigpowderhorn.net/
+Otsego,false,0.4246056e2,-0.8569639e2,East Allegan Street,Michigan,United States,https://www.cityofotsego.org/
 Boyne Mountain Resort,false,0.4516389e2,-0.8493278e2,Village Lane,Michigan,United States,http://www.boyne.com/BoyneMountain/
+Cannonsburg,false,0.4305389e2,-0.8546972e2,Cannonsburg Road Northeast,Michigan,United States,
 Caberfae Peaks Ski & Golf Resort,false,0.4424972e2,-0.85725e2,Prospector Drive,Michigan,United States,http://caberfaepeaks.com
+Boyne City,false,0.4521222e2,-0.8501389e2,Boyne City,Michigan,United States,http://www.cityofboynecity.com/
 Crystal Mountain,false,0.4452e2,-0.8599222e2,Crystal Mountain,Michigan,United States,http://www.crystalmountain.com
+Traverse City,false,0.4476806e2,-0.8562222e2,Traverse City,Michigan,United States,http://www.traversecitymi.gov
 The Highlands at Harbor Springs,false,0.4547083e2,-0.8493472e2,Boyne Highlands Drive,Michigan,United States,https://www.highlandsharborsprings.com/
+Glen Arbor,false,0.448975e2,-0.8598528e2,Glen Arbor,Michigan,United States,
+Mont Ripley,false,0.4712917e2,-0.8855944e2,Burt Street,Michigan,United States,
 Marquette Mountain,false,0.46508e2,-0.8742e2,Marquette,Michigan,United States,http://www.marquettemountain.com
-Mont Ripley,false,0.4712917e2,-0.8855944e2,Mont Ripley,Michigan,United States,
 Mount Bohemia,false,0.4739167e2,-0.8801361e2,Keweenaw County,Michigan,United States,http://www.mtbohemia.com/
 Mount Brighton,false,0.4253806e2,-0.8380694e2,The Golf Club at Mt. Brighton,Michigan,United States,
+Traverse City,false,0.4476806e2,-0.8562222e2,Traverse City,Michigan,United States,http://www.traversecitymi.gov
+Holly,false,0.4279194e2,-0.8362778e2,United States Postal Service,Michigan,United States,http://www.hollyvillage.org/
+Charlevoix,false,0.4531806e2,-0.8525833e2,Bridge Park Drive,Michigan,United States,http://www.cityofcharlevoix.org/
+Ironwood,false,0.4645583e2,-0.9015944e2,East McLeod Avenue,Michigan,United States,https://cityofironwood.org/
 Mulligan's Hollow Ski Bowl,false,0.430564e2,-0.862393e2,Mulligan's Hollow Rec Area,Michigan,United States,
+Norway,false,0.4578917e2,-0.8790444e2,Norway,Michigan,United States,https://www.norwaymi.gov/
 Nub's Nob,false,0.4547e2,-0.84903e2,Harbor Springs,Michigan,United States,http://nubsnob.com
-Pine Knob,false,0.427422524e2,-0.833671629e2,Village of Clarkston,Michigan,United States,
+Gaylord,false,0.4502472e2,-0.8467667e2,South Court Alley,Michigan,United States,https://cityofgaylord.com/
+Petoskey,false,0.4537333e2,-0.8495528e2,Downtown Greenway,Michigan,United States,http://www.petoskey.us/
+Pine Knob,false,0.427422524e2,-0.833671629e2,Clarkston,Michigan,United States,
+Iron Mountain,false,0.458225e2,-0.8806417e2,North Stephenson Avenue,Michigan,United States,http://www.cityofironmountain.com
 Porcupine Mountains Ski Area,false,0.468e2,-0.8967e2,Union Spring Trail,Michigan,United States,https://porkies.ski/
+Bellaire,false,0.4497361e2,-0.8520583e2,Bellaire,Michigan,United States,https://www.bellairemichigan.com/
 Ski Brule,false,0.46028e2,-0.88701e2,Alpine Highlands Road,Michigan,United States,
+Harrison,false,0.4402111e2,-0.8480056e2,Harrison,Michigan,United States,https://cityofharrisonmi.org/
 Snow River Mountain Resort,false,0.465e2,-0.8997083e2,Sugar Maple Chalet,Michigan,United States,http://www.snowriver.com
+Newberg Township,false,0.4193306e2,-0.8580917e2,Cass County,Michigan,United States,https://newbergtwp.com/
 Timber Ridge Ski Area,false,0.42391711e2,-0.85779052e2,23 1/2 Street,Michigan,United States,
 Afton Alps,false,0.4485556e2,-0.9278917e2,67th Street South,Minnesota,United States,http://www.aftonalps.com/
+Gaylord,false,0.4502472e2,-0.8467667e2,South Court Alley,Michigan,United States,https://cityofgaylord.com/
+Kensington,false,0.4577778e2,-0.9569556e2,Kensington,Minnesota,United States,http://www.kensingtonmn.com/
 Buck Hill,false,0.44724e2,-0.93283e2,Buck Hill Road,Minnesota,United States,http://www.buckhill.com
 Buena Vista Ski Area,false,0.4765806e2,-0.9487917e2,Buena Vista Acsess Road,Minnesota,United States,
+Duluth,false,0.4678694e2,-0.9209806e2,Duluth,Minnesota,United States,https://duluthmn.gov/
+Wabasha,false,0.4438345e2,-0.920316e2,Pembroke Avenue,Minnesota,United States,
 Hyland Hills Ski Area,false,0.44844e2,-0.93364e2,HSSA Chalet,Minnesota,United States,https://www.threeriversparks.org/location/hyland-hills-ski-area
+Detroit Lakes,false,0.4681722e2,-0.9584528e2,Holmes Street East,Minnesota,United States,http://www.cityofdetroitlakes.com
 Lutsen Mountains,false,0.47664e2,-0.90714e2,Lutsen Mountains,Minnesota,United States,http://www.lutsen.com/winter/
 Mount Kato,false,0.4413139e2,-0.9403639e2,Mount Kato Service Road,Minnesota,United States,http://www.mountkato.com
+Coleraine,false,0.4728889e2,-0.9342778e2,Coleraine,Minnesota,United States,
+Kimball,false,0.4531444e2,-0.9430083e2,Kimball,Minnesota,United States,https://www.ci.kimball.mn.us/
+Nisswa,false,0.4649028e2,-0.942975e2,Nisswa,Minnesota,United States,
 Spirit Mountain,false,0.4671944e2,-0.9221806e2,Duluth,Minnesota,United States,http://www.spiritmt.com
 Welch Village,false,0.4456056e2,-0.9272722e2,Cannon Valley Trail,Minnesota,United States,http://www.welchvillage.com
 Wild Mountain,false,0.4548889e2,-0.9270556e2,Taylors Falls,Minnesota,United States,http://www.wildmountain.com/
-Hidden Valley Ski Area,false,0.38535578e2,-0.9065287e2,Hidden Valley,Missouri,United States,http://www.hiddenvalleyski.com/
-Snow Creek,false,0.39468651e2,-0.94971964e2,Snow Creek Drive,Missouri,United States,http://www.skisnowcreek.com/
+Hidden Valley Ski Area,false,0.38535578e2,-0.9065287e2,Hidden Valley Drive,Missouri,United States,http://www.hiddenvalleyski.com/
 Bottineau Winter Park,false,0.48951e2,-0.100473e3,Bottineau Winter Park,North Dakota,United States,http://www.skibwp.com
+Snow Creek,false,0.39468651e2,-0.94971964e2,Snow Creek Drive,Missouri,United States,http://www.skisnowcreek.com/
 Frost Fire Park,false,0.48912e2,-0.98068e2,Walhalla,North Dakota,United States,http://www.frostfirepark.org
 Huff Hills,false,0.4662694e2,-0.10072333e3,Ski Lodge,North Dakota,United States,
+Concord Township,false,0.4167167e2,-0.8125083e2,Pinehill Road,Ohio,United States,https://concordtwp.com/
 Alpine Valley Ski Area,false,0.415303e2,-0.812662e2,Chesterland,Ohio,United States,http://www.alpinevalleyohio.com/
-Boston Mills/Brandywine Ski Resort,false,0.4126417e2,-0.81565e2,Riverview Road,Ohio,United States,http://www.bmbw.com
+Boston Mills/Brandywine Ski Resorts,false,0.412648e2,-0.815644e2,Riverview Road,Ohio,United States,http://bmbw.com
 Mad River Mountain,false,0.403163167e2,-0.836805639e2,Valley Hi,Ohio,United States,http://www.skimadriver.com/
+Mansfield,false,0.4075e2,-0.82517e2,Mansfield,Ohio,United States,
 Mystic Miner Ski Resort,false,0.443084333e2,-0.1038184417e3,Deer Mount Road,South Dakota,United States,http://skimystic.com/main.php
 Great Bear Recreation Park,false,0.435821e2,-0.966649667e2,Sioux Falls,South Dakota,United States,http://www.greatbearpark.com
 Terry Peak,false,0.44329e2,-0.103835e3,Terry Summit Road,South Dakota,United States,http://www.terrypeak.com/
 Alpine Valley Resort,false,0.42736e2,-0.88428e2,East Troy,Wisconsin,United States,http://www.alpinevalleyresort.com
+Sussex,false,0.43135e2,-0.8822028e2,Main Street,Wisconsin,United States,http://villagesussex.org
+Hudson,false,0.4497194e2,-0.92745e2,Kinnickinnic Street,Wisconsin,United States,
+Middleton,false,0.4306028e2,-0.8957167e2,Town of Middleton,Wisconsin,United States,https://cityofmiddleton.us
+Merrillan,false,0.4444944e2,-0.908375e2,Merrillan,Wisconsin,United States,
+Rhinelander,false,0.4563944e2,-0.8941222e2,West Rives Street,Wisconsin,United States,http://www.rhinelandercityhall.org
 Cascade Mountain,false,0.435039278e2,-0.895180167e2,I 90;I 94,Wisconsin,United States,http://www.cascademountain.com/
-Devil's Head Resort,false,0.4342306e2,-0.8962694e2,Devil's Head Resort,Wisconsin,United States,https://www.devilsheadresort.com/ski-resort-mountain-sauk-merrimac-wi-wisconsin/
+Bruce,false,0.4545722e2,-0.9127306e2,Bruce,Wisconsin,United States,
+Wisconsin Dells,false,0.436374e2,-0.897788e2,Deer Run Ridge,Wisconsin,United States,http://www.citywd.org/
+Franklin,false,0.4289917e2,-0.8800222e2,Tuckaway Country Club,Wisconsin,United States,http://www.franklinwi.gov
+Devil's Head Resort,false,0.4342306e2,-0.8962694e2,Bluff Road,Wisconsin,United States,https://www.devilsheadresort.com/ski-resort-mountain-sauk-merrimac-wi-wisconsin/
 Granite Peak Ski Area,false,0.4492861e2,-0.896825e2,Rib Mountain,Wisconsin,United States,http://www.skigranitepeak.com/
-Kettlebowl,false,0.45271323e2,-0.8890197883e2,Kettlebowl Ski Hill & Cross-country Trails,Wisconsin,United States,
+West Bend,false,0.43425e2,-0.8818333e2,Ziegler Office Building,Wisconsin,United States,http://www.ci.west-bend.wi.us
+Hubertus,false,0.4323667e2,-0.8822111e2,Hubertus Road,Wisconsin,United States,
+Kettlebowl,false,0.45271323e2,-0.8890197883e2,Kettlebowl Ski Hill & Cross-country Trails,Wisconsin,United States,https://kettlebowl.org
+Kewaunee County,false,0.4459e2,-0.8744e2,Summit Beach Drive,Wisconsin,United States,http://www.kewauneeco.org
+Florence,false,0.4592222e2,-0.8825167e2,Florence,Wisconsin,United States,
+Slinger,false,0.4332833e2,-0.8828333e2,Slinger,Wisconsin,United States,https://www.vi.slinger.wi.gov/
+Superior,false,0.4672056e2,-0.9210389e2,Tower Avenue,Wisconsin,United States,http://www.ci.superior.wi.us
+Lake Geneva,false,0.425925e2,-0.8843444e2,Geneva Street,Wisconsin,United States,
+Bayfield,false,0.468117e2,-0.9082e2,Bayfield,Wisconsin,United States,http://cityofbayfield.com
+La Crosse,false,0.4381333e2,-0.9123306e2,La Crosse,Wisconsin,United States,https://www.cityoflacrosse.org/
+Mount Morris,false,0.441125e2,-0.8918139e2,County Highway W,Wisconsin,United States,
+Navarino,false,0.4461111e2,-0.8849194e2,State Highway 156,Wisconsin,United States,
+Plymouth,false,0.4374917e2,-0.8797667e2,Division Street,Wisconsin,United States,http://www.plymouthgov.com
+Stevens Point,false,0.4452306e2,-0.8956028e2,Stevens Point,Wisconsin,United States,
+Kewaskum,false,0.4351417e2,-0.8822333e2,Kewaskum,Wisconsin,United States,http://village.kewaskum.wi.us
 Telemark Lodge,false,0.46190056e2,-0.91247639e2,Telemark Road,Wisconsin,United States,
-Trollhaugen,false,0.4535125e2,-0.9261801e2,Town of Osceola,Wisconsin,United States,
+Green Bay,false,0.4451333e2,-0.8801583e2,Green Bay,Wisconsin,United States,http://greenbaywi.gov
+Trollhaugen,false,0.4535125e2,-0.9261801e2,100th Avenue,Wisconsin,United States,
 Tyrol Basin,false,0.43042747e2,-0.8977772e2,Bohn Road,Wisconsin,United States,http://tyrolbasin.com
+Fort McCoy,false,0.4400972e2,-0.9068333e2,South K Street,Wisconsin,United States,
+Whitecap Mountains,false,0.46405e2,-0.9040361e2,Skye Drive,Wisconsin,United States,
 Wilmot Mountain,false,0.425e2,-0.8818889e2,Wilmot Mountain,Wisconsin,United States,http://www.wilmotmountain.com
 Arizona Snowbowl,false,0.3533e2,-0.111705e3,Humphreys Spur Trail,Arizona,United States,http://www.arizonasnowbowl.com
+Williams,false,0.3525944e2,-0.11215111e3,Williams,Arizona,United States,
 Mount Lemmon Ski Valley,false,0.3245222e2,-0.11078389e3,East Ski Run Road,Arizona,United States,http://www.skithelemmon.com/
 Sunrise Park Resort,false,0.3397333e2,-0.10956472e3,Sunrise Park Resort,Arizona,United States,https://www.sunrise.ski/
 Arapahoe Basin,false,0.3964167e2,-0.10587167e3,Argentine North Fork Trail,Colorado,United States,http://arapahoebasin.com
@@ -185,23 +280,27 @@ Snowmass,false,0.391956e2,-0.1069513e3,Snowmass Village,Colorado,United States,h
 Beaver Creek Resort,false,0.3963139e2,-0.10652167e3,Eagle County,Colorado,United States,http://www.beavercreek.com/
 Breckenridge Ski Resort,false,0.3948e2,-0.106067e3,One Ski Hill Place,Colorado,United States,http://www.breckenridge.com/
 Copper Mountain,false,0.3950167e2,-0.10615639e3,Copper Road,Colorado,United States,http://www.coppercolorado.com
-Crested Butte Mountain Resort,false,0.3889972e2,-0.106965e3,Mount Crested Butte,Colorado,United States,http://www.skicb.com
+Durango,false,0.37273267e2,-0.107871692e3,Durango,Colorado,United States,https://www.durangogov.org/
+Gunnison,false,0.3854444e2,-0.106926917e3,North Main Street,Colorado,United States,https://www.gunnisonco.gov/
 Echo Mountain,false,0.39685e2,-0.10551944e3,Malcolm mcalpine,Colorado,United States,https://echomntn.com/
+Crested Butte Mountain Resort,false,0.3889972e2,-0.106965e3,Mount Crested Butte,Colorado,United States,http://www.skicb.com
 Eldora Mountain Resort,false,0.399375e2,-0.10558361e3,17th Avenue,Colorado,United States,http://eldora.com
 Hesperus Ski Area,false,0.3729778e2,-0.108055e3,Ski Hesperus,Colorado,United States,
-Howelsen Hill Ski Area,false,0.40483e2,-0.106839e3,Steamboat Springs,Colorado,United States,
 Kendall Mountain Ski Area,false,0.3781135e2,-0.10765652e3,Silverton,Colorado,United States,
+Howelsen Hill Ski Area,false,0.40483e2,-0.106839e3,Steamboat Springs,Colorado,United States,
 Keystone Resort,false,0.39605e2,-0.10595417e3,East Keystone Road,Colorado,United States,http://www.keystoneresort.com/
+Lake City,false,0.3803e2,-0.10731028e3,Hotchkiss Street,Colorado,United States,http://www.lakecity.com
 Loveland Ski Area,false,0.3968e2,-0.105897e3,US 6,Colorado,United States,http://www.skiloveland.com
-Monarch Mountain,false,0.385125e2,-0.1063325e3,US 50,Colorado,United States,http://www.skimonarch.com
 Powderhorn Resort,false,0.3906306e2,-0.10815556e3,Lower Ramble On,Colorado,United States,http://www.powderhorn.com
+Monarch Mountain,false,0.385125e2,-0.1063325e3,US 50,Colorado,United States,http://www.skimonarch.com
 Purgatory Resort,false,0.3762972e2,-0.10781444e3,Sheol Street,Colorado,United States,http://www.purgatoryresort.com/
 Silverton Mountain,false,0.378847e2,-0.10766529e3,Silverton Mountain,Colorado,United States,http://www.silvertonmountain.com
+Granby,false,0.4006472e2,-0.10591944e3,Winter Park to Granby Trail,Colorado,United States,https://www.townofgranby.com/
 Ski Cooper,false,0.3936e2,-0.106302e3,Cooper Loop,Colorado,United States,http://www.skicooper.com/
 Steamboat Ski Resort,false,0.40459e2,-0.106803e3,Steamboat Springs,Colorado,United States,http://www.steamboat.com
 Sunlight Ski Area,false,0.39399806e2,-0.107339278e3,Ski Sunlight Mountain Resort,Colorado,United States,http://www.sunlightmtn.com/
-Telluride Ski Resort,false,0.3793639e2,-0.10782028e3,West Pacific Avenue,Colorado,United States,http://tellurideskiresort.com
 Vail Ski Resort,false,0.39639e2,-0.106374e3,Gore Valley Trail,Colorado,United States,http://www.vail.com/
+Telluride Ski Resort,false,0.3793639e2,-0.10782028e3,West Pacific Avenue,Colorado,United States,http://tellurideskiresort.com
 Winter Park Resort,false,0.3988694e2,-0.1057625e3,Admin Building,Colorado,United States,http://winterparkresort.com
 Wolf Creek ski area,false,0.3747222e2,-0.10679333e3,Private Road to Treasure Pass,Colorado,United States,http://www.wolfcreekski.com
 Bald Mountain Ski Area,false,0.4657e2,-0.11587e3,Bald Mountain Road,Idaho,United States,http://www.skibaldmountain.com/about.html
@@ -218,32 +317,33 @@ Sandpoint,false,0.48267e2,-0.116567e3,US 2,Idaho,United States,http://www.cityof
 Pomerelle,false,0.42318e2,-0.113608e3,Howell Canyon Road,Idaho,United States,http://www.pomerelle.com
 Rotarun Ski Area,false,0.434975e2,-0.114366e3,Rodeo Drive,Idaho,United States,http://rotarunskiarea.org
 Schweitzer Mountain,false,0.48367e2,-0.116623e3,Schweitzer Mountain Road,Idaho,United States,http://www.schweitzer.com
-Silver Mountain,false,0.47495e2,-0.116135e3,Wardner,Idaho,United States,http://www.silvermt.com
 Snowhaven,false,0.45869e2,-0.11609e3,Tollgate Road,Idaho,United States,http://grangeville.us/snowhaven-ski-and-tubing-hill/
+Silver Mountain,false,0.47495e2,-0.116135e3,Wardner,Idaho,United States,http://www.silvermt.com
 Soldier Mountain,false,0.43485e2,-0.11483e3,National Forest Development Road 093,Idaho,United States,https://soldiermountain.com/
 Bald Mountain,false,0.43655e2,-0.11440917e3,Broadway Face,Idaho,United States,http://www.sunvalley.com
 Tamarack Resort,false,0.44671e2,-0.116123e3,Valley County,Idaho,United States,http://www.tamarackidaho.com
 Bear Paw Ski Bowl,false,0.481644e2,-0.1096702194e3,Elk Peak Road,Montana,United States,https://web.archive.org/web/20061029144905/http://www.skibearpaw.com:80/
-Big Sky Resort,false,0.4525e2,-0.11141667e3,Madison County,Montana,United States,http://www.bigskyresort.com/
 Blacktail Mountain Ski Area,false,0.4801306e2,-0.11424694e3,Blacktail Road,Montana,United States,http://www.blacktailmountain.com/
+Big Sky Resort,false,0.4525e2,-0.11141667e3,Madison County,Montana,United States,http://www.bigskyresort.com/
 Bridger Bowl Ski Area,false,0.45818e2,-0.110897e3,Bridge Bowl Road,Montana,United States,https://bridgerbowl.com
 Discovery Ski Area,false,0.4625639e2,-0.11324194e3,Granite County,Montana,United States,http://www.skidiscovery.com/
 Great Divide Montana,false,0.467497e2,-0.1123043e3,Aspen Way,Montana,United States,http://www.skigd.com
 Lost Trail Powder Mountain,false,0.45692e2,-0.113952e3,Lost Trail Powder Mountain,Idaho,United States,http://www.losttrail.com
 Maverick Mountain Ski Area,false,0.45435e2,-0.11312944e3,Lighting Ridge Road,Montana,United States,http://skimaverick.com
-Montana Snowbowl,false,0.4702e2,-0.114e3,Second Thought,Montana,United States,http://www.montanasnowbowl.com
 Moonlight Basin,false,0.4531417e2,-0.11145083e3,Big Sky Roadway,Montana,United States,http://www.bigskyresort.com/
+Montana Snowbowl,false,0.4702e2,-0.114e3,Second Thought,Montana,United States,http://www.montanasnowbowl.com
 Red Lodge Mountain,false,0.45191e2,-0.109335e3,Ski Run Road,Montana,United States,http://www.redlodgemountain.com
-Showdown Ski Area,false,0.4683861e2,-0.11070889e3,Forest Service Road 834,Montana,United States,http://www.showdownmontana.com/
 Teton Pass Ski Area,false,0.4792806e2,-0.11281528e3,Teton Firewood Access 3,Montana,United States,https://www.skitetonmt.com/
+Showdown Ski Area,false,0.4683861e2,-0.11070889e3,Forest Service Road 834,Montana,United States,http://www.showdownmontana.com/
 Turner Mountain Ski Resort,false,0.48605e2,-0.11563e3,Lincoln County,Montana,United States,http://www.skiturner.com
-Whitefish Mountain Resort,false,0.485e2,-0.11434e3,Summit Trail,Montana,United States,http://www.skiwhitefish.com/
 Yellowstone Club,false,0.452313833e2,-0.1114512556e3,Madison County,Montana,United States,
+Whitefish Mountain Resort,false,0.485e2,-0.11434e3,Summit Trail,Montana,United States,http://www.skiwhitefish.com/
 Angel Fire Resort,false,0.363875e2,-0.10527333e3,Angel Fire,New Mexico,United States,http://www.angelfireresort.com
 Pajarito Mountain Ski Area,false,0.3589417e2,-0.10639028e3,Pajarito Mountain Ski Area,New Mexico,United States,http://www.pajarito.ski/
+Red River,false,0.3670639e2,-0.10540528e3,Red River,New Mexico,United States,
 Sandia Peak Ski Area,false,0.352070056e2,-0.1064134472e3,Albuquerque,New Mexico,United States,http://www.sandiapeak.com
-Sipapu Ski & Summer Resort,false,0.36154211e2,-0.105548508e3,Sipapu Ski & Summer Resort,New Mexico,United States,http://www.sipapunm.com/
 Ski Apache,false,0.3339722e2,-0.10579917e3,Sierra Blanca,New Mexico,United States,https://skiapache.com/
+Sipapu Ski & Summer Resort,false,0.36154211e2,-0.105548508e3,Sipapu Ski & Summer Resort,New Mexico,United States,http://www.sipapunm.com/
 Ski Cloudcroft,false,0.329507083e2,-0.1057072417e3,Cloudcroft,New Mexico,United States,https://skicloudcroft.net/
 Ski Santa Fe,false,0.35796325e2,-0.1058012806e3,NM 475,New Mexico,United States,http://www.skisantafe.com
 Taos Ski Valley,false,0.3659778e2,-0.105445e3,Bull of the Woods Road,New Mexico,United States,
@@ -251,21 +351,21 @@ Alta Ski Area,false,0.4058083e2,-0.11163722e3,Alta,Utah,United States,http://www
 Beaver Mountain,false,0.41968e2,-0.111541e3,Bjorr Cottonwood,Utah,United States,http://www.skithebeav.com
 Brian Head Ski Resort,false,0.37683e2,-0.112833e3,Timberline Upper,Utah,United States,
 Brighton Ski Resort,false,0.406e2,-0.11158333e3,Brighton,Utah,United States,http://www.brightonresort.com/
-Cherry Peak Resort,false,0.4192639e2,-0.11175667e3,Cherry Peak Ski Area,Utah,United States,http://www.skicherrypeak.com
+Cherry Peak Resort,false,0.4192639e2,-0.11175667e3,Cherry Peak Resort,Utah,United States,http://www.skicherrypeak.com
 Deer Valley,false,0.4062278e2,-0.11148944e3,Goldener Hirsch Inn,Utah,United States,http://www.deervalley.com/
-Elk Mountain,false,0.3832056e2,-0.11239167e3,Alpine Lane,Utah,United States,http://www.skieaglepoint.com
 Nordic Valley,false,0.413e2,-0.1118583e3,Viking Drive,Utah,United States,
+Elk Mountain,false,0.3832056e2,-0.11239167e3,Alpine Lane,Utah,United States,http://www.skieaglepoint.com
 Park City Mountain Resort,false,0.4065083e2,-0.1115075e3,Marriott's MountainSide,Utah,United States,http://www.parkcitymountain.com/
 Powder Mountain,false,0.4138e2,-0.11178028e3,Hidden Lake Road,Utah,United States,https://www.powdermountain.com
 Snowbasin,false,0.41216e2,-0.111857e3,Meadow Loop,Utah,United States,http://www.snowbasin.com
 Snowbird,false,0.4058111e2,-0.11165639e3,Plaza Deck,Utah,United States,http://www.snowbird.com
 Solitude Mountain Resort,false,0.40615139e2,-0.111588917e3,Brighton,Utah,United States,https://www.solitudemountain.com/
-Sundance Resort,false,0.40392e2,-0.111579e3,Novice Trail,Utah,United States,http://www.sundanceresort.com
 Shell,false,0.4453556e2,-0.10777917e3,East 2nd Street,Wyoming,United States,
+Sundance Resort,false,0.40392e2,-0.111579e3,Novice Trail,Utah,United States,http://www.sundanceresort.com
 Beartooth Basin Summer Ski Area,false,0.44975e2,-0.109435e3,Beartooth Highway,Wyoming,United States,http://www.beartoothbasin.com/
 Grand Targhee Resort,false,0.43789e2,-0.110957e3,Pika Traverse,Wyoming,United States,http://www.grandtarghee.com
-Hogadon Ski Area,false,0.427449611e2,-0.1063394278e3,Casper,Wyoming,United States,http://hogadon.net/
 Jackson Hole Mountain Resort,false,0.4359e2,-0.11089e3,Cody Bowl Spur,Wyoming,United States,https://jacksonhole.com/
+Hogadon Ski Area,false,0.427449611e2,-0.1063394278e3,Casper,Wyoming,United States,http://hogadon.net/
 Ten Sleep,false,0.4403472e2,-0.10744806e3,3rd Street,Wyoming,United States,
 Cokeville,false,0.42085e2,-0.11095556e3,2nd Street,Wyoming,United States,
 Cody,false,0.4452333e2,-0.10905722e3,Cody,Wyoming,United States,https://codywy.gov
@@ -275,51 +375,54 @@ White Pine Ski Resort,false,0.429778389e2,-0.1097581722e3,Surveyor Park Road,Wyo
 Arctic Valley Ski Area,false,0.6124667e2,-0.14965056e3,Anchorage,Alaska,United States,https://arcticvalley.org
 Alyeska Resort,false,0.609705e2,-0.1490982e3,The Hotel Alyeska,Alaska,United States,http://www.alyeskaresort.com/
 Eaglecrest Ski Area,false,0.5827611e2,-0.13451528e3,Juneau,Alaska,United States,http://skieaglecrest.com/
-Hilltop Ski Area,false,0.6114083e2,-0.149745e3,Anchorage,Alaska,United States,http://www.hilltopskiarea.org/
 Moose Mountain,false,0.6494056e2,-0.14799056e3,Moose Mountain Road,Alaska,United States,
-Mount Eyak,false,0.6055e2,-0.14575e3,Cordova,Alaska,United States,
+Hilltop Ski Area,false,0.6114083e2,-0.149745e3,Anchorage,Alaska,United States,http://www.hilltopskiarea.org/
+Mount Eyak,false,0.6055e2,-0.14575e3,Towers,Alaska,United States,
 Skiland,false,0.6504889e2,-0.14740917e3,Skiland Road,Alaska,United States,http://www.skilandfairbanks.com/
+Wofford Heights,false,0.3570694e2,-0.11845611e3,East Evans Road,California,United States,
 Alpine Meadows,false,0.39164e2,-0.120239e3,Breezeway,California,United States,https://www.palisadestahoe.com
 Badger Pass Ski Area,false,0.3766194e2,-0.1196636e3,Old Glacier Point Road,California,United States,http://www.travelyosemite.com/winter/yosemite-ski-snowboard-area/
 Bear Mountain,false,0.342267e2,-0.1168602e3,Lassen Drive,California,United States,http://www.bearmountain.com/
 Bear Valley,false,0.38492e2,-0.120044e3,Bear Valley Day Lodge,California,United States,http://www.bearvalley.com
 Boreal Mountain Resort,false,0.393317e2,-0.1203511e3,Bunny Hill Drive,California,United States,http://www.rideboreal.com
 Buckhorn Ski Club,false,0.3434457e2,-0.11791437e3,Angeles Crest Highway,California,United States,http://www.orgsites.com/ca/buckhorn/index.html
-China Peak,false,0.372297e2,-0.1191583e3,Primo,California,United States,http://www.skichinapeak.com
 Coppervale Ski Area,false,0.40345e2,-0.120904e3,Westwood,California,United States,
+China Peak,false,0.372297e2,-0.1191583e3,Primo,California,United States,http://www.skichinapeak.com
 Dodge Ridge Ski Area,false,0.381896e2,-0.1199564e3,Dodge Ridge Road,California,United States,http://www.dodgeridge.com/
 Donner Ski Ranch,false,0.393183139e2,-0.1203300194e3,Ski Ranch Lane,California,United States,http://www.donnerskiranch.com/
 Granlibakken,false,0.391556e2,-0.1201551e3,Granlibakken Road,California,United States,
 Heavenly Mountain Resort,false,0.389353e2,-0.11994e3,Heavenly California Lodge,California,United States,http://www.skiheavenly.com
-Homewood Mountain Resort,false,0.390827e2,-0.1201755e3,Upper Mountain Road,California,United States,http://www.skihomewood.com/
 June Mountain ski area,false,0.377683e2,-0.1190906e3,June Lake,California,United States,http://www.junemountain.com
-Kirkwood Mountain Resort,false,0.38684e2,-0.120068e3,Kirkwood Meadows Drive,California,United States,http://www.kirkwood.com
-Mammoth Mountain Ski Area,false,0.3763056e2,-0.1190325e3,Kamikaze,California,United States,http://www.mammothmountain.com/
+Homewood Mountain Resort,false,0.390827e2,-0.1201755e3,Upper Mountain Road,California,United States,http://www.skihomewood.com/
+Kirkwood Mountain Resort,false,0.38684e2,-0.120068e3,Sun Meadows 4,California,United States,http://www.kirkwood.com
 Mount Baldy Ski Lifts,false,0.3427e2,-0.11762e3,Mount Baldy Road,California,United States,http://mtbaldyresort.com
+Mammoth Mountain Ski Area,false,0.3763056e2,-0.1190325e3,Kamikaze,California,United States,http://www.mammothmountain.com/
 Mount Shasta Ski Park,false,0.4132083e2,-0.12220389e3,Ski Park Service Road,California,United States,http://www.skipark.com
 Mount Waterman,false,0.34349722e2,-0.117928611e3,Angeles Crest Highway,California,United States,http://www.mtwaterman.org/
 Mountain High,false,0.3437472e2,-0.11769323e3,Big Pines,California,United States,http://www.mthigh.com
 Northstar California,false,0.39264e2,-0.120125e3,Village Run,California,United States,http://northstarcalifornia.com
+Palisades Tahoe,false,0.39196e2,-0.120235e3,Olympic Valley,California,United States,http://www.palisadestahoe.com
 Sierra-at-Tahoe,false,0.388002e2,-0.1200806e3,Solstice Plaza,California,United States,http://www.sierraattahoe.com
 Snow Summit,false,0.342286e2,-0.1168911e3,Miracle Mile Trail,California,United States,http://www.snowsummit.com
 Snow Valley Mountain Resort,false,0.34223375e2,-0.117037423e3,Rim of the World Highway,California,United States,http://www.snow-valley.com//
-Palisades Tahoe,false,0.39196e2,-0.120235e3,Olympic Valley,California,United States,http://www.palisadestahoe.com
 Sugar Bowl Ski Resort,false,0.3930444e2,-0.12033583e3,Elderberry Court,California,United States,http://www.sugarbowl.com
 Tahoe Donner Downhill,false,0.393549e2,-0.120259e3,Slalom Way,California,United States,http://www.skitahoedonner.com
-Diamond Peak,false,0.39254e2,-0.119924e3,Tyrolean Downhill Alternate,Nevada,United States,
+Diamond Peak,false,0.39254e2,-0.119924e3,Ski Way,Nevada,United States,https://www.diamondpeak.com/
+Elko,false,0.40833e2,-0.115767e3,Elko,Nevada,United States,https://www.elkocity.com
 Lee Canyon,false,0.36301638e2,-0.115680759e3,Las Vegas Ski and Snowboard Resort,Nevada,United States,
 Mount Rose Ski Tahoe,false,0.3932917e2,-0.11988583e3,Mount Rose Highway,Nevada,United States,http://www.skirose.com/
-Anthony Lakes,false,0.44964e2,-0.118235e3,National Forest Development Road 73,Oregon,United States,http://www.anthonylakes.com/
+Reno,false,0.3952722e2,-0.11982194e3,Reno,Nevada,United States,http://reno.gov
 Cooper Spur ski area,false,0.4541228e2,-0.12160501e3,Cooper Spur Ski Area Road,Oregon,United States,http://www.cooperspur.com/
+Anthony Lakes,false,0.44964e2,-0.118235e3,National Forest Development Road 73,Oregon,United States,http://www.anthonylakes.com/
 Ferguson Ridge Ski Area,false,0.4528209e2,-0.11711285e3,Ferguson Ridge Road,Oregon,United States,http://www.skifergi.com
-Hoodoo,false,0.44409e2,-0.121872e3,Hoodoo Butte Road,Oregon,United States,http://skihoodoo.com/
+Hoodoo,false,0.44409e2,-0.121872e3,Home Run,Oregon,United States,http://skihoodoo.com/
 Mount Ashland Ski Area,false,0.4208333e2,-0.12271667e3,Mount Ashland Summit Trail,Oregon,United States,http://www.mtashland.com
 Mount Bachelor ski area,false,0.44003e2,-0.121677e3,Blade Runner,Oregon,United States,http://www.mtbachelor.com
 Mount Hood Meadows,false,0.4532889e2,-0.1216625e3,Mt. Hood Meadows Road,Oregon,United States,http://www.skihood.com/
 Mount Hood Skibowl,false,0.4530189e2,-0.121773212e3,Government Camp,Oregon,United States,http://www.skibowl.com/
 Timberline Lodge ski area,false,0.4533e2,-0.12171e3,Gotta Get Back,Oregon,United States,http://www.timberlinelodge.com/
 Summit Pass,false,0.45303e2,-0.1217472e3,Government Camp,Oregon,United States,https://www.timberlinelodge.com/mountain/summit-pass
-Warner Canyon,false,0.4223749e2,-0.12029583e3,Warner Highway,Oregon,United States,https://www.warnercanyonski.com/
+Warner Canyon,false,0.4223749e2,-0.12029583e3,Winnemucca-to-the-Sea Highway,Oregon,United States,https://www.warnercanyonski.com/
 Willamette Pass Resort,false,0.436e2,-0.122036e3,State Highway 58,Oregon,United States,http://www.willamettepass.ski
 49 Degrees North Ski Area,false,0.48301e2,-0.117563e3,Chewelah Mountain Trail,Washington,United States,http://www.ski49n.com/
 Badger Mountain Ski Area,false,0.4761273e2,-0.12012978e3,Waterville,Washington,United States,http://www.skibadgermt.com/
@@ -327,11 +430,12 @@ Crystal Mountain,false,0.4693e2,-0.12148e3,Silver Creek Trail,Washington,United 
 Echo Valley Ski Area,false,0.4793583e2,-0.12005611e3,Coyote Trail Road,Washington,United States,https://skiechovalley.com/
 Hurricane Ridge Ski and Snowboard Area,false,0.47971e2,-0.123493e3,High Ridge Nature Trail,Washington,United States,http://www.hurricaneridge.net
 Leavenworth Ski Hill,false,0.4761437e2,-0.12066859e3,Leavenworth Ski Lodge Road,Washington,United States,http://www.skileavenworth.com/
-Loup Loup Ski Bowl,false,0.4839472e2,-0.11991278e3,Forest Road 4200-100,Washington,United States,http://www.skitheloup.com/
 Meany Lodge,false,0.4728028e2,-0.12132056e3,Meany Lodge,Washington,United States,http://www.meanylodge.org
+Loup Loup Ski Bowl,false,0.4839472e2,-0.11991278e3,Forest Road 4200-100,Washington,United States,http://www.skitheloup.com/
 Mission Ridge Ski Area,false,0.47292e2,-0.120399e3,Forest Road 7122,Washington,United States,http://www.missionridge.com
 Mt. Baker Ski Area,false,0.48862e2,-0.121654e3,Forest Road 3080,Washington,United States,http://www.mtbaker.us
 Mount Spokane Ski and Snowboard Park,false,0.47922e2,-0.117097e3,Trail 130,Washington,United States,https://www.mtspokane.com
+Snoqualmie Pass,false,0.4739222e2,-0.1214e3,Snoqualmie Drive,Washington,United States,
 Sitzmark Ski Area,false,0.48865e2,-0.119164e3,Tonasket-Havillah Road,Washington,United States,https://www.facebook.com/SitzmarkSkiArea/
 Ski Bluewood,false,0.46082e2,-0.117851e3,Forest Road 650,Washington,United States,http://www.bluewood.com
 Stevens Pass Ski Area,false,0.4774472e2,-0.12108889e3,US 2,Washington,United States,https://www.stevenspass.com/

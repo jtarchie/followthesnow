@@ -10,9 +10,9 @@ module FollowTheSnow
   module Scrape
     Wikipedia = Struct.new(:url, :logger, keyword_init: true) do
       def resorts
-        doc = Nokogiri::HTML(HTTP.follow.timeout(10).get(url).to_s)
-        links = doc.css('#mw-content-text ul > li > a:first-child')
-        Parallel.map(links, in_threads: 4) do |link|
+        doc   = Nokogiri::HTML(HTTP.follow.timeout(10).get(url).to_s)
+        links = doc.css('#mw-content-text ul > li > a:not(.new):first-child, #mw-content-text ul > li > a.new + a')
+        Parallel.map(links, in_threads: 5) do |link|
           href = link['href']
           next if href =~ /Template|Category|Comparison|List|Former/i
 
@@ -45,6 +45,8 @@ module FollowTheSnow
                                     lng: geo.lng,
                                     url: url
                                   })
+          # prevent rate limit and bot detection
+          # from wikipedia
           sleep(rand(0.0..1.0))
           resort
         end.compact
