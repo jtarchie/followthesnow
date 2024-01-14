@@ -16,7 +16,7 @@ module FollowTheSnow
           # filter resorts that do not have all values
           [r.country, r.state, r.city, r.name].compact.length == 4
         end.sort_by do |r|
-          [r.country, r.state, r.city, r.name]
+          [r.country, r.state, r.name]
         end
       end
 
