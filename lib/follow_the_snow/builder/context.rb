@@ -12,10 +12,7 @@ module FollowTheSnow
       attr_reader :resorts
 
       def initialize(resorts:)
-        @resorts = resorts.select do |r|
-          # filter resorts that do not have all values
-          [r.country, r.state, r.city, r.name].compact.length == 4
-        end.sort_by do |r|
+        @resorts = resorts.sort_by do |r|
           [r.country, r.state, r.name]
         end
       end
@@ -28,9 +25,7 @@ module FollowTheSnow
         resorts_by_countries.keys.sort
       end
 
-      def states(country: nil)
-        return resorts_by_countries.values.flatten.map(&:state).uniq if country.nil?
-
+      def states(country:)
         resorts_by_countries.fetch(country).group_by(&:state).keys
       end
 

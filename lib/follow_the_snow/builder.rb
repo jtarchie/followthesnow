@@ -81,7 +81,7 @@ module FollowTheSnow
       end
 
       def write_file(layout, source_filename, build_filename, metadata = {})
-        template     = Tilt::ERBTemplate.new { File.read(source_filename) }
+        template     = Tilt::ERBTemplate.new(source_filename)
         parsed_file  = FrontMatterParser::Parser.new(:md).call(template.render(@context, metadata))
         front_matter = parsed_file.front_matter
         contents     = parsed_file.content

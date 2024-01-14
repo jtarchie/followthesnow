@@ -67,7 +67,7 @@ RSpec.describe('Building') do
   it 'builds HTML files', :focus do
     resorts = Dir[File.join(resorts_dir, '*.csv')].flat_map do |filename|
       FollowTheSnow::Resort.from_csv(filename)
-    end.take(5)
+    end
 
     builder   = FollowTheSnow::Builder::Site.new(
       build_dir: build_dir,
@@ -78,6 +78,15 @@ RSpec.describe('Building') do
     builder.build!
 
     html_files = Dir[File.join(build_dir, '**', '*.html')].to_a
-    expect(html_files.length).to eq(9)
+    expect(html_files.length).to eq(700)
+  end
+
+  it 'has context' do
+    resorts = Dir[File.join(resorts_dir, '*.csv')].flat_map do |filename|
+      FollowTheSnow::Resort.from_csv(filename)
+    end
+
+    context = FollowTheSnow::Builder::Context.new(resorts: resorts)
+    expect(context.countries).to eq ['Canada', 'Japan', 'United States']
   end
 end
