@@ -1,6 +1,6 @@
 ---
 title: List by countries
-description: List of countries that have ski resorts
+description: List of countries that have ski resorts.
 ---
 
 Our mission is to provide you with accurate and timely snowfall forecasts, so
