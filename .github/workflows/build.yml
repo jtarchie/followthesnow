@@ -11,24 +11,17 @@ jobs:
     env:
       RUBY_YJIT_ENABLE: "1"
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Ruby
-    # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
-    # change this to (see https://github.com/ruby/setup-ruby#versioning):
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.2'
+        ruby-version: '3.3'
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - name: Cache multiple paths
-      uses: actions/cache@v3
-      with:
-        path: .cache
-        key: cache-for-http-responses
     - name: Install minify
       uses: jaxxstorm/action-install-gh-release@v1.9.0
       with: # Grab the latest version
         repo: tdewolff/minify
-        tag: v2.12.4 
+        tag: v2.20.14 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ACTIONS_ALLOW_UNSECURE_COMMANDS: true
