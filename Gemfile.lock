@@ -21,17 +21,16 @@ GEM
     crack (0.4.5)
       rexml
     diff-lcs (1.5.0)
-    domain_name (0.6.20231109)
+    domain_name (0.6.20240107)
     drb (2.2.0)
       ruby2_keywords
     event_stream_parser (1.0.0)
-    faraday (2.8.1)
-      base64
-      faraday-net_http (>= 2.0, < 3.1)
-      ruby2_keywords (>= 0.0.4)
+    faraday (2.9.0)
+      faraday-net_http (>= 2.0, < 3.2)
     faraday-multipart (1.0.4)
       multipart-post (~> 2)
-    faraday-net_http (3.0.2)
+    faraday-net_http (3.1.0)
+      net-http
     ferrum (0.14)
       addressable (~> 2.5)
       concurrent-ruby (~> 1.1)
@@ -63,9 +62,11 @@ GEM
     llhttp-ffi (0.4.0)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
-    minitest (5.20.0)
+    minitest (5.21.1)
     multipart-post (2.3.0)
     mutex_m (0.2.0)
+    net-http (0.4.1)
+      uri
     nokogiri (1.16.0-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.0-x86_64-darwin)
@@ -77,14 +78,14 @@ GEM
     ougai (2.0.0)
       oj (~> 3.10)
     parallel (1.24.0)
-    parser (3.3.0.2)
+    parser (3.3.0.3)
       ast (~> 2.4.1)
       racc
     public_suffix (5.0.4)
     racc (1.7.3)
     rainbow (3.1.1)
     rake (13.1.0)
-    regexp_parser (2.8.3)
+    regexp_parser (2.9.0)
     rexml (3.2.6)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
@@ -124,6 +125,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
+    uri (0.13.0)
     webmock (3.19.1)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
@@ -135,6 +137,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
+  arm64-darwin-23
   x86_64-darwin-20
   x86_64-linux
 
