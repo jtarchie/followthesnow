@@ -4,7 +4,6 @@ source 'https://rubygems.org'
 
 gem 'activesupport'
 gem 'erb_lint'
-gem 'ferrum'
 gem 'front_matter_parser'
 gem 'geo_coord', require: 'geo/coord'
 gem 'http'
