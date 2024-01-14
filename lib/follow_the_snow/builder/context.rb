@@ -13,7 +13,7 @@ module FollowTheSnow
 
       def initialize(resorts:)
         @resorts = resorts.sort_by do |r|
-          [r.country, r.state, r.name]
+          [r.country, r.state, r.name].join
         end
       end
 

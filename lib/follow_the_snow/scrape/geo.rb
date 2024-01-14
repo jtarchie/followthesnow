@@ -15,7 +15,7 @@ module FollowTheSnow
 
         OpenStruct.new({
                          city: address.city || address.village || address.leisure || address.tourism || address.building || address.road || address.county,
-                         state: address.state || address.province || address.region,
+                         state: address.state || address.province || address.region || address.municipality,
                          country: address.country
                        })
       end

@@ -78,7 +78,7 @@ RSpec.describe('Building') do
     builder.build!
 
     html_files = Dir[File.join(build_dir, '**', '*.html')].to_a
-    expect(html_files.length).to eq(700)
+    expect(html_files.length).to eq(1642)
   end
 
   it 'has context' do
@@ -87,6 +87,6 @@ RSpec.describe('Building') do
     end
 
     context = FollowTheSnow::Builder::Context.new(resorts: resorts)
-    expect(context.countries).to eq ['Canada', 'Japan', 'United States']
+    expect(context.countries).to eq ['Canada', 'Europe', 'Japan', 'United States']
   end
 end

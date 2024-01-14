@@ -21,7 +21,14 @@ module FollowTheSnow
 
     def self.from_csv(filename)
       CSV.read(filename, headers: true).map do |resort|
-        Resort.new(resort.to_h)
+        payload = resort.to_h
+
+        if filename.include? 'europe'
+          payload['state']   = payload['country']
+          payload['country'] = 'Europe'
+        end
+
+        Resort.new(payload)
       end.uniq(&:name)
     end
 
