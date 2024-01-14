@@ -2,6 +2,7 @@
 
 require 'active_support'
 require 'active_support/time'
+require 'active_support/core_ext/string'
 require 'terminal-table'
 
 module FollowTheSnow
@@ -41,7 +42,7 @@ module FollowTheSnow
             f.snow.to_s
           end
 
-          row  = ["[#{resort.name}](/resorts/#{resort.name.parameterize})#{resort.closed? ? '*' : ''}"]
+          row  = [%(<a href="/resorts/#{resort.name.parameterize}">#{resort.name}</a>).html_safe]
           row += if snow_days.length == max_days.length
                    snow_days
                  else
@@ -50,12 +51,7 @@ module FollowTheSnow
           row
         end
 
-        table       = Terminal::Table.new(
-          headings: headers,
-          rows: rows
-        )
-        table.style = { border: :markdown }
-        table.to_s
+        [headers, rows]
       end
 
       def table_for_longterm(resort)
@@ -77,12 +73,7 @@ module FollowTheSnow
           ]
         end
 
-        table       = Terminal::Table.new(
-          headings: headers,
-          rows: rows
-        )
-        table.style = { border: :markdown }
-        table.to_s
+        [headers, rows]
       end
 
       def current_timestamp

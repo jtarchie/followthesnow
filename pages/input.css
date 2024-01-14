@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+p {
+  @apply text-base text-gray-800 dark:text-gray-200 leading-relaxed mb-4;
+}
+
+a {
+  @apply underline hover:no-underline;
+}

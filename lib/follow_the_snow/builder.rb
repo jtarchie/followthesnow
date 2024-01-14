@@ -3,7 +3,6 @@
 require 'active_support'
 require 'active_support/inflector'
 require 'fileutils'
-require 'kramdown'
 require 'tilt/erb'
 require 'front_matter_parser'
 require_relative './builder/context'
@@ -29,12 +28,12 @@ module FollowTheSnow
         FileUtils.mkdir_p(@build_dir)
         FileUtils.copy_entry(File.join(@source_dir, 'public'), @build_dir)
 
-        layout_html = erb('_layout.erb.html')
+        layout_html = erb(File.join(@source_dir, '_layout.html.erb'))
 
-        Dir[File.join(@source_dir, '**', '*.erb.md')].each do |filename|
+        Dir[File.join(@source_dir, '**', '*.html.erb')].each do |filename|
           next if File.basename(filename) =~ /^_/
 
-          build_filename = filename.gsub(@source_dir, @build_dir).gsub('.erb.md', '.html')
+          build_filename = filename.gsub(@source_dir, @build_dir).gsub('.html.erb', '.html')
           FileUtils.mkdir_p(File.dirname(build_filename))
 
           case filename
@@ -81,14 +80,14 @@ module FollowTheSnow
       end
 
       def write_file(layout, source_filename, build_filename, metadata = {})
-        template     = Tilt::ERBTemplate.new(source_filename)
-        parsed_file  = FrontMatterParser::Parser.new(:md).call(template.render(@context, metadata))
+        template     = erb(source_filename)
+        parsed_file  = FrontMatterParser::Parser.new(:html).call(template.render(@context, metadata))
         front_matter = parsed_file.front_matter
         contents     = parsed_file.content
         variables    = front_matter
                        .merge(metadata)
                        .merge({
-                                content: from_markdown(contents)
+                                content: contents
                               })
 
         @logger.info('writing file', { source: source_filename, build_filename: build_filename, metadata: metadata })
@@ -100,16 +99,7 @@ module FollowTheSnow
       end
 
       def erb(filename)
-        Tilt::ERBTemplate.new(File.join(@source_dir, filename), trim: true)
-      end
-
-      def from_markdown(template)
-        Kramdown::Document.new(
-          template,
-          input: 'GFM',
-          gfm_emojis: true,
-          hard_wrap: false
-        ).to_html
+        Tilt::ERBTemplate.new(filename, trim: true)
       end
     end
   end
