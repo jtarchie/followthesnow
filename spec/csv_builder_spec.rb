@@ -15,8 +15,6 @@ RSpec.describe 'CSVBuilder' do
     stub_country_page
     stub_resort_page
     stub_geo_lookup(lat: 3.533611111, lng: -113.4752778)
-    stub_openai_prompt
-    # stub_browser(url: 'https://some-resort.com')
 
     builder = FollowTheSnow::CSVBuilder.new(
       build_dir: build_dir,

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative './scrape/wikipedia'
-require_relative './scrape/website'
 require_relative './scrape/geo'
 require 'csv'
 require 'ougai'

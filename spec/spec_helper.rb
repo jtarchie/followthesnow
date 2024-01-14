@@ -130,33 +130,3 @@ def stub_geo_lookup(lat:, lng:)
       }.to_json
     )
 end
-
-def stub_openai_prompt
-  stub_request(:post, 'https://api.openai.com/v1/chat/completions')
-    .to_return(
-      status: 200,
-      body: {
-        choices: [
-          {
-            message: {
-              content: '{"closed": true}'
-            }
-          }
-        ]
-      }.to_json,
-      headers: {
-        'Content-Type' => 'application/json'
-      }
-    )
-end
-
-def stub_browser(url:)
-  browser = double('browser')
-  expect(browser).to receive(:go_to).with(url)
-  expect(browser).to receive(:network).and_return(OpenStruct.new(status: 200))
-
-  body = double(:bodt)
-  expect(browser).to receive(:at_css).and_return(body)
-  expect(body).to receive(:inner_text).and_return 'some text'
-  allow(Ferrum::Browser).to receive(:new) { browser }
-end

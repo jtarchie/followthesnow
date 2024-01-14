@@ -1534,6 +1534,10 @@ html {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.sticky {
+  position: sticky;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
