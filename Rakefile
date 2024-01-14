@@ -60,6 +60,7 @@ end
 
 task :fmt do
   sh('npm run build')
+  sh('deno fmt .')
   sh('rubocop -A')
   sh('bundle exec erblint --lint-all --enable-linters space_around_erb_tag,extra_newline -a pages/')
 end
