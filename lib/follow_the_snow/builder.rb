@@ -38,7 +38,7 @@ module FollowTheSnow
 
           case filename
           when /\[state\]/
-            states.each do |state|
+            Parallel.each(states, in_threads: 3) do |state|
               state_filename = build_filename.gsub('[state]', state.parameterize)
               write_file(
                 layout_html,
@@ -51,7 +51,7 @@ module FollowTheSnow
               )
             end
           when /\[resort\]/
-            resorts.each do |resort|
+            Parallel.each(resorts, in_threads: 3) do |resort|
               resort_filename = build_filename.gsub('[resort]', resort.name.parameterize)
               write_file(
                 layout_html,
