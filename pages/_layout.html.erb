@@ -25,8 +25,8 @@
     </div>
     <div class="flex-none">
       <ul class="menu menu-horizontal p-0">
-        <li><a href="about">About</a></li>
-        <li><a href="hello@followthesnow.today">Contact</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="mailto:hello@followthesnow.today">Contact</a></li>
       </ul>
     </div>
   </div>
@@ -40,12 +40,5 @@
       <p>© <%= Time.now.strftime("%Y") %> <a href="https://github.com/jtarchie/followthesnow">Follow the Snow</a></p>
     </aside>
   </footer>
-  <script>
-    document.querySelectorAll("td:not(:first-child)").forEach(function(element) {
-      if(element.innerText != "0”") {
-        element.classList.add("dump");
-      }
-    })
-  </script>
 </body>
 </html>
