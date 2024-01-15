@@ -8,8 +8,8 @@ description: '<%= h resort.state %> &raquo; <%= h resort.name %>'
 <div class="text-sm breadcrumbs mb-4">
   <ul>
     <li><a href="/">All</a></li>
-    <li><a href="/#<%= resorts.first.country.parameterize %>">
-        <%= h resorts.first.country %>
+    <li><a href="/#<%= resorts.country.parameterize %>">
+        <%= h resorts.country %>
       </a></li>
     <li><a href="/states/<%= resort.state.parameterize %>">
         <%= h resort.state %>
