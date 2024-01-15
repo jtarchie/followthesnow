@@ -19,34 +19,51 @@
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
 
   <!-- Navbar -->
-  <div class="navbar bg-base-100">
-    <div class="flex-1">
-      <a class="btn btn-ghost normal-case text-xl" href="/">follow the snow</a>
-    </div>
-    <div class="flex-none">
-      <ul class="menu menu-horizontal p-0">
-        <li class="flex items-center gap-2">
-          <label class="swap swap-rotate">
-            <input type="checkbox" id="unit-toggle" />
-            <span class="swap-on">°C</span>
-            <span class="swap-off">°F</span>
+  <div class="drawer">
+    <input id="nav-drawer" type="checkbox" class="drawer-toggle" />
+    <div class="drawer-content flex flex-col"> 
+      <div class="navbar bg-base-100">
+        <div class="flex-none lg:hidden">
+          <label for="nav-drawer" aria-label="open sidebar" class="btn btn-square btn-ghost">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
           </label>
-        </li>
+        </div> 
+        <div class="flex-1">
+          <a class="btn btn-ghost normal-case text-xl" href="/">follow the snow</a>
+        </div>
+        <div class="flex-none">
+          <label class="flex cursor-pointer gap-2">
+            <span class="label-text">°F</span> 
+            <input type="checkbox" id="unit-toggle" class="toggle"/>
+            <span class="label-text">°C</span> 
+          </label>
+          <div class="flex-none hidden lg:block">
+            <ul class="menu menu-horizontal p-0">
+              <li><a href="/about">About</a></li>
+              <li><a href="mailto:hello@followthesnow.today">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="container mx-auto p-4">
+        <%= content %>
+      </div>
+      <footer class="footer footer-center p-4 bg-base-300 text-base-content">
+        <aside>
+          <p>Last Updated: <%= h current_timestamp %></p>
+          <p>Made with &#10084 in Colorado</p>
+          <p>© <%= Time.now.strftime("%Y") %> <a href="https://github.com/jtarchie/followthesnow">Follow the Snow</a></p>
+        </aside>
+      </footer>
+    </div>
+    <div class="drawer-side">
+      <label for="nav-drawer" aria-label="close sidebar" class="drawer-overlay"></label> 
+      <ul class="menu p-4 w-80 min-h-full bg-base-200">
         <li><a href="/about">About</a></li>
         <li><a href="mailto:hello@followthesnow.today">Contact</a></li>
       </ul>
     </div>
   </div>
-  <div class="container mx-auto p-4">
-    <%= content %>
-  </div>
-  <footer class="footer footer-center p-4 bg-base-300 text-base-content">
-    <aside>
-      <p>Last Updated: <%= h current_timestamp %></p>
-      <p>Made with &#10084 in Colorado</p>
-      <p>© <%= Time.now.strftime("%Y") %> <a href="https://github.com/jtarchie/followthesnow">Follow the Snow</a></p>
-    </aside>
-  </footer>
   <script src="/assets/main.js"></script>
 </body>
 </html>
