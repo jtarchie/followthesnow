@@ -3,3 +3,4 @@
 brew 'direnv'
 brew 'ruby'
 brew 'node'
+brew 'minify'
