@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'active_support'
+require 'active_support/core_ext/string'
+
 module FollowTheSnow
   Forecast::Daily = Struct.new(:forecasts, keyword_init: true) do
     class ForecastDelegate < SimpleDelegator
@@ -12,12 +15,13 @@ module FollowTheSnow
         when 0
           case __getobj__.snow.end
           when 0
-            '0"'
+            '<span class="imperial">0"</span><span class="metric">0 cm</span>'.html_safe
           else
-            "<#{__getobj__.snow.end}\""
+            %(<span class="imperial">#{__getobj__.snow.end}"</span><span class="metric">#{inches_to_metric __getobj__.snow.end}</span>).html_safe
           end
         else
-          "#{__getobj__.snow.begin}-#{__getobj__.snow.end}\""
+          %(<span class="imperial">#{__getobj__.snow.begin}-#{__getobj__.snow.end}"</span>).html_safe +
+            %(<span class="metric">#{inches_to_metric __getobj__.snow.begin}-#{inches_to_metric __getobj__.snow.end}</span>).html_safe
         end
       end
 
@@ -35,15 +39,44 @@ module FollowTheSnow
       end
 
       def temp
-        "#{__getobj__.temp.end}°F"
+        f = __getobj__.temp.end
+        %(<span class="imperial">#{f} °F</span><span class="metric">#{fahrenheit_to_celsius f} °C</span>).html_safe
       end
 
       def wind_gust
-        "#{__getobj__.wind_gust.end} mph"
+        speed = __getobj__.wind_gust.end
+        %(<span class="imperial">#{speed} mph</span><span class="metric">#{mph_to_kph speed} kph</span>).html_safe
       end
 
       def wind_speed
-        "#{__getobj__.wind_direction} #{__getobj__.wind_speed.end} mph"
+        speed = __getobj__.wind_speed.end
+        %(#{__getobj__.wind_direction} <span class="imperial">#{speed} mph</span><span class="metric">#{mph_to_kph speed} kph</span>).html_safe
+      end
+
+      private
+
+      def mph_to_kph(mph)
+        kph = mph * 1.60934
+        kph.round(2)
+      end
+
+      def fahrenheit_to_celsius(fahrenheit)
+        celsius = (fahrenheit - 32) * 5.0 / 9.0
+        celsius.round(2)
+      end
+
+      def inches_to_metric(inches)
+        # Conversion factor: 1 inch = 2.54 centimeters
+        cm_value = inches * 2.54
+
+        # Define the threshold
+        threshold = 1.0
+
+        return "#{cm_value.round(2)} cm" unless cm_value < threshold
+
+        # Convert to millimeters (1 cm = 10 mm)
+        mm_value = cm_value * 10
+        "#{mm_value.round(2)} mm"
       end
     end
 

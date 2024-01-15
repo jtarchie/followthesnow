@@ -9,3 +9,23 @@ p {
 a {
   @apply underline hover:no-underline;
 }
+
+body {
+  &.metric {
+    .metric {
+      display: inline-block;
+    }
+
+    .imperial {
+      display: none;
+    }
+  }
+
+  .metric {
+    display: none;
+  }
+
+  .imperial {
+    display: inline-block;
+  }
+} 

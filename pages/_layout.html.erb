@@ -25,6 +25,13 @@
     </div>
     <div class="flex-none">
       <ul class="menu menu-horizontal p-0">
+        <li class="flex items-center gap-2">
+          <label class="swap swap-rotate">
+            <input type="checkbox" id="unit-toggle" />
+            <span class="swap-on">°C</span>
+            <span class="swap-off">°F</span>
+          </label>
+        </li>
         <li><a href="/about">About</a></li>
         <li><a href="mailto:hello@followthesnow.today">Contact</a></li>
       </ul>
@@ -40,5 +47,6 @@
       <p>© <%= Time.now.strftime("%Y") %> <a href="https://github.com/jtarchie/followthesnow">Follow the Snow</a></p>
     </aside>
   </footer>
+  <script src="/assets/main.js"></script>
 </body>
 </html>
