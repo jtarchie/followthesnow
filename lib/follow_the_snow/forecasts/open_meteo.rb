@@ -16,10 +16,10 @@ module FollowTheSnow
         daily.fetch('time').each_with_index.map do |timestamp, index|
           dt = Date.parse(timestamp)
 
-          temp_range       = (daily.fetch('temperature_2m_min')[index].round)..(daily['temperature_2m_max'][index].round)
-          snow_range       = 0..daily.fetch('snowfall_sum')[index].round
-          wind_gust_range  = 0..daily.fetch('windgusts_10m_max')[index].round
-          wind_speed_range = 0..daily.fetch('windspeed_10m_max')[index].round
+          temp_range       = (daily.fetch('temperature_2m_min')[index].round(2))..(daily['temperature_2m_max'][index].round(2))
+          snow_range       = 0..daily.fetch('snowfall_sum')[index].round(2)
+          wind_gust_range  = 0..daily.fetch('windgusts_10m_max')[index].round(2)
+          wind_speed_range = 0..daily.fetch('windspeed_10m_max')[index].round(2)
 
           Forecast.new(
             name: dt.strftime('%a'),
