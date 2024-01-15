@@ -14,8 +14,5 @@ module FollowTheSnow
   )
 end
 
-require_relative './forecasts/aggregate'
 require_relative './forecasts/daily'
-require_relative './forecasts/open_weather_map'
 require_relative './forecasts/open_meteo'
-require_relative './forecasts/text'
