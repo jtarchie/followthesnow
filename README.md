@@ -38,3 +38,21 @@ bundle exec rspec
 
 All the resorts are in CSV files in `resorts/` by country. They are scraped via
 `rake scrape` from respective Wikipedia pages.
+
+### Notes
+
+Exploring getting information from website via scraping. Haven't done it because
+it would cost money.
+
+```javascript
+document.body.querySelectorAll(
+  "nav,header,footer,form,button,iframe,script,[role]",
+).forEach((node) => node.remove());
+document.body.textContent.trim().replace(/\s+/g, " ");
+```
+
+Using this content into an ChatGPT prompt:
+
+> Please identify the current conditions reported at the resort. Include details
+> of snow depth, if the resort is open, etc. Please put it in a JSON format,
+> where the keys are simple to infer camel case keys.
