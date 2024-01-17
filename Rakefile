@@ -23,13 +23,11 @@ task :build do
   build!(resorts)
 end
 
-task :fast do
+task fast: [:css] do
   require 'webmock'
   include WebMock::API
   WebMock.enable!
   WebMock.disable_net_connect!
-
-  sh('npm run build')
 
   stub_request(:get, /api.open-meteo.com/)
     .to_return(
@@ -58,8 +56,15 @@ task :fast do
   build!(resorts)
 end
 
-task :fmt do
+task :css do
   sh('npm run build')
+  filepath = File.join(__dir__, "pages/public/assets/main.css")
+  contents = File.read(filepath)
+  contents.gsub!(/^\s*--[\w-]+:\s*;$/, '')
+  File.write(filepath, contents)
+end
+
+task fmt: [:css] do
   sh('deno fmt .')
   sh('rubocop -A')
   sh('bundle exec erblint --lint-all --enable-linters space_around_erb_tag,extra_newline -a pages/')
