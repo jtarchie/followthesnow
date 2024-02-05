@@ -58,7 +58,7 @@ end
 
 task :css do
   sh('npm run build')
-  filepath = File.join(__dir__, "pages/public/assets/main.css")
+  filepath = File.join(__dir__, 'pages/public/assets/main.css')
   contents = File.read(filepath)
   contents.gsub!(/^\s*--[\w-]+:\s*;$/, '')
   File.write(filepath, contents)
@@ -72,10 +72,6 @@ end
 
 task :test do
   sh('bundle exec rspec')
-end
-
-task :scrape do
-  sh('ruby lib/follow_the_snow/csv_builder.rb')
 end
 
 task default: %i[fmt test build]
