@@ -19,9 +19,7 @@ def build!(resorts)
 end
 
 task :build do
-  resorts = Dir[File.join(__dir__, 'resorts', '*.csv')].flat_map do |filename|
-    FollowTheSnow::Resort.from_csv(filename)
-  end
+  resorts = FollowTheSnow::Resort.from_sqlite(sqlite_file)
   build!(resorts)
 end
 
