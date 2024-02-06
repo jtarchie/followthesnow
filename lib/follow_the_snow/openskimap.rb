@@ -60,7 +60,6 @@ module FollowTheSnow
           UPPER(subdivisions.country) = country_code AND
           UPPER(countries.alpha2) = country_code
         WHERE
-          (region_code <> '' AND region_code IS NOT NULL) AND
           payload->>'$.geometry.type' = 'Point' AND
           payload->>'$.properties.name' IS NOT NULL AND
           payload->>'$.properties.status' = 'operating' AND
@@ -79,7 +78,7 @@ module FollowTheSnow
         region_code  = feature.dig('properties', 'location', 'iso3166_2')
         country_code = feature.dig('properties', 'location', 'iso3166_1Alpha2')
 
-        if %w[US CA JP].include?(country_code) && region_code.blank?
+        if [country_code, region_code].any?(&:blank?)
           lat = feature.dig('geometry', 'coordinates', 1)
           lon = feature.dig('geometry', 'coordinates', 0)
 
