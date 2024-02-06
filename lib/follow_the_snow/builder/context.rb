@@ -12,12 +12,12 @@ module FollowTheSnow
 
       def initialize(resorts:)
         @resorts = resorts.sort_by do |r|
-          [r.country, r.state, r.name].join
+          [r.country_code, r.region_code, r.name].join
         end
       end
 
       def resorts_by_countries
-        @resorts_by_countries ||= @resorts.group_by(&:country)
+        @resorts_by_countries ||= @resorts.group_by(&:country_name)
       end
 
       def countries
@@ -25,7 +25,7 @@ module FollowTheSnow
       end
 
       def states(country:)
-        resorts_by_countries.fetch(country).group_by(&:state).keys
+        resorts_by_countries.fetch(country).group_by(&:region_name).keys
       end
 
       def table_for_resorts(resorts)

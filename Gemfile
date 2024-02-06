@@ -3,7 +3,9 @@
 source 'https://rubygems.org'
 
 gem 'activesupport'
+gem 'down'
 gem 'erb_lint'
+gem 'fast_ostruct'
 gem 'front_matter_parser'
 gem 'geo_coord', require: 'geo/coord'
 gem 'http'

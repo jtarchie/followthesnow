@@ -3,17 +3,12 @@
 require 'spec_helper'
 
 RSpec.describe('Resort') do
-  it 'returns coordinates' do
-    resort = FollowTheSnow::Resort.new(lat: 1.001, lng: 2.002)
-    expect(resort.coords).to eq [1.001, 2.002]
-  end
+  it 'can load a sqlite file' do
+    files = Dir[File.join(__dir__, '..', 'data', '*.sqlite')]
+    expect(files.length).to be > 0
 
-  it 'can load a CSV file' do
-    csv_files = Dir[File.join(__dir__, '..', 'resorts', '*.csv')]
-    expect(csv_files.length).to be > 0
-
-    csv_files.each do |csv_file|
-      resorts = FollowTheSnow::Resort.from_csv(csv_file)
+    files.each do |file|
+      resorts = FollowTheSnow::Resort.from_sqlite(file)
       expect(resorts.length).to be > 0
     end
   end

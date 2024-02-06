@@ -8,7 +8,7 @@ module FollowTheSnow
     def forecasts
       @forecasts ||= begin
         forecast_response = JSON.parse(
-          HTTP.timeout(10).get("https://api.open-meteo.com/v1/forecast?latitude=#{resort.lat}&longitude=#{resort.lng}&models=best_match&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,snowfall_sum,precipitation_hours,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York")
+          HTTP.timeout(10).get("https://api.open-meteo.com/v1/forecast?latitude=#{resort.lat}&longitude=#{resort.lon}&models=best_match&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,snowfall_sum,precipitation_hours,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York")
         )
 
         daily = forecast_response.fetch('daily')

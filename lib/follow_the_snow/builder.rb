@@ -37,6 +37,19 @@ module FollowTheSnow
           FileUtils.mkdir_p(File.dirname(build_filename))
 
           case filename
+          when /\[country\]/
+            countries.each do |country|
+              country_filename = build_filename.gsub('[country]', country.parameterize)
+              write_file(
+                layout_html,
+                filename,
+                country_filename,
+                {
+                  country: country,
+                  states: resorts_by_country(country)
+                }
+              )
+            end
           when /\[state\]/
             states.each do |state|
               state_filename = build_filename.gsub('[state]', state.parameterize)
@@ -71,12 +84,21 @@ module FollowTheSnow
       private
 
       def resorts_by_state(state)
-        @resorts_by_state ||= resorts.group_by(&:state)
+        @resorts_by_state ||= resorts.group_by(&:region_name)
         @resorts_by_state.fetch(state)
       end
 
       def states
-        @states ||= resorts.map(&:state).uniq.sort
+        @states ||= resorts.map(&:region_name).uniq.sort
+      end
+
+      def resorts_by_country(country)
+        @resorts_by_country ||= resorts.group_by(&:country_name)
+        @resorts_by_country.fetch(country)
+      end
+
+      def countries
+        @countries ||= resorts.map(&:country_name).uniq.sort
       end
 
       def write_file(layout, source_filename, build_filename, metadata = {})

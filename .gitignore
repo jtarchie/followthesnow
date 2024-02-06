@@ -246,3 +246,4 @@ docs/
 .DS_Store
 Brewfile.lock.json
 .envrc
+*.geojson

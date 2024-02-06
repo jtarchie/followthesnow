@@ -3,6 +3,8 @@
 require_relative './lib/follow_the_snow'
 require 'fileutils'
 
+sqlite_file = File.join(__dir__, 'data', 'features.sqlite')
+
 def build!(resorts)
   build_dir = File.join(__dir__, 'docs')
   FileUtils.rm_rf(build_dir)
@@ -49,9 +51,7 @@ task fast: [:css] do
       }.to_json
     )
 
-  resorts = Dir[File.join(__dir__, 'resorts', '*.csv')].flat_map do |filename|
-    FollowTheSnow::Resort.from_csv(filename)
-  end
+  resorts = FollowTheSnow::Resort.from_sqlite(sqlite_file)
 
   build!(resorts)
 end
@@ -61,6 +61,7 @@ task :css do
   filepath = File.join(__dir__, 'pages/public/assets/main.css')
   contents = File.read(filepath)
   contents.gsub!(/^\s*--[\w-]+:\s*;$/, '')
+
   File.write(filepath, contents)
 end
 
@@ -72,6 +73,11 @@ end
 
 task :test do
   sh('bundle exec rspec')
+end
+
+task :scrape do
+  builder = FollowTheSnow::OpenSkiMapBuilder.new(data_dir: File.join(__dir__, 'data'))
+  builder.build!
 end
 
 task default: %i[fmt test build]

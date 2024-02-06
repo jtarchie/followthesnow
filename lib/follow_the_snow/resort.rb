@@ -1,39 +1,33 @@
 # frozen_string_literal: true
 
-require 'csv'
+require 'sqlite3'
 
 module FollowTheSnow
   Resort = Struct.new(
-    :city,
-    :closed,
-    :forecast_url,
+    :id,
     :lat,
-    :lng,
+    :lon,
     :name,
-    :state,
-    :country,
+    :region_code,
+    :country_code,
+    :country_name,
+    :region_name,
     :url,
+    :min_elevation,
+    :max_elevation,
     keyword_init: true
   ) do
-    def coords
-      [lat, lng]
-    end
+    def self.from_sqlite(filename)
+      db      = SQLite3::Database.new filename
+      rows    = db.prepare('SELECT * FROM resorts').execute
+      results = []
+      rows.each_hash do |payload|
+        results.push Resort.new(payload)
+      end
+      results.uniq(&:name)
+      rows.close
 
-    def self.from_csv(filename)
-      CSV.read(filename, headers: true).map do |resort|
-        payload = resort.to_h
-
-        if filename.include? 'europe'
-          payload['state']   = payload['country']
-          payload['country'] = 'Europe'
-        end
-
-        Resort.new(payload)
-      end.uniq(&:name)
-    end
-
-    def closed?
-      self['closed'] == 'true'
+      results
     end
 
     def forecasts(aggregates: [

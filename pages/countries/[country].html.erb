@@ -1,0 +1,28 @@
+<!--
+---
+title: Regions by <%= country %>
+description: List of regions by <%= country %>.
+---
+-->
+
+<div class="text-sm breadcrumbs mb-4">
+  <ul>
+    <li><a href="/">All</a></li>
+    <li>
+      <%= h country %>
+    </li>
+  </ul>
+</div>
+
+<p>Please select a region to see the available resorts and snow forecast.</p>
+
+<h2 class="text-2xl font-semibold mb-2" id="<%= country.parameterize %>">
+  <%= h country %>
+</h2>
+<ul class="list-disc pl-5 space-y-1">
+  <% states(country: country).each do |state| %>
+    <li><a href="/states/<%= state.parameterize %>">
+        <%= h state %>
+      </a></li>
+    <% end %>
+</ul>

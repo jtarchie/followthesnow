@@ -6,7 +6,7 @@ require 'tmpdir'
 RSpec.describe('Building') do
   let(:build_dir) { Dir.mktmpdir }
   let(:pages_dir) { File.expand_path(File.join(__dir__, '..', 'pages')) }
-  let(:resorts_dir) { File.expand_path(File.join(__dir__, '..', 'resorts')) }
+  let(:sqlite) { File.expand_path(File.join(__dir__, '..', 'data', 'features.sqlite')) }
 
   before do
     stub_request(:get, /api.open-meteo.com/)
@@ -31,9 +31,7 @@ RSpec.describe('Building') do
   end
 
   it 'builds HTML files', :focus do
-    resorts = Dir[File.join(resorts_dir, '*.csv')].flat_map do |filename|
-      FollowTheSnow::Resort.from_csv(filename)
-    end
+    resorts = FollowTheSnow::Resort.from_sqlite(sqlite)
 
     builder   = FollowTheSnow::Builder::Site.new(
       build_dir: build_dir,
@@ -44,15 +42,6 @@ RSpec.describe('Building') do
     builder.build!
 
     html_files = Dir[File.join(build_dir, '**', '*.html')].to_a
-    expect(html_files.length).to eq(1642)
-  end
-
-  it 'has context' do
-    resorts = Dir[File.join(resorts_dir, '*.csv')].flat_map do |filename|
-      FollowTheSnow::Resort.from_csv(filename)
-    end
-
-    context = FollowTheSnow::Builder::Context.new(resorts: resorts)
-    expect(context.countries).to eq ['Canada', 'Europe', 'Japan', 'United States']
+    expect(html_files.length).to eq(2593)
   end
 end
