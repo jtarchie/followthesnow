@@ -42,6 +42,6 @@ RSpec.describe('Building') do
     builder.build!
 
     html_files = Dir[File.join(build_dir, '**', '*.html')].to_a
-    expect(html_files.length).to eq(2593)
+    expect(html_files.length).to eq(3806)
   end
 end
