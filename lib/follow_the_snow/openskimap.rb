@@ -47,8 +47,8 @@ module FollowTheSnow
           payload->>'$.properties.websites[0]' AS url,
           payload->>'$.properties.statistics.minElevation' AS min_elevation,
           payload->>'$.properties.statistics.maxElevation' AS max_elevation,
-          payload->>'$.properties.location.iso3166_1Alpha2' AS country_code,
-          payload->>'$.properties.location.iso3166_2' AS region_code,
+          UPPER(payload->>'$.properties.location.iso3166_1Alpha2') AS country_code,
+          UPPER(payload->>'$.properties.location.iso3166_2') AS region_code,
           subdivisions.name AS region_name,
           countries.name AS country_name
         FROM
@@ -56,8 +56,8 @@ module FollowTheSnow
         JOIN
           subdivisions, countries
         ON
-          subdivisions.code = region_code AND
-          subdivisions.country = country_code AND
+          UPPER(subdivisions.code) = region_code AND
+          UPPER(subdivisions.country) = country_code AND
           UPPER(countries.alpha2) = country_code
         WHERE
           (region_code <> '' AND region_code IS NOT NULL) AND
