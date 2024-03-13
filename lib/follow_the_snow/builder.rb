@@ -102,8 +102,10 @@ module FollowTheSnow
       end
 
       def write_file(layout, source_filename, build_filename, metadata = {})
-        template     = erb(source_filename)
-        parsed_file  = FrontMatterParser::Parser.new(:html).call(template.render(@context, metadata))
+        template       = erb(source_filename)
+        @frontmatter ||= FrontMatterParser::Parser.new(:html)
+        parsed_file    = @frontmatter.call(template.render(@context, metadata))
+
         front_matter = parsed_file.front_matter
         contents     = parsed_file.content
         variables    = front_matter
@@ -121,7 +123,8 @@ module FollowTheSnow
       end
 
       def erb(filename)
-        Tilt::ERBTemplate.new(filename, trim: true)
+        @cache ||= {}
+        @cache.fetch(filename, Tilt::ERBTemplate.new(filename, trim: true))
       end
     end
   end
