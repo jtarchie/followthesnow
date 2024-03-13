@@ -112,7 +112,7 @@ module FollowTheSnow
                                 content: contents
                               })
 
-        @logger.info('writing file', { source: source_filename, build_filename: build_filename, metadata: metadata })
+        @logger.info('writing file', { source: source_filename, build_filename: build_filename })
         FileUtils.mkdir_p(File.dirname(build_filename))
         File.write(
           build_filename,
