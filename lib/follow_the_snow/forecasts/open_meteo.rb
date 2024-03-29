@@ -32,7 +32,7 @@ module FollowTheSnow
             wind_speed: wind_speed_range
           )
         end
-      rescue OpenSSL::SSL::SSLError, HTTP::Error, KeyError
+      rescue JSON::ParserError, OpenSSL::SSL::SSLError, HTTP::Error, KeyError
         sleep(rand(5))
         retry
       end
