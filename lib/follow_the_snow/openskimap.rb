@@ -100,6 +100,8 @@ module FollowTheSnow
         end
 
         db.execute('INSERT INTO features (payload) VALUES (?)', [feature.to_json])
+      rescue => ex
+        @logger.error(ex)
       end
 
       db.close
