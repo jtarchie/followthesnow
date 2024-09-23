@@ -8,7 +8,7 @@ description: 'Weekly forecast of snow resorts for <%= h state %>'
 <div class="text-sm breadcrumbs mb-4">
   <ul>
     <li><a href="/">All</a></li>
-    <li><a href="/#<%= resorts.first.country_name.parameterize %>">
+    <li><a href="/countries/<%= resorts.first.country_name.parameterize %>">
         <%= h resorts.first.country_name %>
       </a></li>
     <li>
