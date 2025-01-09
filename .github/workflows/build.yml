@@ -32,11 +32,10 @@ jobs:
       env:
         OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
     - name: Publish to Cloudflare Pages
-      uses: cloudflare/pages-action@v1
+      uses: cloudflare/wrangler-action@v3
       with:
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         accountId: 945954ae6af55e6e4af004fb7772fdc5
-        projectName: followthesnow
-        directory: docs
         # Optional: Enable this if you want to have GitHub Deployments triggered
         gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+        command: pages deploy docs/ --project-name followthesnow
