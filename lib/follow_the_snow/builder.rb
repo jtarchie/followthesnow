@@ -3,6 +3,7 @@
 require 'active_support'
 require 'active_support/inflector'
 require 'fileutils'
+require 'tilt'
 require 'tilt/erb'
 require 'front_matter_parser'
 require_relative './builder/context'
