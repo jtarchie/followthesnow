@@ -17,13 +17,13 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.3'
+        ruby-version: '3.4'
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Install minify
       uses: jaxxstorm/action-install-gh-release@v1.9.0
       with: # Grab the latest version
         repo: tdewolff/minify
-        tag: v2.20.14 
+        tag: v2.22.2 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ACTIONS_ALLOW_UNSECURE_COMMANDS: true
