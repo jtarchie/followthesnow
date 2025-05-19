@@ -3,11 +3,13 @@
 require 'active_support'
 require 'active_support/inflector'
 require 'fileutils'
+require 'front_matter_parser'
+require 'ougai'
+require 'parallel'
+require 'ruby-limiter'
 require 'tilt'
 require 'tilt/erb'
-require 'front_matter_parser'
 require_relative './builder/context'
-require 'ougai'
 
 module FollowTheSnow
   module Builder
@@ -19,6 +21,7 @@ module FollowTheSnow
         @logger       = Ougai::Logger.new($stderr)
         @logger.level = Ougai::Logger::DEBUG
         @source_dir   = source_dir
+        @num_threads  = 5
       end
 
       def resorts
@@ -39,7 +42,7 @@ module FollowTheSnow
 
           case filename
           when /\[country\]/
-            countries.each do |country|
+            Parallel.each(countries, in_threads: @num_threads) do |country|
               country_filename = build_filename.gsub('[country]', country.parameterize)
               write_file(
                 layout_html,
@@ -52,7 +55,7 @@ module FollowTheSnow
               )
             end
           when /\[state\]/
-            states.each do |state|
+            Parallel.each(states, in_threads: @num_threads) do |state|
               state_filename = build_filename.gsub('[state]', state.parameterize)
               write_file(
                 layout_html,
@@ -65,7 +68,12 @@ module FollowTheSnow
               )
             end
           when /\[resort\]/
-            resorts.each do |resort|
+            # rate limit from open meteo (600 / minute) halved for safety
+            limiter = Limiter::RateQueue.new(300, interval: 60)
+
+            Parallel.each(resorts, in_threads: @num_threads) do |resort|
+              limiter.shift unless defined?(RSpec)
+
               resort_filename = build_filename.gsub('[resort]', resort.name.parameterize)
               write_file(
                 layout_html,
