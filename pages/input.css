@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 @plugin "daisyui";
 
 /*
@@ -45,4 +45,4 @@ body {
   .imperial {
     display: inline-block;
   }
-} 
+}

@@ -3,7 +3,7 @@ name: Build Site
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 10 * * *' # 5AM EST
+    - cron: "0 10 * * *" # 5AM EST
 
 jobs:
   build:
@@ -11,31 +11,31 @@ jobs:
     env:
       RUBY_YJIT_ENABLE: "1"
     steps:
-    - uses: actions/checkout@v4
-      with:
-        lfs: true
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.4'
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - name: Install minify
-      uses: jaxxstorm/action-install-gh-release@v1.9.0
-      with: # Grab the latest version
-        repo: tdewolff/minify
-        tag: v2.22.2 
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-    - name: Build docs
-      run: bundle exec rake build
-      env:
-        OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
-    - name: Publish to Cloudflare Pages
-      uses: cloudflare/wrangler-action@v3
-      with:
-        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        accountId: 945954ae6af55e6e4af004fb7772fdc5
-        # Optional: Enable this if you want to have GitHub Deployments triggered
-        gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-        command: pages deploy docs/ --project-name followthesnow
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Install minify
+        uses: jaxxstorm/action-install-gh-release@v1.9.0
+        with: # Grab the latest version
+          repo: tdewolff/minify
+          tag: v2.23.5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+      - name: Build docs
+        run: bundle exec rake build
+        env:
+          OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 945954ae6af55e6e4af004fb7772fdc5
+          # Optional: Enable this if you want to have GitHub Deployments triggered
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: pages deploy docs/ --project-name followthesnow
