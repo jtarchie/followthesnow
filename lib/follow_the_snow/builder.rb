@@ -71,7 +71,7 @@ module FollowTheSnow
             # rate limit from open meteo (600 / minute) halved for safety
             limiter = Limiter::RateQueue.new(300, interval: 60)
 
-            Parallel.each(resorts, in_threads: @num_threads) do |resort|
+            Parallel.each(resorts, in_threads: @num_threads * 10) do |resort|
               limiter.shift unless defined?(RSpec)
 
               resort_filename = build_filename.gsub('[resort]', resort.name.parameterize)
