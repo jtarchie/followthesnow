@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './lib/follow_the_snow'
+require_relative 'lib/follow_the_snow'
 require 'fileutils'
 
 sqlite_file = File.join(__dir__, 'data', 'features.sqlite')

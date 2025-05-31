@@ -14,5 +14,5 @@ module FollowTheSnow
   )
 end
 
-require_relative './forecasts/daily'
-require_relative './forecasts/open_meteo'
+require_relative 'forecasts/daily'
+require_relative 'forecasts/open_meteo'

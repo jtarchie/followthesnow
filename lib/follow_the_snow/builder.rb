@@ -9,7 +9,7 @@ require 'parallel'
 require 'ruby-limiter'
 require 'tilt'
 require 'tilt/erb'
-require_relative './builder/context'
+require_relative 'builder/context'
 
 module FollowTheSnow
   module Builder
