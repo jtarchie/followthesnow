@@ -30,7 +30,7 @@ RSpec.describe('Building') do
       )
   end
 
-  it 'builds HTML files', :focus do
+  it 'builds HTML files' do
     resorts = FollowTheSnow::Resort.from_sqlite(sqlite)
 
     builder   = FollowTheSnow::Builder::Site.new(

@@ -9,6 +9,10 @@
 #
 # See https://docs.rubocop.org/rubocop/configuration
 
+plugins:
+  - rubocop-rspec
+  - rubocop-rake
+
 AllCops:
   TargetRubyVersion: 3.4
   NewCops: enable
@@ -46,7 +50,7 @@ Style/ClassAndModuleChildren:
 Style/Documentation:
   Enabled: false
 
-Style/ExtraSpacing:
+Layout/ExtraSpacing:
   ForceEqualSignAlignment: true
 
 Layout/MultilineHashKeyLineBreaks:
@@ -66,3 +70,9 @@ Style/MultilineBlockChain:
 
 Style/HashSyntax:
   EnforcedShorthandSyntax: never
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false

@@ -18,11 +18,13 @@ def build!(resorts)
   sh('minify docs/ --all --recursive -o docs/')
 end
 
+desc 'Build the site with the latest data from the SQLite database'
 task :build do
   resorts = FollowTheSnow::Resort.from_sqlite(sqlite_file)
   build!(resorts)
 end
 
+desc 'Build the site with fake data for testing purposes'
 task fast: [:css] do
   require 'webmock'
   include WebMock::API
@@ -54,6 +56,7 @@ task fast: [:css] do
   build!(resorts)
 end
 
+desc 'Build the CSS files'
 task :css do
   sh('npm run build')
   filepath = File.join(__dir__, 'pages/public/assets/main.css')
@@ -63,16 +66,19 @@ task :css do
   File.write(filepath, contents)
 end
 
+desc 'Format the codebase'
 task fmt: [:css] do
   sh('deno fmt .')
   sh('rubocop -A')
   sh('bundle exec erblint --lint-all --enable-linters space_around_erb_tag,extra_newline -a pages/')
 end
 
+desc 'Run the tests'
 task :test do
   sh('bundle exec rspec')
 end
 
+desc 'Scrape the OpenSkiMap data and build the SQLite database'
 task :scrape do
   builder = FollowTheSnow::OpenSkiMapBuilder.new(data_dir: File.join(__dir__, 'data'))
   builder.build!
