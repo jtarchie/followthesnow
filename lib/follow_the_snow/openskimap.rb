@@ -34,8 +34,8 @@ module FollowTheSnow
       db.execute <<-SQL
         CREATE TABLE IF NOT EXISTS features (
           id INTEGER PRIMARY KEY,
-          payload JSONB
-        );
+          payload BLOB
+        ) STRICT;
       SQL
 
       db.execute <<-SQL
@@ -99,7 +99,7 @@ module FollowTheSnow
           }
         end
 
-        db.execute('INSERT INTO features (payload) VALUES (?)', [feature.to_json])
+        db.execute('INSERT INTO features (payload) VALUES (jsonb(?))', [feature.to_json])
       rescue StandardError => e
         @logger.error(e)
       end
