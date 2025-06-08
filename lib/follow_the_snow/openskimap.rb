@@ -18,7 +18,7 @@ module FollowTheSnow
     def build!
       filename = File.join(@data_dir, 'features.sqlite')
       geojson  = File.join(@data_dir, 'ski_areas.geojson')
-      Down.download('https://tiles.skimap.org/geojson/ski_areas.geojson', destination: geojson) unless File.exist?(geojson)
+      Down.download('https://tiles.openskimap.org/geojson/ski_areas.geojson', destination: geojson) unless File.exist?(geojson)
 
       payload = JSON.parse(File.read(geojson))
 
