@@ -14,8 +14,7 @@ module FollowTheSnow
         daily = forecast_response.fetch('daily')
 
         daily.fetch('time').each_with_index.map do |timestamp, index|
-          dt = Date.parse(timestamp)
-
+          dt               = Date.parse(timestamp)
           temp_range       = (daily.fetch('temperature_2m_min')[index].round(2))..(daily['temperature_2m_max'][index].round(2))
           snow_range       = 0..daily.fetch('snowfall_sum')[index].round(2)
           wind_gust_range  = 0..daily.fetch('windgusts_10m_max')[index].round(2)
@@ -32,7 +31,9 @@ module FollowTheSnow
             wind_speed: wind_speed_range
           )
         end
-      rescue JSON::ParserError, OpenSSL::SSL::SSLError, HTTP::Error, KeyError
+      rescue JSON::ParserError, OpenSSL::SSL::SSLError, HTTP::Error, KeyError => e
+        # Consider using your @logger if accessible here, or $stderr for simplicity
+        warn "[API ERROR] Resort ID #{resort&.id || 'N/A'}: #{e.class} - #{e.message}. Retrying after sleep..."
         sleep(rand(5))
         retry
       end
