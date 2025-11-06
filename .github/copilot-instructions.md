@@ -46,7 +46,7 @@ Follow the RuboCop configuration defined in `.rubocop.yml`:
 
 1. **Target Ruby Version**: 3.4
 2. **Frozen String Literals**: Always include `# frozen_string_literal: true` at the top of Ruby files
-3. **Hash Syntax**: Use classic hash rockets (`=>`) instead of shorthand syntax
+3. **Hash Syntax**: Use classic hash rockets (`=>`) instead of shorthand syntax (project standard, deviates from modern Ruby conventions)
 4. **Line Length**: No strict limit, but be reasonable
 5. **Documentation**: Class and module documentation is not required
 6. **Equal Sign Alignment**: Align equal signs in consecutive assignments for readability
