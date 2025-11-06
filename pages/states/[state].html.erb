@@ -35,11 +35,24 @@ description: 'Weekly forecast of snow for ski areas in <%= h state %>'
       <tbody>
         <% rows.each do |row| %>
           <tr>
-            <% row.each do |cell| %>
-              <td>
-                <%= h cell %>
-              </td>
+            <% row.each_with_index do |cell, index| %>
+              <% if index == 0 %>
+                <!-- First column is the resort name/link -->
+                <td class="font-medium">
+                  <%= cell %>
+                </td>
+              <% elsif snow?(cell) %>
+                <!-- Highlight cells with snow -->
+                <td class="snow-cell" aria-label="<%= cell %> inches of snow">
+                  <span class="snow-value"><%= h cell %>❄️</span>
+                </td>
+              <% else %>
+                <!-- Regular cell -->
+                <td class="text-gray-400">
+                  <%= h cell %>
+                </td>
               <% end %>
+            <% end %>
           </tr>
           <% end %>
       </tbody>

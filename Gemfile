@@ -15,11 +15,9 @@ gem 'parallel'
 gem 'rake'
 gem 'rspec'
 gem 'rubocop'
+gem 'rubocop-rake'
+gem 'rubocop-rspec'
 gem 'ruby-limiter'
 gem 'sqlite3'
 gem 'tilt'
 gem 'webmock'
-
-gem 'rubocop-rake', '~> 0.7.1'
-
-gem 'rubocop-rspec', '~> 3.6'

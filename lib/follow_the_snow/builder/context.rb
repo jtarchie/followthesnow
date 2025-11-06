@@ -28,6 +28,46 @@ module FollowTheSnow
         resorts_by_countries.fetch(country).group_by(&:region_name).keys
       end
 
+      # Check if a country has any snow in the forecast
+      def country_has_snow?(country)
+        resorts_by_countries.fetch(country).any? do |resort|
+          resort.forecasts.any? { |f| f.snow.to_f.positive? }
+        end
+      end
+
+      # Check if a state/region has any snow in the forecast
+      def state_has_snow?(state)
+        resorts = @resorts.select { |r| r.region_name == state }
+        resorts.any? do |resort|
+          resort.forecasts.any? { |f| f.snow.to_f.positive? }
+        end
+      end
+
+      # Get total snow amount for a country
+      def total_snow_for_country(country)
+        resorts_by_countries.fetch(country).sum do |resort|
+          resort.forecasts.sum { |f| f.snow.to_f }
+        end
+      end
+
+      # Get total snow amount for a state/region
+      def total_snow_for_state(state)
+        resorts = @resorts.select { |r| r.region_name == state }
+        resorts.sum do |resort|
+          resort.forecasts.sum { |f| f.snow.to_f }
+        end
+      end
+
+      # Get snow icon/indicator for display
+      def snow_indicator
+        %(<span class="snow-indicator" aria-label="Snow in forecast">❄️</span>).html_safe
+      end
+
+      # Check if a snow value should be highlighted
+      def snow?(value)
+        value.to_f.positive?
+      end
+
       def table_for_resorts(resorts)
         max_days = resorts.map do |resort|
           resort.forecasts.map(&:time_of_day)

@@ -28,6 +28,7 @@ desc 'Build the site with fake data for testing purposes'
 task fast: [:css] do
   require 'webmock'
   include WebMock::API
+
   WebMock.enable!
   WebMock.disable_net_connect!
 
