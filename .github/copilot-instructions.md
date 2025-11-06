@@ -243,7 +243,7 @@ The project uses Rake for automation:
 ### GitHub Actions
 
 The repository uses GitHub Actions for:
-- Daily automated site builds (6 AM EST)
+- Daily automated site builds (10:00 UTC / 5 AM EST)
 - Deployment to Cloudflare Pages
 - Linting and testing on pull requests
 
@@ -251,6 +251,8 @@ When modifying workflows, ensure:
 - Ruby version matches `.ruby-version`
 - Secrets are properly referenced
 - Cache strategies are used for dependencies
+
+**Note**: The OPENWEATHER_API_KEY environment variable in workflows is legacy and currently unused. The project uses the Open-Meteo API which does not require an API key for basic usage.
 
 ## ERB Template Guidelines
 
