@@ -7,15 +7,23 @@ description: List of countries that have ski resorts.
 
 <p>Please select a country to see the available regions in that area.</p>
 
-<h2 class="text-3xl font-bold mb-4">Regions</h2>
+<div class="flex justify-between items-center mb-4">
+  <h2 class="text-3xl font-bold">Regions</h2>
+  <label class="flex items-center gap-2 cursor-pointer">
+    <input type="checkbox" id="filter-snow-toggle" class="toggle toggle-primary" />
+    <span class="label-text">Show only with snow ❄️</span>
+  </label>
+</div>
   <ul class="list-disc pl-5 space-y-2">
   <% countries.each do |country| %>
-    <li class="flex items-center gap-2">
+    <li class="flex items-center gap-2" data-has-snow="<%= country_has_snow?(country) %>">
       <a href="/countries/<%= country.parameterize %>" class="flex-grow">
         <%= h country %>
       </a>
       <% if country_has_snow?(country) %>
-        <%= snow_indicator %>
+        <span class="snow-badge" title="<%= country_snow_count(country) %> resorts with snow, <%= format_snow_total(total_snow_for_country(country)) %> total">
+          ❄️ <%= country_snow_count(country) %> (<%= format_snow_total(total_snow_for_country(country)) %>)
+        </span>
       <% end %>
     </li>
   <% end %>

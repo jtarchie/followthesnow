@@ -77,3 +77,17 @@ body {
 td.text-gray-400 {
   @apply opacity-60;
 }
+
+/* Snow badge styling */
+.snow-badge {
+  @apply inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs
+    font-semibold;
+  @apply bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300;
+  @apply border border-blue-200 dark:border-blue-800;
+  white-space: nowrap;
+}
+
+/* Hide elements when filter is active */
+body.filter-snow-only [data-has-snow="false"] {
+  display: none;
+}

@@ -13,7 +13,7 @@ $toggle.addEventListener("change", () => {
   toggleUnits();
   localStorage.setItem(
     "preferredUnits",
-    $toggle.checked ? "metric" : "imperial",
+    $toggle.checked ? "metric" : "imperial"
   );
 });
 
@@ -31,4 +31,26 @@ window.addEventListener("DOMContentLoaded", (event) => {
   }
 
   toggleUnits();
+
+  // Snow filter toggle functionality
+  const filterSnowToggle = document.getElementById("filter-snow-toggle");
+  if (filterSnowToggle) {
+    // Load saved filter preference
+    const filterSnowOnly = localStorage.getItem("filterSnowOnly") === "true";
+    filterSnowToggle.checked = filterSnowOnly;
+    if (filterSnowOnly) {
+      document.body.classList.add("filter-snow-only");
+    }
+
+    // Handle toggle changes
+    filterSnowToggle.addEventListener("change", () => {
+      const isChecked = filterSnowToggle.checked;
+      if (isChecked) {
+        document.body.classList.add("filter-snow-only");
+      } else {
+        document.body.classList.remove("filter-snow-only");
+      }
+      localStorage.setItem("filterSnowOnly", isChecked);
+    });
+  }
 });

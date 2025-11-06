@@ -68,6 +68,74 @@ module FollowTheSnow
         value.to_f.positive?
       end
 
+      # Get count of resorts with snow in a country
+      def country_snow_count(country)
+        resorts_by_countries.fetch(country).count do |resort|
+          resort.forecasts.any? { |f| f.snow.to_f.positive? }
+        end
+      end
+
+      # Get count of resorts with snow in a state
+      def state_snow_count(state)
+        resorts = @resorts.select { |r| r.region_name == state }
+        resorts.count do |resort|
+          resort.forecasts.any? { |f| f.snow.to_f.positive? }
+        end
+      end
+
+      # Get top N resorts by total snow in forecast period
+      def top_snowy_resorts(limit: 10)
+        resort_snow = @resorts.map do |resort|
+          total = resort.forecasts.sum { |f| f.snow.to_f }
+          { resort: resort, total: total }
+        end
+
+        resort_snow.select { |rs| rs[:total].positive? }
+                   .sort_by { |rs| -rs[:total] }
+                   .take(limit)
+      end
+
+      # Get resorts with snow today (next 24 hours)
+      def resorts_with_snow_today
+        @resorts.select do |resort|
+          # Get first forecast (usually today)
+          first_forecast = resort.forecasts.first
+          first_forecast && first_forecast.snow.to_f.positive?
+        end.sort_by { |r| -r.forecasts.first.snow.to_f }
+      end
+
+      # Get regional summaries (country -> total snow, resort count)
+      def regional_summaries
+        resorts_by_countries.map do |country, resorts|
+          total_snow = resorts.sum do |resort|
+            resort.forecasts.sum { |f| f.snow.to_f }
+          end
+
+          resort_count = resorts.count do |resort|
+            resort.forecasts.any? { |f| f.snow.to_f.positive? }
+          end
+
+          {
+            country: country,
+            total_snow: total_snow,
+            resort_count: resort_count,
+            total_resorts: resorts.count
+          }
+        end.select { |s| s[:resort_count].positive? }
+                            .sort_by { |s| -s[:total_snow] }
+      end
+
+      # Format snow total for display
+      def format_snow_total(inches)
+        return '0"' if inches.zero?
+
+        if inches >= 1
+          "#{inches.round(1)}\""
+        else
+          "#{(inches * 10).round(0) / 10.0}\""
+        end
+      end
+
       def table_for_resorts(resorts)
         max_days = resorts.map do |resort|
           resort.forecasts.map(&:time_of_day)
