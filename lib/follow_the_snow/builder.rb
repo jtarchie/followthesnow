@@ -15,10 +15,10 @@ module FollowTheSnow
   module Builder
     # builds the entire site
     class Site
-      def initialize(build_dir:, resorts:, source_dir:)
+      def initialize(build_dir:, resorts:, source_dir:, logger_io: $stderr)
         @build_dir    = build_dir
         @context      = Context.new(resorts: resorts)
-        @logger       = Ougai::Logger.new($stderr)
+        @logger       = Ougai::Logger.new(logger_io)
         @logger.level = Ougai::Logger::DEBUG
         @source_dir   = source_dir
         @num_threads  = 5

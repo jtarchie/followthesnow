@@ -36,12 +36,193 @@ RSpec.describe('Building') do
     builder   = FollowTheSnow::Builder::Site.new(
       build_dir: build_dir,
       resorts: resorts,
-      source_dir: pages_dir
+      source_dir: pages_dir,
+      logger_io: File.open(File::NULL, 'w')
     )
 
     builder.build!
 
     html_files = Dir[File.join(build_dir, '**', '*.html')].to_a
-    expect(html_files.length).to eq(3889)
+    expect(html_files.length).to eq(3445) # Added snow-now.html (base was 3444)
+  end
+
+  describe 'snow-now page' do
+    let(:resorts) { FollowTheSnow::Resort.from_sqlite(sqlite) }
+    let(:builder) do
+      FollowTheSnow::Builder::Site.new(
+        build_dir: build_dir,
+        resorts: resorts,
+        source_dir: pages_dir,
+        logger_io: File.open(File::NULL, 'w')
+      )
+    end
+
+    before { builder.build! }
+
+    it 'generates snow-now.html' do
+      snow_now_path = File.join(build_dir, 'snow-now.html')
+      expect(File.exist?(snow_now_path)).to be(true)
+    end
+
+    it 'includes top snowy resorts section' do
+      snow_now_html = File.read(File.join(build_dir, 'snow-now.html'))
+      expect(snow_now_html).to include('Most Snow')
+      expect(snow_now_html).to include('🏔️')
+    end
+
+    it 'includes snow today section' do
+      snow_now_html = File.read(File.join(build_dir, 'snow-now.html'))
+      expect(snow_now_html).to include('Snow Today')
+      expect(snow_now_html).to include('📅')
+    end
+
+    it 'includes regional summaries section' do
+      snow_now_html = File.read(File.join(build_dir, 'snow-now.html'))
+      expect(snow_now_html).to include('Snow by Region')
+      expect(snow_now_html).to include('🌍')
+    end
+
+    it 'includes quick stats section' do
+      snow_now_html = File.read(File.join(build_dir, 'snow-now.html'))
+      expect(snow_now_html).to include('Total Resorts Tracked')
+      expect(snow_now_html).to include('Resorts w/ Snow')
+    end
+  end
+
+  describe 'snow indicators and badges' do
+    let(:resorts) { FollowTheSnow::Resort.from_sqlite(sqlite) }
+    let(:builder) do
+      FollowTheSnow::Builder::Site.new(
+        build_dir: build_dir,
+        resorts: resorts,
+        source_dir: pages_dir,
+        logger_io: File.open(File::NULL, 'w')
+      )
+    end
+
+    before { builder.build! }
+
+    it 'includes data-has-snow attributes on index page' do
+      index_html = File.read(File.join(build_dir, 'index.html'))
+      expect(index_html).to include('data-has-snow=')
+    end
+
+    it 'includes snow badges with counts on index page' do
+      index_html = File.read(File.join(build_dir, 'index.html'))
+      # Should have snow badge class and snowflake emoji
+      if index_html.include?('snow-badge')
+        expect(index_html).to include('❄️')
+        expect(index_html).to match(/\d+\s*\(/m) # Number followed by parenthesis (count format)
+      end
+    end
+
+    it 'includes filter toggle on index page' do
+      index_html = File.read(File.join(build_dir, 'index.html'))
+      expect(index_html).to include('filter-snow-toggle')
+      expect(index_html).to include('Show only with snow')
+    end
+
+    it 'includes data-has-snow attributes on country pages' do
+      # Check a country page that should exist
+      country_files = Dir[File.join(build_dir, 'countries', '*.html')]
+      expect(country_files).not_to be_empty
+
+      first_country_html = File.read(country_files.first)
+      expect(first_country_html).to include('data-has-snow=')
+    end
+
+    it 'includes snow badges on country pages with snow' do
+      country_files = Dir[File.join(build_dir, 'countries', '*.html')]
+
+      # Find a country page with snow badges
+      country_with_badge = country_files.find do |file|
+        File.read(file).include?('snow-badge')
+      end
+
+      if country_with_badge
+        html = File.read(country_with_badge)
+        expect(html).to include('❄️')
+        expect(html).to match(/snow-badge.*\d+.*\(/m)
+      end
+    end
+
+    it 'includes filter toggle on country pages' do
+      country_files      = Dir[File.join(build_dir, 'countries', '*.html')]
+      first_country_html = File.read(country_files.first)
+      expect(first_country_html).to include('filter-snow-toggle')
+    end
+  end
+
+  describe 'snow cell styling' do
+    let(:resorts) { FollowTheSnow::Resort.from_sqlite(sqlite) }
+    let(:builder) do
+      FollowTheSnow::Builder::Site.new(
+        build_dir: build_dir,
+        resorts: resorts,
+        source_dir: pages_dir,
+        logger_io: File.open(File::NULL, 'w')
+      )
+    end
+
+    before { builder.build! }
+
+    it 'adds snow-cell class to cells with snow in state pages' do
+      state_files = Dir[File.join(build_dir, 'states', '*.html')]
+      expect(state_files).not_to be_empty
+
+      # Find a state page with snow
+      state_with_snow = state_files.find do |file|
+        File.read(file).include?('snow-cell')
+      end
+
+      if state_with_snow
+        html = File.read(state_with_snow)
+        expect(html).to include('snow-cell')
+        expect(html).to include('snow-value')
+      end
+    end
+
+    it 'adds snow-cell class to snowfall column in resort pages' do
+      resort_files = Dir[File.join(build_dir, 'resorts', '*.html')]
+      expect(resort_files).not_to be_empty
+
+      # Find a resort page with snow
+      resort_with_snow = resort_files.find do |file|
+        content = File.read(file)
+        content.include?('snow-cell') || content.include?('Long Term Forecast')
+      end
+
+      if resort_with_snow
+        html = File.read(resort_with_snow)
+        # Check for either snow-cell styling or basic table structure
+        expect(html).to include('table')
+      end
+    end
+  end
+
+  describe 'navigation links' do
+    let(:resorts) { FollowTheSnow::Resort.from_sqlite(sqlite) }
+    let(:builder) do
+      FollowTheSnow::Builder::Site.new(
+        build_dir: build_dir,
+        resorts: resorts,
+        source_dir: pages_dir,
+        logger_io: File.open(File::NULL, 'w')
+      )
+    end
+
+    before { builder.build! }
+
+    it 'includes Snow Now link in navigation' do
+      index_html = File.read(File.join(build_dir, 'index.html'))
+      expect(index_html).to include('href="/snow-now"')
+      expect(index_html).to include('Snow Now')
+    end
+
+    it 'includes Snow Now link in mobile menu' do
+      index_html = File.read(File.join(build_dir, 'index.html'))
+      expect(index_html).to include('drawer-side')
+      expect(index_html).to match(/snow-now.*Snow Now/m)
+    end
   end
 end

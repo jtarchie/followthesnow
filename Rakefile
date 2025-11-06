@@ -53,6 +53,8 @@ task fast: [:css] do
     )
 
   resorts = FollowTheSnow::Resort.from_sqlite(sqlite_file)
+  # Limit to first 10 resorts for fast testing
+  resorts = resorts.take(10)
 
   build!(resorts)
 end
