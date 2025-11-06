@@ -93,6 +93,7 @@ GEM
     oj (3.16.12)
       bigdecimal (>= 3.0)
       ostruct (>= 0.2)
+    openssl (3.3.2)
     ostruct (0.6.3)
     ougai (2.0.0)
       oj (~> 3.10)
@@ -182,13 +183,14 @@ DEPENDENCIES
   geo_coord
   http
   nokogiri
+  openssl
   ougai
   parallel
   rake
   rspec
   rubocop
-  rubocop-rake (~> 0.7.1)
-  rubocop-rspec (~> 3.6)
+  rubocop-rake
+  rubocop-rspec
   ruby-limiter
   sqlite3
   tilt

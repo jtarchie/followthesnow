@@ -67,7 +67,7 @@ module FollowTheSnow
           country_code IN ('US', 'CA', 'JP', 'AL', 'AD', 'AT', 'BY', 'BE', 'BA', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FO', 'FI', 'FR', 'DE', 'GI', 'GR', 'GG', 'VA', 'HU', 'IS', 'IE', 'IM', 'IT', 'JE', 'LV', 'LI', 'LT', 'LU', 'MT', 'MD', 'MC', 'ME', 'NL', 'MK', 'NO', 'PL', 'PT', 'RO', 'RU', 'SM', 'RS', 'SK', 'SI', 'ES', 'SJ', 'SE', 'CH', 'UA', 'GB');
       SQL
 
-      payload.fetch('features').each do |feature|
+      payload.fetch('features').each_with_index do |feature, index|
         coordinates = feature.dig('geometry', 'coordinates')
         if coordinates && coordinates[0].is_a?(Array)
           coordinates.flatten!
@@ -87,6 +87,8 @@ module FollowTheSnow
           key = address.keys.grep(/^ISO3166-2/).max_by { |k| k[/\d+$/].to_i }
           @logger.info(
             'address',
+            index: index,
+            out_of: payload.fetch('features').size,
             address: address,
             key: key,
             lat: lat,
