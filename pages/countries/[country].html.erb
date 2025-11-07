@@ -20,7 +20,7 @@ description: List of regions by <%= country %>.
     <h2 class="text-2xl font-semibold" id="<%= country.parameterize %>">
       <%= h country %>
       <% if country_has_snow?(country) %>
-        <span class="snow-badge ml-2" title="<%= country_snow_count(country) %> resorts with snow">
+        <span class="snow-badge ml-2">
           ❄️ <%= country_snow_count(country) %> (<%= format_snow_total(total_snow_for_country(country)) %>)
         </span>
       <% end %>
@@ -37,7 +37,7 @@ description: List of regions by <%= country %>.
         <%= h state %>
       </a>
       <% if state_has_snow?(state) %>
-        <span class="snow-badge" title="<%= state_snow_count(state) %> resorts with snow">
+        <span class="snow-badge">
           ❄️ <%= state_snow_count(state) %> (<%= format_snow_total(total_snow_for_state(state)) %>)
         </span>
       <% end %>

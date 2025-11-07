@@ -21,7 +21,7 @@ description: List of countries that have ski resorts.
         <%= h country %>
       </a>
       <% if country_has_snow?(country) %>
-        <span class="snow-badge" title="<%= country_snow_count(country) %> resorts with snow, <%= format_snow_total(total_snow_for_country(country)) %> total">
+        <span class="snow-badge">
           ❄️ <%= country_snow_count(country) %> (<%= format_snow_total(total_snow_for_country(country)) %>)
         </span>
       <% end %>

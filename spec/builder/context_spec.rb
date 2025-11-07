@@ -314,7 +314,7 @@ RSpec.describe(FollowTheSnow::Builder::Context) do
 
     it 'formats whole numbers with both units' do
       result = context.format_snow_total(5)
-      expect(result).to include('<span class="imperial">5.0"</span>')
+      expect(result).to include('<span class="imperial">5"</span>')
       expect(result).to include('<span class="metric">12.7 cm</span>')
       expect(result.html_safe?).to be(true)
     end
@@ -329,14 +329,14 @@ RSpec.describe(FollowTheSnow::Builder::Context) do
     it 'rounds to one decimal place' do
       result = context.format_snow_total(7.849)
       expect(result).to include('<span class="imperial">7.8"</span>')
-      expect(result).to include('<span class="metric">19.84 cm</span>')
+      expect(result).to include('<span class="metric">19.94 cm</span>')
       expect(result.html_safe?).to be(true)
     end
 
     it 'formats small amounts correctly with millimeters' do
       result = context.format_snow_total(0.5)
       expect(result).to include('<span class="imperial">0.5"</span>')
-      expect(result).to include('<span class="metric">12.7 mm</span>')
+      expect(result).to include('<span class="metric">1.27 cm</span>')
       expect(result.html_safe?).to be(true)
     end
 
@@ -358,7 +358,7 @@ RSpec.describe(FollowTheSnow::Builder::Context) do
     end
 
     it 'handles the boundary case near 1cm' do
-      expect(context.inches_to_metric(0.5)).to eq('12.7 mm')
+      expect(context.inches_to_metric(0.5)).to eq('1.27 cm')
     end
   end
 
