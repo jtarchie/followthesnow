@@ -238,22 +238,31 @@ RSpec.describe(FollowTheSnow::Builder::Context) do
 
   describe '#resorts_with_snow_today' do
     it 'returns resorts with snow in first forecast' do
-      results = context.resorts_with_snow_today
+      results = context.resorts_with_snow_today(limit: 10)
 
       expect(results.length).to eq(2)
-      expect(results.map(&:name)).to include('Snowy Resort', 'Whistler')
+      expect(results.map { |r| r[:resort].name }).to include('Snowy Resort', 'Whistler')
     end
 
     it 'sorts by snow amount descending' do
-      results = context.resorts_with_snow_today
+      results = context.resorts_with_snow_today(limit: 10)
 
-      expect(results[0].name).to eq('Snowy Resort') # 5.5 inches
-      expect(results[1].name).to eq('Whistler') # 3.2 inches
+      expect(results[0][:resort].name).to eq('Snowy Resort') # 5.5 inches
+      expect(results[0][:snow]).to eq(5.5)
+      expect(results[1][:resort].name).to eq('Whistler') # 3.2 inches
+      expect(results[1][:snow]).to eq(3.2)
     end
 
     it 'excludes resorts without snow today' do
-      results = context.resorts_with_snow_today
-      expect(results.map(&:name)).not_to include('Dry Resort')
+      results = context.resorts_with_snow_today(limit: 10)
+      resort_names = results.map { |r| r[:resort].name }
+      expect(resort_names).not_to include('Dry Resort')
+    end
+
+    it 'respects the limit parameter' do
+      results = context.resorts_with_snow_today(limit: 1)
+      expect(results.length).to eq(1)
+      expect(results[0][:resort].name).to eq('Snowy Resort')
     end
   end
 

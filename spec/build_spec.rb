@@ -77,6 +77,35 @@ RSpec.describe('Building') do
       expect(snow_now_html).to include('📅')
     end
 
+    it 'displays snow today in table format with actual snow values' do
+      snow_now_html = File.read(File.join(build_dir, 'snow-now.html'))
+      doc = Nokogiri::HTML(snow_now_html)
+
+      # Find the Snow Today section
+      snow_today_section = doc.xpath('//section[.//h2[contains(text(), "Snow Today")]]')
+      expect(snow_today_section).not_to be_empty
+
+      # Check if it has a table
+      table = snow_today_section.at_xpath('.//table')
+
+      if table
+        # Verify table structure
+        headers = table.xpath('.//thead//th').map(&:text).map(&:strip)
+        expect(headers).to include('Rank', 'Resort', 'Location', 'Snow Today')
+
+        # Check that there are rows with actual snow values (not all zeros)
+        snow_cells = table.xpath('.//tbody//tr//td[4]').map(&:text).map(&:strip)
+
+        # At least one row should have non-zero snow
+        has_non_zero = snow_cells.any? do |cell|
+          # Extract numeric value and check if it's greater than 0
+          cell.match?(/[1-9]\d*\.?\d*/)
+        end
+
+        expect(has_non_zero).to be(true), "Expected at least one resort with non-zero snow, but got: #{snow_cells.inspect}"
+      end
+    end
+
     it 'includes regional summaries section' do
       snow_now_html = File.read(File.join(build_dir, 'snow-now.html'))
       expect(snow_now_html).to include('Snow by Region')

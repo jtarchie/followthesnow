@@ -82,12 +82,16 @@ module FollowTheSnow
       end
 
       # Get resorts with snow today (next 24 hours)
-      def resorts_with_snow_today
-        @resorts.select do |resort|
-          # Get first forecast (usually today)
+      def resorts_with_snow_today(limit: 10)
+        resort_snow = @resorts.map do |resort|
           first_forecast = raw_forecasts_for(resort).first
-          first_forecast && snow_inches(first_forecast).positive?
-        end.sort_by { |r| -snow_inches(raw_forecasts_for(r).first) }
+          snow_amount    = first_forecast ? snow_inches(first_forecast) : 0
+          { resort: resort, snow: snow_amount }
+        end
+
+        resort_snow.select { |rs| rs[:snow].positive? }
+                   .sort_by { |rs| -rs[:snow] }
+                   .take(limit)
       end
 
       # Get regional summaries (country -> total snow, resort count)
