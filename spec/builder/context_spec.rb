@@ -305,28 +305,60 @@ RSpec.describe(FollowTheSnow::Builder::Context) do
   end
 
   describe '#format_snow_total' do
-    it 'formats zero as 0"' do
-      expect(context.format_snow_total(0)).to eq('0"')
+    it 'formats zero with both units' do
+      result = context.format_snow_total(0)
+      expect(result).to include('<span class="imperial">0"</span>')
+      expect(result).to include('<span class="metric">0 cm</span>')
+      expect(result.html_safe?).to be(true)
     end
 
-    it 'formats whole numbers with one decimal' do
-      expect(context.format_snow_total(5)).to eq('5"')
+    it 'formats whole numbers with both units' do
+      result = context.format_snow_total(5)
+      expect(result).to include('<span class="imperial">5.0"</span>')
+      expect(result).to include('<span class="metric">12.7 cm</span>')
+      expect(result.html_safe?).to be(true)
     end
 
-    it 'formats decimals correctly' do
-      expect(context.format_snow_total(12.5)).to eq('12.5"')
+    it 'formats decimals correctly with both units' do
+      result = context.format_snow_total(12.5)
+      expect(result).to include('<span class="imperial">12.5"</span>')
+      expect(result).to include('<span class="metric">31.75 cm</span>')
+      expect(result.html_safe?).to be(true)
     end
 
     it 'rounds to one decimal place' do
-      expect(context.format_snow_total(7.849)).to eq('7.8"')
+      result = context.format_snow_total(7.849)
+      expect(result).to include('<span class="imperial">7.8"</span>')
+      expect(result).to include('<span class="metric">19.84 cm</span>')
+      expect(result.html_safe?).to be(true)
     end
 
-    it 'formats small amounts correctly' do
-      expect(context.format_snow_total(0.5)).to eq('0.5"')
+    it 'formats small amounts correctly with millimeters' do
+      result = context.format_snow_total(0.5)
+      expect(result).to include('<span class="imperial">0.5"</span>')
+      expect(result).to include('<span class="metric">12.7 mm</span>')
+      expect(result.html_safe?).to be(true)
     end
 
-    it 'formats very small amounts' do
-      expect(context.format_snow_total(0.138)).to eq('0.1"')
+    it 'formats very small amounts with millimeters' do
+      result = context.format_snow_total(0.138)
+      expect(result).to include('<span class="imperial">0.1"</span>')
+      expect(result).to include('<span class="metric">3.51 mm</span>')
+      expect(result.html_safe?).to be(true)
+    end
+  end
+
+  describe '#inches_to_metric' do
+    it 'converts inches to centimeters for values >= 1cm' do
+      expect(context.inches_to_metric(5)).to eq('12.7 cm')
+    end
+
+    it 'converts inches to millimeters for values < 1cm' do
+      expect(context.inches_to_metric(0.138)).to eq('3.51 mm')
+    end
+
+    it 'handles the boundary case near 1cm' do
+      expect(context.inches_to_metric(0.5)).to eq('12.7 mm')
     end
   end
 
