@@ -34,58 +34,71 @@ module FollowTheSnow
 
         layout_html = erb(File.join(@source_dir, '_layout.html.erb'))
 
-        Dir[File.join(@source_dir, '**', '*.html.erb')].each do |filename|
-          next if File.basename(filename) =~ /^_/
+        # Collect all template files
+        all_templates = Dir[File.join(@source_dir, '**', '*.html.erb')].reject do |filename|
+          File.basename(filename) =~ /^_/
+        end
 
-          build_filename = filename.gsub(@source_dir, @build_dir).gsub('.html.erb', '.html')
-          FileUtils.mkdir_p(File.dirname(build_filename))
+        # Group templates by type for ordered processing
+        resort_templates  = all_templates.select { |f| f.include?('[resort]') }
+        state_templates   = all_templates.select { |f| f.include?('[state]') }
+        country_templates = all_templates.select { |f| f.include?('[country]') }
+        other_templates   = all_templates - resort_templates - state_templates - country_templates
 
-          case filename
-          when /\[country\]/
-            Parallel.each(countries, in_threads: @num_threads) do |country|
-              country_filename = build_filename.gsub('[country]', country.parameterize)
-              write_file(
-                layout_html,
-                filename,
-                country_filename,
-                {
-                  country: country,
-                  states: resorts_by_country(country)
-                }
-              )
+        # Process in order: resorts (with rate limiting), then states, then countries, then others
+        # This ensures API rate limiting is in place before any calls happen
+        [resort_templates, state_templates, country_templates, other_templates].each do |templates|
+          templates.each do |filename|
+            build_filename = filename.gsub(@source_dir, @build_dir).gsub('.html.erb', '.html')
+            FileUtils.mkdir_p(File.dirname(build_filename))
+
+            case filename
+            when /\[resort\]/
+              # rate limit from open meteo (600 / minute) halved for safety
+              limiter = Limiter::RateQueue.new(250, interval: 60, balanced: true)
+
+              Parallel.each(resorts, in_threads: @num_threads * 10) do |resort|
+                limiter.shift unless defined?(RSpec)
+
+                resort_filename = build_filename.gsub('[resort]', resort.name.parameterize)
+                write_file(
+                  layout_html,
+                  filename,
+                  resort_filename,
+                  {
+                    resort: resort
+                  }
+                )
+              end
+            when /\[state\]/
+              Parallel.each(states, in_threads: @num_threads) do |state|
+                state_filename = build_filename.gsub('[state]', state.parameterize)
+                write_file(
+                  layout_html,
+                  filename,
+                  state_filename,
+                  {
+                    resorts: resorts_by_state(state),
+                    state: state
+                  }
+                )
+              end
+            when /\[country\]/
+              Parallel.each(countries, in_threads: @num_threads) do |country|
+                country_filename = build_filename.gsub('[country]', country.parameterize)
+                write_file(
+                  layout_html,
+                  filename,
+                  country_filename,
+                  {
+                    country: country,
+                    states: resorts_by_country(country)
+                  }
+                )
+              end
+            else
+              write_file(layout_html, filename, build_filename)
             end
-          when /\[state\]/
-            Parallel.each(states, in_threads: @num_threads) do |state|
-              state_filename = build_filename.gsub('[state]', state.parameterize)
-              write_file(
-                layout_html,
-                filename,
-                state_filename,
-                {
-                  resorts: resorts_by_state(state),
-                  state: state
-                }
-              )
-            end
-          when /\[resort\]/
-            # rate limit from open meteo (600 / minute) halved for safety
-            limiter = Limiter::RateQueue.new(250, interval: 60, balanced: true)
-
-            Parallel.each(resorts, in_threads: @num_threads * 10) do |resort|
-              limiter.shift unless defined?(RSpec)
-
-              resort_filename = build_filename.gsub('[resort]', resort.name.parameterize)
-              write_file(
-                layout_html,
-                filename,
-                resort_filename,
-                {
-                  resort: resort
-                }
-              )
-            end
-          else
-            write_file(layout_html, filename, build_filename)
           end
         end
       end
