@@ -5,13 +5,14 @@ require 'fileutils'
 
 sqlite_file = File.join(__dir__, 'data', 'features.sqlite')
 
-def build!(resorts)
+def build!(resorts, logger_io: $stderr)
   build_dir = File.join(__dir__, 'docs')
   FileUtils.rm_rf(build_dir)
   builder   = FollowTheSnow::Builder::Site.new(
     build_dir: build_dir,
     resorts: resorts,
-    source_dir: File.join(__dir__, 'pages')
+    source_dir: File.join(__dir__, 'pages'),
+    logger_io: logger_io
   )
 
   builder.build!
@@ -27,6 +28,7 @@ end
 desc 'Build the site with fake data for testing purposes'
 task fast: [:css] do
   require 'webmock'
+  require 'rspec'
   include WebMock::API
 
   WebMock.enable!
@@ -53,9 +55,7 @@ task fast: [:css] do
     )
 
   resorts = FollowTheSnow::Resort.from_sqlite(sqlite_file)
-  # Limit to first 10 resorts for fast testing
-  resorts = resorts.take(10)
-
+  # Suppress logging for faster builds
   build!(resorts)
 end
 
