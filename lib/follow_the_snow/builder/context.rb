@@ -2,11 +2,13 @@
 
 require 'active_support/time'
 require 'active_support/core_ext/string'
+require_relative 'snow_helper'
 
 module FollowTheSnow
   module Builder
     class Context
       include ERB::Util
+      include SnowHelper
 
       attr_reader :resorts
 
@@ -52,16 +54,6 @@ module FollowTheSnow
       def total_snow_for_state(state)
         resorts = @resorts.select { |r| r.region_name == state }
         resorts.sum { |resort| total_snow_for(resort) }
-      end
-
-      # Get snow icon/indicator for display
-      def snow_indicator
-        %(<span class="snow-indicator" aria-label="Snow in forecast">❄️</span>).html_safe
-      end
-
-      # Check if a snow value should be highlighted
-      def snow?(value)
-        value.to_s.gsub(/[^\d.-]/, '').to_f.positive?
       end
 
       # Get count of resorts with snow in a country
@@ -117,17 +109,6 @@ module FollowTheSnow
           }
         end.select { |s| s[:resort_count].positive? }
                             .sort_by { |s| -s[:total_snow] }
-      end
-
-      # Format snow total for display
-      def format_snow_total(inches)
-        return '0"' if inches.zero?
-
-        if inches >= 1
-          "#{inches.round(1)}\""
-        else
-          "#{(inches * 10).round(0) / 10.0}\""
-        end
       end
 
       def table_for_resorts(resorts)
@@ -199,18 +180,6 @@ module FollowTheSnow
         @raw_forecast_cache            ||= {}
         cache_key                        = resort.id || resort.object_id
         @raw_forecast_cache[cache_key] ||= resort.forecasts(aggregates: [])
-      end
-
-      def snow_inches(forecast)
-        return 0 unless forecast&.snow
-
-        if forecast.snow.respond_to?(:end)
-          forecast.snow.end.to_f
-        elsif forecast.snow.respond_to?(:to_f)
-          forecast.snow.to_f
-        else
-          0
-        end
       end
     end
   end
