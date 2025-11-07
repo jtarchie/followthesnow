@@ -47,7 +47,7 @@ description: 'Weekly forecast of snow for <%= h resort.name %>'
             <% row.each_with_index do |cell, index| %>
               <% if index == 1 && snow?(cell) %>
                 <!-- Snowfall column (index 1) - highlight if there's snow -->
-                <td class="snow-cell" aria-label="<%= cell %> inches of snow">
+                <td class="snow-cell">
                   <span class="snow-value"><%= h cell %>❄️</span>
                 </td>
               <% elsif index == 1 %>

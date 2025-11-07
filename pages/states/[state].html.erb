@@ -43,7 +43,7 @@ description: 'Weekly forecast of snow for ski areas in <%= h state %>'
                 </td>
               <% elsif snow?(cell) %>
                 <!-- Highlight cells with snow -->
-                <td class="snow-cell" aria-label="<%= cell %> inches of snow">
+                <td class="snow-cell">
                   <span class="snow-value"><%= h cell %>❄️</span>
                 </td>
               <% else %>

@@ -331,6 +331,12 @@ RSpec.describe(FollowTheSnow::Builder::Context) do
   end
 
   describe '#snow?' do
+    it 'returns true if number exists in string' do
+      expect(context.snow?('There is 3 inches of snow')).to be(true)
+      expect(context.snow?('Snowfall: 0.5')).to be(true)
+      expect(context.snow?('Snowfall: -0.5')).to be(false)
+    end
+
     it 'returns true for positive snow values' do
       expect(context.snow?(5.5)).to be(true)
     end

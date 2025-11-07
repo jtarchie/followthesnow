@@ -31,31 +31,27 @@ module FollowTheSnow
       # Check if a country has any snow in the forecast
       def country_has_snow?(country)
         resorts_by_countries.fetch(country).any? do |resort|
-          resort.forecasts.any? { |f| f.snow.to_f.positive? }
+          any_snow?(resort)
         end
       end
 
       # Check if a state/region has any snow in the forecast
       def state_has_snow?(state)
         resorts = @resorts.select { |r| r.region_name == state }
-        resorts.any? do |resort|
-          resort.forecasts.any? { |f| f.snow.to_f.positive? }
-        end
+        resorts.any? { |resort| any_snow?(resort) }
       end
 
       # Get total snow amount for a country
       def total_snow_for_country(country)
         resorts_by_countries.fetch(country).sum do |resort|
-          resort.forecasts.sum { |f| f.snow.to_f }
+          total_snow_for(resort)
         end
       end
 
       # Get total snow amount for a state/region
       def total_snow_for_state(state)
         resorts = @resorts.select { |r| r.region_name == state }
-        resorts.sum do |resort|
-          resort.forecasts.sum { |f| f.snow.to_f }
-        end
+        resorts.sum { |resort| total_snow_for(resort) }
       end
 
       # Get snow icon/indicator for display
@@ -65,28 +61,26 @@ module FollowTheSnow
 
       # Check if a snow value should be highlighted
       def snow?(value)
-        value.to_f.positive?
+        value.to_s.gsub(/[^\d.-]/, '').to_f.positive?
       end
 
       # Get count of resorts with snow in a country
       def country_snow_count(country)
         resorts_by_countries.fetch(country).count do |resort|
-          resort.forecasts.any? { |f| f.snow.to_f.positive? }
+          any_snow?(resort)
         end
       end
 
       # Get count of resorts with snow in a state
       def state_snow_count(state)
         resorts = @resorts.select { |r| r.region_name == state }
-        resorts.count do |resort|
-          resort.forecasts.any? { |f| f.snow.to_f.positive? }
-        end
+        resorts.count { |resort| any_snow?(resort) }
       end
 
       # Get top N resorts by total snow in forecast period
       def top_snowy_resorts(limit: 10)
         resort_snow = @resorts.map do |resort|
-          total = resort.forecasts.sum { |f| f.snow.to_f }
+          total = total_snow_for(resort)
           { resort: resort, total: total }
         end
 
@@ -99,20 +93,20 @@ module FollowTheSnow
       def resorts_with_snow_today
         @resorts.select do |resort|
           # Get first forecast (usually today)
-          first_forecast = resort.forecasts.first
-          first_forecast && first_forecast.snow.to_f.positive?
-        end.sort_by { |r| -r.forecasts.first.snow.to_f }
+          first_forecast = raw_forecasts_for(resort).first
+          first_forecast && snow_inches(first_forecast).positive?
+        end.sort_by { |r| -snow_inches(raw_forecasts_for(r).first) }
       end
 
       # Get regional summaries (country -> total snow, resort count)
       def regional_summaries
         resorts_by_countries.map do |country, resorts|
           total_snow = resorts.sum do |resort|
-            resort.forecasts.sum { |f| f.snow.to_f }
+            total_snow_for(resort)
           end
 
           resort_count = resorts.count do |resort|
-            resort.forecasts.any? { |f| f.snow.to_f.positive? }
+            any_snow?(resort)
           end
 
           {
@@ -185,6 +179,38 @@ module FollowTheSnow
       def current_timestamp
         Time.zone = 'Eastern Time (US & Canada)'
         Time.zone.now.strftime('%Y-%m-%d %l:%M%p %Z')
+      end
+
+      private
+
+      def any_snow?(resort)
+        raw_forecasts_for(resort).any? do |forecast|
+          snow_inches(forecast).positive?
+        end
+      end
+
+      def total_snow_for(resort)
+        raw_forecasts_for(resort).sum do |forecast|
+          snow_inches(forecast)
+        end
+      end
+
+      def raw_forecasts_for(resort)
+        @raw_forecast_cache            ||= {}
+        cache_key                        = resort.id || resort.object_id
+        @raw_forecast_cache[cache_key] ||= resort.forecasts(aggregates: [])
+      end
+
+      def snow_inches(forecast)
+        return 0 unless forecast&.snow
+
+        if forecast.snow.respond_to?(:end)
+          forecast.snow.end.to_f
+        elsif forecast.snow.respond_to?(:to_f)
+          forecast.snow.to_f
+        else
+          0
+        end
       end
     end
   end

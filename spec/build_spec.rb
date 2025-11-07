@@ -2,6 +2,7 @@
 
 require 'spec_helper'
 require 'tmpdir'
+require 'nokogiri'
 
 RSpec.describe('Building') do
   let(:build_dir) { Dir.mktmpdir }
@@ -102,9 +103,18 @@ RSpec.describe('Building') do
 
     before { builder.build! }
 
-    it 'includes data-has-snow attributes on index page' do
-      index_html = File.read(File.join(build_dir, 'index.html'))
-      expect(index_html).to include('data-has-snow=')
+    it 'marks countries and states with snow when snowfall is present' do
+      index_doc = Nokogiri::HTML(File.read(File.join(build_dir, 'index.html')))
+      usa_li    = index_doc.at_xpath("//li[@data-has-snow and .//a[normalize-space(text())='United States of America']]")
+
+      expect(usa_li).not_to be_nil
+      expect(usa_li['data-has-snow']).to eq('true')
+
+      usa_doc  = Nokogiri::HTML(File.read(File.join(build_dir, 'countries', 'united-states-of-america.html')))
+      idaho_li = usa_doc.at_xpath("//li[@data-has-snow and .//a[normalize-space(text())='Idaho']]")
+
+      expect(idaho_li).not_to be_nil
+      expect(idaho_li['data-has-snow']).to eq('true')
     end
 
     it 'includes snow badges with counts on index page' do
