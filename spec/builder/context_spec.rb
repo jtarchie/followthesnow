@@ -254,7 +254,7 @@ RSpec.describe(FollowTheSnow::Builder::Context) do
     end
 
     it 'excludes resorts without snow today' do
-      results = context.resorts_with_snow_today(limit: 10)
+      results      = context.resorts_with_snow_today(limit: 10)
       resort_names = results.map { |r| r[:resort].name }
       expect(resort_names).not_to include('Dry Resort')
     end

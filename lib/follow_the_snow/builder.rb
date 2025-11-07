@@ -137,6 +137,7 @@ module FollowTheSnow
                               })
 
         @logger.info('writing file', { source: source_filename, build_filename: build_filename })
+        FileUtils.mkdir_p(File.dirname(build_filename))
         File.write(
           build_filename,
           layout.render(@context, variables)

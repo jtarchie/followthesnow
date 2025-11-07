@@ -70,8 +70,10 @@ module FollowTheSnow
       end
 
       # Get top N resorts by total snow in forecast period
-      def top_snowy_resorts(limit: 10)
-        resort_snow = @resorts.map do |resort|
+      def top_snowy_resorts(limit: 10, country: nil, state: nil)
+        resorts_to_check = filter_resorts(country: country, state: state)
+
+        resort_snow = resorts_to_check.map do |resort|
           total = total_snow_for(resort)
           { resort: resort, total: total }
         end
@@ -82,8 +84,10 @@ module FollowTheSnow
       end
 
       # Get resorts with snow today (next 24 hours)
-      def resorts_with_snow_today(limit: 10)
-        resort_snow = @resorts.map do |resort|
+      def resorts_with_snow_today(limit: 10, country: nil, state: nil)
+        resorts_to_check = filter_resorts(country: country, state: state)
+
+        resort_snow = resorts_to_check.map do |resort|
           first_forecast = raw_forecasts_for(resort).first
           snow_amount    = first_forecast ? snow_inches(first_forecast) : 0
           { resort: resort, snow: snow_amount }
@@ -95,24 +99,47 @@ module FollowTheSnow
       end
 
       # Get regional summaries (country -> total snow, resort count)
-      def regional_summaries
-        resorts_by_countries.map do |country, resorts|
-          total_snow = resorts.sum do |resort|
-            total_snow_for(resort)
-          end
+      def regional_summaries(country: nil)
+        if country
+          # Return state-level summaries for a specific country
+          country_resorts = resorts_by_countries.fetch(country)
+          country_resorts.group_by(&:region_name).map do |state, resorts|
+            total_snow   = resorts.sum { |resort| total_snow_for(resort) }
+            resort_count = resorts.count { |resort| any_snow?(resort) }
 
-          resort_count = resorts.count do |resort|
-            any_snow?(resort)
-          end
+            {
+              state: state,
+              total_snow: total_snow,
+              resort_count: resort_count,
+              total_resorts: resorts.count
+            }
+          end.select { |s| s[:resort_count].positive? }
+                         .sort_by { |s| -s[:total_snow] }
+        else
+          # Return country-level summaries
+          resorts_by_countries.map do |country_name, resorts|
+            total_snow = resorts.sum do |resort|
+              total_snow_for(resort)
+            end
 
-          {
-            country: country,
-            total_snow: total_snow,
-            resort_count: resort_count,
-            total_resorts: resorts.count
-          }
-        end.select { |s| s[:resort_count].positive? }
-                            .sort_by { |s| -s[:total_snow] }
+            resort_count = resorts.count do |resort|
+              any_snow?(resort)
+            end
+
+            {
+              country: country_name,
+              total_snow: total_snow,
+              resort_count: resort_count,
+              total_resorts: resorts.count
+            }
+          end.select { |s| s[:resort_count].positive? }
+                              .sort_by { |s| -s[:total_snow] }
+        end
+      end
+
+      # Get all resorts for a country
+      def resorts_for_country(country)
+        resorts_by_countries.fetch(country)
       end
 
       def table_for_resorts(resorts)
@@ -167,6 +194,16 @@ module FollowTheSnow
       end
 
       private
+
+      # Filter resorts by country and/or state
+      def filter_resorts(country: nil, state: nil)
+        filtered = @resorts
+
+        filtered = filtered.select { |r| r.country_name == country } if country
+        filtered = filtered.select { |r| r.region_name == state } if state
+
+        filtered
+      end
 
       def any_snow?(resort)
         raw_forecasts_for(resort).any? do |forecast|

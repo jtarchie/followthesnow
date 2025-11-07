@@ -14,9 +14,8 @@ description: List of regions by <%= country %>.
   </ul>
 </div>
 
-<p>Please select a region to see the available resorts and snow forecast.</p>
-
-<div class="flex justify-between items-center mb-4">
+<div class="mb-6">
+  <div class="flex justify-between items-center mb-2">
     <h2 class="text-2xl font-semibold" id="<%= country.parameterize %>">
       <%= h country %>
       <% if country_has_snow?(country) %>
@@ -25,11 +24,16 @@ description: List of regions by <%= country %>.
         </span>
       <% end %>
     </h2>
-  <label class="flex items-center gap-2 cursor-pointer">
-    <input type="checkbox" id="filter-snow-toggle" class="toggle toggle-primary" />
-    <span class="label-text">Show only with snow ❄️</span>
-  </label>
+    <label class="flex items-center gap-2 cursor-pointer">
+      <input type="checkbox" id="filter-snow-toggle" class="toggle toggle-primary" />
+      <span class="label-text">Show only with snow ❄️</span>
+    </label>
+  </div>
+  <a href="/countries/<%= country.parameterize %>-snow-now" class="link link-primary text-sm">
+    ❄️ View Snow Now Report
+  </a>
 </div>
+
 <ul class="list-disc pl-5 space-y-2">
   <% states(country: country).each do |state| %>
     <li class="flex items-center gap-2" data-has-snow="<%= state_has_snow?(state) %>">

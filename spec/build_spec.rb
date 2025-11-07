@@ -44,7 +44,8 @@ RSpec.describe('Building') do
     builder.build!
 
     html_files = Dir[File.join(build_dir, '**', '*.html')].to_a
-    expect(html_files.length).to eq(3445) # Added snow-now.html (base was 3444)
+    # Base was 3444, added 1 snow-now.html, plus [country]-snow-now.html and [state]-snow-now.html for each region/state
+    expect(html_files.length).to eq(3841)
   end
 
   describe 'snow-now page' do
@@ -79,7 +80,7 @@ RSpec.describe('Building') do
 
     it 'displays snow today in table format with actual snow values' do
       snow_now_html = File.read(File.join(build_dir, 'snow-now.html'))
-      doc = Nokogiri::HTML(snow_now_html)
+      doc           = Nokogiri::HTML(snow_now_html)
 
       # Find the Snow Today section
       snow_today_section = doc.xpath('//section[.//h2[contains(text(), "Snow Today")]]')
@@ -162,8 +163,8 @@ RSpec.describe('Building') do
     end
 
     it 'includes data-has-snow attributes on country pages' do
-      # Check a country page that should exist
-      country_files = Dir[File.join(build_dir, 'countries', '*.html')]
+      # Check a country page that should exist (exclude snow-now pages)
+      country_files = Dir[File.join(build_dir, 'countries', '*.html')].reject { |f| f.include?('snow-now') }
       expect(country_files).not_to be_empty
 
       first_country_html = File.read(country_files.first)
@@ -171,7 +172,7 @@ RSpec.describe('Building') do
     end
 
     it 'includes snow badges on country pages with snow' do
-      country_files = Dir[File.join(build_dir, 'countries', '*.html')]
+      country_files = Dir[File.join(build_dir, 'countries', '*.html')].reject { |f| f.include?('snow-now') }
 
       # Find a country page with snow badges
       country_with_badge = country_files.find do |file|
@@ -186,7 +187,7 @@ RSpec.describe('Building') do
     end
 
     it 'includes filter toggle on country pages' do
-      country_files      = Dir[File.join(build_dir, 'countries', '*.html')]
+      country_files      = Dir[File.join(build_dir, 'countries', '*.html')].reject { |f| f.include?('snow-now') }
       first_country_html = File.read(country_files.first)
       expect(first_country_html).to include('filter-snow-toggle')
     end

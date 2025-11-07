@@ -17,7 +17,16 @@ description: 'Weekly forecast of snow for ski areas in <%= h state %>'
   </ul>
 </div>
 
-<h2 class="text-3xl font-bold mb-4">Snowfall Prediction</h2>
+<div class="mb-6">
+  <div class="flex justify-between items-center mb-2">
+    <h2 class="text-3xl font-bold"><%= h state %></h2>
+    <a href="/states/<%= state.parameterize %>-snow-now" class="link link-primary text-sm whitespace-nowrap">
+      ❄️ Snow Now
+    </a>
+  </div>
+</div>
+
+<h3 class="text-xl font-semibold mb-4">Forecast</h3>
 
 <% headers, rows=table_for_resorts(resorts) %>
   <div class="overflow-x-auto">
