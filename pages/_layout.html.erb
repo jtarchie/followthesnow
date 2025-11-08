@@ -61,31 +61,33 @@
             <span class="label-text">°C</span> 
           </label>
         </div>
-        <div class="flex-none hidden lg:block">
-          <ul class="menu menu-horizontal p-0">
-            <li><a href="/snow-now" class="font-semibold">❄️ Snow Now</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="mailto:hello@followthesnow.today">Contact</a></li>
-          </ul>
+        <div class="flex-none mx-2">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="filter-snow-toggle" class="toggle" />
+            <span class="label-text text-sm">Only Snow</span>
+          </label>
         </div>
       </div>
       <div class="container mx-auto p-4">
         <%= content %>
       </div>
-      <footer class="footer footer-center p-4 bg-base-300 text-base-content">
+      <footer class="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10">
+        <nav class="grid grid-flow-col gap-4">
+          <a class="link link-hover" href="/about">About</a>
+          <a class="link link-hover" href="mailto:hello@followthesnow.today">Contact</a>
+          <a class="link link-hover" href="https://www.buymeacoffee.com/jtarchie" target="_blank">Buy me a Coffee</a>
+        </nav>
         <aside>
-          <p>Last Updated: <%= h current_timestamp %></p>
-          <p>Made with ❤️ for ❄️ in Colorado <a href="https://www.buymeacoffee.com/jtarchie" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a></p>
-          <p>© <%= Time.now.strftime("%Y") %> <a href="https://github.com/jtarchie/followthesnow">Follow the Snow</a></p>
+          <p>
+            © <%= Time.now.strftime("%Y") %> <a href="https://github.com/jtarchie/followthesnow">Follow the Snow</a><br>
+            Last Updated: <%= h current_timestamp %>
+          </p>
         </aside>
       </footer>
     </div>
     <div class="drawer-side">
       <label for="nav-drawer" aria-label="close sidebar" class="drawer-overlay"></label> 
       <ul class="menu p-4 w-80 min-h-full bg-base-200">
-        <li><a href="/snow-now" class="font-semibold">❄️ Snow Now</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="mailto:hello@followthesnow.today">Contact</a></li>
       </ul>
     </div>
   </div>

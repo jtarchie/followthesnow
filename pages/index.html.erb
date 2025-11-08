@@ -8,11 +8,10 @@ description: List of countries that have ski resorts.
 <p>Please select a country to see the available regions in that area.</p>
 
 <div class="flex justify-between items-center mb-4">
-  <h2 class="text-3xl font-bold">Regions</h2>
-  <label class="flex items-center gap-2 cursor-pointer">
-    <input type="checkbox" id="filter-snow-toggle" class="toggle toggle-primary" />
-    <span class="label-text">Show only with snow ❄️</span>
-  </label>
+  <h2 class="text-3xl font-bold">
+    Regions
+    <a href="/snow-now" class="link link-primary text-sm whitespace-nowrap">Snow Now</a>
+  </h2>
 </div>
   <ul class="list-disc pl-5 space-y-2">
   <% countries.each do |country| %>

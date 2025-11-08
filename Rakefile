@@ -56,7 +56,7 @@ task fast: [:css] do
 
   resorts = FollowTheSnow::Resort.from_sqlite(sqlite_file)
   # Suppress logging for faster builds
-  build!(resorts)
+  build!(resorts.take(100))
 end
 
 desc 'Build the CSS files'

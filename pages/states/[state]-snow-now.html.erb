@@ -19,13 +19,13 @@ description: 'Current snow forecasts for ski resorts in <%= h state %>.'
 <div class="mb-8">
   <h1 class="text-4xl font-bold mb-2">❄️ Snow Now: <%= h state %></h1>
   <p class="text-lg text-gray-600 dark:text-gray-400">
-    Current snow forecasts for resorts in <%= h state %>. Updated <%= h current_timestamp %>
+    Current snow forecasts for resorts in <%= h state %>.
   </p>
 </div>
 
 <!-- Top Snowy Resorts -->
 <section class="mb-8">
-  <h2 class="text-3xl font-bold mb-4">🏔️ Most Snow (Forecast Period)</h2>
+  <h2 class="text-3xl font-bold mb-4">Most Snow (Forecast Period)</h2>
   <p class="mb-4">These resorts in <%= h state %> are expecting the most snowfall in the coming days:</p>
   
   <% top_resorts = top_snowy_resorts(state: state, limit: 15) %>
@@ -58,7 +58,7 @@ description: 'Current snow forecasts for ski resorts in <%= h state %>.'
                 </a>
               </td>
               <td class="text-right font-bold text-blue-700 dark:text-blue-300">
-                <%= format_snow_total(total) %> ❄️
+                <%= format_snow_total(total) %>
               </td>
             </tr>
           <% end %>
@@ -74,7 +74,7 @@ description: 'Current snow forecasts for ski resorts in <%= h state %>.'
 
 <!-- Snow Today -->
 <section class="mb-8">
-  <h2 class="text-3xl font-bold mb-4">📅 Snow Today</h2>
+  <h2 class="text-3xl font-bold mb-4">Snow Today</h2>
   <p class="mb-4">Resorts in <%= h state %> expecting snow in the immediate forecast:</p>
   
   <% snow_today = resorts_with_snow_today(state: state, limit: 15) %>
@@ -107,7 +107,7 @@ description: 'Current snow forecasts for ski resorts in <%= h state %>.'
                 </a>
               </td>
               <td class="text-right font-bold text-purple-700 dark:text-purple-300">
-                <%= format_snow_total(snow) %> ❄️
+                <%= format_snow_total(snow) %>
               </td>
             </tr>
           <% end %>

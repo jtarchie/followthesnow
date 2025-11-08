@@ -16,13 +16,13 @@ description: 'Current snow forecasts for ski resorts in <%= h country %>.'
 <div class="mb-8">
   <h1 class="text-4xl font-bold mb-2">❄️ Snow Now: <%= h country %></h1>
   <p class="text-lg text-gray-600 dark:text-gray-400">
-    Current snow forecasts for resorts in <%= h country %>. Updated <%= h current_timestamp %>
+    Current snow forecasts for resorts in <%= h country %>.
   </p>
 </div>
 
 <!-- Top Snowy Resorts -->
 <section class="mb-8">
-  <h2 class="text-3xl font-bold mb-4">🏔️ Most Snow (Forecast Period)</h2>
+  <h2 class="text-3xl font-bold mb-4">Most Snow (Forecast Period)</h2>
   <p class="mb-4">These resorts in <%= h country %> are expecting the most snowfall in the coming days:</p>
   
   <% top_resorts = top_snowy_resorts(country: country, limit: 15) %>
@@ -61,7 +61,7 @@ description: 'Current snow forecasts for ski resorts in <%= h country %>.'
                 </a>
               </td>
               <td class="text-right font-bold text-blue-700 dark:text-blue-300">
-                <%= format_snow_total(total) %> ❄️
+                <%= format_snow_total(total) %>
               </td>
             </tr>
           <% end %>
@@ -77,7 +77,7 @@ description: 'Current snow forecasts for ski resorts in <%= h country %>.'
 
 <!-- Snow Today -->
 <section class="mb-8">
-  <h2 class="text-3xl font-bold mb-4">📅 Snow Today</h2>
+  <h2 class="text-3xl font-bold mb-4">Snow Today</h2>
   <p class="mb-4">Resorts in <%= h country %> expecting snow in the immediate forecast:</p>
   
   <% snow_today = resorts_with_snow_today(country: country, limit: 15) %>
@@ -116,7 +116,7 @@ description: 'Current snow forecasts for ski resorts in <%= h country %>.'
                 </a>
               </td>
               <td class="text-right font-bold text-purple-700 dark:text-purple-300">
-                <%= format_snow_total(snow) %> ❄️
+                <%= format_snow_total(snow) %>
               </td>
             </tr>
           <% end %>
@@ -132,7 +132,7 @@ description: 'Current snow forecasts for ski resorts in <%= h country %>.'
 
 <!-- Regional Breakdown by State -->
 <section class="mb-8">
-  <h2 class="text-3xl font-bold mb-4">📍 By Region</h2>
+  <h2 class="text-3xl font-bold mb-4">By Region</h2>
   
   <% regional = regional_summaries(country: country) %>
   
@@ -158,7 +158,7 @@ description: 'Current snow forecasts for ski resorts in <%= h country %>.'
                 <span class="badge badge-secondary"><%= summary[:resort_count] %> / <%= summary[:total_resorts] %></span>
               </td>
               <td class="text-right font-bold text-blue-700 dark:text-blue-300">
-                <%= format_snow_total(summary[:total_snow]) %> ❄️
+                <%= format_snow_total(summary[:total_snow]) %>
               </td>
             </tr>
           <% end %>

@@ -15,23 +15,12 @@ description: List of regions by <%= country %>.
 </div>
 
 <div class="mb-6">
-  <div class="flex justify-between items-center mb-2">
-    <h2 class="text-2xl font-semibold" id="<%= country.parameterize %>">
-      <%= h country %>
-      <% if country_has_snow?(country) %>
-        <span class="snow-badge ml-2">
-          ❄️ <%= country_snow_count(country) %> (<%= format_snow_total(total_snow_for_country(country)) %>)
-        </span>
-      <% end %>
-    </h2>
-    <label class="flex items-center gap-2 cursor-pointer">
-      <input type="checkbox" id="filter-snow-toggle" class="toggle toggle-primary" />
-      <span class="label-text">Show only with snow ❄️</span>
-    </label>
-  </div>
-  <a href="/countries/<%= country.parameterize %>-snow-now" class="link link-primary text-sm">
-    ❄️ View Snow Now Report
-  </a>
+  <h2 class="text-2xl font-semibold mb-2" id="<%= country.parameterize %>">
+    <%= h country %>
+    <a href="/countries/<%= country.parameterize %>-snow-now" class="link link-primary text-sm whitespace-nowrap">
+      Snow Now
+    </a>
+  </h2>
 </div>
 
 <ul class="list-disc pl-5 space-y-2">
@@ -42,7 +31,7 @@ description: List of regions by <%= country %>.
       </a>
       <% if state_has_snow?(state) %>
         <span class="snow-badge">
-          ❄️ <%= state_snow_count(state) %> (<%= format_snow_total(total_snow_for_state(state)) %>)
+          <%= state_snow_count(state) %> (<%= format_snow_total(total_snow_for_state(state)) %>)
         </span>
       <% end %>
     </li>

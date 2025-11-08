@@ -159,7 +159,7 @@ RSpec.describe('Building') do
     it 'includes filter toggle on index page' do
       index_html = File.read(File.join(build_dir, 'index.html'))
       expect(index_html).to include('filter-snow-toggle')
-      expect(index_html).to include('Show only with snow')
+      expect(index_html).to include('Only Snow')
     end
 
     it 'includes data-has-snow attributes on country pages' do
