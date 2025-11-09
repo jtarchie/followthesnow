@@ -56,9 +56,13 @@ description: 'Current snow forecasts for ski resorts in <%= h country %>.'
                 </a>
               </td>
               <td>
-                <a href="/states/<%= resort.region_name.parameterize %>" class="hover:underline">
+                <% if small_country?(country) %>
                   <%= h resort.region_name %>
-                </a>
+                <% else %>
+                  <a href="/states/<%= resort.region_name.parameterize %>" class="hover:underline">
+                    <%= h resort.region_name %>
+                  </a>
+                <% end %>
               </td>
               <td class="text-right font-bold text-blue-700 dark:text-blue-300">
                 <%= format_snow_total(total) %>
@@ -111,9 +115,13 @@ description: 'Current snow forecasts for ski resorts in <%= h country %>.'
                 </a>
               </td>
               <td>
-                <a href="/states/<%= resort.region_name.parameterize %>" class="hover:underline">
+                <% if small_country?(country) %>
                   <%= h resort.region_name %>
-                </a>
+                <% else %>
+                  <a href="/states/<%= resort.region_name.parameterize %>" class="hover:underline">
+                    <%= h resort.region_name %>
+                  </a>
+                <% end %>
               </td>
               <td class="text-right font-bold text-purple-700 dark:text-purple-300">
                 <%= format_snow_total(snow) %>
@@ -131,46 +139,48 @@ description: 'Current snow forecasts for ski resorts in <%= h country %>.'
 </section>
 
 <!-- Regional Breakdown by State -->
-<section class="mb-8">
-  <h2 class="text-3xl font-bold mb-4">By Region</h2>
-  
-  <% regional = regional_summaries(country: country) %>
-  
-  <% if regional.any? %>
-    <div class="overflow-x-auto">
-      <table class="table w-full">
-        <thead>
-          <tr>
-            <th>Region</th>
-            <th class="text-right">Resorts w/ Snow</th>
-            <th class="text-right">Total Snow</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% regional.each do |summary| %>
+<% unless small_country?(country) %>
+  <section class="mb-8">
+    <h2 class="text-3xl font-bold mb-4">By Region</h2>
+    
+    <% regional = regional_summaries(country: country) %>
+    
+    <% if regional.any? %>
+      <div class="overflow-x-auto">
+        <table class="table w-full">
+          <thead>
             <tr>
-              <td>
-                <a href="/states/<%= summary[:state].parameterize %>/snow-now" class="link link-primary font-medium">
-                  <%= h summary[:state] %>
-                </a>
-              </td>
-              <td class="text-right">
-                <span class="badge badge-secondary"><%= summary[:resort_count] %> / <%= summary[:total_resorts] %></span>
-              </td>
-              <td class="text-right font-bold text-blue-700 dark:text-blue-300">
-                <%= format_snow_total(summary[:total_snow]) %>
-              </td>
+              <th>Region</th>
+              <th class="text-right">Resorts w/ Snow</th>
+              <th class="text-right">Total Snow</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  <% else %>
-    <div class="alert alert-info">
-      <span>No regional snow data available at this time for <%= h country %>.</span>
-    </div>
-  <% end %>
-</section>
+          </thead>
+          <tbody>
+            <% regional.each do |summary| %>
+              <tr>
+                <td>
+                  <a href="/states/<%= summary[:state].parameterize %>/snow-now" class="link link-primary font-medium">
+                    <%= h summary[:state] %>
+                  </a>
+                </td>
+                <td class="text-right">
+                  <span class="badge badge-secondary"><%= summary[:resort_count] %> / <%= summary[:total_resorts] %></span>
+                </td>
+                <td class="text-right font-bold text-blue-700 dark:text-blue-300">
+                  <%= format_snow_total(summary[:total_snow]) %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="alert alert-info">
+        <span>No regional snow data available at this time for <%= h country %>.</span>
+      </div>
+    <% end %>
+  </section>
+<% end %>
 
 <!-- Quick Stats Summary -->
 <section class="mb-8">

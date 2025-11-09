@@ -57,7 +57,10 @@ module FollowTheSnow
               # rate limit from open meteo (600 / minute) halved for safety
               limiter = Limiter::RateQueue.new(25, interval: 10, balanced: true)
 
-              Parallel.each(resorts, in_threads: @num_threads * 10) do |resort|
+              # Filter out resorts with names that don't parameterize properly (e.g., Cyrillic, Greek)
+              valid_resorts = resorts.reject { |r| r.name.parameterize.empty? }
+
+              Parallel.each(valid_resorts, in_threads: @num_threads * 10) do |resort|
                 limiter.shift unless defined?(RSpec)
 
                 resort_filename = build_filename.gsub('[resort]', resort.name.parameterize)
@@ -71,7 +74,14 @@ module FollowTheSnow
                 )
               end
             when /\[state\]/
-              Parallel.each(states, in_threads: @num_threads) do |state|
+              # Skip state pages for countries with few resorts
+              states_to_build = states.reject do |state|
+                # Find which country this state belongs to
+                sample_resort = resorts_by_state(state).first
+                @context.small_country?(sample_resort.country_name)
+              end
+
+              Parallel.each(states_to_build, in_threads: @num_threads) do |state|
                 state_filename = build_filename.gsub('[state]', state.parameterize)
                 write_file(
                   layout_html,

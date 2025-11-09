@@ -409,4 +409,75 @@ RSpec.describe(FollowTheSnow::Builder::Context) do
       expect(indicator.html_safe?).to be(true)
     end
   end
+
+  describe '#small_country?' do
+    it 'returns true for countries with resorts at or below threshold' do
+      # Create a country with exactly SMALL_COUNTRY_THRESHOLD resorts
+      small_resorts = (1..FollowTheSnow::Builder::Context::SMALL_COUNTRY_THRESHOLD).map do |i|
+        FollowTheSnow::Resort.new(
+          id: i + 100,
+          name: "Small Resort #{i}",
+          country_name: 'Small Country',
+          country_code: 'SC',
+          region_name: 'Region A',
+          region_code: 'RA',
+          lat: 40.0,
+          lon: -100.0
+        )
+      end
+
+      context_with_small = described_class.new(resorts: resorts + small_resorts)
+      expect(context_with_small.small_country?('Small Country')).to be(true)
+    end
+
+    it 'returns false for countries with more resorts than threshold' do
+      # USA has 2 resorts, which is below threshold, but let's add more
+      large_resorts = (1..(FollowTheSnow::Builder::Context::SMALL_COUNTRY_THRESHOLD + 1)).map do |i|
+        FollowTheSnow::Resort.new(
+          id: i + 200,
+          name: "Large Resort #{i}",
+          country_name: 'Large Country',
+          country_code: 'LC',
+          region_name: 'Region B',
+          region_code: 'RB',
+          lat: 40.0,
+          lon: -100.0
+        )
+      end
+
+      context_with_large = described_class.new(resorts: resorts + large_resorts)
+      expect(context_with_large.small_country?('Large Country')).to be(false)
+    end
+
+    it 'returns true for Canada with 1 resort (below threshold)' do
+      # Canada only has 1 resort in our test data
+      expect(context.small_country?('Canada')).to be(true)
+    end
+
+    it 'returns true for USA with 2 resorts (below threshold)' do
+      # USA has 2 resorts in our test data
+      expect(context.small_country?('United States of America')).to be(true)
+    end
+  end
+
+  describe '#any_snow?' do
+    it 'returns true when resort has snow in forecast' do
+      expect(context.any_snow?(resort_with_snow)).to be(true)
+    end
+
+    it 'returns false when resort has no snow in forecast' do
+      expect(context.any_snow?(resort_without_snow)).to be(false)
+    end
+  end
+
+  describe '#total_snow_for' do
+    it 'returns total snow amount for a resort' do
+      # resort_with_snow has 5.5 + 2.3 = 7.8 inches total
+      expect(context.total_snow_for(resort_with_snow)).to eq(7.8)
+    end
+
+    it 'returns 0 for resort without snow' do
+      expect(context.total_snow_for(resort_without_snow)).to eq(0)
+    end
+  end
 end

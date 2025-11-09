@@ -10,6 +10,10 @@ module FollowTheSnow
       include ERB::Util
       include SnowHelper
 
+      # Countries with this many or fewer resorts will show resorts directly
+      # instead of states/regions, to simplify navigation
+      SMALL_COUNTRY_THRESHOLD = 20
+
       attr_reader :resorts
 
       def initialize(resorts:)
@@ -28,6 +32,11 @@ module FollowTheSnow
 
       def states(country:)
         resorts_by_countries.fetch(country).group_by(&:region_name).keys
+      end
+
+      # Check if a country should skip state/region pages and show resorts directly
+      def small_country?(country)
+        resorts_for_country(country).count <= SMALL_COUNTRY_THRESHOLD
       end
 
       # Check if a country has any snow in the forecast
@@ -193,6 +202,20 @@ module FollowTheSnow
         Time.zone.now.strftime('%Y-%m-%d %l:%M%p %Z')
       end
 
+      # Check if a resort has any snow in its forecast
+      def any_snow?(resort)
+        raw_forecasts_for(resort).any? do |forecast|
+          snow_inches(forecast).positive?
+        end
+      end
+
+      # Get total snow amount for a specific resort
+      def total_snow_for(resort)
+        raw_forecasts_for(resort).sum do |forecast|
+          snow_inches(forecast)
+        end
+      end
+
       private
 
       # Filter resorts by country and/or state
@@ -203,18 +226,6 @@ module FollowTheSnow
         filtered = filtered.select { |r| r.region_name == state } if state
 
         filtered
-      end
-
-      def any_snow?(resort)
-        raw_forecasts_for(resort).any? do |forecast|
-          snow_inches(forecast).positive?
-        end
-      end
-
-      def total_snow_for(resort)
-        raw_forecasts_for(resort).sum do |forecast|
-          snow_inches(forecast)
-        end
       end
 
       def raw_forecasts_for(resort)
